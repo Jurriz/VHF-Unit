@@ -17,5 +17,7 @@ Efter tillverkning skall kortet testas utförligt för att försäkra dess funkt
 
 Detta examensarbete kommer att bidra till en större förståelse kring utformningen och designprocessen vid tillverkningen av ett integrerat system på ett kretskort. Samt att företaget i fråga kommer att få ett färdigt förslag på en layout som de sedan kan använda i sin produkt.  
 
+Länk till min dagbok och all nyttig data på [OneNote!](https://onedrive.live.com/edit.aspx?cid=0edc400075a4f6cd&page=view&resid=EDC400075A4F6CD!18262&parId=EDC400075A4F6CD!15285&app=OneNote)
+
 #### En grov tidsplan över arbetet:
 ![Tidsplan Josef](https://github.com/Jurriz/VHF-Unit/blob/master/Tidsplan.png)
