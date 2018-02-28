@@ -15,4 +15,4 @@ Arbetet kommer handla om att ta fram en layout för detta system för en framtid
 
 Detta examensarbete kommer att bidra till en större förståelse kring utformningen och designprocessen vid tillverkningen av ett integrerat system på ett kretskort. Samt att företaget i fråga kommer att få ett färdigt förslag på en layout som de sedan kan använda i sin produkt.  
 
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+![Tidsplan Josef](https://github.com/Jurriz/VHF-Unit/blob/master/Tidsplan.png)
