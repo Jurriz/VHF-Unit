@@ -361,16 +361,30 @@ void main(void)
 //	RCSTA2bits.SPEN = 1;		// USART2
 //	TRISGbits.TRISG2 = 1;		// RX
 
-    LATDbits.LATD2 = 1;
+    LATDbits.LATD0 = 1;
     Delay(1000);
     LATDbits.LATD1 = 1;
     Delay(1000);
-    LATDbits.LATD0 = 1;
+    LATDbits.LATD2 = 1;
+    Delay(1000);
+    LATDbits.LATD3 = 1;
+    Delay(1000);
+    LATDbits.LATD4 = 1;
+    Delay(1000);
+    LATDbits.LATD5 = 1;
+    Delay(1000);
+    LATDbits.LATD0 = 0;
+    Delay(1000);
+    LATDbits.LATD1 = 0;
     Delay(1000);
     LATDbits.LATD2 = 0;
     Delay(1000);
-    LATDbits.LATD1 = 0;
-
+    LATDbits.LATD3 = 0;
+    Delay(1000);
+    LATDbits.LATD4 = 0;
+    Delay(1000);
+    LATDbits.LATD5 = 0;
+    
 	lData = DoStartADXL362();
 	nLo = (lData & 0x000000FF);		// REVID
 	lData >>= 8;
@@ -383,7 +397,7 @@ void main(void)
 	Nop();
 	sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n ADXL362 Init:\r\n\r\n DEVID_AD\t0x%02X (0xAD)\r\n DEVID_MST\t0x%02X (0x1D)\r\n PARTID\t\t0x%02X (0xF2)\r\n REVID\t\t0x%02X (0x01/0x02)\r\n\r\n", nHi, nMHi, nMLo, nLo);
 	SkrivBuffert(szUSART_Out, 1);
-
+   
 	FlagBits.bReadInc = 0;
 
 	strcpypgm2ram(szUSART_Out, (const rom far char *)" NMEA Generator \r\n\r\n\r\n\r\n");
@@ -396,8 +410,8 @@ void main(void)
 
 
 	// Ställ in tid och datum enlig nedan, värdet är sparat sedan tidigare
-	lDefaultTid = 0x112200;
-	lDefaultDatum = 0x160414;
+	lDefaultTid = 0x143000;
+	lDefaultDatum = 0x180302;
 
 	// Kontrollera om RTC:n behöver initieras om
 	nTmp = DoCheckRV3049Start();
@@ -405,7 +419,7 @@ void main(void)
 	Nop();
 	Nop();
 	
-	if ( (nTmp & 0x20) != 0)	// PON = bit 5 = 0x20
+	//if ( (nTmp & 0x20) != 0)	// PON = bit 5 = 0x20
 	{
 		DoInitRV3049();
 	
@@ -419,23 +433,56 @@ void main(void)
 	DoResetRTC_INT();
 
 	FlagBits.bTimerIRQ = 0;
-
-	while (1)
+    
+//    lData = DoStartADXL362();
+//    nLo = (lData & 0x000000FF);		// REVID
+//	lData >>= 8;
+//	nMLo = (lData & 0x000000FF);	// PARTID
+//	lData >>= 8;
+//	nMHi = (lData & 0x000000FF);	// DEVID_MST
+//	lData >>= 8;
+//	nHi = (lData & 0x000000FF);		// DEVID_AD
+	
+	Nop();
+	//sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n ADXL362 Init:\r\n\r\n DEVID_AD\t0x%02X (0xAD)\r\n DEVID_MST\t0x%02X (0x1D)\r\n PARTID\t\t0x%02X (0xF2)\r\n REVID\t\t0x%02X (0x01/0x02)\r\n\r\n", nHi, nMHi, nMLo, nLo);
+	//SkrivBuffert(szUSART_Out, 1);
+	
+    while (1)
 	{
-		if (FlagBits.bTimerIRQ == 1)
-		{
-			// Interrupt-flaggorna blir lästa och clearade i DoReadRTC() som anropas från IRQ-rutinen
-			// DoResetRTC_INT();
+//		if (FlagBits.bTimerIRQ == 1)
+//		{
+//			// Interrupt-flaggorna blir lästa och clearade i DoReadRTC() som anropas från IRQ-rutinen
+//			// DoResetRTC_INT();
+//
+//			DoReadRTC();
+//			
+//			FlagBits.bTimerIRQ = 0;
+//		}
+        unsigned char x_val, y_val, z_val;
+       
+        ACC_ENABLE = 0;
+        Delay(1);
 
-			DoReadRTC();
-			
-			FlagBits.bTimerIRQ = 0;
-		}
-
+        MyWriteSPI(AccRead);		// Läs från... 
+        MyWriteSPI(0x08);			// ...adress 0x00 
+        x_val = MyReadSPI();
+        y_val = MyReadSPI();
+        z_val = MyReadSPI();
+        sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n Utläsning av x,y,z \r\n\r\n X\t0x%02X \r\n Y\t0x%02X \r\n Z\t\t0x%02X \r\n\r\n", x_val, y_val, z_val);
+        SkrivBuffert(szUSART_Out, 1);
+        
+        LATDbits.LATD0 = 1;
+        Delay(1000);
+        LATDbits.LATD1 = 0;
+        Delay(1000);
+        ACC_ENABLE = 1;
 		Nop();
 		Nop();
 	}				
-
+        LATDbits.LATD0 = 1;
+        Delay(1000);
+        LATDbits.LATD1 = 0;
+        Delay(1000);
 	DoReadAllRTC_Regs();
 	
 	nTmp = DoReadRTC();
