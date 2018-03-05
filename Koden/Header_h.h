@@ -140,7 +140,7 @@ char DoCheckRV3049Start(void);
 // ACC-ADXL362
 void ToggleACC(void);
 long int DoReadInc(void);
-long int DoStartADXL362(void);
+char DoStartST_ACC(void);
 
 // -----------------------------------------------------------------------------
 // Util.c
@@ -170,6 +170,7 @@ void InitCPU(void);
 unsigned char GetKeyPressed(void);
 void Delay19200(void);
 void Delay(unsigned int nDelay);
+void Blink(void);
 unsigned char DoEnterPin(unsigned char nVal, unsigned char nShowResult);
 void SetMainMenu(void);
 void DoTXcharSW(char nTecken);

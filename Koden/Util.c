@@ -260,6 +260,33 @@ void Delay(unsigned int nDelay)
 	}	
 }
 
+void Blink(void)
+{
+    LATDbits.LATD0 = 1;
+    Delay(500);
+    LATDbits.LATD1 = 1;
+    Delay(500);
+    LATDbits.LATD2 = 1;
+    Delay(500);
+    LATDbits.LATD3 = 1;
+    Delay(500);
+    LATDbits.LATD4 = 1;
+    Delay(500);
+    LATDbits.LATD5 = 1;
+    Delay(500);
+    LATDbits.LATD0 = 0;
+    Delay(500);
+    LATDbits.LATD1 = 0;
+    Delay(500);
+    LATDbits.LATD2 = 0;
+    Delay(500);
+    LATDbits.LATD3 = 0;
+    Delay(500);
+    LATDbits.LATD4 = 0;
+    Delay(500);
+    LATDbits.LATD5 = 0;
+}
+
 // -----------------------------------------------------------------------------
 
 	// Enligt Microchip gäller följande:

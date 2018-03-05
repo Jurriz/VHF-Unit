@@ -689,7 +689,7 @@ LED_0 = 0;
 	
 	// char nSec, nMin, nHour, nDay, nwDay, nWDay, nMon, nYear;
 
-	sprintf(szUSART_Out, (const rom far char *)"\x0c\r\n %02X-%02X-%02X Fungarar %02X:%02X:%02X 0x%02X  %+d'C\r\n\r\n", 
+	sprintf(szUSART_Out, (const rom far char *)"\x0c\r\n %02X-%02X-%02X  %02X:%02X:%02X 0x%02X  %+d'C\r\n\r\n", 
 		nYear, nMon, nDay, nHour, nMin, nSec, nWeekDay, nTemp);
 	
 	SkrivBuffert(szUSART_Out, 1);

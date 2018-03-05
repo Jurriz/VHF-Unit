@@ -308,12 +308,13 @@ void SkrivBuffert(char *szUt, char nVal)
 // -----------------------------------------------------------------------------
 void main(void)
 {
-	unsigned char nLoop, nPek, nTmp, nSlask, nPoll, nTemp;
+	unsigned char nLoop, nPek, nTmp, nSlask, nPoll, nTemp, WAI;
 	unsigned char nHi, nMHi, nMLo, nLo;	
-	unsigned char nTICK;
+	unsigned char nTICK, TempL, TempH;
 
 	signed char nOldX, nOldY, nOldZ;
-	long int lData;
+	char lData;
+ 
 	
 	//OSCTUNEbits.PLLEN = 0;
 
@@ -361,45 +362,16 @@ void main(void)
 //	RCSTA2bits.SPEN = 1;		// USART2
 //	TRISGbits.TRISG2 = 1;		// RX
 
-    LATDbits.LATD0 = 1;
-    Delay(1000);
-    LATDbits.LATD1 = 1;
-    Delay(1000);
-    LATDbits.LATD2 = 1;
-    Delay(1000);
-    LATDbits.LATD3 = 1;
-    Delay(1000);
-    LATDbits.LATD4 = 1;
-    Delay(1000);
-    LATDbits.LATD5 = 1;
-    Delay(1000);
-    LATDbits.LATD0 = 0;
-    Delay(1000);
-    LATDbits.LATD1 = 0;
-    Delay(1000);
-    LATDbits.LATD2 = 0;
-    Delay(1000);
-    LATDbits.LATD3 = 0;
-    Delay(1000);
-    LATDbits.LATD4 = 0;
-    Delay(1000);
-    LATDbits.LATD5 = 0;
+    Blink();
     
-	lData = DoStartADXL362();
-	nLo = (lData & 0x000000FF);		// REVID
-	lData >>= 8;
-	nMLo = (lData & 0x000000FF);	// PARTID
-	lData >>= 8;
-	nMHi = (lData & 0x000000FF);	// DEVID_MST
-	lData >>= 8;
-	nHi = (lData & 0x000000FF);		// DEVID_AD
+	lData = DoStartST_ACC();
 	
 	Nop();
-	sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n ADXL362 Init:\r\n\r\n DEVID_AD\t0x%02X (0xAD)\r\n DEVID_MST\t0x%02X (0x1D)\r\n PARTID\t\t0x%02X (0xF2)\r\n REVID\t\t0x%02X (0x01/0x02)\r\n\r\n", nHi, nMHi, nMLo, nLo);
+	sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LSM9DS1 Init:\r\n\r\n WHO AM I? \t0x%02X (0x68)\r\n\r\n", lData);
 	SkrivBuffert(szUSART_Out, 1);
    
 	FlagBits.bReadInc = 0;
-
+/*
 	strcpypgm2ram(szUSART_Out, (const rom far char *)" NMEA Generator \r\n\r\n\r\n\r\n");
 	SkrivBuffert(szUSART_Out, 1);
 	
@@ -434,56 +406,53 @@ void main(void)
 
 	FlagBits.bTimerIRQ = 0;
     
-//    lData = DoStartADXL362();
-//    nLo = (lData & 0x000000FF);		// REVID
+//  lData = DoStartADXL362();
+//  nLo = (lData & 0x000000FF);		// REVID
 //	lData >>= 8;
 //	nMLo = (lData & 0x000000FF);	// PARTID
 //	lData >>= 8;
 //	nMHi = (lData & 0x000000FF);	// DEVID_MST
 //	lData >>= 8;
 //	nHi = (lData & 0x000000FF);		// DEVID_AD
-	
+	*/
 	Nop();
-	//sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n ADXL362 Init:\r\n\r\n DEVID_AD\t0x%02X (0xAD)\r\n DEVID_MST\t0x%02X (0x1D)\r\n PARTID\t\t0x%02X (0xF2)\r\n REVID\t\t0x%02X (0x01/0x02)\r\n\r\n", nHi, nMHi, nMLo, nLo);
-	//SkrivBuffert(szUSART_Out, 1);
 	
-    while (1)
-	{
-//		if (FlagBits.bTimerIRQ == 1)
-//		{
-//			// Interrupt-flaggorna blir lästa och clearade i DoReadRTC() som anropas från IRQ-rutinen
-//			// DoResetRTC_INT();
-//
-//			DoReadRTC();
-//			
-//			FlagBits.bTimerIRQ = 0;
-//		}
-        unsigned char x_val, y_val, z_val;
-       
-        ACC_ENABLE = 0;
-        Delay(1);
+    //while (1)
+        {     
+            FlagBits.bSPIbusy = 1;
+            
+            OpenSPI(SPI_FOSC_16, MODE_11, SMPEND);
 
-        MyWriteSPI(AccRead);		// Läs från... 
-        MyWriteSPI(0x08);			// ...adress 0x00 
-        x_val = MyReadSPI();
-        y_val = MyReadSPI();
-        z_val = MyReadSPI();
-        sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n Utläsning av x,y,z \r\n\r\n X\t0x%02X \r\n Y\t0x%02X \r\n Z\t\t0x%02X \r\n\r\n", x_val, y_val, z_val);
-        SkrivBuffert(szUSART_Out, 1);
-        
+            ACC_ENABLE = 0;
+            Delay(1);
+
+            MyWriteSPI(0x8F);           // Läs från adress 0x0F "WHO AM I"
+            WAI = MyReadSPI();			// Data skickas sedan till WAI
+            CloseSPI();
+            ToggleACC();
+            OpenSPI(SPI_FOSC_16, MODE_11, SMPEND);
+            MyWriteSPI(0x95);           // Läs från adress 0x15 "OUT_TEMP_L"
+            TempL = MyReadSPI();		// Data skickas sedan till TempL
+            TempH = MyReadSPI();        // Läs OUT_TEMP_H som kommer efter i registret
+            
+            
+            sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n Who am I?\t0x%02X \r\n Temperature L \t0x%02X \r\n Temperature H \t0x%02X \r\n", WAI, TempL, TempH); // Utskrift på skärmen
+            SkrivBuffert(szUSART_Out, 1);
+
+            Blink();    // Blinka lamporna
+
+             CloseSPI();
+            ACC_ENABLE = 1;
+            FlagBits.bSPIbusy = 0;
+            
+            Nop();
+            Nop();
+        }				
         LATDbits.LATD0 = 1;
         Delay(1000);
         LATDbits.LATD1 = 0;
         Delay(1000);
-        ACC_ENABLE = 1;
-		Nop();
-		Nop();
-	}				
-        LATDbits.LATD0 = 1;
-        Delay(1000);
-        LATDbits.LATD1 = 0;
-        Delay(1000);
-	DoReadAllRTC_Regs();
+        DoReadAllRTC_Regs();
 	
 	nTmp = DoReadRTC();
 	if (nTmp != 0)
@@ -518,7 +487,7 @@ void main(void)
 	FlagBits.bTimerIRQ = 0;
 	nLoop = 0;
 	nTICK = 2;
-	while (1)
+	//while (1)
 	{	
 		if (FlagBits.bTimerIRQ == 1)
 		{
@@ -540,7 +509,7 @@ void main(void)
 				{
 					nTICK = 2;
 				}	
-			} */
+			} 
 
 			lData = DoReadInc();
 
@@ -549,7 +518,7 @@ void main(void)
 			nMLo = (lData & 0x000000FF);	// Y
 			lData >>= 8;
 			nMHi = (lData & 0x000000FF);	// Z
-
+*/
 			sprintf(szUSART_Out, (const rom far char *)" %3d\t%3d\t%3d\t%d\r\n\r\n", (signed char)nLo, (signed char)nMLo, (signed char)nMHi, (char)FlagBits.bToggle);
 			SkrivBuffert(szUSART_Out, 1);
 
@@ -561,7 +530,7 @@ void main(void)
 	}
 
 	Delay(1000);
-
+    LATDbits.LATD4 = 1;
                                         // ÄNTRAT Kommenterat bort allt som har med NMEA att göra
     /*
 	FlagBits.AllMyFlags	= 0L;
