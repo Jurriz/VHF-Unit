@@ -59,7 +59,7 @@ volatile union
 
 
 //#pragma udata USART_Buffer0
-	char szUSART_1[16];
+	char szUSART_1[32];
 //#pragma udata
 
 //#pragma udata USART_Buffer1
@@ -67,7 +67,7 @@ volatile union
 //#pragma udata
 
 //#pragma udata USART_Buffer2
-	char szUSART_2[16];
+	char szUSART_2[32];
 //#pragma udata
 
 // unsigned char nTICK;
@@ -311,18 +311,16 @@ void main(void)
 	unsigned char nLoop, nPek, nTmp, nSlask, nPoll, nTemp, WAI;
 	unsigned char nHi, nMHi, nMLo, nLo;	
 	unsigned char nTICK, TempL, TempH;
+    unsigned char X_L, X_H, Y_L, Y_H, Z_L, Z_H;
 
 	signed char nOldX, nOldY, nOldZ;
 	char lData;
- 
-	
-	//OSCTUNEbits.PLLEN = 0;
 
 	FlagBits.bTimerIRQ = 0;
         
 	InitCPU();
 
-	ACC_ENABLE = 1;
+	//ACC_ENABLE = 1;
 	
 	RTC_ENABLE = 0;
 
@@ -341,12 +339,12 @@ void main(void)
 		USART_EIGHT_BIT &
 		USART_CONT_RX &
 		USART_BRGH_HIGH,
-		42 );				// INTOSC  4MHz 16
-//		42 );				// HS     10MHz
+		42 );				// HS      10MHz 
+//		16 );				// INTOSC  4MHz
 
 	BAUDCON1bits.BRG16 = 1;
 
-	// 9600bps
+	/*// 9600bps
 	Open2USART( USART_TX_INT_OFF &
 		USART_RX_INT_ON &
 		USART_ASYNCH_MODE &
@@ -357,19 +355,30 @@ void main(void)
 //		103);				// HS     10MHz
 
 	BAUDCON2bits.BRG16 = 1;
-	
-	// Öppna USART2
-//	RCSTA2bits.SPEN = 1;		// USART2
-//	TRISGbits.TRISG2 = 1;		// RX
-
-    Blink();
+*/
+    //Blink();
     
-	lData = DoStartST_ACC();
+	lData = DoStartST_ACC();        // Do start gör ingen skillnad.
 	
 	Nop();
-	sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LSM9DS1 Init:\r\n\r\n WHO AM I? \t0x%02X (0x68)\r\n\r\n", lData);
+	sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LSM9DS1 Initiering:\r\n\r\n WHO AM I? \t0x%02X (0x68)\r\n\r\n", lData);
 	SkrivBuffert(szUSART_Out, 1);
    
+//    OpenSPI(SPI_FOSC_4, MODE_11, SMPMID);
+//    Delay(1);
+//    ACC_ENABLE = 0;
+//    Delay(1);
+//    SPI1_Exchange8bit(0x8F);
+//    lData = SPI1_Exchange8bit(0x00);
+//    sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LSM9DS1 läst med annan SPI funktion \r\n\r\n WHO AM I? \t0x%02X (0x68)\r\n\r\n", lData);
+//	SkrivBuffert(szUSART_Out, 1);
+//    Delay(1);
+//    ACC_ENABLE = 1;
+//    Delay(1);
+//    CloseSPI();
+    
+    
+    
 	FlagBits.bReadInc = 0;
 /*
 	strcpypgm2ram(szUSART_Out, (const rom far char *)" NMEA Generator \r\n\r\n\r\n\r\n");
@@ -420,39 +429,83 @@ void main(void)
     //while (1)
         {     
             FlagBits.bSPIbusy = 1;
-            
             OpenSPI(SPI_FOSC_16, MODE_11, SMPEND);
-
             ACC_ENABLE = 0;
-            Delay(1);
-
+            Delay(10);
             MyWriteSPI(0x8F);           // Läs från adress 0x0F "WHO AM I"
             WAI = MyReadSPI();			// Data skickas sedan till WAI
-            CloseSPI();
+            Delay(10);
+            //ACC_ENABLE = 1;
+            //CloseSPI();
+            //FlagBits.bSPIbusy = 0;
+            
+            Delay(1);
             ToggleACC();
-            OpenSPI(SPI_FOSC_16, MODE_11, SMPEND);
-            MyWriteSPI(0x95);           // Läs från adress 0x15 "OUT_TEMP_L"
-            TempL = MyReadSPI();		// Data skickas sedan till TempL
-            TempH = MyReadSPI();        // Läs OUT_TEMP_H som kommer efter i registret
+            Delay(1);
             
+            //FlagBits.bSPIbusy = 1;
+            //OpenSPI(SPI_FOSC_16, MODE_11, SMPMID);
+            //ACC_ENABLE = 0;
+            //Delay(10);
             
-            sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n Who am I?\t0x%02X \r\n Temperature L \t0x%02X \r\n Temperature H \t0x%02X \r\n", WAI, TempL, TempH); // Utskrift på skärmen
+            // X Pitch axis
+            MyWriteSPI(0x98);           // Läs från adress 0x15 "OUT_X_L_G"
+            X_L = MyReadSPI();		// Data skickas sedan till TempL
+            ToggleACC();
+            MyWriteSPI(0x99); 
+            X_H = MyReadSPI();
+            ToggleACC();
+            
+            // Y Roll axis
+            MyWriteSPI(0x9A);           // Läs från adress 0x15 "OUT_X_L_G"
+            Y_L = MyReadSPI();		// Data skickas sedan till TempL
+            ToggleACC();
+            MyWriteSPI(0x9B); 
+            Y_H = MyReadSPI();
+            ToggleACC();
+             
+            // Z Yaw axis
+            MyWriteSPI(0x9C);           // Läs från adress 0x15 "OUT_X_L_G"
+            Z_L = MyReadSPI();		// Data skickas sedan till TempL
+            ToggleACC();
+            MyWriteSPI(0x9D); 
+            Z_H = MyReadSPI();
+           
+
+//            ACC_ENABLE = 1;
+//            CloseSPI();
+//            FlagBits.bSPIbusy = 0;
+//            
+//            Delay(1000);
+//            ToggleACC();
+//            Delay(1000);
+//             
+//            FlagBits.bSPIbusy = 1;
+//            OpenSPI(SPI_FOSC_16, MODE_11, SMPMID);
+//            ACC_ENABLE = 0;
+//            Delay(10);
+//            MyWriteSPI(0x99);           // Läs från adress 0x15 "OUT_TEMP_L"
+//            TempH = MyReadSPI();        // Läs OUT_TEMP_H som kommer efter i registret
+            
+            ACC_ENABLE = 1;
+            CloseSPI();
+            FlagBits.bSPIbusy = 0;
+            
+            sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n Who am I?\t0x%02X \r\n X_L \t0x%02X \r\n X_H \t0x%02X \n\r\n Y_L \t0x%02X \r\n Y_H \t0x%02X \n\r\n Z_L \t0x%02X \r\n Z_H \t0x%02X \r\n", 
+                    WAI, X_L, X_H, Y_L, Y_H, Z_L, Z_H); // Utskrift på skärmen
             SkrivBuffert(szUSART_Out, 1);
 
             Blink();    // Blinka lamporna
-
-             CloseSPI();
-            ACC_ENABLE = 1;
-            FlagBits.bSPIbusy = 0;
             
             Nop();
             Nop();
-        }				
-        LATDbits.LATD0 = 1;
-        Delay(1000);
-        LATDbits.LATD1 = 0;
-        Delay(1000);
-        DoReadAllRTC_Regs();
+        }		
+    
+    LATDbits.LATD0 = 1;
+    Delay(1000);
+    LATDbits.LATD1 = 0;
+    Delay(1000);
+    DoReadAllRTC_Regs();
 	
 	nTmp = DoReadRTC();
 	if (nTmp != 0)
@@ -470,13 +523,13 @@ void main(void)
 	DoChangeTickRV3049(nTICK);
 
 	// Ställ in tid och datum enlig nedan
-	lGPSTid = 0x144700;
-	lGPSDatum = 0x160408;
+	lGPSTid = 0x133030;
+	lGPSDatum = 0x180308;
 
 	Nop();
 	Nop();
 
-//	DoSetTimeRV3049();
+	DoSetTimeRV3049();
 
 	// Kontroll
 	nTmp = DoReadRTC();
@@ -499,7 +552,7 @@ void main(void)
 			// DoResetRTC_INT();
 			FlagBits.bTimerIRQ = 0;
 			
-/*			nLoop++;
+			nLoop++;
 			if ( (nLoop % 5) == 0)
 			{
 				nLoop = 0;
@@ -518,7 +571,7 @@ void main(void)
 			nMLo = (lData & 0x000000FF);	// Y
 			lData >>= 8;
 			nMHi = (lData & 0x000000FF);	// Z
-*/
+
 			sprintf(szUSART_Out, (const rom far char *)" %3d\t%3d\t%3d\t%d\r\n\r\n", (signed char)nLo, (signed char)nMLo, (signed char)nMHi, (char)FlagBits.bToggle);
 			SkrivBuffert(szUSART_Out, 1);
 
@@ -613,7 +666,7 @@ void main(void)
 		Nop();
 		Nop();
      */
-	}	
+}	
 
  
 

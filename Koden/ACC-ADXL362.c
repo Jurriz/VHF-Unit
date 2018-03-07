@@ -26,7 +26,7 @@ long int DoReadInc(void)
 
 	FlagBits.bSPIbusy = 1;
 
-	OpenSPI(SPI_FOSC_16, MODE_11, SMPEND);	// Farten minskad för att försäkra sig om att skrivinstruktionen ska gå fram (0x03)
+	OpenSPI(SPI_FOSC_16, MODE_11, SMPMID);	// Farten minskad för att försäkra sig om att skrivinstruktionen ska gå fram (0x03)
 	
 	ACC_ENABLE = 0;
 
@@ -61,47 +61,22 @@ char DoStartST_ACC(void)
 
 	FlagBits.bSPIbusy = 1;
 	
-	OpenSPI(SPI_FOSC_16, MODE_11, SMPEND);	// Farten minskad för att försäkra sig om att skrivinstruktionen ska gå fram (0x03)
+    ACC_POW_VDD_IO = 1;   Delay(5);     //  Output POWER TO VDD_IO
+    ACC_POW_VDD = 1;      Delay(10);     //  Output POWER TO VDD
+    
+	OpenSPI(SPI_FOSC_4, MODE_11, SMPMID);	// Farten minskad för att försäkra sig om att skrivinstruktionen ska gå fram (0x03)
 
 	ACC_ENABLE = 0; // CS dras låg
+    
     Delay(1);
 	
 	MyWriteSPI(0x22);		// Skriv till 0x22 REG8
-	MyWriteSPI(0x01);			// Reset
-	//MyWriteSPI(0x52);			// 0x1F 0x52 = 'R' = Soft Reset
+	MyWriteSPI(0x81);		// Software Reset och Reboot
 
-	Delay(1);
-    /*
-	MyWriteSPI(AccWrite);		// Skriv ... 
-	MyWriteSPI(0x20);			// ...från adress 0x20 och framåt
-
-//	MyWriteSPI(0xFA);			// 0x20 THRESH_ACT
-	MyWriteSPI(0x7A);			// 0x20 THRESH_ACT
-	MyWriteSPI(0x00);			// 0x21
-
-	MyWriteSPI(0x01);			// 0x22 TIME_ACT
-
-	MyWriteSPI(0x96);			// 0x23 THRESH_INACT
-	MyWriteSPI(0x00);			// 0x24
-
-	MyWriteSPI(0x00);			// 0x25
-	MyWriteSPI(0x00);			// 0x26
-
-	MyWriteSPI(0x3F);			// 0x27 ACTIVITY/INACTIVITY
-
-	MyWriteSPI(0x00);			// 0x28
-	MyWriteSPI(0x80);			// 0x29
-	
-	MyWriteSPI(0x90);			// 0x2A INTMAP1
-	MyWriteSPI(0x00);			// 0x2B INTMAP2
-
-	MyWriteSPI(0x50);			// 0x2C 10.x.1.0.000	±8g 12.5Hz
-//	MyWriteSPI(0x50);			// 0x2C 01.x.1.0.000	±4g 12.5Hz
-	MyWriteSPI(0x0A);			// 0x2D x.0.00.1.1.10	Autosleep Enabled
-//	MyWriteSPI(0x02);			// 0x2D x.0.00.0.0.10	Autosleep Disabled
-*/
+	Delay(50); // Viktigt att ha denna tillräckligt stor så att kretsen hinner starta om helt
 	ToggleACC();
-
+    Delay(1);
+    
 	MyWriteSPI(0x8F);               // Läs från WHO_AM_I 
 	lReturn = MyReadSPI();			// Data skickas till lReturn
 	
@@ -175,5 +150,5 @@ char DoStartST_ACC(void)
 // CKP = 0 = Idle state for clock is a low level
 // CKE = 0 = Transmit occurs on transition from Idle to active clock state
 // CKP = 1 = Idle state for clock is a high level
-// CKE = 0 = Transmit occurs on transition from active to Idle clock state
+// CKE = 1 = Transmit occurs on transition from active to Idle clock state
 // -----------------------------------------------------------------------------

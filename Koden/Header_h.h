@@ -36,8 +36,8 @@
 //						@ PORTC.4		// SDI
 //						@ PORTC.3		// SCK
 // #define FREE			LATCbits.LATC2	// ECCP1 Enhanced PWM output, Channel A
-// #define FREE			LATCbits.LATC1	// ECCP2 Enhanced PWM output, Channel A
-// #define 				LATCbits.LATC0	// Används som räknaringång, ansluten till RTC:s 32768 Hz utgång
+#define ACC_POW_VDD_IO	LATCbits.LATC1	// Används för att starta upp kretsen på rätt sätt (VDD_IO)
+#define ACC_POW_VDD		LATCbits.LATC0	// Används för att starta upp kretsen på rätt sätt (VDD)
 
 // **********************************************************************
 // TRISD = 0b.0000.0000, används för LEDar på labkortet
@@ -145,6 +145,7 @@ char DoStartST_ACC(void);
 // -----------------------------------------------------------------------------
 // Util.c
 unsigned char MyReadSPI(void);
+unsigned char SPI1_Exchange8bit(unsigned char data);
 unsigned char MyWriteSPI(unsigned char data_out);
 int dow(int y, int m, int d);
 unsigned char BCD2Byte(unsigned char nIn);
@@ -294,7 +295,7 @@ extern char nTimeOutUSART_1, nTimeOutUSART_2;
 
 // -----------------------------------------------------------------------------
 //#pragma udata USART_Buffer0
-	extern char szUSART_1[16];
+	extern char szUSART_1[32];
 //#pragma udata
 
 //#pragma udata USART_Buffer1
@@ -302,7 +303,7 @@ extern char nTimeOutUSART_1, nTimeOutUSART_2;
 //#pragma udata
 
 //#pragma udata USART_Buffer2
-	extern char szUSART_2[16];
+	extern char szUSART_2[32];
 //#pragma udata
 
 // extern unsigned char nTICK;

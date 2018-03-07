@@ -18,11 +18,25 @@ void InitCPU(void)
 	//ANCON1 = 0xFF;
 
     //18F45k22
+    //Digitala ingångar
+    
+    // TRIS sätter riktning på datan
+    // 1 Output
+    // 0 Input
+    
+    //LAT sätter pullup eller pulldown
+    // 1 Pullup till Vdd
+    // 0 Pulldown till Jord
+    
     ANSELA = 0x00;
     ANSELB = 0x00;
     ANSELC = 0x00;
     ANSELD = 0x00;
     // ---
+    LATCbits.LATC0 =  0;     // Sätter upp C0 som latch
+    LATCbits.LATC1 =  0;     // Sätter upp C1 som latch 
+    TRISCbits.RC0 = 0;      // Sätter RC0 som utgång
+    TRISCbits.RC1 = 0;      // Sätter RC1 som utgång
     
 	PORTA = 0b00000000;
 	TRISA = 0b11100011;
@@ -30,15 +44,12 @@ void InitCPU(void)
 	
 	PORTB = 0b00000000;
 	TRISB = 0b00011011;
-
-	// Weak pull-up
-//	INTCON2bits.RBPU = 0;
+    
+    LATE  = 0b00000011; // Sätter CS kontakterna först, drar de normalt höga
+	TRISE = 0b00000000; // Alla är utgångar
 
 	LATD  = 0b00000000;	
 	TRISD = 0b00000000; 	// LEDar, alla ut
-
-	LATE  = 0b00000001;
-	TRISE = 0b00000000; 
 
 //	LATF  = 0b00010000;		// RF4=MEMORY_ENABLE_0      ÄNDRAT
 //	TRISF = 0b10000000;
@@ -145,6 +156,7 @@ void InitCPU(void)
 	// Timer3: TICK?					500ms, pulsas från RTC (ej vid batteridrift)
 	// Timer4: Test						6.5ms intervall
 */
+    
 	OpenTimer2(TIMER_INT_ON & T2_PS_1_16 & T2_POST_1_16);	// 6.5ms
 	WriteTimer2(0);
 	PR2 = 0xFF;
@@ -222,6 +234,20 @@ unsigned char MyReadSPI(void)
 	while ( (!SSPSTATbits.BF) && (TMR0L < 20) );	// wait until cycle complete
 
 	return (SSPBUF);								// return with byte read 
+}
+
+unsigned char SPI1_Exchange8bit(unsigned char data)
+{
+    // Clear the Write Collision flag, to allow writing
+    SSP1CON1bits.WCOL = 0;
+
+    SSP1BUF = data;
+
+    while(SSP1STATbits.BF == 0x0)
+    {
+    }
+
+    return (SSP1BUF);
 }
 
 //---------------------------------------------------------------------------------------------

@@ -601,7 +601,7 @@ char DoReadRTC(void)
 	static char nVarv = 0;
 
 	char nCONTROL_INT_FLAG, nCONTROL_STATUS, nReturn;
-	unsigned char nSec, nMin, nHour, nDay, nwDay, nWDay, nMon, nYear;
+	unsigned char nSec, nMin, nHour, nDay, nwDay, nMon, nYear;
 	signed char	nTemp;
 
 	FlagBits.bSPIbusy = 1;
@@ -609,7 +609,7 @@ char DoReadRTC(void)
 	nReturn = 0;
 	nTemp = 0;
 
-	OpenSPI(SPI_FOSC_4, MODE_01, SMPMID);
+	OpenSPI(SPI_FOSC_4, MODE_11, SMPMID);
 
 	RTC_ENABLE = 1;		// Nu kan inga klock-register ändras innan RTC_ENABLE går låg
 	
@@ -708,7 +708,7 @@ LED_0 = 0;
 
 
 // -----------------------------------------------------------------------------
-char DoCheckRV3049Start(void)
+char DoCheckRV3049tSart(void)
 {
 	char nReturn;
 
