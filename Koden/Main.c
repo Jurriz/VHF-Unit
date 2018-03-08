@@ -314,6 +314,7 @@ void main(void)
     unsigned char X_L, X_H, Y_L, Y_H, Z_L, Z_H;
 
 	signed char nOldX, nOldY, nOldZ;
+    signed int xVal, yVal, zVal;
 	char lData;
 
 	FlagBits.bTimerIRQ = 0;
@@ -426,51 +427,55 @@ void main(void)
 	*/
 	Nop();
 	
-    //while (1)
+    while (1)
         {     
             FlagBits.bSPIbusy = 1;
-            OpenSPI(SPI_FOSC_16, MODE_11, SMPEND);
+            OpenSPI(SPI_FOSC_16, MODE_11, SMPMID);
             ACC_ENABLE = 0;
-            Delay(10);
-            MyWriteSPI(0x8F);           // Läs från adress 0x0F "WHO AM I"
-            WAI = MyReadSPI();			// Data skickas sedan till WAI
-            Delay(10);
-            //ACC_ENABLE = 1;
-            //CloseSPI();
-            //FlagBits.bSPIbusy = 0;
+//            Delay(10);
+//            MyWriteSPI(0x8F);           // Läs från adress 0x0F "WHO AM I"
+//            WAI = MyReadSPI();			// Data skickas sedan till WAI
+//            //ACC_ENABLE = 1;
+//            //CloseSPI();
+//            //FlagBits.bSPIbusy = 0;
+//            
+//            Delay(1);
+//            ToggleACC();
+//            Delay(1);
+//            
+//            //FlagBits.bSPIbusy = 1;
+//            //OpenSPI(SPI_FOSC_16, MODE_11, SMPMID);
+//            //ACC_ENABLE = 0;
+//            //Delay(10);
+//
+//            // X Pitch axis
+//            
+//            Delay(1);
+//            ToggleACC();
+//            Delay(1);
+            Delay(100);
+            MyWriteSPI(0xA8);           // Läs från adress 0x15 "OUT_X_L_XL"
             
-            Delay(1);
-            ToggleACC();
-            Delay(1);
-            
-            //FlagBits.bSPIbusy = 1;
-            //OpenSPI(SPI_FOSC_16, MODE_11, SMPMID);
-            //ACC_ENABLE = 0;
-            //Delay(10);
-            
-            // X Pitch axis
-            MyWriteSPI(0x98);           // Läs från adress 0x15 "OUT_X_L_G"
             X_L = MyReadSPI();		// Data skickas sedan till TempL
-            ToggleACC();
-            MyWriteSPI(0x99); 
+            //ToggleACC();
+            //MyWriteSPI(0x19); 
             X_H = MyReadSPI();
-            ToggleACC();
+            //ToggleACC();
             
             // Y Roll axis
-            MyWriteSPI(0x9A);           // Läs från adress 0x15 "OUT_X_L_G"
+            //MyWriteSPI(0x1A);           // Läs från adress 0x15 "OUT_X_L_G"
             Y_L = MyReadSPI();		// Data skickas sedan till TempL
-            ToggleACC();
-            MyWriteSPI(0x9B); 
+            //ToggleACC();
+            //MyWriteSPI(0x1B); 
             Y_H = MyReadSPI();
-            ToggleACC();
+            //ToggleACC();
              
             // Z Yaw axis
-            MyWriteSPI(0x9C);           // Läs från adress 0x15 "OUT_X_L_G"
+            //MyWriteSPI(0xAC);           // Läs från adress 0x15 "OUT_X_L_G"
             Z_L = MyReadSPI();		// Data skickas sedan till TempL
-            ToggleACC();
-            MyWriteSPI(0x9D); 
+            //ToggleACC();
+            //MyWriteSPI(0xAD); 
             Z_H = MyReadSPI();
-           
 
 //            ACC_ENABLE = 1;
 //            CloseSPI();
@@ -491,11 +496,33 @@ void main(void)
             CloseSPI();
             FlagBits.bSPIbusy = 0;
             
-            sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n Who am I?\t0x%02X \r\n X_L \t0x%02X \r\n X_H \t0x%02X \n\r\n Y_L \t0x%02X \r\n Y_H \t0x%02X \n\r\n Z_L \t0x%02X \r\n Z_H \t0x%02X \r\n", 
-                    WAI, X_L, X_H, Y_L, Y_H, Z_L, Z_H); // Utskrift på skärmen
+            // Räkna ut accelerometerdatan
+            xVal = X_H;
+            xVal = xVal << 8; 
+            xVal = xVal | X_L;
+            
+            yVal = Y_H;
+            yVal = yVal << 8; 
+            yVal = yVal | Y_L;
+            
+            zVal = Z_H;
+            zVal = zVal << 8; 
+            zVal = zVal | Z_L;
+            
+            xVal = xVal / 10;
+            if(xVal > 0){
+                for (nHi = 0; xVal > nHi; nHi++){
+                sprintf(szUSART_Out, (const rom far char *)"#"); // Utskrift på skärmen
             SkrivBuffert(szUSART_Out, 1);
-
-            Blink();    // Blinka lamporna
+                }
+            }   
+            
+            sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n X \t %04d \r\n Y \t %04d \n\r Z \t %04d \r\n", 
+                    xVal, yVal, zVal); // Utskrift på skärmen
+            SkrivBuffert(szUSART_Out, 1);
+            
+            Delay(1000);
+            //Blink();    // Blinka lamporna
             
             Nop();
             Nop();
@@ -667,6 +694,3 @@ void main(void)
 		Nop();
      */
 }	
-
- 
-

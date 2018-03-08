@@ -72,14 +72,22 @@ char DoStartST_ACC(void)
 	
 	MyWriteSPI(0x22);		// Skriv till 0x22 REG8
 	MyWriteSPI(0x81);		// Software Reset och Reboot
-
-	Delay(50); // Viktigt att ha denna tillräckligt stor så att kretsen hinner starta om helt
-	ToggleACC();
+    Delay(1);
+    ACC_ENABLE = 1;
+	Delay(700); // Viktigt att ha denna tillräckligt stor så att kretsen hinner starta om helt
+	ACC_ENABLE = 0;
+    Delay(1);     
+    
+    MyWriteSPI(0x20);         // Skriv till CTRL_REG6_XL..  
+    MyWriteSPI(0x98);         // 1000 0000 vilket ger accelerometern hastigheten 238 Hz
+    
+    Delay(1);
+    ToggleACC();
     Delay(1);
     
 	MyWriteSPI(0x8F);               // Läs från WHO_AM_I 
 	lReturn = MyReadSPI();			// Data skickas till lReturn
-	
+	Delay(1);
 	ACC_ENABLE = 1;
 
 	CloseSPI();
