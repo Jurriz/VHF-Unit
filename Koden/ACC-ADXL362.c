@@ -61,33 +61,29 @@ char DoStartST_ACC(void)
 
 	FlagBits.bSPIbusy = 1;
 	
-    ACC_POW_VDD_IO = 1;   Delay(5);     //  Output POWER TO VDD_IO
-    ACC_POW_VDD = 1;      Delay(10);     //  Output POWER TO VDD
-    
+    ACC_POW_VDD_IO = 1;   Delay(1);     //  Output POWER TO VDD_IO
+    ACC_POW_VDD = 1;                    //  Output POWER TO VDD
+    Delay(1000);            // Viktigt att accelerometern hinner stara upp ordentligt
 	OpenSPI(SPI_FOSC_4, MODE_11, SMPMID);	// Farten minskad för att försäkra sig om att skrivinstruktionen ska gå fram (0x03)
-
-	ACC_ENABLE = 0; // CS dras låg
+	//ACC_ENABLE = 0; // CS dras låg
     
-    Delay(1);
+    //Delay(1);
 	
-	MyWriteSPI(0x22);		// Skriv till 0x22 REG8
-	MyWriteSPI(0x81);		// Software Reset och Reboot
-    Delay(1);
-    ACC_ENABLE = 1;
-	Delay(700); // Viktigt att ha denna tillräckligt stor så att kretsen hinner starta om helt
-	ACC_ENABLE = 0;
-    Delay(1);     
+	//MyWriteSPI(0x22);		// Skriv till 0x22 REG8
+	//MyWriteSPI(0x81);		// Software Reset och Reboot
+    //Delay(1);
+    //ACC_ENABLE = 1;
+	//Delay(300); // Viktigt att ha denna tillräckligt stor så att kretsen hinner starta om helt
+	ACC_ENABLE = 0; 
     
     MyWriteSPI(0x20);         // Skriv till CTRL_REG6_XL..  
-    MyWriteSPI(0x98);         // 1000 0000 vilket ger accelerometern hastigheten 238 Hz
+    MyWriteSPI(0x98);         // 1001 1000 vilket ger accelerometern hastigheten 238 Hz
     
-    Delay(1);
     ToggleACC();
-    Delay(1);
     
 	MyWriteSPI(0x8F);               // Läs från WHO_AM_I 
 	lReturn = MyReadSPI();			// Data skickas till lReturn
-	Delay(1);
+    
 	ACC_ENABLE = 1;
 
 	CloseSPI();

@@ -5,6 +5,7 @@
 #include <timers.h>
 #include <usart.h>
 #include <spi.h>
+#include <i2c.h>
 #include <delays.h>
 #include <adc.h>
 
@@ -314,7 +315,7 @@ void main(void)
     unsigned char X_L, X_H, Y_L, Y_H, Z_L, Z_H;
 
 	signed char nOldX, nOldY, nOldZ;
-    signed int xVal, yVal, zVal;
+    signed int xVal, yVal, zVal, xVal_100, yVal_100, zVal_100;
 	char lData;
 
 	FlagBits.bTimerIRQ = 0;
@@ -359,7 +360,7 @@ void main(void)
 */
     //Blink();
     
-	lData = DoStartST_ACC();        // Do start gör ingen skillnad.
+	lData = DoStartST_ACC();        // Kör itiieringen
 	
 	Nop();
 	sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LSM9DS1 Initiering:\r\n\r\n WHO AM I? \t0x%02X (0x68)\r\n\r\n", lData);
@@ -429,74 +430,27 @@ void main(void)
 	
     while (1)
         {     
-            FlagBits.bSPIbusy = 1;
+            //FlagBits.bSPIbusy = 1;
             OpenSPI(SPI_FOSC_16, MODE_11, SMPMID);
             ACC_ENABLE = 0;
-//            Delay(10);
-//            MyWriteSPI(0x8F);           // Läs från adress 0x0F "WHO AM I"
-//            WAI = MyReadSPI();			// Data skickas sedan till WAI
-//            //ACC_ENABLE = 1;
-//            //CloseSPI();
-//            //FlagBits.bSPIbusy = 0;
-//            
-//            Delay(1);
-//            ToggleACC();
-//            Delay(1);
-//            
-//            //FlagBits.bSPIbusy = 1;
-//            //OpenSPI(SPI_FOSC_16, MODE_11, SMPMID);
-//            //ACC_ENABLE = 0;
-//            //Delay(10);
-//
-//            // X Pitch axis
-//            
-//            Delay(1);
-//            ToggleACC();
-//            Delay(1);
-            Delay(100);
-            MyWriteSPI(0xA8);           // Läs från adress 0x15 "OUT_X_L_XL"
+
+            MyWriteSPI(0xA8);       // Läs från adress 0x15 "OUT_X_L_XL", data läses automatiskt ut i en linjär rörelse
             
             X_L = MyReadSPI();		// Data skickas sedan till TempL
-            //ToggleACC();
-            //MyWriteSPI(0x19); 
             X_H = MyReadSPI();
-            //ToggleACC();
             
-            // Y Roll axis
-            //MyWriteSPI(0x1A);           // Läs från adress 0x15 "OUT_X_L_G"
             Y_L = MyReadSPI();		// Data skickas sedan till TempL
-            //ToggleACC();
-            //MyWriteSPI(0x1B); 
             Y_H = MyReadSPI();
-            //ToggleACC();
-             
-            // Z Yaw axis
-            //MyWriteSPI(0xAC);           // Läs från adress 0x15 "OUT_X_L_G"
-            Z_L = MyReadSPI();		// Data skickas sedan till TempL
-            //ToggleACC();
-            //MyWriteSPI(0xAD); 
+       
+            Z_L = MyReadSPI();		// Data skickas toll Z_L och Z_H
             Z_H = MyReadSPI();
-
-//            ACC_ENABLE = 1;
-//            CloseSPI();
-//            FlagBits.bSPIbusy = 0;
-//            
-//            Delay(1000);
-//            ToggleACC();
-//            Delay(1000);
-//             
-//            FlagBits.bSPIbusy = 1;
-//            OpenSPI(SPI_FOSC_16, MODE_11, SMPMID);
-//            ACC_ENABLE = 0;
-//            Delay(10);
-//            MyWriteSPI(0x99);           // Läs från adress 0x15 "OUT_TEMP_L"
-//            TempH = MyReadSPI();        // Läs OUT_TEMP_H som kommer efter i registret
             
             ACC_ENABLE = 1;
             CloseSPI();
-            FlagBits.bSPIbusy = 0;
             
-            // Räkna ut accelerometerdatan
+            //FlagBits.bSPIbusy = 0;
+            
+            // Räkna ut accelerometerdatan, klumpa ihop de lägre bitarna med de högre
             xVal = X_H;
             xVal = xVal << 8; 
             xVal = xVal | X_L;
@@ -509,23 +463,57 @@ void main(void)
             zVal = zVal << 8; 
             zVal = zVal | Z_L;
             
-            xVal = xVal / 10;
-            if(xVal > 0){
-                for (nHi = 0; xVal > nHi; nHi++){
-                sprintf(szUSART_Out, (const rom far char *)"#"); // Utskrift på skärmen
-            SkrivBuffert(szUSART_Out, 1);
-                }
-            }   
-            
-            sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n X \t %04d \r\n Y \t %04d \n\r Z \t %04d \r\n", 
+            // Skriver ut X, Y och Z med deras värden
+            sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n X \t %04d \r\n Y \t %04d \n\r Z \t %04d \r\n\r\n", 
                     xVal, yVal, zVal); // Utskrift på skärmen
             SkrivBuffert(szUSART_Out, 1);
             
-            Delay(1000);
-            //Blink();    // Blinka lamporna
             
-            Nop();
-            Nop();
+            // Gör alla värden positiva för att enklare skriva ut dem
+            if(xVal < 0)
+               xVal =- xVal;
+            if(yVal < 0)
+               yVal =- yVal;
+            if(zVal < 0)
+               zVal =- zVal;
+            
+            // Delar alla värden med 100 för att kunna visa data på skärmen lite enklare
+            xVal_100 = xVal / 100;
+            yVal_100 = yVal / 100;
+            zVal_100 = zVal / 100;
+            
+            // Skriv ut ett antal "X" på skärmen som motsvarar absolutbeloppett av värdet på X-axeln delat på 100
+            if(xVal > 0){
+                for (nHi = 0; xVal_100 > nHi; nHi++){
+                sprintf(szUSART_Out, (const rom far char *)"X"); // Utskrift på skärmen
+            SkrivBuffert(szUSART_Out, 1);
+                }
+            }
+            
+            sprintf(szUSART_Out, (const rom far char *)"\r\n"); // Lägger in en radbrytning på skärmen mellan värdena
+            SkrivBuffert(szUSART_Out, 1);
+            
+            // Skriv ut ett antal "Y" på skärmen som motsvarar absolutbeloppett av värdet på Y-axeln delat på 100
+            if(yVal > 0){
+                for (nHi = 0; yVal_100 > nHi; nHi++){
+                sprintf(szUSART_Out, (const rom far char *)"Y"); // Utskrift på skärmen
+            SkrivBuffert(szUSART_Out, 1);
+                }
+            }
+            
+            sprintf(szUSART_Out, (const rom far char *)"\r\n"); // Lägger in en radbrytning på skärmen mellan värdena
+            SkrivBuffert(szUSART_Out, 1);
+            
+            // Skriv ut ett antal "Z" på skärmen som motsvarar absolutbeloppett av värdet på Z-axeln delat på 100
+            if(zVal > 0){
+                for (nHi = 0; zVal_100 > nHi; nHi++){
+                sprintf(szUSART_Out, (const rom far char *)"Z"); // Utskrift på skärmen
+            SkrivBuffert(szUSART_Out, 1);
+                }
+            }    
+            
+            Delay(1000);
+            
         }		
     
     LATDbits.LATD0 = 1;
