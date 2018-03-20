@@ -311,11 +311,11 @@ void main(void)
 {
 	unsigned char nLoop, nPek, nTmp, nSlask, nPoll, nTemp, WAI;
 	unsigned char nHi, nMHi, nMLo, nLo;	
-	unsigned char nTICK, TempL, TempH;
+	unsigned char nTICK, TempL, TempH, test, test1;
     unsigned char X_L, X_H, Y_L, Y_H, Z_L, Z_H;
 
 	signed char nOldX, nOldY, nOldZ;
-    signed int xVal, yVal, zVal, xVal_100, yVal_100, zVal_100;
+    signed int xVal, yVal, zVal, xVal_100, yVal_100, zVal_100, i=0;
 	char lData;
 
 	FlagBits.bTimerIRQ = 0;
@@ -360,12 +360,13 @@ void main(void)
 */
     //Blink();
     
-	lData = DoStartST_ACC();        // Kör itiieringen
+	//lData = DoStartST_ACC();        // Kör itiieringen
 	
-	Nop();
-	sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LSM9DS1 Initiering:\r\n\r\n WHO AM I? \t0x%02X (0x68)\r\n\r\n", lData);
-	SkrivBuffert(szUSART_Out, 1);
+	//Nop();
+	//sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LSM9DS1 Initiering:\r\n\r\n WHO AM I? \t0x%02X (0x68)\r\n\r\n", lData);
+	//SkrivBuffert(szUSART_Out, 1);
    
+    
 //    OpenSPI(SPI_FOSC_4, MODE_11, SMPMID);
 //    Delay(1);
 //    ACC_ENABLE = 0;
@@ -373,7 +374,7 @@ void main(void)
 //    SPI1_Exchange8bit(0x8F);
 //    lData = SPI1_Exchange8bit(0x00);
 //    sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LSM9DS1 läst med annan SPI funktion \r\n\r\n WHO AM I? \t0x%02X (0x68)\r\n\r\n", lData);
-//	SkrivBuffert(szUSART_Out, 1);
+//    SkrivBuffert(szUSART_Out, 1);
 //    Delay(1);
 //    ACC_ENABLE = 1;
 //    Delay(1);
@@ -429,8 +430,13 @@ void main(void)
 	Nop();
 	
     while (1)
-        {     
-            //FlagBits.bSPIbusy = 1;
+    {     
+        RTC_ENABLE = 1;
+        Delay(100);
+        RTC_ENABLE = 0;
+        Delay(100);
+        //FlagBits.bSPIbusy = 1;
+        /*
             OpenSPI(SPI_FOSC_16, MODE_11, SMPMID);
             ACC_ENABLE = 0;
 
@@ -487,8 +493,35 @@ void main(void)
                 for (nHi = 0; xVal_100 > nHi; nHi++){
                 sprintf(szUSART_Out, (const rom far char *)"X"); // Utskrift på skärmen
             SkrivBuffert(szUSART_Out, 1);
+          
                 }
-            }
+            */
+        
+        // RADIO TESTKOD
+        OpenSPI(SPI_FOSC_16, MODE_00, SMPMID);
+        ACC_ENABLE = 0;
+        
+        MyWriteSPI(0x02);       // Skriv på funktionen POWER_UP  
+        
+        MyWriteSPI(0x00);       // Skriv in funktionen BOOT_OPTIONS 0x00
+        MyWriteSPI(0x00);       // Skriv in funktionen XTAL_OPTIONS 0x00
+        
+        MyWriteSPI(0x01);       // Skicka in en 32-bitars adress som beskriver hastigheten på den interna klockan på radiokortet
+        MyWriteSPI(0xC9);
+        MyWriteSPI(0xC3);
+        MyWriteSPI(0x80);
+        Delay(100);      
+        
+        test = MyReadSPI();
+        test1 = MyReadSPI();  
+        ACC_ENABLE = 1;
+        CloseSPI();
+        sprintf(szUSART_Out, (const rom far char *)"\r\n Test 1 - %02X, Test 2 - %02X Counter: %d", test, test1, i); // Lägger in en radbrytning på skärmen mellan värdena
+        SkrivBuffert(szUSART_Out, 1);
+        
+        Blink();
+        i++;
+    }
             
             sprintf(szUSART_Out, (const rom far char *)"\r\n"); // Lägger in en radbrytning på skärmen mellan värdena
             SkrivBuffert(szUSART_Out, 1);
@@ -514,7 +547,7 @@ void main(void)
             
             Delay(1000);
             
-        }		
+        		
     
     LATDbits.LATD0 = 1;
     Delay(1000);
