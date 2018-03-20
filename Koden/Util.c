@@ -28,15 +28,17 @@ void InitCPU(void)
     // 1 Pullup till Vdd
     // 0 Pulldown till Jord
     
-    ANSELA = 0x00;
+    ANSELA = 0x00;  // Sätter om alla pinnar till digitala istället för det initialt analoga
     ANSELB = 0x00;
     ANSELC = 0x00;
     ANSELD = 0x00;
-    // ---
+    
+    // Sätter voltage supply på utgångar på processorn
     LATCbits.LATC0 =  0;     // Sätter upp C0 som latch
     LATCbits.LATC1 =  0;     // Sätter upp C1 som latch 
     TRISCbits.RC0 = 0;      // Sätter RC0 som utgång
     TRISCbits.RC1 = 0;      // Sätter RC1 som utgång
+    
     
 	PORTA = 0b00000000;
 	TRISA = 0b11100011;

@@ -36,10 +36,21 @@ The processor can be determined to have these many connections and enough functi
 The processor do not start up on it own, much consideration needs in making right initzilation and configure it right. Powering it is done by connnecting the VDD pin to the power net. The
 
 \subsubsection{Connenctions}
- In the registers 
+%% In the registers 
+In start of every microcontroller the processor have to be programmed. This is done on the processor by a principle called In Circuit programming\cite{}. Here the most common implementation is the \gls{jtag}, where the all the programming and debugging is done through a standardized interface. The approach is different on this \gls{mcu}, here three pin's is used to program the device. The first one is the "PGC" which is the clock signal for the In-Circuit Debugger and In-Circuit Serial Programming. This is done with the use of 
+And that is by connetue
 
-\subsubsection{C}
+\subsubsection{Software implementation}
 
 \subsection{Accelerometer}
-The accelerometer used is a 
+The component used is a 3-axis, ultra-low-powera and high performance accelerometer from ST\cite{STacc}.
+
+\subsubsection{Power}
+Two voltage connections is apperent on this device, one which is called VDD and the other is called VDD_IO. 
+
+\subsubsection{Connenctions}
+ In the registers 
+
+\subsubsection{Software implementation}
+
 
