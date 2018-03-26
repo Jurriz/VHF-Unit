@@ -36,8 +36,8 @@
 //						@ PORTC.4		// SDI
 //						@ PORTC.3		// SCK
 // #define FREE			LATCbits.LATC2	// ECCP1 Enhanced PWM output, Channel A
-#define ACC_POW_VDD_IO	LATCbits.LATC1	// Används för att starta upp kretsen på rätt sätt (VDD_IO)
-#define ACC_POW_VDD		LATCbits.LATC0	// Används för att starta upp kretsen på rätt sätt (VDD)
+#define ADSADS_SD     	LATCbits.LATC1	// Används för att starta upp kretsen på rätt sätt (VDD_IO)
+#define RADIO_SDN 		LATCbits.LATC0	// Används för att starta upp kretsen på rätt sätt (VDD)
 
 // **********************************************************************
 // TRISD = 0b.0000.0000, används för LEDar på labkortet
@@ -60,7 +60,7 @@
 // #define FREE				LATEbits.LATE5	// D,O
 // #define FREE			 	LATEbits.LATE4	// D,O
 // #define FREE				LATEbits.LATE3	// D,O
-// #define FREE				LATEbits.LATE2	// D,O
+#define RADIO_EN			LATEbits.LATE2	// D,O
 #define RTC_ENABLE			LATEbits.LATE1	// D,O
 #define ACC_ENABLE			LATEbits.LATE0	// D,O
 
@@ -125,7 +125,7 @@
 void SkrivBuffert(char *szUt, char nVal);
 
 // -----------------------------------------------------------------------------
-// RTC-RC3049
+// RTC-RV8803C7
 void DoSetTimeRV3049(void);
 void ToggleRTC(void);
 char DoStartRV3049(void);
@@ -137,10 +137,18 @@ char DoChangeTickRV3049(unsigned char nT1);
 char DoCheckRV3049Start(void);
 
 // -----------------------------------------------------------------------------
-// ACC-ADXL362
+// ACC-LIS2DW12
 void ToggleACC(void);
 long int DoReadInc(void);
 char DoStartST_ACC(void);
+
+// -----------------------------------------------------------------------------
+// Radio-SI4463
+void DoResetRadio(void);
+void ToggleRadio(void);
+void DoStartRadio(void);
+unsigned char ReadFromRadio(unsigned char nProp, unsigned char nLen);
+char DoCheckCTSManyTimes (void);
 
 // -----------------------------------------------------------------------------
 // Util.c
@@ -149,6 +157,8 @@ unsigned char SPI1_Exchange8bit(unsigned char data);
 unsigned char MyWriteSPI(unsigned char data_out);
 int dow(int y, int m, int d);
 unsigned char BCD2Byte(unsigned char nIn);
+signed int AccDataCalc(unsigned char val_L, unsigned char val_H);
+void Blink(void);
 
 // -----------------------------------------------------------------------------
 // AmCe_NReader.c --------------------------------------------------------------

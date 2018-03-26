@@ -1,10 +1,11 @@
-#include <p18f45k22.h>
+#include <p18f46k22.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <timers.h>
 #include <usart.h>
 #include <spi.h>
+#include <i2c.h>
 #include <delays.h>
 #include <adc.h>
 
@@ -17,7 +18,7 @@ void InitCPU(void)
 	//ANCON0 = 0xFF;                                    ÄNDRAT
 	//ANCON1 = 0xFF;
 
-    //18F45k22
+    //18F46k22
     //Digitala ingångar
     
     // TRIS sätter riktning på datan
@@ -47,7 +48,7 @@ void InitCPU(void)
 	PORTB = 0b00000000;
 	TRISB = 0b00011011;
     
-    LATE  = 0b00000011; // Sätter CS kontakterna först, drar de normalt höga
+    LATE  = 0b00000111; // Sätter CS kontakterna först, drar de normalt höga
 	TRISE = 0b00000000; // Alla är utgångar
 
 	LATD  = 0b00000000;	
@@ -283,36 +284,68 @@ void Delay(unsigned int nDelay)
 	
 	for (nLoop0 = 0; nLoop0 < nDelay; nLoop0++)
 	{
-//		for (nLoop1 = 0; nLoop1 < 250; nLoop1++);	// HS
-		for (nLoop1 = 0; nLoop1 < 99; nLoop1++);	// INTOSC
+		for (nLoop1 = 0; nLoop1 < 250; nLoop1++);	// HS
+//		for (nLoop1 = 0; nLoop1 < 99; nLoop1++);	// INTOSC
 	}	
 }
 
+// -----------------------------------------------------------------------------
+signed int AccDataCalc(unsigned char val_L, unsigned char val_H)
+{
+    signed int nTmp;
+    nTmp = val_H;
+    nTmp = nTmp << 8;
+    nTmp = nTmp | val_L;
+    
+    if(nTmp < 0)
+           nTmp =- nTmp;
+    return nTmp;
+}
+
+// -----------------------------------------------------------------------------
+//void PrintAccData(signed int Acc_val, char text)
+//{
+//    for (int i = 0; Acc_val > i; i++)
+//    {
+//        sprintf(szUSART_Out, (const rom far char *), text); // Utskrift på skärmen
+//        SkrivBuffert(szUSART_Out, 1);
+//    }
+//}
+
+// -----------------------------------------------------------------------------
 void Blink(void)
 {
     LATDbits.LATD0 = 1;
-    Delay(500);
+    Delay(100);
     LATDbits.LATD1 = 1;
-    Delay(500);
+    Delay(100);
     LATDbits.LATD2 = 1;
-    Delay(500);
+    Delay(100);
     LATDbits.LATD3 = 1;
-    Delay(500);
+    Delay(100);
     LATDbits.LATD4 = 1;
-    Delay(500);
+    Delay(100);
     LATDbits.LATD5 = 1;
-    Delay(500);
+    Delay(100);
+    LATDbits.LATD6 = 1;
+    Delay(100);
+    LATDbits.LATD7 = 1;
+    Delay(100);
     LATDbits.LATD0 = 0;
-    Delay(500);
+    Delay(100);
     LATDbits.LATD1 = 0;
-    Delay(500);
+    Delay(100);
     LATDbits.LATD2 = 0;
-    Delay(500);
+    Delay(100);
     LATDbits.LATD3 = 0;
-    Delay(500);
+    Delay(100);
     LATDbits.LATD4 = 0;
-    Delay(500);
+    Delay(100);
     LATDbits.LATD5 = 0;
+    Delay(100);
+    LATDbits.LATD6 = 0;
+    Delay(100);
+    LATDbits.LATD7 = 0;
 }
 
 // -----------------------------------------------------------------------------

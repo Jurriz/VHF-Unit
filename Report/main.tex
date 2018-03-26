@@ -17,6 +17,8 @@
 \usepackage{wrapfig}
 \usepackage{rotating}
 \usepackage{subcaption, float}
+\usepackage{titlesec}
+\usepackage{verbatim}
 %\usepackage[sc]{titlesec}
 %\usepackage{titletoc}
 
@@ -65,6 +67,14 @@
 }
 \makeatother
 
+
+%% Fixed 4th deepth
+\setcounter{secnumdepth}{4}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
 % Figure caption source
 \newcommand*{\captionsource}[2]{%
   \caption[{#1}]{#1}\par
@@ -111,13 +121,16 @@
 \input{introduction.tex}
 
 \clearpage
-\section{Functionality}\label{sec:function}
+\section{Method}\label{sec:function}
 \input{functionality.tex}
 
 \clearpage
 \section{Schematics}\label{sec:schematic}
 \input{Schematic.tex}
 
+\clearpage
+\section{PCB}\label{sec:pcb}
+\input{pcb.tex}
 
 \clearpage
 \input{references.tex}

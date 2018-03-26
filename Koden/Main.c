@@ -1,4 +1,4 @@
-#include <p18f45k22.h>
+#include <p18f46k22.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -12,9 +12,9 @@
 #include "Header_h.h"
 
 // -----------------------------------------------------------------------------
-// PIC18F87J11 (j10)
+// PIC18LF46k22 
 #pragma config DEBUG = ON
-#pragma config XINST = ON          //ÄNDRAT FRÅN ON till OFF
+#pragma config XINST = ON          
 
 #pragma config STVREN = ON
 #pragma config WDTEN = OFF
@@ -309,9 +309,9 @@ void SkrivBuffert(char *szUt, char nVal)
 // -----------------------------------------------------------------------------
 void main(void)
 {
-	unsigned char nLoop, nPek, nTmp, nSlask, nPoll, nTemp, WAI;
+    unsigned char nLoop, nLoop1, nPek, nTmp, nSlask, nPoll, nTemp, WAI, nTest;
 	unsigned char nHi, nMHi, nMLo, nLo;	
-	unsigned char nTICK, TempL, TempH, test, test1;
+	unsigned char nTICK, TempL, TempH, test, CTS_OK, szData[];
     unsigned char X_L, X_H, Y_L, Y_H, Z_L, Z_H;
 
 	signed char nOldX, nOldY, nOldZ;
@@ -321,12 +321,10 @@ void main(void)
 	FlagBits.bTimerIRQ = 0;
         
 	InitCPU();
-
-	//ACC_ENABLE = 1;
 	
-	RTC_ENABLE = 0;
+	//RTC_ENABLE = 0;
 
-	Delay(100);
+	//Delay(100);
 	
 	INTCONbits.GIE = 0;		// Global
 
@@ -383,7 +381,7 @@ void main(void)
     
     
 	FlagBits.bReadInc = 0;
-/*
+    /*
 	strcpypgm2ram(szUSART_Out, (const rom far char *)" NMEA Generator \r\n\r\n\r\n\r\n");
 	SkrivBuffert(szUSART_Out, 1);
 	
@@ -428,133 +426,214 @@ void main(void)
 //	nHi = (lData & 0x000000FF);		// DEVID_AD
 	*/
 	Nop();
-	
-    while (1)
-    {     
-        RTC_ENABLE = 1;
-        Delay(100);
-        RTC_ENABLE = 0;
-        Delay(100);
-        //FlagBits.bSPIbusy = 1;
-        /*
-            OpenSPI(SPI_FOSC_16, MODE_11, SMPMID);
-            ACC_ENABLE = 0;
 
-            MyWriteSPI(0xA8);       // Läs från adress 0x15 "OUT_X_L_XL", data läses automatiskt ut i en linjär rörelse
-            
-            X_L = MyReadSPI();		// Data skickas sedan till TempL
-            X_H = MyReadSPI();
-            
-            Y_L = MyReadSPI();		// Data skickas sedan till TempL
-            Y_H = MyReadSPI();
-       
-            Z_L = MyReadSPI();		// Data skickas toll Z_L och Z_H
-            Z_H = MyReadSPI();
-            
-            ACC_ENABLE = 1;
-            CloseSPI();
-            
-            //FlagBits.bSPIbusy = 0;
-            
-            // Räkna ut accelerometerdatan, klumpa ihop de lägre bitarna med de högre
-            xVal = X_H;
-            xVal = xVal << 8; 
-            xVal = xVal | X_L;
-            
-            yVal = Y_H;
-            yVal = yVal << 8; 
-            yVal = yVal | Y_L;
-            
-            zVal = Z_H;
-            zVal = zVal << 8; 
-            zVal = zVal | Z_L;
-            
-            // Skriver ut X, Y och Z med deras värden
-            sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n X \t %04d \r\n Y \t %04d \n\r Z \t %04d \r\n\r\n", 
-                    xVal, yVal, zVal); // Utskrift på skärmen
-            SkrivBuffert(szUSART_Out, 1);
-            
-            
-            // Gör alla värden positiva för att enklare skriva ut dem
-            if(xVal < 0)
-               xVal =- xVal;
-            if(yVal < 0)
-               yVal =- yVal;
-            if(zVal < 0)
-               zVal =- zVal;
-            
-            // Delar alla värden med 100 för att kunna visa data på skärmen lite enklare
-            xVal_100 = xVal / 100;
-            yVal_100 = yVal / 100;
-            zVal_100 = zVal / 100;
-            
-            // Skriv ut ett antal "X" på skärmen som motsvarar absolutbeloppett av värdet på X-axeln delat på 100
-            if(xVal > 0){
-                for (nHi = 0; xVal_100 > nHi; nHi++){
-                sprintf(szUSART_Out, (const rom far char *)"X"); // Utskrift på skärmen
-            SkrivBuffert(szUSART_Out, 1);
-          
-                }
-            */
+    while (0)
+    {     
         
-        // RADIO TESTKOD
-        OpenSPI(SPI_FOSC_16, MODE_00, SMPMID);
+        // ---------- Läs från Accelerometern ----------------------------------
+        OpenSPI1(SPI_FOSC_4, MODE_11, SMPMID);
+         
+        lData = DoStartST_ACC();        // Kör itiieringen
+
+        Nop();
+        sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LSM9DS1 Initiering:\r\n\r\n WHO AM I? \t0x%02X (0x68)\r\n\r\n", lData);
+        SkrivBuffert(szUSART_Out, 1);
+
+        Delay(1);
         ACC_ENABLE = 0;
-        
-        MyWriteSPI(0x02);       // Skriv på funktionen POWER_UP  
-        
-        MyWriteSPI(0x00);       // Skriv in funktionen BOOT_OPTIONS 0x00
-        MyWriteSPI(0x00);       // Skriv in funktionen XTAL_OPTIONS 0x00
-        
-        MyWriteSPI(0x01);       // Skicka in en 32-bitars adress som beskriver hastigheten på den interna klockan på radiokortet
-        MyWriteSPI(0xC9);
-        MyWriteSPI(0xC3);
-        MyWriteSPI(0x80);
-        Delay(100);      
-        
-        test = MyReadSPI();
-        test1 = MyReadSPI();  
+        Delay(1);
+
+        MyWriteSPI(0xA8);       // Läs från adress 0x15 "OUT_X_L_XL", data läses automatiskt ut i en linjär rörelse
+
+        X_L = MyReadSPI();		// Data skickas sedan till TempL
+        X_H = MyReadSPI();
+
+        Y_L = MyReadSPI();		// Data skickas sedan till TempL
+        Y_H = MyReadSPI();
+
+        Z_L = MyReadSPI();		// Data skickas toll Z_L och Z_H
+        Z_H = MyReadSPI();
+
         ACC_ENABLE = 1;
-        CloseSPI();
-        sprintf(szUSART_Out, (const rom far char *)"\r\n Test 1 - %02X, Test 2 - %02X Counter: %d", test, test1, i); // Lägger in en radbrytning på skärmen mellan värdena
+        CloseSPI1();
+        
+        // Räkna ut accelerometerdatan, klumpa ihop de lägre bitarna med de högre
+        xVal = AccDataCalc(X_L, X_H);
+        yVal = AccDataCalc(Y_L, Y_H);
+        zVal = AccDataCalc(Z_L, Z_H);
+
+        // Skriver ut antalet x,y,z för hur stort utslag de har.
+//        PrintAccData(xVal, "x");
+//        PrintAccData(yVal, "x");
+//        PrintAccData(zVal, "x");
+        
+        // Delar alla värden med 100 för att kunna visa data på skärmen lite enklare
+        xVal_100 = xVal / 100;
+        yVal_100 = yVal / 100;
+        zVal_100 = zVal / 100;
+
+        // Skriv ut ett antal "X" på skärmen som motsvarar absolutbeloppett av värdet på X-axeln delat på 100
+//        for (nHi = 0; xVal_100 > nHi; nHi++)
+//        {
+//            printf(szUSART_Out, (const rom far char *)"X"); // Utskrift på skärmen
+//            SkrivBuffert(szUSART_Out, 1);
+//        }
+//        
+//         for (nHi = 0; yVal_100 > nHi; nHi++)
+//        {
+//            printf(szUSART_Out, (const rom far char *)"Y"); // Utskrift på skärmen
+//            SkrivBuffert(szUSART_Out, 1);
+//        }
+//        
+//         for (nHi = 0; zVal_100 > nHi; nHi++)
+//        {
+//            printf(szUSART_Out, (const rom far char *)"Z"); // Utskrift på skärmen
+//            SkrivBuffert(szUSART_Out, 1);
+//        }
+        
+        //Skriver ut X, Y och Z med deras värden
+        sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n X \t %04d \r\n Y \t %04d \n\r Z \t %04d \r\n\r\n", 
+                xVal, yVal, zVal); // Utskrift på skärmen
+        SkrivBuffert(szUSART_Out, 1);
+        
+        CloseSPI1();
+        
+        
+        // --------- Läs från radion: ------------------------------------------
+        OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);
+        
+        DoResetRadio();
+        
+        DoCheckCTSManyTimes();
+        
+        DoStartRadio();
+        
+        DoCheckCTSManyTimes();
+         
+        // ----- Kör en läsning av info ----
+        ToggleRadio();
+        
+        WriteSPI1(0x01);       
+        
+        RADIO_EN = 1;
+        Delay(1);
+        
+        nTmp = DoCheckCTSManyTimes();
+        
+        if (nTmp == 0xFF)   // Om CTS är hög är allting rätt
+        {
+            CTS_OK = 1;     // Kollar så att CTS är ok
+            nLoop = 0;
+            while (nLoop < 8)
+            {
+                szData[nLoop] = MyReadSPI();
+                nLoop++;
+            }	
+        }		
+        
+        RADIO_EN = 1;
+        CloseSPI1();
+        
+        // ---------------------------------------------------------------------
+        
+        for (i=0; i<nLoop; i++)     // Skriv ut utläst data från PART_INFO
+        {
+            sprintf(szUSART_Out, (const rom far char *)"Index %d - %02X \r\n ", i, szData[i]); // Visar part_info
+            SkrivBuffert(szUSART_Out, 1);
+        }
+        sprintf(szUSART_Out, (const rom far char *)"\r\n");     //Lägger in lite radbrytningar
         SkrivBuffert(szUSART_Out, 1);
         
         Blink();
-        i++;
-    }
-            
-            sprintf(szUSART_Out, (const rom far char *)"\r\n"); // Lägger in en radbrytning på skärmen mellan värdena
-            SkrivBuffert(szUSART_Out, 1);
-            
-            // Skriv ut ett antal "Y" på skärmen som motsvarar absolutbeloppett av värdet på Y-axeln delat på 100
-            if(yVal > 0){
-                for (nHi = 0; yVal_100 > nHi; nHi++){
-                sprintf(szUSART_Out, (const rom far char *)"Y"); // Utskrift på skärmen
-            SkrivBuffert(szUSART_Out, 1);
-                }
-            }
-            
-            sprintf(szUSART_Out, (const rom far char *)"\r\n"); // Lägger in en radbrytning på skärmen mellan värdena
-            SkrivBuffert(szUSART_Out, 1);
-            
-            // Skriv ut ett antal "Z" på skärmen som motsvarar absolutbeloppett av värdet på Z-axeln delat på 100
-            if(zVal > 0){
-                for (nHi = 0; zVal_100 > nHi; nHi++){
-                sprintf(szUSART_Out, (const rom far char *)"Z"); // Utskrift på skärmen
-            SkrivBuffert(szUSART_Out, 1);
-                }
-            }    
-            
-            Delay(1000);
-            
-        		
+    }       
+    i=0;
+    while(1)
+    {
+        
+    // Kod till I2C accelerometern:
+    SSP1ADD = 0x18;
     
-    LATDbits.LATD0 = 1;
-    Delay(1000);
-    LATDbits.LATD1 = 0;
-    Delay(1000);
-    DoReadAllRTC_Regs();
-	
+    RTC_ENABLE = 1;     // För att se på skåpet
+    
+    OpenI2C(MASTER, SLEW_ON); 
+    
+    StartI2C();        // Start  kommando
+
+    WriteI2C(0xD4); //SAD + W (D6)
+    
+    AckI2C();   // Get acknowledgement
+    
+    WriteI2C(0x22); // Adress 0x0f (Who_AM_I), CTRL_REG_1 
+    
+    AckI2C();   // Get Akcnowledgement
+    
+    RestartI2C(); // Repeted Start
+    
+    WriteI2C(0xD4); //SAD + R (D7)
+    
+    AckI2C();   // Get acknowledgement
+    
+    WriteI2C(0x81); // SW_RESET och BOOT
+    
+    AckI2C();
+    
+    StopI2C();
+    
+    CloseI2C();
+    
+    // ---- KÖR IGEN -----------------------------------------------------------
+    
+    OpenI2C(MASTER, SLEW_ON); 
+    
+    StartI2C();        // Start  kommando
+
+    IdleI2C();
+    
+    nTmp = WriteI2C(0xD4); //SAD + W (D6)
+       
+    IdleI2C();
+    
+    AckI2C();   // Get acknowledgement
+    
+    IdleI2C();
+    
+    nTmp = WriteI2C(0x22); // Read from adress 0x0f (Who_AM_I)
+
+    IdleI2C();
+    
+    AckI2C();   // Get Akcnowledgement
+    
+    IdleI2C();
+    
+    RestartI2C(); // Repeted Start
+
+    IdleI2C();
+    
+    nTmp = WriteI2C(0xD5); //SAD + R (D7)
+
+    IdleI2C();
+    
+    AckI2C();   // Get acknowledgement
+    
+    IdleI2C();
+    
+    nTmp = ReadI2C();
+
+    IdleI2C();
+    
+    NotAckI2C();
+    
+    StopI2C();
+    
+    CloseI2C();
+    
+    RTC_ENABLE = 0;
+    
+	Blink();
+    i++;
+   
+    }
+    
 	nTmp = DoReadRTC();
 	if (nTmp != 0)
 	{
