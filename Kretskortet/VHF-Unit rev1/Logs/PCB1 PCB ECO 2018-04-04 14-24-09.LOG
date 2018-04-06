@@ -1,0 +1,9 @@
+Removed Pin From Net: NetName=VRF Pin=R?-1
+Added Component: Designator=U?(LGA8C90P4X2_320X150X80)
+Added Pin To Net: NetName=VRF Pin=R?-1
+Added Pin To Net: NetName=SDA_RTC Pin=U?-1
+Added Pin To Net: NetName=GND Pin=U?-5
+Added Pin To Net: NetName=NINT_RTC Pin=U?-6
+Added Pin To Net: NetName=SCL_RTC Pin=U?-8
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component R? Res2
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component U? RV-8803-C7

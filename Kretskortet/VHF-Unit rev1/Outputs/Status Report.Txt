@@ -1,0 +1,10 @@
+Output: Mixed Sim
+Type  : AdvSimNetlist
+From  : Project [VHF-Unit rev1.PrjPcb]
+   Generated File[VHF-Unit rev1.nsx]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 13:20:21 On 2018-04-04

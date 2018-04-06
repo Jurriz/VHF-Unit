@@ -1,0 +1,117 @@
+Added Component: Designator=Balun(Balun)
+Added Component: Designator=C?(0402)
+Added Component: Designator=C?(0402)
+Added Component: Designator=C?(0402)
+Added Component: Designator=C?(0402)
+Added Component: Designator=C?(0402)
+Added Component: Designator=C?(0402)
+Added Component: Designator=C?(0402)
+Added Component: Designator=C?(0402)
+Added Component: Designator=L?(0402-A)
+Added Component: Designator=L?(0402-A)
+Added Component: Designator=P?(HDR1X2)
+Added Component: Designator=R?(J1-0603)
+Added Component: Designator=R?(J1-0603)
+Added Component: Designator=R?(0603)
+Added Component: Designator=R?(J1-0603)
+Added Component: Designator=U?(BGA8C40P2X4_87X156X50)
+Added Pin To Net: NetName=?SD Pin=U?-18
+Added Net: Name=?SD
+Added Pin To Net: NetName=CS_ACC Pin=U?-2
+Added Pin To Net: NetName=CS_ACC Pin=U?-21
+Added Net: Name=CS_ACC
+Added Pin To Net: NetName=GND Pin=C?-1
+Added Pin To Net: NetName=GND Pin=C?-1
+Added Pin To Net: NetName=GND Pin=C?-1
+Added Pin To Net: NetName=GND Pin=C?-1
+Added Pin To Net: NetName=GND Pin=C?-1
+Added Pin To Net: NetName=GND Pin=C?-1
+Added Pin To Net: NetName=GND Pin=C?-1
+Added Pin To Net: NetName=GND Pin=C?-3
+Added Pin To Net: NetName=GND Pin=U?-3
+Added Pin To Net: NetName=GND Pin=U?-6
+Added Pin To Net: NetName=GND Pin=U?-6
+Added Pin To Net: NetName=GND Pin=U?-6
+Added Pin To Net: NetName=GND Pin=U?-7
+Added Pin To Net: NetName=GND Pin=U?-8
+Added Pin To Net: NetName=GND Pin=U?-18
+Added Pin To Net: NetName=GND Pin=U?-21
+Added Pin To Net: NetName=GND Pin=U?-27
+Added Net: Name=GND
+Added Pin To Net: NetName=GPIO0_RADIO Pin=U?-9
+Added Net: Name=GPIO0_RADIO
+Added Pin To Net: NetName=GPIO1_RADIO Pin=U?-10
+Added Net: Name=GPIO1_RADIO
+Added Pin To Net: NetName=HALL_OUT Pin=U?-2
+Added Pin To Net: NetName=HALL_OUT Pin=U?-12
+Added Net: Name=HALL_OUT
+Added Pin To Net: NetName=INT_ACC Pin=U?-9
+Added Pin To Net: NetName=INT_ACC Pin=U?-12
+Added Net: Name=INT_ACC
+Added Pin To Net: NetName=MCLR Pin=U?-16
+Added Net: Name=MCLR
+Added Pin To Net: NetName=NetC?_2 Pin=C?-2
+Added Net: Name=NetC?_2
+Added Pin To Net: NetName=NetL?_1 Pin=L?-1
+Added Pin To Net: NetName=NetL?_1 Pin=U?-4
+Added Net: Name=NetL?_1
+Added Pin To Net: NetName=NINT_RTC Pin=R?-1
+Added Pin To Net: NetName=NINT_RTC Pin=U?-8
+Added Net: Name=NINT_RTC
+Added Pin To Net: NetName=NIRQ_RADIO Pin=U?-11
+Added Pin To Net: NetName=NIRQ_RADIO Pin=U?-13
+Added Net: Name=NIRQ_RADIO
+Added Pin To Net: NetName=NSEL_RADIO Pin=U?-15
+Added Pin To Net: NetName=NSEL_RADIO Pin=U?-20
+Added Net: Name=NSEL_RADIO
+Added Pin To Net: NetName=PGC Pin=U?-14
+Added Net: Name=PGC
+Added Pin To Net: NetName=PGD Pin=U?-15
+Added Net: Name=PGD
+Added Pin To Net: NetName=SCK Pin=U?-1
+Added Pin To Net: NetName=SCK Pin=U?-12
+Added Pin To Net: NetName=SCK Pin=U?-33
+Added Net: Name=SCK
+Added Pin To Net: NetName=SCL_RTC Pin=R?-1
+Added Pin To Net: NetName=SCL_RTC Pin=U?-34
+Added Net: Name=SCL_RTC
+Added Pin To Net: NetName=SDA_RTC Pin=R?-1
+Added Pin To Net: NetName=SDA_RTC Pin=U?-35
+Added Net: Name=SDA_RTC
+Added Pin To Net: NetName=SDI Pin=U?-4
+Added Pin To Net: NetName=SDI Pin=U?-14
+Added Pin To Net: NetName=SDI Pin=U?-39
+Added Net: Name=SDI
+Added Pin To Net: NetName=SDN_RADIO Pin=U?-1
+Added Pin To Net: NetName=SDN_RADIO Pin=U?-32
+Added Net: Name=SDN_RADIO
+Added Pin To Net: NetName=SDO Pin=U?-3
+Added Pin To Net: NetName=SDO Pin=U?-13
+Added Pin To Net: NetName=SDO Pin=U?-38
+Added Net: Name=SDO
+Added Pin To Net: NetName=VBAT Pin=C?-2
+Added Pin To Net: NetName=VBAT Pin=U?-7
+Added Net: Name=VBAT
+Added Pin To Net: NetName=VCC Pin=C?-2
+Added Pin To Net: NetName=VCC Pin=C?-2
+Added Pin To Net: NetName=VCC Pin=C?-2
+Added Pin To Net: NetName=VCC Pin=L?-2
+Added Pin To Net: NetName=VCC Pin=L?-2
+Added Pin To Net: NetName=VCC Pin=R?-1
+Added Pin To Net: NetName=VCC Pin=R?-2
+Added Pin To Net: NetName=VCC Pin=R?-2
+Added Pin To Net: NetName=VCC Pin=R?-2
+Added Pin To Net: NetName=VCC Pin=U?-5
+Added Net: Name=VCC
+Added Pin To Net: NetName=VSEL1 Pin=U?-2
+Added Pin To Net: NetName=VSEL1 Pin=U?-17
+Added Net: Name=VSEL1
+Added Pin To Net: NetName=VSEL2 Pin=U?-3
+Added Net: Name=VSEL2
+Added Pin To Net: NetName=VSEL3 Pin=U?-4
+Added Pin To Net: NetName=VSEL3 Pin=U?-19
+Added Net: Name=VSEL3
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component Balun
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component L? Inductor
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component P? Bat_con
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component R? Res2
