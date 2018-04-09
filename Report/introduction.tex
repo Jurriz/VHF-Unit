@@ -1,9 +1,31 @@
+This chapter describes the idea behind and the background to this project. A rough sketch of how the work is divided and the goals for this project is provided.
 
+\subsection{Background}
 This is not a new area of pruducts for Followit, they have made radio sending units for over four decades now.
 When new and improved technology arrives each and every year you need to make new products to have the latest most efficient and effective systems. Every generation of a component will most likley have a smaller physical size, have more advanced features and draw less power then the previous one. Followit wants to make a new unit which implement all the new and improved technologies into a small, advanced product with low power consumption. 
-Customers have been asking for a simple, small and cheap radio unit from the company to complement their more advanced and powerful GPS based products. With this type of product they could produce them in a larger number and gain new sale territories. By having such a small product it can be used in new areas that they never could before. The smaller the animal you want to track, the smaller equipment you could strap to them. This is one of the reasons that this product is so sought for in the buisness. \\
+Customers have been asking for a simple, small and cheap radio unit from the company to complement their more advanced and powerful GPS based products. With this type of product they could produce them in a larger number and gain new sale territories. By having such a small product it can be used in new areas that they never could before. The smaller the animal you want to track, the smaller equipment you could strap to them. This is one of the reasons that this product is so sought for in the buisness. Most of the \gls{IC}'s are already chosen by the company, but there are no acctual implementations. The final version is supposed to work in different areas, both as a tracker for animals and also as a product for theft protection in cars a vehicles. This means that it  Much consideration is taken to get the product both small and inexpencive. The cost of the PCB depends on the size, manufacturing and the numbers of layers. The rest of the cost comes down to the components, batteries and casing.    \\
+
+\subsection{Project goals}
+Followit wants to produce a VHF radio unit which have a powerful MCU for advanced programs and with some extra feautures that makes it possible to use the finished product in different areas and with different types of characteristics.
+The unit is supposed to be desiged as cheap as possible.
+Both the cast of the bare board and the components needs to be kept down.  
+
+
+A MCU - For processing
+Accelerometer - Important for knowing if the device is moving or lying still.
+Radio - All the communication uses the radio 
+Real time Clock - 
+Hall switch - To turn on and off the device
+
+\subsection{Scope}
+Main focus of this thesis is to create a PCB prototype that is tested and well designed and works as intended. Some of the coponents in the product are predefined but their implementation have to be done.
+Extended test code is written to the product which includes tests for all the components in the circuit.  
+No documentation of the product is needed.
+
+\subsection{Approach}
 To get to the point of making the actual \gls{pcb} a thorough analyse of the components and their connections needs to be made. Firstly the datasheets are considered for an understanding of the component itself and the required connections for this particular implementation. Both power and data is crucial for operation and there might also be some peripherals connections and chip selection that needs to be considerd. \\
-By writing a simple code the function of each individual part can be tested.  In some cases the component needs to be initialized in a specific way or it needs some other special attention which might require additional connections than it firstly seemed.
+By writing a program the functions of each individual component can be tested. The code is written in C using the program MPLAB X\cite{MPLAB}.  In some cases the component needs to be initialized in a specific way or it needs some other special attention which might require additional connections than it firstly seemed.
 With all the specified components connected together a program is made to show all the functions and that they work as intended. 
+To ensure that each component on the PCB works and the prototype can be handed over to the software developers  
 
 \thispagestyle{empty}
