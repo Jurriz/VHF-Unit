@@ -1,0 +1,11 @@
+Change Component Footprint: Designator=R3 Old Footprint=0402_RES New Footprint=0402_SMD_RES_0_Ohm
+Change Component Footprint: Designator=R6 Old Footprint=0402_RES New Footprint=0402_SMD_RES_0_Ohm
+Change Component Footprint: Designator=R10 Old Footprint=0402_RES New Footprint=0402_SMD_RES_0_Ohm
+Change Component Footprint: Designator=R11 Old Footprint=0402_RES New Footprint=0402_SMD_RES_0_Ohm
+Change Component Designator: OldDesignator=R3 NewDesignator=ACC
+Change Component Designator: OldDesignator=R6 NewDesignator=MCU
+Change Component Designator: OldDesignator=R10 NewDesignator=Radio
+Change Component Designator: OldDesignator=R11 NewDesignator=RTC
+Change Component Designator: OldDesignator=R12 NewDesignator=Hall
+Change Net Name : Old Net Name=NetC1_2 New Net Name=NetACC_1
+Change Net Name : Old Net Name=NetR12_1 New Net Name=NetHall_1

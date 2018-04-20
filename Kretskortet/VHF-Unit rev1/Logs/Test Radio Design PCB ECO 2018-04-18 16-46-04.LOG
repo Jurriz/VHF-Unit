@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=NetR13_2 Pin=U10-4
+Removed Pin From Net: NetName=NetR14_2 Pin=U10-6
+Added Component: Designator=U9(DPW0004A_V)
+Added Pin To Net: NetName=NetR14_2 Pin=U10-4
+Added Pin To Net: NetName=NetR13_2 Pin=U10-6

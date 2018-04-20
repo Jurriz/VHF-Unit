@@ -1,0 +1,9 @@
+Change Component Designator: OldDesignator=E3 NewDesignator=SDA
+Change Component Designator: OldDesignator=E4 NewDesignator=SCL
+Change Component Designator: OldDesignator=E5 NewDesignator=TCXO_EN
+Change Component Designator: OldDesignator=E6 NewDesignator=nSel_Radio
+Change Component Designator: OldDesignator=E7 NewDesignator=CS_Acc
+Change Component Designator: OldDesignator=E8 NewDesignator=SDI
+Change Component Designator: OldDesignator=E9 NewDesignator=SDO
+Change Component Designator: OldDesignator=E10 NewDesignator=SCK
+Added Component: Designator=U9(DPW0004A_V)

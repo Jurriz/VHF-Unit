@@ -1,0 +1,3 @@
+Removed Pin From Net: NetName=NSEL_RADIO Pin=U2-20
+Added Component: Designator=U9(DPW0004A_V)
+Added Pin To Net: NetName=NSEL_RADIO Pin=U2-2

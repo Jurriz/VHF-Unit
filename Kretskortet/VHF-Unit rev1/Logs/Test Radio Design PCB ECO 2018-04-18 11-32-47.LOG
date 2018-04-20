@@ -1,0 +1,12 @@
+Change Component Designator: OldDesignator=C? NewDesignator=C23
+Change Component Designator: OldDesignator=C? NewDesignator=C31
+Change Component Designator: OldDesignator=R? NewDesignator=R13
+Change Component Designator: OldDesignator=R? NewDesignator=R14
+Added Component: Designator=U9(DPW0004A_V)
+Change Net Name : Old Net Name=NetC?_2 New Net Name=NetC23_2
+Added Pin To Net: NetName=NetC31_2 Pin=C31-2
+Added Pin To Net: NetName=NetC31_2 Pin=R13-1
+Added Pin To Net: NetName=NetC31_2 Pin=U3-9
+Added Net: Name=NetC31_2
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C31 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component R14 Res2

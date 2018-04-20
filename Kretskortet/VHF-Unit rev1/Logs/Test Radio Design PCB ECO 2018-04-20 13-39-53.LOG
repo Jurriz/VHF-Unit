@@ -1,0 +1,76 @@
+Removed Pin From Net: NetName=NetC22_2 Pin=C22-2
+Removed Pin From Net: NetName=NetC22_2 Pin=U10-1
+Added Component: Designator=Ant(0402_SMD_RES_0_Ohm)
+Added Component: Designator=C10(0603_SMD)
+Added Component: Designator=C11(0603_SMD)
+Added Component: Designator=C12(0603_SMD)
+Added Component: Designator=C13(0603_SMD)
+Added Component: Designator=C32(0603_SMD)
+Added Component: Designator=C33(0603_SMD)
+Added Component: Designator=C34(0603_SMD)
+Added Component: Designator=C35(0603_SMD)
+Added Component: Designator=C36(0603_SMD)
+Added Component: Designator=E3(EXP-PAD)
+Added Component: Designator=L8(0603_SMD)
+Added Component: Designator=L9(0603_SMD)
+Added Component: Designator=L10(0603_SMD)
+Added Component: Designator=L11(0603_SMD)
+Added Component: Designator=L12(0603_SMD)
+Added Pin To Net: NetName=NetC22_2 Pin=C32-1
+Added Pin To Net: NetName=GND Pin=C33-2
+Added Pin To Net: NetName=GND Pin=C34-2
+Added Pin To Net: NetName=GND Pin=C35-2
+Added Pin To Net: NetName=GND Pin=C36-2
+Added Pin To Net: NetName=NetC22_2 Pin=L8-1
+Change Net Name : Old Net Name=NetC22_2 New Net Name=NetC32_1
+Added Pin To Net: NetName=NetAnt_1 Pin=Ant-1
+Added Pin To Net: NetName=NetAnt_1 Pin=C32-2
+Added Net: Name=NetAnt_1
+Added Pin To Net: NetName=NetAnt_2 Pin=Ant-2
+Added Pin To Net: NetName=NetAnt_2 Pin=C22-2
+Added Pin To Net: NetName=NetAnt_2 Pin=U10-1
+Added Net: Name=NetAnt_2
+Added Pin To Net: NetName=NetC10_1 Pin=C10-1
+Added Pin To Net: NetName=NetC10_1 Pin=C11-2
+Added Pin To Net: NetName=NetC10_1 Pin=C34-1
+Added Pin To Net: NetName=NetC10_1 Pin=L9-2
+Added Pin To Net: NetName=NetC10_1 Pin=L10-1
+Added Net: Name=NetC10_1
+Added Pin To Net: NetName=NetC10_2 Pin=C10-2
+Added Pin To Net: NetName=NetC10_2 Pin=C33-1
+Added Pin To Net: NetName=NetC10_2 Pin=L8-2
+Added Pin To Net: NetName=NetC10_2 Pin=L9-1
+Added Net: Name=NetC10_2
+Added Pin To Net: NetName=NetC11_1 Pin=C11-1
+Added Pin To Net: NetName=NetC11_1 Pin=C12-2
+Added Pin To Net: NetName=NetC11_1 Pin=C35-1
+Added Pin To Net: NetName=NetC11_1 Pin=L10-2
+Added Pin To Net: NetName=NetC11_1 Pin=L11-1
+Added Net: Name=NetC11_1
+Added Pin To Net: NetName=NetC12_1 Pin=C12-1
+Added Pin To Net: NetName=NetC12_1 Pin=C36-1
+Added Pin To Net: NetName=NetC12_1 Pin=L11-2
+Added Pin To Net: NetName=NetC12_1 Pin=L12-1
+Added Net: Name=NetC12_1
+Added Pin To Net: NetName=NetC13_1 Pin=C13-1
+Added Pin To Net: NetName=NetC13_1 Pin=E3-1
+Added Net: Name=NetC13_1
+Added Pin To Net: NetName=NetC13_2 Pin=C13-2
+Added Pin To Net: NetName=NetC13_2 Pin=L12-2
+Added Net: Name=NetC13_2
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component Ant Res2
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C10 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C11 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C12 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C13 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C32 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C33 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C34 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C35 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C36 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component E3 Antenna
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component L8 Inductor
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component L9 Inductor
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component L10 Inductor
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component L11 Inductor
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component L12 Inductor

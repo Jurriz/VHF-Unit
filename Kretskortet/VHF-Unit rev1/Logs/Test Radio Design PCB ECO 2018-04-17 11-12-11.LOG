@@ -1,0 +1,25 @@
+Added Component: Designator=E3(TestPoint)
+Added Component: Designator=E4(TestPoint)
+Added Component: Designator=E5(TestPoint)
+Added Component: Designator=E6(TestPoint)
+Added Component: Designator=E7(TestPoint)
+Added Component: Designator=E8(TestPoint)
+Added Component: Designator=E9(TestPoint)
+Added Component: Designator=E10(TestPoint)
+Added Component: Designator=U9(DPW0004A_V)
+Added Pin To Net: NetName=SDA_RTC Pin=E3-1
+Added Pin To Net: NetName=SCL_RTC Pin=E4-1
+Added Pin To Net: NetName=TCXO_EN Pin=E5-1
+Added Pin To Net: NetName=NSEL_RADIO Pin=E6-1
+Added Pin To Net: NetName=CS_ACC Pin=E7-1
+Added Pin To Net: NetName=SDI Pin=E8-1
+Added Pin To Net: NetName=SDO Pin=E9-1
+Added Pin To Net: NetName=SCK Pin=E10-1
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component E3 Antenna
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component E4 Antenna
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component E5 Antenna
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component E6 Antenna
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component E7 Antenna
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component E8 Antenna
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component E9 Antenna
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component E10 Antenna

@@ -1,0 +1,3 @@
+Change Component Footprint: Designator=U1 Old Footprint=LGA12C50P4X4_200X200X70 New Footprint=LGA12C50P4X4_200X200X70 Low Density
+Change Component Designator: OldDesignator=R10_Radio NewDesignator=R10
+Added Component: Designator=U9(DPW0004A_V)

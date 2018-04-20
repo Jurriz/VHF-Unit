@@ -1,0 +1,23 @@
+Removed Pin From Net: NetName=VCC Pin=C28-2
+Removed Pin From Net: NetName=VSEL3 Pin=U2-19
+Removed Pin From Net: NetName=LED_RED Pin=U2-29
+Removed Pin From Net: NetName=VSEL2 Pin=U5-3
+Removed Pin From Net: NetName=VSEL3 Pin=U5-4
+Removed Pin From Net: NetName=GND Pin=X1-2
+Removed Pin From Net: NetName=NetC29_2 Pin=X1-3
+Removed Pin From Net: NetName=VCC Pin=X1-4
+Removed Member From Class: ClassName=Scheme VHF-Unit Member=X1
+Added Component: Designator=U9(YZP0004AAAA)
+Added Component: Designator=Y1(ABS05-XTAL)
+Added Pin To Net: NetName=VSEL3 Pin=C28-2
+Added Pin To Net: NetName=VSEL2 Pin=U2-19
+Added Pin To Net: NetName=LED_RED Pin=U2-23
+Added Pin To Net: NetName=VSEL3 Pin=U2-29
+Added Pin To Net: NetName=VSEL2 Pin=U5-4
+Added Pin To Net: NetName=VSEL3 Pin=Y1-1
+Change Net Name : Old Net Name=VSEL3 New Net Name=NetC28_2
+Added Pin To Net: NetName=NetU5_3 Pin=U5-3
+Added Pin To Net: NetName=NetU5_3 Pin=U9-B2
+Added Net: Name=NetU5_3
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component U9 SN74AUP1G04YFPR
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component Y1 XTAL

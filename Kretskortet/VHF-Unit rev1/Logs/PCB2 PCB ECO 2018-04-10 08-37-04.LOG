@@ -1,0 +1,17 @@
+Removed Pin From Net: NetName=MCLR Pin=C?-1
+Removed Member From Class: ClassName=U_Radio Module scheme Member=X?
+Change Component Designator: OldDesignator=C? NewDesignator=C28
+Change Component Designator: OldDesignator=C? NewDesignator=C29
+Change Component Designator: OldDesignator=X? NewDesignator=X1
+Change Component Designator: OldDesignator=X? NewDesignator=X2
+Added Component: Designator=CON1(TAG-CONNECT)
+Added Pin To Net: NetName=GND Pin=C28-1
+Added Pin To Net: NetName=MCLR Pin=CON1-1
+Added Pin To Net: NetName=VCC Pin=CON1-2
+Added Pin To Net: NetName=GND Pin=CON1-3
+Added Pin To Net: NetName=PGD Pin=CON1-4
+Added Pin To Net: NetName=PGC Pin=CON1-5
+Change Net Name : Old Net Name=NetC?_2 New Net Name=NetC29_2
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component C28 Cap Semi
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component CON1 TC2030-MCP-NL
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component X2 IQXT-350

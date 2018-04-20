@@ -1,0 +1,350 @@
+Added Component: Designator=C1(0402_CAP)
+Added Component: Designator=C2(0402_CAP)
+Added Component: Designator=C3(0402_CAP)
+Added Component: Designator=C4(0402_CAP)
+Added Component: Designator=C5(0402_CAP)
+Added Component: Designator=C6(0402_CAP)
+Added Component: Designator=C7(0402_CAP)
+Added Component: Designator=C8(0402_CAP)
+Added Component: Designator=C9(0402_CAP)
+Added Component: Designator=C10(0402_CAP)
+Added Component: Designator=C11(0402_CAP)
+Added Component: Designator=C12(0402_CAP)
+Added Component: Designator=C13(0402_CAP)
+Added Component: Designator=C14(0402_CAP)
+Added Component: Designator=C15(0402_CAP)
+Added Component: Designator=C16(0402_CAP)
+Added Component: Designator=C17(0402_CAP)
+Added Component: Designator=C18(0402_CAP)
+Added Component: Designator=C19(0402_CAP)
+Added Component: Designator=C20(0402_CAP)
+Added Component: Designator=C21(0402_CAP)
+Added Component: Designator=C22(0402_CAP)
+Added Component: Designator=C23(0402_CAP)
+Added Component: Designator=C24(0402_CAP)
+Added Component: Designator=C25(0402_CAP)
+Added Component: Designator=C26(0402_CAP)
+Added Component: Designator=C27(0402_CAP)
+Added Component: Designator=C28(0402_CAP)
+Added Component: Designator=C29(0402_CAP)
+Added Component: Designator=C30(0402_CAP)
+Added Component: Designator=CON1(TAG-CONNECT)
+Added Component: Designator=CON3(JST-PH)
+Added Component: Designator=D1(0603_LED)
+Added Component: Designator=D2(0603_LED)
+Added Component: Designator=E1(EXP-PAD)
+Added Component: Designator=E2(EXP-PAD)
+Added Component: Designator=L1(0402_CAP)
+Added Component: Designator=L2(0402_CAP)
+Added Component: Designator=L3(0402_CAP)
+Added Component: Designator=L4(0402_CAP)
+Added Component: Designator=L5(0402_CAP)
+Added Component: Designator=L6(0402_CAP)
+Added Component: Designator=L7(0402_CAP)
+Added Component: Designator=L8(0402_CAP)
+Added Component: Designator=R1(0402_RES)
+Added Component: Designator=R2(0402_RES)
+Added Component: Designator=R3(0402_RES)
+Added Component: Designator=R4(0402_RES)
+Added Component: Designator=R5(0402_RES)
+Added Component: Designator=R6(0402_RES)
+Added Component: Designator=R7(0402_RES)
+Added Component: Designator=R8(0402_RES)
+Added Component: Designator=R9(0402_RES)
+Added Component: Designator=R10(0402_RES)
+Added Component: Designator=R11(0402_RES)
+Added Component: Designator=R12(0402_RES)
+Added Component: Designator=R13(0402_RES)
+Added Component: Designator=U1(LGA12C50P4X4_200X200X70)
+Added Component: Designator=U2(MCHP-UQFN-MV40_L)
+Added Component: Designator=U3(SLAB-QFN-20-2600x2600TP_L)
+Added Component: Designator=U4(LGA8C90P4X2_320X150X80)
+Added Component: Designator=U5(BGA8C40P2X4_87X156X50)
+Added Component: Designator=U6(TI-DQN4-480X480TP_V)
+Added Component: Designator=U7(SOT95P280X140-3N)
+Added Component: Designator=U8(Balun)
+Added Component: Designator=U9(DPW0004A_V)
+Added Component: Designator=U10(LGA6C40P2X3_70X110X40)
+Added Component: Designator=X2(IQXT-350)
+Added Component: Designator=Y1(ABS05-XTAL)
+Added Pin To Net: NetName=GND Pin=C1-1
+Added Pin To Net: NetName=NetC1_2 Pin=C1-2
+Added Pin To Net: NetName=GND Pin=C2-1
+Added Pin To Net: NetName=NetC1_2 Pin=C2-2
+Added Pin To Net: NetName=VRF Pin=C3-1
+Added Pin To Net: NetName=GND Pin=C3-2
+Added Pin To Net: NetName=NetC4_1 Pin=C4-1
+Added Pin To Net: NetName=NetC4_2 Pin=C4-2
+Added Pin To Net: NetName=NetC5_1 Pin=C5-1
+Added Pin To Net: NetName=NetC5_2 Pin=C5-2
+Added Pin To Net: NetName=NetC6_1 Pin=C6-1
+Added Pin To Net: NetName=NetC6_2 Pin=C6-2
+Added Pin To Net: NetName=GND Pin=C7-1
+Added Pin To Net: NetName=NetC7_2 Pin=C7-2
+Added Pin To Net: NetName=GND Pin=C8-1
+Added Pin To Net: NetName=NetC7_2 Pin=C8-2
+Added Pin To Net: NetName=NetC9_1 Pin=C9-1
+Added Pin To Net: NetName=NetC9_2 Pin=C9-2
+Added Pin To Net: NetName=VRF Pin=C10-1
+Added Pin To Net: NetName=GND Pin=C10-2
+Added Pin To Net: NetName=VRF Pin=C11-1
+Added Pin To Net: NetName=GND Pin=C11-2
+Added Pin To Net: NetName=VRF Pin=C12-1
+Added Pin To Net: NetName=GND Pin=C12-2
+Added Pin To Net: NetName=VRF Pin=C13-1
+Added Pin To Net: NetName=GND Pin=C13-2
+Added Pin To Net: NetName=GND Pin=C14-1
+Added Pin To Net: NetName=NetC14_2 Pin=C14-2
+Added Pin To Net: NetName=GND Pin=C15-1
+Added Pin To Net: NetName=VBAT Pin=C15-2
+Added Pin To Net: NetName=VRF Pin=C16-1
+Added Pin To Net: NetName=GND Pin=C16-2
+Added Pin To Net: NetName=NetC4_2 Pin=C17-1
+Added Pin To Net: NetName=NetC17_2 Pin=C17-2
+Added Pin To Net: NetName=NetC18_1 Pin=C18-1
+Added Pin To Net: NetName=GND Pin=C18-2
+Added Pin To Net: NetName=GND Pin=C19-1
+Added Pin To Net: NetName=VCC Pin=C19-2
+Added Pin To Net: NetName=NetC20_1 Pin=C20-1
+Added Pin To Net: NetName=NetC20_2 Pin=C20-2
+Added Pin To Net: NetName=NetC21_1 Pin=C21-1
+Added Pin To Net: NetName=NetC21_2 Pin=C21-2
+Added Pin To Net: NetName=NetC22_1 Pin=C22-1
+Added Pin To Net: NetName=NetC22_2 Pin=C22-2
+Added Pin To Net: NetName=NetC23_1 Pin=C23-1
+Added Pin To Net: NetName=NetC22_1 Pin=C23-2
+Added Pin To Net: NetName=GND Pin=C24-1
+Added Pin To Net: NetName=NetC4_1 Pin=C24-2
+Added Pin To Net: NetName=GND Pin=C25-1
+Added Pin To Net: NetName=NetC4_2 Pin=C25-2
+Added Pin To Net: NetName=GND Pin=C26-1
+Added Pin To Net: NetName=NetC17_2 Pin=C26-2
+Added Pin To Net: NetName=NetC27_1 Pin=C27-1
+Added Pin To Net: NetName=NetC27_2 Pin=C27-2
+Added Pin To Net: NetName=GND Pin=C28-1
+Added Pin To Net: NetName=NetC28_2 Pin=C28-2
+Added Pin To Net: NetName=GND Pin=C29-1
+Added Pin To Net: NetName=NetC29_2 Pin=C29-2
+Added Pin To Net: NetName=GND Pin=C30-1
+Added Pin To Net: NetName=VCC Pin=C30-2
+Added Pin To Net: NetName=MCLR Pin=CON1-1
+Added Pin To Net: NetName=VCC Pin=CON1-2
+Added Pin To Net: NetName=GND Pin=CON1-3
+Added Pin To Net: NetName=PGD Pin=CON1-4
+Added Pin To Net: NetName=PGC Pin=CON1-5
+Added Pin To Net: NetName=VBAT Pin=CON3-1
+Added Pin To Net: NetName=GND Pin=CON3-2
+Added Pin To Net: NetName=LED_GREEN Pin=D1-1
+Added Pin To Net: NetName=NetD1_2 Pin=D1-2
+Added Pin To Net: NetName=LED_RED Pin=D2-1
+Added Pin To Net: NetName=NetD2_2 Pin=D2-2
+Added Pin To Net: NetName=NetC5_1 Pin=E1-1
+Added Pin To Net: NetName=NetC20_2 Pin=E2-1
+Added Pin To Net: NetName=NetC21_2 Pin=L1-1
+Added Pin To Net: NetName=VRF Pin=L1-2
+Added Pin To Net: NetName=NetC18_1 Pin=L2-1
+Added Pin To Net: NetName=NetC9_2 Pin=L2-2
+Added Pin To Net: NetName=NetL3_1 Pin=L3-1
+Added Pin To Net: NetName=VCC Pin=L3-2
+Added Pin To Net: NetName=NetC22_1 Pin=L4-1
+Added Pin To Net: NetName=NetC4_1 Pin=L4-2
+Added Pin To Net: NetName=NetC4_1 Pin=L5-1
+Added Pin To Net: NetName=NetC4_2 Pin=L5-2
+Added Pin To Net: NetName=NetC4_2 Pin=L6-1
+Added Pin To Net: NetName=NetC17_2 Pin=L6-2
+Added Pin To Net: NetName=NetC17_2 Pin=L7-1
+Added Pin To Net: NetName=NetC20_1 Pin=L7-2
+Added Pin To Net: NetName=NetC22_1 Pin=L8-1
+Added Pin To Net: NetName=NetC23_1 Pin=L8-2
+Added Pin To Net: NetName=NetD1_2 Pin=R1-1
+Added Pin To Net: NetName=GND Pin=R1-2
+Added Pin To Net: NetName=NetD2_2 Pin=R2-1
+Added Pin To Net: NetName=GND Pin=R2-2
+Added Pin To Net: NetName=NetC1_2 Pin=R3-1
+Added Pin To Net: NetName=VCC Pin=R3-2
+Added Pin To Net: NetName=VCC Pin=R4-1
+Added Pin To Net: NetName=NINT_RTC Pin=R4-2
+Added Pin To Net: NetName=NetR5_1 Pin=R5-1
+Added Pin To Net: NetName=NetR5_2 Pin=R5-2
+Added Pin To Net: NetName=VCC Pin=R6-1
+Added Pin To Net: NetName=NetC7_2 Pin=R6-2
+Added Pin To Net: NetName=SCL_RTC Pin=R7-1
+Added Pin To Net: NetName=VCC Pin=R7-2
+Added Pin To Net: NetName=SDA_RTC Pin=R8-1
+Added Pin To Net: NetName=VCC Pin=R8-2
+Added Pin To Net: NetName=NetC9_1 Pin=R9-1
+Added Pin To Net: NetName=NetR5_1 Pin=R9-2
+Added Pin To Net: NetName=VRF Pin=R10-1
+Added Pin To Net: NetName=VCC Pin=R10-2
+Added Pin To Net: NetName=NetC14_2 Pin=R11-1
+Added Pin To Net: NetName=VCC Pin=R11-2
+Added Pin To Net: NetName=NetR12_1 Pin=R12-1
+Added Pin To Net: NetName=VCC Pin=R12-2
+Added Pin To Net: NetName=GND Pin=R13-1
+Added Pin To Net: NetName=NetC23_1 Pin=R13-2
+Added Pin To Net: NetName=SCK Pin=U1-1
+Added Pin To Net: NetName=CS_ACC Pin=U1-2
+Added Pin To Net: NetName=SDO Pin=U1-3
+Added Pin To Net: NetName=SDI Pin=U1-4
+Added Pin To Net: NetName=GND Pin=U1-6
+Added Pin To Net: NetName=GND Pin=U1-7
+Added Pin To Net: NetName=GND Pin=U1-8
+Added Pin To Net: NetName=NetC1_2 Pin=U1-9
+Added Pin To Net: NetName=NetC1_2 Pin=U1-10
+Added Pin To Net: NetName=INT_ACC Pin=U1-12
+Added Pin To Net: NetName=GND Pin=U2-6
+Added Pin To Net: NetName=NetC7_2 Pin=U2-7
+Added Pin To Net: NetName=NINT_RTC Pin=U2-8
+Added Pin To Net: NetName=INT_ACC Pin=U2-9
+Added Pin To Net: NetName=HALL_OUT Pin=U2-12
+Added Pin To Net: NetName=NIRQ_RADIO Pin=U2-13
+Added Pin To Net: NetName=PGC Pin=U2-14
+Added Pin To Net: NetName=PGD Pin=U2-15
+Added Pin To Net: NetName=MCLR Pin=U2-16
+Added Pin To Net: NetName=VSEL1 Pin=U2-17
+Added Pin To Net: NetName=VSEL2 Pin=U2-18
+Added Pin To Net: NetName=VSEL3 Pin=U2-19
+Added Pin To Net: NetName=NSEL_RADIO Pin=U2-20
+Added Pin To Net: NetName=CS_ACC Pin=U2-21
+Added Pin To Net: NetName=LED_GREEN Pin=U2-22
+Added Pin To Net: NetName=LED_RED Pin=U2-23
+Added Pin To Net: NetName=NetC7_2 Pin=U2-26
+Added Pin To Net: NetName=GND Pin=U2-27
+Added Pin To Net: NetName=NetC29_2 Pin=U2-28
+Added Pin To Net: NetName=NetC28_2 Pin=U2-29
+Added Pin To Net: NetName=SDN_RADIO Pin=U2-32
+Added Pin To Net: NetName=SCK Pin=U2-33
+Added Pin To Net: NetName=SCL_RTC Pin=U2-34
+Added Pin To Net: NetName=SDA_RTC Pin=U2-35
+Added Pin To Net: NetName=NetU2_36 Pin=U2-36
+Added Pin To Net: NetName=SDO Pin=U2-38
+Added Pin To Net: NetName=SDI Pin=U2-39
+Added Pin To Net: NetName=GND Pin=U2-41
+Added Pin To Net: NetName=SDN_RADIO Pin=U3-1
+Added Pin To Net: NetName=NetU3_2 Pin=U3-2
+Added Pin To Net: NetName=NetU3_3 Pin=U3-3
+Added Pin To Net: NetName=NetC21_2 Pin=U3-4
+Added Pin To Net: NetName=VRF Pin=U3-6
+Added Pin To Net: NetName=VRF Pin=U3-8
+Added Pin To Net: NetName=GPIO0_RADIO Pin=U3-9
+Added Pin To Net: NetName=GPIO1_RADIO Pin=U3-10
+Added Pin To Net: NetName=NIRQ_RADIO Pin=U3-11
+Added Pin To Net: NetName=SCK Pin=U3-12
+Added Pin To Net: NetName=SDO Pin=U3-13
+Added Pin To Net: NetName=SDI Pin=U3-14
+Added Pin To Net: NetName=NSEL_RADIO Pin=U3-15
+Added Pin To Net: NetName=NetR5_2 Pin=U3-16
+Added Pin To Net: NetName=NetC6_1 Pin=U3-17
+Added Pin To Net: NetName=GND Pin=U3-18
+Added Pin To Net: NetName=NetU3_19 Pin=U3-19
+Added Pin To Net: NetName=NetU3_20 Pin=U3-20
+Added Pin To Net: NetName=GND Pin=U3-21
+Added Pin To Net: NetName=SDA_RTC Pin=U4-1
+Added Pin To Net: NetName=NetC14_2 Pin=U4-3
+Added Pin To Net: NetName=GND Pin=U4-5
+Added Pin To Net: NetName=NINT_RTC Pin=U4-6
+Added Pin To Net: NetName=SCL_RTC Pin=U4-8
+Added Pin To Net: NetName=NetL3_1 Pin=U5-0
+Added Pin To Net: NetName=VBAT Pin=U5-1
+Added Pin To Net: NetName=VSEL1 Pin=U5-2
+Added Pin To Net: NetName=NetU5_3 Pin=U5-3
+Added Pin To Net: NetName=VSEL3 Pin=U5-4
+Added Pin To Net: NetName=VCC Pin=U5-5
+Added Pin To Net: NetName=GND Pin=U5-6
+Added Pin To Net: NetName=VBAT Pin=U5-7
+Added Pin To Net: NetName=NetC18_1 Pin=U6-1
+Added Pin To Net: NetName=GND Pin=U6-2
+Added Pin To Net: NetName=NetU6_3 Pin=U6-3
+Added Pin To Net: NetName=VRF Pin=U6-4
+Added Pin To Net: NetName=GND Pin=U6-5
+Added Pin To Net: NetName=NetR12_1 Pin=U7-1
+Added Pin To Net: NetName=HALL_OUT Pin=U7-2
+Added Pin To Net: NetName=GND Pin=U7-3
+Added Pin To Net: NetName=GND Pin=U8-1
+Added Pin To Net: NetName=NetC5_2 Pin=U8-2
+Added Pin To Net: NetName=GND Pin=U8-3
+Added Pin To Net: NetName=GND Pin=U8-4
+Added Pin To Net: NetName=GND Pin=U8-5
+Added Pin To Net: NetName=NetC27_1 Pin=U8-6
+Added Pin To Net: NetName=NetU3_3 Pin=U8-7
+Added Pin To Net: NetName=NetU3_2 Pin=U8-8
+Added Pin To Net: NetName=NetC22_2 Pin=U10-1
+Added Pin To Net: NetName=GND Pin=U10-2
+Added Pin To Net: NetName=NetC27_2 Pin=U10-3
+Added Pin To Net: NetName=NetU3_19 Pin=U10-4
+Added Pin To Net: NetName=NetC21_1 Pin=U10-5
+Added Pin To Net: NetName=NetU3_20 Pin=U10-6
+Added Pin To Net: NetName=NetR5_1 Pin=X2-1
+Added Pin To Net: NetName=NetC9_1 Pin=X2-2
+Added Pin To Net: NetName=NetC6_2 Pin=X2-3
+Added Pin To Net: NetName=NetC9_2 Pin=X2-4
+Added Pin To Net: NetName=NetC28_2 Pin=Y1-1
+Added Pin To Net: NetName=NetC29_2 Pin=Y1-2
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component C1 
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component C2 
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C3 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C4 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C5 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C6 Cap Semi
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component C7 Cap Semi
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component C8 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C9 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C10 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C11 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C12 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C13 Cap Semi
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component C14 Cap Semi
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component C15 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C16 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C17 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C18 Cap Semi
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component C19 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C20 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C21 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C22 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C23 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C24 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C25 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C26 Cap Semi
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component C27 Cap Semi
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component C28 Cap Semi
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component C29 Cap Semi
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component C30 Cap Semi
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component CON1 TC2030-MCP-NL
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component CON3 PCB battery terminals
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component D1 Green_LED
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component D2 Red_LED
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component E1 Antenna
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component E2 Antenna
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component L1 Inductor
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component L2 Inductor
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component L3 Inductor
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component L4 Inductor
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component L5 Inductor
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component L6 Inductor
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component L7 Inductor
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component L8 Inductor
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component R1 Res2
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component R2 Res2
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component R3 Res2
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component R4 Res2
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component R5 Res2
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component R6 Res2
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component R7 Res2
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component R8 Res2
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component R9 Res2
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component R10 Res2
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component R11 Res2
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component R12 Res2
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component R13 Res2
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component U1 LIS2DW12TR
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component U2 PIC18LF46K22-I/MV
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component U3 Si4460-B1B-FMR
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component U4 RV-8803-C7
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component U5 TPS62743
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component U6 TLV71718PDQNT
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component U7 SM353LT
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component U8 Balun
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component U10 Wideband RF SPDT Switch
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component X2 IQXT-350
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component Y1 XTAL

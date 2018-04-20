@@ -1,0 +1,6 @@
+Added Component: Designator=E1(EXP-PAD)
+Added Component: Designator=E3(EXP-PAD)
+Added Pin To Net: NetName=NetC5_1 Pin=E1-1
+Added Pin To Net: NetName=NetC13_1 Pin=E3-1
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component E1 Antenna
+Added Member To Class: ClassName=U_Radio Module scheme Member=Component E3 Antenna

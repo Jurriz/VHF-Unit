@@ -1,0 +1,117 @@
+
+**** 04/20/18 08:44:10 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-bias"  [ c:\users\josef.tvp1\documents\github\vhf-unit\kretskortet\simuleringen\simulering-pspicefiles\schem
+
+
+ ****     CIRCUIT DESCRIPTION
+
+
+******************************************************************************
+
+
+
+
+** Creating circuit file "bias.cir" 
+** WARNING: THIS AUTOMATICALLY GENERATED FILE MAY BE OVERWRITTEN BY SUBSEQUENT SIMULATIONS
+
+*Libraries: 
+* Profile Libraries :
+* Local Libraries :
+* From [PSPICE NETLIST] section of C:\Users\josef.TVP1\AppData\Roaming\SPB_Data\cdssetup\OrCAD_PSpice\17.2.0\PSpice.ini file:
+.lib "nomd.lib" 
+
+*Analysis directives: 
+.AC DEC 1000 1 10000meg
+.OPTIONS ADVCONV
+.PROBE64 V(alias(*)) I(alias(*)) W(alias(*)) D(alias(*)) NOISE(alias(*)) 
+.INC "..\SCHEMATIC1.net" 
+
+
+
+**** INCLUDING SCHEMATIC1.net ****
+* source SIMULERING
+L_L7         N23197 N23659  45n  
+L_L8         N23663 N20684  1n  
+C_C12         N26009 N20684  300p  TC=0,0 
+C_C13         0 N23663  5p  TC=0,0 
+L_L5         N23193 N23197  50n  
+C_C14         N21680 N23193  100p  TC=0,0 
+L_L10         N23659 N23663  47n  
+C_C15         N23197 0  18p  TC=0,0 
+C_C18         0 N23659  18p  TC=0,0 
+R_R2         0 N23659  10000meg TC=0,0 
+V_V3         N21680 0 DC 0Vdc AC 1Vac 
+R_R8         0 N23193  1000meg TC=0,0 
+C_C0         N28991 N36241  25p  TC=0,0 
+V_V4         N28991 0 DC 0Vdc AC 1Vac 
+R_R11         0 N26009  50 TC=0,0 
+L_L0         N36241 N33516  22nH  
+L_LM3         N36492 N37629  68nH  
+C_CM         0 N33516  18p  TC=0,0 
+L_LM         N33516 N36307  56nH  
+L_LM2         N36307 N36492  47nH  
+C_CM2         0 N36492  18p  TC=0,0 
+C_CP1         N36492 N37629  3pf  TC=0,0 
+L_LM4         N37629 N37847  47nH  
+C_CP2         N37629 N37847  2pf  TC=0,0 
+C_C23         N37847 N32588  470p  TC=0,0 
+C_CM3         0 N37629  18p  TC=0,0 
+R_R12         0 N32588  50 TC=0,0 
+R_R9         0 N36307  1000000meg TC=0,0 
+
+**** RESUMING bias.cir ****
+.END
+
+**** 04/20/18 08:44:10 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-bias"  [ c:\users\josef.tvp1\documents\github\vhf-unit\kretskortet\simuleringen\simulering-pspicefiles\schem
+
+
+ ****     SMALL SIGNAL BIAS SOLUTION       TEMPERATURE =   27.000 DEG C
+
+
+******************************************************************************
+
+
+
+ NODE   VOLTAGE     NODE   VOLTAGE     NODE   VOLTAGE     NODE   VOLTAGE
+
+
+(N20684)    0.0000 (N21680)    0.0000 (N23193)    0.0000 (N23197)    0.0000     
+
+(N23659)    0.0000 (N23663)    0.0000 (N26009)    0.0000 (N28991)    0.0000     
+
+(N32588)    0.0000 (N33516)    0.0000 (N36241)    0.0000 (N36307)    0.0000     
+
+(N36492)    0.0000 (N37629)    0.0000 (N37847)    0.0000 
+
+
+
+
+    VOLTAGE SOURCE CURRENTS
+    NAME         CURRENT
+
+    V_V3         0.000E+00
+    V_V4         0.000E+00
+
+    TOTAL POWER DISSIPATION   0.00E+00  WATTS
+
+
+
+          JOB CONCLUDED
+
+**** 04/20/18 08:44:10 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-bias"  [ c:\users\josef.tvp1\documents\github\vhf-unit\kretskortet\simuleringen\simulering-pspicefiles\schem
+
+
+ ****     JOB STATISTICS SUMMARY
+
+
+******************************************************************************
+
+
+
+  Total job time (using Solver 1)   =         .23
+

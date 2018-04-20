@@ -1,0 +1,7 @@
+Removed Pin From Net: NetName=NetC11_1 Pin=C12-2
+Removed Pin From Net: NetName=GND Pin=C36-2
+Removed Pin From Net: NetName=NetC13_2 Pin=L12-2
+Removed Member From Class: ClassName=U_Radio Module scheme Member=C12
+Removed Member From Class: ClassName=U_Radio Module scheme Member=C36
+Removed Member From Class: ClassName=U_Radio Module scheme Member=L12
+Added Pin To Net: NetName=NetC13_2 Pin=L11-2
