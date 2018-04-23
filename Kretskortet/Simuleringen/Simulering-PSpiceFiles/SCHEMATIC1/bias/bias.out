@@ -1,5 +1,5 @@
 
-**** 04/20/18 08:44:10 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+**** 04/23/18 11:14:06 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
 
  ** Profile: "SCHEMATIC1-bias"  [ c:\users\josef.tvp1\documents\github\vhf-unit\kretskortet\simuleringen\simulering-pspicefiles\schem
 
@@ -63,7 +63,7 @@ R_R9         0 N36307  1000000meg TC=0,0
 **** RESUMING bias.cir ****
 .END
 
-**** 04/20/18 08:44:10 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+**** 04/23/18 11:14:06 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
 
  ** Profile: "SCHEMATIC1-bias"  [ c:\users\josef.tvp1\documents\github\vhf-unit\kretskortet\simuleringen\simulering-pspicefiles\schem
 
@@ -101,7 +101,7 @@ R_R9         0 N36307  1000000meg TC=0,0
 
           JOB CONCLUDED
 
-**** 04/20/18 08:44:10 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+**** 04/23/18 11:14:06 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
 
  ** Profile: "SCHEMATIC1-bias"  [ c:\users\josef.tvp1\documents\github\vhf-unit\kretskortet\simuleringen\simulering-pspicefiles\schem
 
@@ -113,5 +113,5 @@ R_R9         0 N36307  1000000meg TC=0,0
 
 
 
-  Total job time (using Solver 1)   =         .23
+  Total job time (using Solver 1)   =         .20
 

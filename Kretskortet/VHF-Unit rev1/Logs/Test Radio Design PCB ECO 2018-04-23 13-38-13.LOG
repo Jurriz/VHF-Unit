@@ -1,0 +1,7 @@
+Added Component: Designator=U4(LGA8C90P4X2_320X150X80)
+Added Pin To Net: NetName=SDA_RTC Pin=U4-1
+Added Pin To Net: NetName=NetC14_2 Pin=U4-3
+Added Pin To Net: NetName=GND Pin=U4-5
+Added Pin To Net: NetName=NINT_RTC Pin=U4-6
+Added Pin To Net: NetName=SCL_RTC Pin=U4-8
+Added Member To Class: ClassName=Scheme VHF-Unit Member=Component U4 RV-8803-C7
