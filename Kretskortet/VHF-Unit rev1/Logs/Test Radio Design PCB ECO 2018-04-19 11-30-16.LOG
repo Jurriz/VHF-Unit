@@ -1,5 +1,0 @@
-Change Component Designator: OldDesignator=C10 NewDesignator=10
-Change Component Designator: OldDesignator=C11 NewDesignator=11
-Change Component Designator: OldDesignator=C12 NewDesignator=12
-Change Component Designator: OldDesignator=C13 NewDesignator=13
-Added Pin To Net: NetName=GND Pin=U9-1

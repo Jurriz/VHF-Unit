@@ -1,7 +1,0 @@
-Added Component: Designator=E1(EXP-PAD)
-Added Component: Designator=E2(EXP-PAD)
-Added Component: Designator=U9(DPW0004A_V)
-Added Pin To Net: NetName=NetC5_1 Pin=E1-1
-Added Pin To Net: NetName=NetC20_2 Pin=E2-1
-Added Member To Class: ClassName=U_Radio Module scheme Member=Component E1 Antenna
-Added Member To Class: ClassName=U_Radio Module scheme Member=Component E2 Antenna

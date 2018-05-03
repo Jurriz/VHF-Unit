@@ -1,5 +1,5 @@
 
-**** 04/20/18 08:38:17 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+**** 05/02/18 10:02:48 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
 
  ** Profile: "SCHEMATIC1-bias"  [ c:\users\josef.tvp1\documents\github\vhf-unit\kretskortet\simuleringen\simulering-pspicefiles\schem
 
@@ -31,46 +31,63 @@
 
 **** INCLUDING SCHEMATIC1.net ****
 * source SIMULERING
-L_L7         N23197 N23659  45n  
-L_L8         N23663 N20684  1n  
-C_C12         N26009 N20684  300p  TC=0,0 
-C_C13         0 N23663  5p  TC=0,0 
-L_L5         N23193 N23197  50n  
-C_C14         N21680 N23193  100p  TC=0,0 
-L_L10         N23659 N23663  47n  
-C_C15         N23197 0  18p  TC=0,0 
-C_C18         0 N23659  18p  TC=0,0 
-R_R2         0 N23659  10000meg TC=0,0 
-V_V3         N21680 0 DC 0Vdc AC 1Vac 
-R_R8         0 N23193  1000meg TC=0,0 
-C_C0         N28991 N36241  39p  TC=0,0 
-V_V4         N28991 0 DC 0Vdc AC 1Vac 
-R_R11         0 N26009  50 TC=0,0 
-L_L0         N36241 N33516  22nH  
-L_LM3         N36492 N37629  68nH  
-C_CM         0 N33516  18p  TC=0,0 
-L_LM         N33516 N36307  56nH  
-L_LM2         N36307 N36492  47nH  
-C_CM2         0 N36492  18p  TC=0,0 
-C_CP1         N36492 N37629  3pf  TC=0,0 
-L_LM4         N37629 N37847  47nH  
-C_CP2         N37629 N37847  2pf  TC=0,0 
-C_C23         N37847 N32588  470p  TC=0,0 
-C_CM3         0 N37629  18p  TC=0,0 
-R_R12         0 N32588  50 TC=0,0 
+R_R19         0 N48604  1000000meg TC=0,0 
+C_CM5         0 N48594  5.2p  TC=0,0 
+C_CM4         0 N48614  26p  TC=0,0 
+L_LM6         N48604 N48614  65n  
+R_R18         0 N48662  50 TC=0,0 
+V_V6         N48570 0 DC 0Vdc AC 1Vac 
+C_CM6         N48594 N48570  170p  TC=0,0 
+L_LM10         N48614 N62639  55.1n  
+C_C33         0 N64032  18p  TC=0,0 
+C_C32         N64022 0  18p  TC=0,0 
+L_L15         N64046 N64238  27n  
+V_V5         N64168 0 DC 0Vdc AC 1Vac 
+C_C28         N64032 N64046  1.8p  TC=0,0 
+C_C34         0 N64046  11p  TC=0,0 
+C_C31         N64242 N64238  220p  TC=0,0 
+R_R15         0 N64242  50 TC=0,0 
+R_R14         0 N64178  100000meg TC=0,0 
+L_L12         N64178 N64022  47n  
+C_C27         N64022 N64032  2.7p  TC=0,0 
+R_R16         0 N64032  100000meg TC=0,0 
+C_C29         N72799 N64178  220p  TC=0,0 
+L_L13         N64022 N64032  68n  
+L_L14         N64032 N64046  47n  
+L_LM11         N66538 N66572  64.3n  
+L_LM14         0 N66538  42n  
+R_R21         0 N66576  50 TC=0,0 
+V_V7         N66528 0 DC 0Vdc AC 1Vac 
+C_C39         N66572 N66576  10.9p  TC=0,0 
+C_CM8         0 N66538  17p  TC=0,0 
+C_CM7         N66538 N66528  100u  TC=0,0 
+R_R20         0 N66538  1000000meg TC=0,0 
+L_LM13         N66576 0  42n  
+C_CM9         0 N66576  17p  TC=0,0 
+L_L0         N67696 N67702  22nH  
+C_C23         N67546 N67764  470p  TC=0,0 
+L_LM         N67702 N67716  56nH  
+C_CP2         N67532 N67546  5p  TC=0,0 
+V_V4         N67686 0 DC 0Vdc AC 1Vac 
+R_R9         0 N67716  1000000meg TC=0,0 
+L_LM4         N67532 N67546  47nH  
+C_CM2         0 N67522  18p  TC=0,0 
+L_LM3         N67522 N67532  68nH  
+C_CM         0 N67702  18p  TC=0,0 
+C_CP1         N67522 N67532  4p  TC=0,0 
+L_LM2         N67716 N67522  47nH  
+R_R12         0 N67764  50 TC=0,0 
+C_CM3         0 N67532  18p  TC=0,0 
+C_C0         N67686 N67696  100p  TC=0,0 
+C_C13         0 N67764  11p  TC=0,0 
+L_LM9         N48594 N48604  36.8n  
+C_CM10         0 N48604  22p  TC=0,0 
+C_CM11         0 N62639  14.7p  TC=0,0 
+L_LM15         N62639 N48662  13n  
+R_R22         N72799 N64168  0 TC=0,0 
+-----------------------------$
+ERROR(ORPSIM-16144): Value may not be 0
 
 **** RESUMING bias.cir ****
 .END
-
-ERROR(ORPSIM-15142): Node N36241 is floating
-
-ERROR(ORPSIM-15142): Node N33516 is floating
-
-ERROR(ORPSIM-15142): Node N36492 is floating
-
-ERROR(ORPSIM-15142): Node N37629 is floating
-
-ERROR(ORPSIM-15142): Node N36307 is floating
-
-ERROR(ORPSIM-15142): Node N37847 is floating
 

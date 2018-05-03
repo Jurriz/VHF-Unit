@@ -1,4 +1,0 @@
-Change Component Footprint: Designator=U2 Old Footprint=MCHP-UQFN-MV40_L New Footprint=MCHP-UQFN-MV40_M
-Change Component Footprint: Designator=U3 Old Footprint=SLAB-QFN-20-2600x2600TP_L New Footprint=SLAB-QFN-20-2600x2600TP_M
-Added Component: Designator=U9(DPW0004A_V)
-Added Member To Class: ClassName=U_Radio Module scheme Member=Component R13 Res2

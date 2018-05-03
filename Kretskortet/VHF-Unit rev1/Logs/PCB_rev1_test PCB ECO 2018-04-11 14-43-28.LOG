@@ -1,9 +1,0 @@
-Added Component: Designator=C30(0402_CAP)
-Added Component: Designator=U9(DPW0004A_V)
-Added Pin To Net: NetName=GND Pin=C30-1
-Added Pin To Net: NetName=VCC Pin=C30-2
-Added Pin To Net: NetName=GND Pin=U9-3
-Added Pin To Net: NetName=NetU5_3 Pin=U9-4
-Added Pin To Net: NetName=VCC Pin=U9-5
-Added Member To Class: ClassName=Scheme VHF-Unit Member=Component C30 Cap Semi
-Added Member To Class: ClassName=Scheme VHF-Unit Member=Component U9 SN74AUP1G04DPWR
