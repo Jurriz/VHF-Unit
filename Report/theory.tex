@@ -17,8 +17,19 @@ To get good characteristics of the circuit the system will be produced on a four
 
 
 
-\subsection{Radio}
+\subsection{Radio Frequency}
+Designing a circuit for radio transmission is a advanced and complex procediur. The high frequencies introduces a lot of intresting phenomenons that need to be considered when construction a circuit in these frequincies. When designing a circuit for RF the components and traces on the PCB behaives in a different way and takes on different characteristics than a equal system at lower frequencies. Some of the challenges that arises are described in "Secrets of RF Circuit Design". Stray capacitance is one of the phenomenon that arises when handlig RF. Between conductors, conductors to ground and between components a small capacitance occures when dealing with RF. To ensure a good radio signal  some criterias need to be fulfilled. 
+The output signal from the radio tranciever is matched at 50 ohms and this has to be matched with the output stage components. These components commonly is a network of inductors and capacitors .This matching network is described later in this section. 
+From different types of radio signal trancievers the type used in this case is determined by the radio ICs manufacturer. \cite{silabbsradio}
 
+\cite{class_e_new}
+The class E (CLE) type used here uses switching type of 
+The most intresting part of the class E is the fact that up to ideal power eficcianty can be acceived by constructed by this type. Class E makes use f
+
+Stating in the datasheet to the radio IC the rough design aspects are defined. From
+
+\subsection{Radio component}
+ The radio module used in this project is from the company Silabs. The chosen radio IC have the characteristics that are wanted in this type of product. The radio trasmission used is the earlier explained class E. With this pice the class E is already implemented in the radio as this is widley used today and a very effective radio signal. 
 
 \subsection{MicroControllerUnit}
 Every advanced system needs a central processing unit to make all the calculations needed. Why a lot of systems needs some powerful processor this system wich is a bit easier with 
