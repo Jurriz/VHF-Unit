@@ -1,6 +1,6 @@
 This chapter will introduce the reader to the problem formulation and the underlaying principles taken into account. The priciple of radio communication and the important speps involved in developing a new product prototype will be presented.
 
-\subsection{
+\subsection{Prototyping}
 Much considerations is taken in orderto construct the final product. The project includes both the software implementation and also the hardware design. As the constrution of the board 
 This chapter will describe the function of each element and their role in the complete project. 
 This chapter 
@@ -20,7 +20,15 @@ To get good characteristics of the circuit the system will be produced on a four
 \subsection{Radio Frequency}
 Designing a circuit for radio transmission is a advanced and complex procediur. The high frequencies introduces a lot of intresting phenomenons that need to be considered when construction a circuit in these frequincies. When designing a circuit for RF the components and traces on the PCB behaives in a different way and takes on different characteristics than a equal system at lower frequencies. Some of the challenges that arises are described in "Secrets of RF Circuit Design". Stray capacitance is one of the phenomenon that arises when handlig RF. Between conductors, conductors to ground and between components a small capacitance occures when dealing with RF. To ensure a good radio signal  some criterias need to be fulfilled. 
 The output signal from the radio tranciever is matched at 50 ohms and this has to be matched with the output stage components. These components commonly is a network of inductors and capacitors .This matching network is described later in this section. 
-From different types of radio signal trancievers the type used in this case is determined by the radio ICs manufacturer. \cite{silabbsradio}
+From different types of radio signal trancievers the type used in this case is determined by the radio ICs manufacturer. %%\cite{silabbsradio}
+ 
+
+Another phenomena thats intruduces is the so called skin effect, where the "skin" part comes from the fysical phenomenal thats hapening. When the frequencies rises the resistance in conductors increases with it. The explanation to for this is that current choses the path of least resistance
+%High-speed Digital design – Johnson & Graham
+
+
+Radio frequincies does many things to a board, these problems and apperances most be evaluated and considered.  
+
 
 \cite{class_e_new}
 The class E (CLE) type used here uses switching type of 
@@ -33,8 +41,9 @@ Stating in the datasheet to the radio IC the rough design aspects are defined. F
 
 \subsection{MicroControllerUnit}
 Every advanced system needs a central processing unit to make all the calculations needed. Why a lot of systems needs some powerful processor this system wich is a bit easier with 
-
+The power consumption is higly dependent on the speed of which the processor is runnig, the faster the more power it consumes and also the slower the less current it will draw. And by the MCU beeing the component with the single higest power consumption the speed is set to a speed as low as possible. This low speed is not a concern in this particular system when the operations required is not time or speed sensitive. The voltage supplied to the MCU is another parameter that will alter the power consumption. The comonent is a low power model which can handle a lower source voltage. A voltage between 1.7 to 3.6 is required, anything lower will not start the device and anything higer will damage the the part. 
 To get the right speed of a crystal we need to get the right product for this particular case. As a crystal 
 Many different types of oscillators exists, both internal and external types. 
 
-\subsection{Accelerometer}
+\subsection{IMU}
+The 
