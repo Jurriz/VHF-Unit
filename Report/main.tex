@@ -1,4 +1,4 @@
-\documentclass[a4paper]{article}
+\documentclass[a4paper]{report}
 
 % text
 \usepackage[utf8]{inputenc}
@@ -19,6 +19,7 @@
 \usepackage{subcaption, float}
 \usepackage{titlesec}
 \usepackage{verbatim}
+\usepackage[document]{ragged2e} % Right and left aligned text
 %\usepackage[sc]{titlesec}
 %\usepackage{titletoc}
 
@@ -46,8 +47,10 @@
   (\glshyperlink[#1]{#2})
 }
 
-\newcommand{\project}{\emph{VHF-Unit}}	%% Name of the project, can always be called by: \project
+%% Name of the project, can always be called by: \project
+\newcommand{\project}{\emph{VHF-Unit}}	
 
+%% Pictures with aurthor and source
 \newcommand\chapterauthor[1]{\authortoc{#1}\printchapterauthor{#1}}
 \WithSuffix\newcommand\chapterauthor*[1]{\printchapterauthor{#1}}
 
@@ -69,11 +72,32 @@
 
 
 %% Fixed 4th deepth
-\setcounter{secnumdepth}{4}
-\titleformat{\paragraph}
-{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
-\titlespacing*{\paragraph}
-{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+%\setcounter{secnumdepth}{4}
+%\titleformat{\paragraph}
+%{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+%\titlespacing*{\paragraph}
+%{0pt}{1.25ex plus 1ex minus .2ex}{0.5ex plus .2ex}
+
+% Chapter and section style
+\titleformat
+{\chapter} % command
+[display] % shape
+{\bfseries\huge} % format
+{ \ \thechapter} % label
+{0.5ex} % sep
+{
+    \rule{\textwidth}{1pt}
+    \vspace{0ex}
+    \centering
+} % before-code
+
+
+%\titleformat{\section}[wrap]
+%{\Large\bfseries}
+%{\thesection}{0.5em}{}
+%\titlespacing{\section}{10pc}{1.5ex plus .1ex minus .2ex}{1pc}
+ 
+
 
 % Figure caption source
 \newcommand*{\captionsource}[2]{%
@@ -101,9 +125,15 @@
 \end{titlepage}
 
 \clearpage
-\begin{abstract}
+%\begin{abstract}
+\chapter*{Abstract}
 \input{abstract.tex}
-\end{abstract}
+%\end{abstract}
+
+% Preface
+\clearpage
+\chapter*{Preface}
+\input{preface.tex}
 
 \clearpage
 \setlength{\columnseprule}{0.2pt}
@@ -117,28 +147,46 @@
 
 \clearpage
 \setcounter{page}{2}
-\section{Introduction}
+\chapter{Introduction}
 \input{introduction.tex}
 
+%%             	Theory
 \clearpage
-\section{Theory}\label{sec:Theory}
+\chapter{Theory}\label{sec:Theory}
+\addcontentsline{toc}{chapter}{Theory}
 \input{theory.tex}
 
+%%   		-----Method ------
+%%			Hardware
 \clearpage
-\section{Method}\label{sec:function}
-\input{functionality.tex}
-
-\clearpage
-\section{Schematics}\label{sec:schematic}
-\input{Schematic.tex}
-
-\clearpage
-\section{PCB}\label{sec:pcb}
+\chapter{PCB}\label{sec:pcb}
 \input{pcb.tex}
 
+%% 			Software
+\clearpage
+\chapter{software}\label{sec:software}
+\input{software.tex}
+
+%% 			Results
+\clearpage
+\chapter{Results}\label{sec:results}
+\input{result.tex}
+
+%%			Schematics
+\clearpage
+\chapter{Schematics}\label{sec:schematic}
+\input{Schematic.tex}
+
+%% 			Discussion
+\clearpage
+\chapter{Discussion}\label{sec:discussion}
+\input{discussion.tex}
+
+%% 			References
 \clearpage
 \input{references.tex}
 
+%%			Appendix
 \clearpage
 \begin{appendices}
 \input{APPENDIX.tex}

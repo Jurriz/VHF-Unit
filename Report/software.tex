@@ -1,0 +1,20 @@
+\vspace{-10ex}%
+\rule{\textwidth}{0.3pt}
+\vspace{10ex}
+ % after-code
+
+\section{Software implementation} %% Ändra denna
+%% Radio
+
+Radio Chip Waking Up First,  the  radio  is  in  the  off  state. After  the  SDN  pin  is  pulled  low,  the  radio  wakes  up  and  performs  a  Power  on.
+Reset  which  takes  a  maximum  of  6 ms  (900 $\mu$ s  typical  at  room  temperature)  until  the  chip  is  ready  to  receive commands on the SPI bus. The GPIO1 pin goes high when the radio is ready for receiving SPI commands. During the reset period, the radio cannot accept any SPI commands. 
+
+%% MCU
+%\subsubsubsection{Programming}
+\subsection{Programming} 
+In start of every embedded system the processor have to be programmed. Here the most common implementation is the \gls{jtag}, where the all the programming and debugging is done through a standardized interface. The approach is different on this \gls{mcu}, here three pins are used to program the device. The first one is the "PGC", which is the clock signal for the In-Circuit Debugger and "PGD", In-Circuit Serial Programming. The third pin needed from the processor is the MCLR. These pins on the processor have to be accessible to program the microcontroller. 
+
+
+\subsection{Software implementation}
+The processor do not start up on it own, much consideration needs in making right initzilation and configure it right. A source voltage is supplied to the processor to get it to operate. There are some initial registers that needs to be set in order to inintialize and start the processor. This varies between different processors and models and is different for applications and systems. These registers contain information about the speed of the processor.    
+
