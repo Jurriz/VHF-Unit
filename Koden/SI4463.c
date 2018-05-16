@@ -44,7 +44,7 @@ void DoStartRadio(void)
     MyWriteSPI(0xBA);
     MyWriteSPI(0x80);
 
-    Delay(15);  // 14ms     // Viktigt att den hinner starta ordentligt
+    Delay(60);  // 14ms     // Viktigt att den hinner starta ordentligt
 
    RADIO_EN = 1;
 }

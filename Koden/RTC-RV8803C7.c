@@ -15,9 +15,9 @@
 // -----------------------------------------------------------------------------
 void ToggleRTC(void)
 {
-	RTC_ENABLE = 0;
+	//RTC_ENABLE = 0;
 	Nop(); Nop(); Nop();
-	RTC_ENABLE = 1;
+	//RTC_ENABLE = 1;
 }
 
 //---------------------------------------------------------------------------------------------
@@ -35,7 +35,7 @@ char DoInitRV3049(void)
 
 	OpenSPI(SPI_FOSC_4, MODE_01, SMPMID);
 
-	RTC_ENABLE = 1;
+	//RTC_ENABLE = 1;
 
 	// =======================================================
 	MyWriteSPI(RTCWrite | RTCControl | 0x04);	// Skriv till Control-Page
@@ -43,11 +43,11 @@ char DoInitRV3049(void)
 
 	Nop();
 
-	RTC_ENABLE = 0;
+	//RTC_ENABLE = 0;
 	
 	Delay(500);
 
-	RTC_ENABLE = 1;
+	//RTC_ENABLE = 1;
 
 	MyWriteSPI(RTCWrite | RTCControl | 0x03);	// Skriv till Control-Page
 	MyWriteSPI(0b00000000);						// CONTROL_Status, återställ PON och SR
@@ -118,7 +118,7 @@ char DoInitRV3049(void)
 	MyWriteSPI(0x00);
 	MyWriteSPI(0x00);
 	
-	RTC_ENABLE = 0;
+	//RTC_ENABLE = 0;
 
 	CloseSPI();
 
@@ -166,7 +166,7 @@ void DoSetTimeRV3049(void)
 
 	OpenSPI(SPI_FOSC_4, MODE_01, SMPMID);
 
-	RTC_ENABLE = 1;
+	//RTC_ENABLE = 1;
 	
 	// SKA WE SÄTTAS TILL NOLL VID INSTÄLLNING AV KLOCKAN ????????????????????????????????????????????
 	MyWriteSPI(RTCWrite | RTCControl | 0x00);	// Skriv till Clock-page 
@@ -188,7 +188,7 @@ void DoSetTimeRV3049(void)
 	Nop(); 
 	Nop();
 
-	RTC_ENABLE = 0;
+	//RTC_ENABLE = 0;
 
 	FlagBits.bSPIbusy = 0;
 }	
@@ -200,7 +200,7 @@ char DoChangeTickRV3049(unsigned char nT1)
 
 	OpenSPI(SPI_FOSC_4, MODE_01, SMPMID);
 
-	RTC_ENABLE = 1;
+	//RTC_ENABLE = 1;
 
 	Nop(); 
 	
@@ -211,7 +211,7 @@ char DoChangeTickRV3049(unsigned char nT1)
 	Nop(); 
 	Nop();
 
-	RTC_ENABLE = 0;
+	//RTC_ENABLE = 0;
 
 	CloseSPI();
 	
@@ -230,7 +230,8 @@ char DoStartRV3049(void)
 	OpenSPI(SPI_FOSC_4, MODE_01, SMPMID);
 //	OpenSPI(SPI_FOSC_4, MODE_11, SMPMID);
 
-	RTC_ENABLE = 1;
+	//RTC_ENABLE = 1;
+    
 	
 	MyWriteSPI(RTCWrite | RTCControl | 0x00);	// Skriv till Control-Page
 	MyWriteSPI(0b00100110);						// CONTROL_1, TimerSource=8Hz, Enables Self Recovery, CountdownAutoReload, 
@@ -260,7 +261,7 @@ char DoStartRV3049(void)
 	MyWriteSPI(RTCWrite | RTCControl | 0x00);	// Skriv till Control-Page
 	MyWriteSPI(0b00100111);						// Control_1, TimerSource=8Hz, CountdownAutoReload, Countdown Timer, WE = 1
 	
-	RTC_ENABLE = 0;
+	//RTC_ENABLE = 0;
 
 	CloseSPI();
 
@@ -466,7 +467,7 @@ char DoReadRTC_DEBUG(void)
 	nReturn = 0;
 	nTemp = 0;
 
-LED_0 = 1;	
+//LED_0 = 1;	
 	
 	OpenSPI(SPI_FOSC_4, MODE_01, SMPMID);
 
@@ -540,7 +541,7 @@ LED_0 = 1;
 //	char nSec, nMin, nHour, nDay, nwDay, nWDay, nMon, nYear;
 //	lDatum
 
-LED_0 = 0;
+//LED_0 = 0;
 
 	CloseSPI();
 	
@@ -686,7 +687,7 @@ char DoReadRTC(void)
 	lDatum <<= 8;
 	lDatum |= (char)nDay;
 	
-LED_0 = 0;
+//LED_0 = 0;
 	
 	// char nSec, nMin, nHour, nDay, nwDay, nWDay, nMon, nYear;
 
@@ -773,4 +774,85 @@ char DoResetRTC_INT(void)
 	
 	FlagBits.bSPIbusy = 0;
 }
+
+
+
+//	nTmp = DoReadRTC();
+//	if (nTmp != 0)
+//	{
+//		Nop();
+//
+//		// Initiera om klockan
+//		DoInitRV3049();
+//	}
+//
+//	Nop();
+//
+//	// Sätt klockticket
+//	nTICK = 8;
+//	DoChangeTickRV3049(nTICK);
+//
+//	// Ställ in tid och datum enlig nedan
+//	lGPSTid = 0x133030;
+//	lGPSDatum = 0x180308;
+//
+//	Nop();
+//	Nop();
+//
+//	DoSetTimeRV3049();
+//
+//	// Kontroll
+//	nTmp = DoReadRTC();
+//	Delay(1000);
+//	nTmp = DoReadRTC();
+//
+//	// DoResetRTC_INT();
+//	FlagBits.bTimerIRQ = 0;
+//	nLoop = 0;
+//	nTICK = 2;
+//	//while (1)
+//	{	
+//		if (FlagBits.bTimerIRQ == 1)
+//		{
+//			// Interrupt-flaggorna blir lästa och clearade i DoReadRTC()
+//			//LED_0 = 1;
+////			DoReadRTC();
+//			
+//			// Interrupt-flaggorna clearas i DoResetRTC_INT()
+//			// DoResetRTC_INT();
+//			FlagBits.bTimerIRQ = 0;
+//			
+//			nLoop++;
+//			if ( (nLoop % 5) == 0)
+//			{
+//				nLoop = 0;
+//				DoChangeTickRV3049(nTICK);
+//				nTICK += 2;
+//				if (nTICK > 12)
+//				{
+//					nTICK = 2;
+//				}	
+//			} 
+//
+//			lData = DoReadInc();
+//
+//			nLo = (lData & 0x000000FF);		// X
+//			lData >>= 8;
+//			nMLo = (lData & 0x000000FF);	// Y
+//			lData >>= 8;
+//			nMHi = (lData & 0x000000FF);	// Z
+//
+//			sprintf(szUSART_Out, (const rom far char *)" %3d\t%3d\t%3d\t%d\r\n\r\n", (signed char)nLo, (signed char)nMLo, (signed char)nMHi, (char)FlagBits.bToggle);
+//			SkrivBuffert(szUSART_Out, 1);
+//
+//			FlagBits.bToggle = !FlagBits.bToggle;
+//		}	
+//		
+//		Nop();
+//		Nop();
+//	}
+//
+//	Delay(1000);
+//    LATDbits.LATD4 = 1;
+//  
 

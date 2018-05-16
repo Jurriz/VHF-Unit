@@ -1,6 +1,6 @@
 #ifndef __AMCE_H
 #define __AMCE_H
-
+//#define _XTAL_FREQ  32000   //Frequency
 
 // -----------------------------------------------------------------------------
 // **********************************************************************
@@ -8,117 +8,58 @@
 // **********************************************************************
 // #define 				PORTAbits.RA7	// Används för oscillatorn på lab-kortet
 // #define 				PORTAbits.RA6	// Används för oscillatorn på lab-kortet
-// #define 				PORTAbits.RA5	// Används till switch på lab-kortet
-// #define RTC_EN		LATAbits.LATA4	// D,O	ACC Enable
-// #define EE_EN		LATAbits.LATA3	// D,O	EEPROM Enable
-// #define LCD_EN		LATAbits.LATA2	// D,O 	LCD Enable
-// #define				PORTAbits.RA1	// Till temperaturkrets på lab-kortet
-// #define 				PORTAbits.RA0	// Till spänningsdelare på lab-kortet
+#define GREEN_LED       LATAbits.LATA5  // D,O 
+#define ACC_ENABLE		LATAbits.LATA4	// ACC Chip Select
+// #define FREE         LATAbits.LATA3	// D,O	
+#define VSEL3   		LATAbits.LATA2	// VSEL 3 	
+#define VSEL2           LATAbits.LATA1	// VSEL 2, inverterad 
+#define VSEL1           LATAbits.LATA0	// VSEL 1
 
 // **********************************************************************
 // TRISB = 0b.1110.0111; PORTB = 0b.0000.0000;		Ok
 // **********************************************************************
-// #define N_R4			PORTBbits.RB7	// D,I/O	
-// #define N_R3			PORTBbits.RB6	// D,I/O	
-// #define N_R2			PORTBbits.RB5	// D,I		
-#define ACC_IRQ			PORTBbits.RB4	// I,O/O	INT1
-#define RTC_INT			PORTBbits.RB3	// D I
-// #define CTS			PORTBbits.RB2	// D,O	används som CTS (9-polig DSUB) på labkortet
-// #define RTS			PORTBbits.RB1	// D,I	används som RTS (9-polig DSUB) på labkortet
-#define RB0_SWITCH		PORTBbits.RB0	// D,I	används till switch på lab-kortet
+//          			@ PORTB.7       // PGD	
+//              		@ PORTB.6   	// PGC
+#define Hall_Out		PORTBbits.RB5	// Hall sensor output		
+#define NIRQ_Radio      PORTBbits.RB4	// NIRQ_Radio
+//#define FREE			PORTBbits.RB3	// D I
+// #define FREE			PORTBbits.RB2	// D,O	
+#define INT_Acc 		PORTBbits.RB1	// INT_ACC	
+#define nINT_RTC		PORTBbits.RB0	// nINT_RTC
 
 // **********************************************************************
 // TRISC = 0b.1000.0000; PORTC = 0b.0000.0000;		Ok
 // **********************************************************************
-// 						@ PORTC.7 		// RX USART
-//						@ PORTC.6		// TX USART
+#define TCXO_EN 		LATCbits.LATC7	// Radio Chip Select & RX USART
+// 						@ PORTC.6 		// TX USART
 // 						@ PORTC.5 		// SDO
 //						@ PORTC.4		// SDI
 //						@ PORTC.3		// SCK
-// #define FREE			LATCbits.LATC2	// ECCP1 Enhanced PWM output, Channel A
-#define ADSADS_SD     	LATCbits.LATC1	// Används för att starta upp kretsen på rätt sätt (VDD_IO)
-#define RADIO_SDN 		LATCbits.LATC0	// Används för att starta upp kretsen på rätt sätt (VDD)
+#define RADIO_SDN		LATCbits.LATC2	// Används för att starta upp kretsen på rätt sätt (VDD)
+#define GPIO_RC1     	LATCbits.LATC1	// Extra, används nu till TCXO
+// #define FREE 		LATCbits.LATC0	// 
+#define RTC_ENABLE      LATCbits.LATC0  // Extra för nu, skall tas bort. Används bara för test
 
 // **********************************************************************
-// TRISD = 0b.0000.0000, används för LEDar på labkortet
+// TRISD = 0b.0000.0000, 
 // **********************************************************************
-#define LED_7			LATDbits.LATD7	// D,O
-#define LED_6			LATDbits.LATD6	// D,O
-#define LED_5			LATDbits.LATD5	// D,O
-#define LED_4			LATDbits.LATD4	// D,O
-#define LED_3			LATDbits.LATD3	// D,O
-#define LED_2			LATDbits.LATD2	// D,O
-#define LED_1		 	LATDbits.LATD1	// D,O
-#define LED_0 			LATDbits.LATD0	// D,O
+//#define FREE			LATDbits.LATD7	// D,O
+#define GPIO2_Radio		LATDbits.LATD6	// D,O
+#define GPIO1_Radio		LATDbits.LATD5	// D,O
+#define RADIO_EN		LATDbits.LATD4	// D,O Radio Chip Select
+//#define FREE			LATDbits.LATD3	// D,O
+//#define FREE			LATDbits.LATD2	// D,O
+//          		 	@ PORTD.1       // SDA_RTC
+//          		 	@ PORTD.0       // SCL_RTC
 
 // **********************************************************************
 // Hela PORTE används till LCD:n
 // TRISE = 0b.0000.0000; PORTE = 0b.0000.0000;		Ok
 // **********************************************************************
-// #define FREE				LATEbits.LATE7	// D,O
-// #define FREE				LATEbits.LATE6	// D,O
-// #define FREE				LATEbits.LATE5	// D,O
-// #define FREE			 	LATEbits.LATE4	// D,O
-// #define FREE				LATEbits.LATE3	// D,O
-#define RADIO_EN			LATEbits.LATE2	// D,O
-#define RTC_ENABLE			LATEbits.LATE1	// D,O
-#define ACC_ENABLE			LATEbits.LATE0	// D,O
-
-// **********************************************************************
-// TRISF = 0b10010000; LATF = 0b01000000;		Ok
-// **********************************************************************
-//#define SEND_NMEA_0			PORTFbits.RF7	// D,I		Detekterar en TCP-anslutning            ÄNDRAT
-/* #define FREE				LATFbits.LATF6	// D,O
-#define LCD_RS				LATFbits.LATF5	// D,O
-#define MEMORY_ENABLE_0		LATFbits.LATF4	// D,O		(Vill inte fungera som ingång!!!!!!!!!!)	
-#define CLOCK_LED			LATFbits.LATF3	// D,O		Led-kort
-#define DATA_LED			LATFbits.LATF2	// D,O 		Led-kort
-#define STROBE_LED			LATFbits.LATF1	// D,O		Led-kort
-// #define 					LATFbits.LATF0	// SAKNAS !!!!!!!!!!!!!!!!!!
-*/
-// #define TCP_DETECT		PORTFbits.RF7	// D,I		Detekterar en TCP-anslutning
-// #define FREE				LATFbits.LATF6	// D,O
-// #define FREE				LATFbits.LATF5	// D,O
-// #define MEMORY_ENABLE_0	LATFbits.LATF4	// D,O		(Vill inte fungera som ingång!!!!!!!!!!)	
-// #define FREE				LATFbits.LATF3	// D,O
-// #define MEMORY_ENABLE_0	LATFbits.LATF2	// D,O
-// #define TCP_DETECT		LATFbits.LATF1	// D,O		Detekterar en TCP-anslutning
-// #define FREE				LATFbits.LATF0	// SAKNAS !!!!!!!!!!!!!!!!!!
-
-// ***********************************************
-
-// **********************************************************************
-// TRISG = 0b.0000.0100; PORTG = 0b.0000.0000;		Ok
-// **********************************************************************
-// #define USART2_MUX1			LATGbits.LATG4	// D,O
-// #define USART2_MUX0			LATGbits.LATG3	// D,O
-// #define RX_2				LATGbits.LATG2	// RX USART
-// #define TX_2				LATGbits.LATG1	// TX USART
-// #define USB_DETECT			PORTGbits.RG0	// D,I
-
-// **********************************************************************
-// TRISH = 0b.00000000; PORTH = 0b.00000000;	Ok
-// **********************************************************************
-//#define SEND_NMEA_0			PORTHbits.RH7	// D,O
-//#define SEND_NMEA_1			PORTHbits.RH6	// D,I
-// #define FREE				LATHbits.LATH5	// D,O
-// #define FREE				LATHbits.LATH4	// D,O
-// #define FREE				LATHbits.LATH3	// D,O
-// #define FREE				LATHbits.LATH2	// D,O
-// #define FREE				LATHbits.LATH1	// D,O
-// #define FREE				LATHbits.LATH0	// D,I
-
-// **********************************************************************
-// TRISJ = 0b.0000.0000; PORTJ = 0b.0000.0000;	Ok
-// **********************************************************************
-// #define FREE				LATJbits.LATJ7	// D,O
-// #define FREE				LATJbits.LATJ6	// D,O
-// #define FREE				LATJbits.LATJ5	// D,O
-// #define FREE				LATJbits.LATJ4	// D,O
-// #define KEYPAD			LATJbits.LATJ3	// D,I
-// #define KEYPAD			LATJbits.LATJ2	// D,O
-// #define KEYPAD			LATJbits.LATJ1	// D,O
-// #define KEYPAD			LATJbits.LATJ0	// D,O
+//              			@PORTE.3    	// MCLR
+// #define FREE             LATEbits.LATE2	// D,O
+// #define FREE             LATEbits.LATE1	// D,O
+#define RED_LED             LATEbits.LATE0	// D,O
 
 // -----------------------------------------------------------------------------
 // Main.c
@@ -158,9 +99,10 @@ unsigned char MyWriteSPI(unsigned char data_out);
 int dow(int y, int m, int d);
 unsigned char BCD2Byte(unsigned char nIn);
 signed int AccDataCalc(unsigned char val_L, unsigned char val_H);
-void Blink(void);
+void Blink1(void);
+void Blink2(void);
+void OSCILLATOR_Initialize(void);
 
-// -----------------------------------------------------------------------------
 // AmCe_NReader.c --------------------------------------------------------------
 void DoEraseAllNotes(void);
 void DoClearEEPROMandRAM(void);
@@ -176,8 +118,8 @@ void DoSaveNoteToEEPROM(unsigned int nIndex);
 void DoSaveNoteToEEPROM_Admin(unsigned int nIndex);
 
 // AmCe_util.c -----------------------------------------------------------------
-void UseUtilMenu(void);
 void InitCPU(void);
+void UseUtilMenu(void);
 unsigned char GetKeyPressed(void);
 void Delay19200(void);
 void Delay(unsigned int nDelay);
@@ -195,7 +137,6 @@ unsigned int DoGetPrintNumber(char nMode);
 void DoCommunicate(void);
 
 // AmCe_LCD.c ------------------------------------------------------------------
-// Se LCD_h.h
 
 // AmCe_EEPROM.c ---------------------------------------------------------------
 void EE_WriteEnable(void);

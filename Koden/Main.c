@@ -8,31 +8,95 @@
 #include <i2c.h>
 #include <delays.h>
 #include <adc.h>
-
 #include "Header_h.h"
 
 // -----------------------------------------------------------------------------
 // PIC18LF46k22 
-#pragma config DEBUG = ON
-#pragma config XINST = ON          
+/*
+#pragma config DEBUG = ON        // Debugger 
+#pragma config XINST = ON       // Extended instruction set  
 
-#pragma config STVREN = ON
-#pragma config WDTEN = OFF
-#pragma config CP0 = OFF
+#pragma config STVREN = 1       // Stack overflow reset enable
+#pragma config WDTEN = OFF      // Watchdog timer enable
+#pragma config CP0 = OFF        // Code protection
 
 #pragma config FCMEN = OFF
 #pragma config IESO = OFF
 
 #pragma config PRICLKEN = ON
-#pragma config FOSC = XT             //ÄNDRAT från HS till XT
-//#pragma config FOSC = INTOSC
+
+//#pragma config FOSC = LFINTOSC
+
 
 #pragma config WDTPS = 32
+#pragma config FOSC = XT             //ÄNDRAT från HS till XT
 //#pragma config WAIT = OFF             ÄNDRAT
 //#pragma config BW = 8                 ÄNDRAT
 //#pragma config MODE = MM              ÄNDRAT
-
+#define _XTAL_FREQ  32678
 // -----------------------------------------------------------------------------
+*/
+
+#pragma config FOSC = INTIO67    // Oscillator Selection bits->Internal oscillator block
+#pragma config PLLCFG = OFF    // 4X PLL Enable->Oscillator used directly
+#pragma config PRICLKEN = ON    // Primary clock enable bit->Primary clock is always enabled
+#pragma config FCMEN = OFF    // Fail-Safe Clock Monitor Enable bit->Fail-Safe Clock Monitor disabled
+#pragma config IESO = OFF    // Internal/External Oscillator Switchover bit->Oscillator Switchover mode disabled
+
+// CONFIG2L
+#pragma config PWRTEN = OFF    // Power-up Timer Enable bit->Power up timer disabled
+#pragma config BOREN = OFF    // Brown-out Reset Enable bits->Brown-out Reset enabled in hardware only (SBOREN is disabled)
+#pragma config BORV = 190    // Brown Out Reset Voltage bits->VBOR set to 1.90 V nominal
+
+// CONFIG2H
+#pragma config WDTEN = OFF    // Watchdog Timer Enable bits->WDT is controlled by SWDTEN bit of the WDTCON register
+#pragma config WDTPS = 32768    // Watchdog Timer Postscale Select bits->1:32768
+
+// CONFIG3H
+#pragma config CCP2MX = PORTC1    // CCP2 MUX bit->CCP2 input/output is multiplexed with RC1
+#pragma config PBADEN = ON    // PORTB A/D Enable bit->PORTB<5:0> pins are configured as analog input channels on Reset
+#pragma config CCP3MX = PORTB5    // P3A/CCP3 Mux bit->P3A/CCP3 input/output is multiplexed with RB5
+#pragma config HFOFST = ON    // HFINTOSC Fast Start-up->HFINTOSC output and ready status are not delayed by the oscillator stable status
+#pragma config T3CMX = PORTC0    // Timer3 Clock input mux bit->T3CKI is on RC0
+#pragma config P2BMX = PORTD2    // ECCP2 B output mux bit->P2B is on RD2
+#pragma config MCLRE = EXTMCLR    // MCLR Pin Enable bit->MCLR pin enabled, RE3 input pin disabled
+
+// CONFIG4L
+#pragma config STVREN = ON    // Stack Full/Underflow Reset Enable bit->Stack full/underflow will cause Reset
+#pragma config LVP = ON    // Single-Supply ICSP Enable bit->Single-Supply ICSP enabled if MCLRE is also 1
+#pragma config XINST = ON    // Extended Instruction Set Enable bit->Instruction set extension and Indexed Addressing mode disabled (Legacy mode)
+#pragma config DEBUG = OFF    // Background Debug->Disabled
+
+// CONFIG5L
+#pragma config CP0 = OFF    // Code Protection Block 0->Block 0 (000800-003FFFh) not code-protected
+#pragma config CP1 = OFF    // Code Protection Block 1->Block 1 (004000-007FFFh) not code-protected
+#pragma config CP2 = OFF    // Code Protection Block 2->Block 2 (008000-00BFFFh) not code-protected
+#pragma config CP3 = OFF    // Code Protection Block 3->Block 3 (00C000-00FFFFh) not code-protected
+
+// CONFIG5H
+#pragma config CPB = OFF    // Boot Block Code Protection bit->Boot block (000000-0007FFh) not code-protected
+#pragma config CPD = OFF    // Data EEPROM Code Protection bit->Data EEPROM not code-protected
+
+// CONFIG6L
+#pragma config WRT0 = OFF    // Write Protection Block 0->Block 0 (000800-003FFFh) not write-protected
+#pragma config WRT1 = OFF    // Write Protection Block 1->Block 1 (004000-007FFFh) not write-protected
+#pragma config WRT2 = OFF    // Write Protection Block 2->Block 2 (008000-00BFFFh) not write-protected
+#pragma config WRT3 = OFF    // Write Protection Block 3->Block 3 (00C000-00FFFFh) not write-protected
+
+// CONFIG6H
+#pragma config WRTC = OFF    // Configuration Register Write Protection bit->Configuration registers (300000-3000FFh) not write-protected
+#pragma config WRTB = OFF    // Boot Block Write Protection bit->Boot Block (000000-0007FFh) not write-protected
+#pragma config WRTD = OFF    // Data EEPROM Write Protection bit->Data EEPROM not write-protected
+
+// CONFIG7L
+#pragma config EBTR0 = OFF    // Table Read Protection Block 0->Block 0 (000800-003FFFh) not protected from table reads executed in other blocks
+#pragma config EBTR1 = OFF    // Table Read Protection Block 1->Block 1 (004000-007FFFh) not protected from table reads executed in other blocks
+#pragma config EBTR2 = OFF    // Table Read Protection Block 2->Block 2 (008000-00BFFFh) not protected from table reads executed in other blocks
+#pragma config EBTR3 = OFF    // Table Read Protection Block 3->Block 3 (00C000-00FFFFh) not protected from table reads executed in other blocks
+
+// CONFIG7H
+#pragma config EBTRB = OFF    // Boot Block Table Read Protection bit->Boot Block (000000-0007FFh) not protected from table reads executed in other blocks
+
 void HandleIRQ(void);
 
 // -----------------------------------------------------------------------------
@@ -84,201 +148,6 @@ unsigned char nWeekDay;
 short long lGPSTid, lGPSDatum;
 short long lDefaultTid, lDefaultDatum;
 
-// -----------------------------------------------------------------------------
-char DoResetRTC_INT(void);
-
-/*// -----------------------------------------------------------------------------
-#pragma code HighVector=0x0008
-
-void atHighVector (void)
-{
-	_asm goto HandleIRQ _endasm
-}
-
-#pragma code
-
-#pragma interrupt HandleIRQ
-
-/*
-void HandleIRQ(void)
-{
-	unsigned char nLoop, nPortTmp, nIn;
-	
-	// ***********************************************************************************************************
-	if (RCSTA1bits.OERR == 1)	// OverRunError
-	{	
-		RCSTA1bits.CREN = 0;
-		RCSTA1bits.CREN = 1;
-	}
-
-	if (RCSTA1bits.FERR == 1)	// FramingError
-	{
-		nPortTmp = getc1USART();
-	}
-
-	if ( (PIE1bits.RC1IE == 1) && (PIR1bits.RC1IF == 1)	)	// Serie Interrupt från USART 1
-	{
-		nIn = getc1USART();
-
-		if (FlagBits.bPassThrough == 1)
-		{
-			if (!Busy2USART())
-			{
-				putc2USART(nIn);
-			}
-		}	
-
-		szUSART_1[nByte_1] = nIn;
-		if (nByte_1 < 510)			// Max 512 tecken
-		{
-			nByte_1++;
-		}
-
-		// Underlättar läsning av text-strängar			
-		szUSART_1[nByte_1] = '\0';
-		
-		nTimeOutUSART_1 = 0;
-	}
-
-	// ***********************************************************************************************************		
-	if (RCSTA2bits.OERR == 1)	// OverRunError
-	{
-		RCSTA2bits.CREN = 0;		
-		RCSTA2bits.CREN = 1;
-	}
-
-	if (RCSTA2bits.FERR == 1)	// OverRunError
-	{
-		nPortTmp = getc2USART();
-	}
-
-	if ( (PIE3bits.RC2IE == 1) && (PIR3bits.RC2IF == 1) )		// Serie Interrupt från USART 2
-	{
-		nIn = getc2USART();
-
-		if (FlagBits.bPassThrough == 1)
-		{
-			if (!Busy1USART())
-			{
-				putc1USART(nIn);
-			}
-		}	
-		
-		szUSART_2[nByte_2] = nIn;
-		if (nByte_2 < 254)			// Max 256 tecken
-		{
-			nByte_2++;
-		}		
-
-		// Underlättar läsning av text-strängar			
-		szUSART_2[nByte_2] = '\0';
-		
-		nTimeOutUSART_2 = 0;
-	}
-	
-
-	// ***********************************************************************************************************		
-	if ( (INTCON3bits.INT3IF == 1) && (INTCON3bits.INT3IE == 1) )
-	{
-		LED_6 = !LED_6;
-
-//		DoResetRTC_INT();
-
-		FlagBits.bTimerIRQ = 1;
-		// FlagBits.bReadInc = 1;
-		
-		INTCON3bits.INT3IF = 0;
-	}
-
-	// ***********************************************************************************************************		
-	if ( (INTCONbits.INT0IF == 1) && (INTCONbits.INT0IE == 1) )
-	{
-		while (RB0_SWITCH == 0);
-		
-		FlagBits.bReadInc = 1;
-		INTCONbits.INT0IF = 0;
-		LED_0 = !LED_0;
-	}
-
-	// ***********************************************************************************************************		
-	if ( (INTCONbits.TMR0IF == 1) && (INTCONbits.TMR0IE == 1) )		// Avstudsare för PIN-pad
-	{
-		INTCONbits.TMR0IF = 0;
- 		CloseTimer0();
-		LED_0 = !LED_0;
-	}
-
-	// ***********************************************************************************************************		
-	// IRQ var 6.56ms
-	if ( (PIR1bits.TMR2IF == 1) && (PIE1bits.TMR2IE == 1) )
-	{
-		LED_7 = ACC_IRQ;
-
-		LED_1 = !LED_1;
-		PIR1bits.TMR2IF = 0;
-
-		nTimeOutUSART_1++;
-		nTimeOutUSART_2++;
-
-		if ((nTimeOutUSART_1 >= 3) && (nByte_1 != 0) )
-		{
-			FlagBits.bReceived_1 = 1;
-			nByte_1 = 0;
-		}
-
-		if ( (nTimeOutUSART_2 >= 3) && (nByte_2 != 0) )
-		{
-			FlagBits.bReceived_2 = 1;
-			nByte_2 = 0;
-		}
-	}
-
-	// ***********************************************************************************************************		
-	if ( (PIR2bits.TMR3IF == 1) && (PIE2bits.TMR3IE == 1) )			// TICK
-	{
-		PIR2bits.TMR3IF = 0;
-		WriteTimer3(0x0C00);	// 200ms
-		nCountToFive++;
-		if (nCountToFive > 4)
-		{
-			LED_3 = !LED_3;		// 200 x 5 = 1000ms
-			nCountToFive = 0;
-		}	
-
-		if (SEND_NMEA_0 == 1)
-		{
-			FlagBits.bNMEA = 1;
-			LED_4 = 1;
-			LED_5 = 0;
-		}
-		else
-		{
-			FlagBits.bNMEA = 0;
-			LED_4 = 0;
-			LED_5 = 1;
-		}
-	}
-
-	// ***********************************************************************************************************		
-	if ( (PIR3bits.TMR4IF == 1) && (PIE3bits.TMR4IE == 1) )			// 6.5ms max, till vad?
-	{
-		CloseTimer4();
-		PIR3bits.TMR4IF = 0;
-
-		// LED_4 = !LED_4;
-	}
-		
-	// ***********************************************************************************************************		
-	// IRQ On Change
-	if 	( (INTCONbits.RBIE == 1) && (INTCONbits.RBIF == 1) )
-	{
-		nPortTmp = PORTB;
-		INTCONbits.RBIF = 0;
-		LED_7 = !LED_7;
-		FlagBits.bReadInc = 1;
-	}  
-}
-*/ 
 //----------------------------------------------------------------------------
 void SkrivBuffert(char *szUt, char nVal)
 {
@@ -321,184 +190,125 @@ void main(void)
 	FlagBits.bTimerIRQ = 0;
         
 	InitCPU();
+    OSCILLATOR_Initialize();  // VET EJ
 	
 	//RTC_ENABLE = 0;
+    
 
+    //LATAbits.LATA0 = 1; // 2.1 V 
+    LATAbits.LATA2 = 1; // 3.3 V   
+    
 	//Delay(100);
 	
-	INTCONbits.GIE = 0;		// Global
+	//INTCONbits.GIE = 0;		// Global
 
 	// **********************************************************************
  	TRISCbits.TRISC7 = 1;		// RX
 	TRISCbits.TRISC6 = 0;		// TX
 	
-	// 57600bps
-	Open1USART( USART_TX_INT_OFF &
-		USART_RX_INT_ON &
-		USART_ASYNCH_MODE &
-		USART_EIGHT_BIT &
-		USART_CONT_RX &
-		USART_BRGH_HIGH,
-		42 );				// HS      10MHz 
-//		16 );				// INTOSC  4MHz
+//---------------------------------------------------------------------------------------    
+    OpenSPI1(SPI_FOSC_16, MODE_11, SMPMID);     
 
-	BAUDCON1bits.BRG16 = 1;
+        ACC_ENABLE = 0; // CS dras låg
 
-	/*// 9600bps
-	Open2USART( USART_TX_INT_OFF &
-		USART_RX_INT_ON &
-		USART_ASYNCH_MODE &
-		USART_EIGHT_BIT &
-		USART_CONT_RX &
-		USART_BRGH_HIGH,
-		259);				// INTOSC  4MHz
-//		103);				// HS     10MHz
+        WriteSPI1(0x24);           // Skriv till 0x22 REG8 // CTRL_REG5 (0x24) 
+        WriteSPI1(0x80);           // Software Reset och Reboot (0x81) // BOOT (1000 0000) (0x80)
+        
+        Delay(100); // Viktigt att ha denna tillräckligt stor så att kretsen hinner starta om helt
+        
+        ToggleACC();
 
-	BAUDCON2bits.BRG16 = 1;
-*/
-    //Blink();
+        WriteSPI1(0x20);            // Skriv till CTRL_REG6_XL.. (0x20) // (CTRL_REG1) 
+        WriteSPI1(0x97);            // 0111 1000 vilket ger accelerometern hastigheten 238 Hz (0x98) // 1001 0111 (0x97)
+        Delay(100);
+        
+        ToggleACC();
+
+        WriteSPI1(0x8F);            // Läs från WHO_AM_I 
+        nTmp = MyReadSPI();         // Spara värdet i nTmp
+        ACC_ENABLE = 1;
+        CloseSPI1();
     
-	//lData = DoStartST_ACC();        // Kör itiieringen
-	
-	//Nop();
-	//sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LSM9DS1 Initiering:\r\n\r\n WHO AM I? \t0x%02X (0x68)\r\n\r\n", lData);
-	//SkrivBuffert(szUSART_Out, 1);
-   
+        RED_LED = 1;
+        Delay(300);                 // Tänd  
+        RED_LED = 0;
+        
     
-//    OpenSPI(SPI_FOSC_4, MODE_11, SMPMID);
-//    Delay(1);
-//    ACC_ENABLE = 0;
-//    Delay(1);
-//    SPI1_Exchange8bit(0x8F);
-//    lData = SPI1_Exchange8bit(0x00);
-//    sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LSM9DS1 läst med annan SPI funktion \r\n\r\n WHO AM I? \t0x%02X (0x68)\r\n\r\n", lData);
-//    SkrivBuffert(szUSART_Out, 1);
-//    Delay(1);
-//    ACC_ENABLE = 1;
-//    Delay(1);
-//    CloseSPI();
-    
-    
-    
-	FlagBits.bReadInc = 0;
-    /*
-	strcpypgm2ram(szUSART_Out, (const rom far char *)" NMEA Generator \r\n\r\n\r\n\r\n");
-	SkrivBuffert(szUSART_Out, 1);
-	
-	INTCONbits.GIE = 1;		// Global
-
-	strcpypgm2ram(szUSART_Out, (const rom far char *)"\r\n RV3049:\r\n\r\n");
-	SkrivBuffert(szUSART_Out, 1);
-
-
-	// Ställ in tid och datum enlig nedan, värdet är sparat sedan tidigare
-	lDefaultTid = 0x143000;
-	lDefaultDatum = 0x180302;
-
-	// Kontrollera om RTC:n behöver initieras om
-	nTmp = DoCheckRV3049Start();
-	
-	Nop();
-	Nop();
-	
-	//if ( (nTmp & 0x20) != 0)	// PON = bit 5 = 0x20
-	{
-		DoInitRV3049();
-	
-		lGPSTid = lDefaultTid;
-		lGPSDatum = lDefaultDatum;
-		DoSetTimeRV3049();
-	}
-
-	// En läsning måste göras för att få igång klockan
-	DoReadRTC();
-	DoResetRTC_INT();
-
-	FlagBits.bTimerIRQ = 0;
-    
-//  lData = DoStartADXL362();
-//  nLo = (lData & 0x000000FF);		// REVID
-//	lData >>= 8;
-//	nMLo = (lData & 0x000000FF);	// PARTID
-//	lData >>= 8;
-//	nMHi = (lData & 0x000000FF);	// DEVID_MST
-//	lData >>= 8;
-//	nHi = (lData & 0x000000FF);		// DEVID_AD
-	*/
-	Nop();
-
+    // Testkod för att se så att kretsen gör som den ska och fungerar 
     while (0)
-    {     
+    {
         
         // ---------- Läs från Accelerometern ----------------------------------
-        OpenSPI1(SPI_FOSC_4, MODE_11, SMPMID);
-         
-        lData = DoStartST_ACC();        // Kör itiieringen
-
-        Nop();
-        sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LSM9DS1 Initiering:\r\n\r\n WHO AM I? \t0x%02X (0x68)\r\n\r\n", lData);
-        SkrivBuffert(szUSART_Out, 1);
-
-        Delay(1);
         ACC_ENABLE = 0;
+        OpenSPI1(SPI_FOSC_16, MODE_11, SMPMID);   
         Delay(1);
-
-        MyWriteSPI(0xA8);       // Läs från adress 0x15 "OUT_X_L_XL", data läses automatiskt ut i en linjär rörelse
-
+        WriteSPI1(0xA8);       //(0xA8) Läs från adress 0x28 "OUT_X_L", data läses automatiskt ut i en linjär rörelse, bit 0 & 1 måste vara satta
         X_L = MyReadSPI();		// Data skickas sedan till TempL
+        
+        RED_LED = 1; Delay(5);
+        RED_LED = 0;
+        
+        WriteSPI1(0xA9);
         X_H = MyReadSPI();
-
-        Y_L = MyReadSPI();		// Data skickas sedan till TempL
-        Y_H = MyReadSPI();
-
-        Z_L = MyReadSPI();		// Data skickas toll Z_L och Z_H
-        Z_H = MyReadSPI();
 
         ACC_ENABLE = 1;
         CloseSPI1();
         
         // Räkna ut accelerometerdatan, klumpa ihop de lägre bitarna med de högre
         xVal = AccDataCalc(X_L, X_H);
-        yVal = AccDataCalc(Y_L, Y_H);
-        zVal = AccDataCalc(Z_L, Z_H);
 
-        // Skriver ut antalet x,y,z för hur stort utslag de har.
-//        PrintAccData(xVal, "x");
-//        PrintAccData(yVal, "x");
-//        PrintAccData(zVal, "x");
-        
-        // Delar alla värden med 100 för att kunna visa data på skärmen lite enklare
         xVal_100 = xVal / 100;
-        yVal_100 = yVal / 100;
-        zVal_100 = zVal / 100;
 
-        // Skriv ut ett antal "X" på skärmen som motsvarar absolutbeloppett av värdet på X-axeln delat på 100
-//        for (nHi = 0; xVal_100 > nHi; nHi++)
-//        {
-//            printf(szUSART_Out, (const rom far char *)"X"); // Utskrift på skärmen
-//            SkrivBuffert(szUSART_Out, 1);
-//        }
-//        
-//         for (nHi = 0; yVal_100 > nHi; nHi++)
-//        {
-//            printf(szUSART_Out, (const rom far char *)"Y"); // Utskrift på skärmen
-//            SkrivBuffert(szUSART_Out, 1);
-//        }
-//        
-//         for (nHi = 0; zVal_100 > nHi; nHi++)
-//        {
-//            printf(szUSART_Out, (const rom far char *)"Z"); // Utskrift på skärmen
-//            SkrivBuffert(szUSART_Out, 1);
-//        }
+        GREEN_LED = 1; Delay(5); 
+        GREEN_LED = 0;
+    } 
+       
+       while(1) { 
+        // --------- Läs från radion: ------------------------------------------
         
-        //Skriver ut X, Y och Z med deras värden
-        sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n X \t %04d \r\n Y \t %04d \n\r Z \t %04d \r\n\r\n", 
-                xVal, yVal, zVal); // Utskrift på skärmen
-        SkrivBuffert(szUSART_Out, 1);
+        // Startar TCXO
+        //TCXO_EN = 1;
+        //LATCbits.LATC7 = 1;
+        GPIO_RC1 = 1;
+        Delay(3);
+        OpenSPI1(SPI_FOSC_4, MODE_00, SMPEND);
+        
+        DoResetRadio();
+        
+        DoCheckCTSManyTimes();
+        
+        DoStartRadio();
+        
+        DoCheckCTSManyTimes();
+         
+        // ----- Kör en läsning av info ----
+        ToggleRadio();
+        
+        WriteSPI1(0x01);       
+        
+        RADIO_EN = 1;
+        Delay(1);
+        
+        nTmp = DoCheckCTSManyTimes();
+        
+        if (nTmp == 0xFF)   // Om CTS är hög är allting rätt
+        {
+            CTS_OK = 1;     // Kollar så att CTS är ok
+            nLoop = 0;
+            while (nLoop < 8)
+            {
+                szData[nLoop] = MyReadSPI();
+                nLoop++;
+            }	
+        }		
+        
+        RADIO_EN = 1;
         
         CloseSPI1();
+        RED_LED = 1; Delay(10); 
+        RED_LED = 0;
         
-        
+    }  
         // --------- Läs från radion: ------------------------------------------
         OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);
         
@@ -538,22 +348,26 @@ void main(void)
         
         for (i=0; i<nLoop; i++)     // Skriv ut utläst data från PART_INFO
         {
-            sprintf(szUSART_Out, (const rom far char *)"Index %d - %02X \r\n ", i, szData[i]); // Visar part_info
-            SkrivBuffert(szUSART_Out, 1);
+        //    sprintf(szUSART_Out, (const rom far char *)"Index %d - %02X \r\n ", i, szData[i]); // Visar part_info
+        //    SkrivBuffert(szUSART_Out, 1);
         }
-        sprintf(szUSART_Out, (const rom far char *)"\r\n");     //Lägger in lite radbrytningar
-        SkrivBuffert(szUSART_Out, 1);
+        //sprintf(szUSART_Out, (const rom far char *)"\r\n");     //Lägger in lite radbrytningar
+        //SkrivBuffert(szUSART_Out, 1);
         
-        Blink();
-    }       
+        //Blink1();
+    
+    
+
     i=0;
+    
+    
     while(1)
     {
         
     // Kod till I2C accelerometern:
     SSP1ADD = 0x18;
     
-    RTC_ENABLE = 1;     // För att se på skåpet
+    //RTC_ENABLE = 1;     // För att se på skåpet
     
     OpenI2C(MASTER, SLEW_ON); 
     
@@ -627,170 +441,11 @@ void main(void)
     
     CloseI2C();
     
-    RTC_ENABLE = 0;
+    //RTC_ENABLE = 0;
     
-	Blink();
+	Blink1();
     i++;
    
     }
-    
-	nTmp = DoReadRTC();
-	if (nTmp != 0)
-	{
-		Nop();
-
-		// Initiera om klockan
-		DoInitRV3049();
-	}
-
-	Nop();
-
-	// Sätt klockticket
-	nTICK = 8;
-	DoChangeTickRV3049(nTICK);
-
-	// Ställ in tid och datum enlig nedan
-	lGPSTid = 0x133030;
-	lGPSDatum = 0x180308;
-
-	Nop();
-	Nop();
-
-	DoSetTimeRV3049();
-
-	// Kontroll
-	nTmp = DoReadRTC();
-	Delay(1000);
-	nTmp = DoReadRTC();
-
-	// DoResetRTC_INT();
-	FlagBits.bTimerIRQ = 0;
-	nLoop = 0;
-	nTICK = 2;
-	//while (1)
-	{	
-		if (FlagBits.bTimerIRQ == 1)
-		{
-			// Interrupt-flaggorna blir lästa och clearade i DoReadRTC()
-			LED_0 = 1;
-//			DoReadRTC();
-			
-			// Interrupt-flaggorna clearas i DoResetRTC_INT()
-			// DoResetRTC_INT();
-			FlagBits.bTimerIRQ = 0;
-			
-			nLoop++;
-			if ( (nLoop % 5) == 0)
-			{
-				nLoop = 0;
-				DoChangeTickRV3049(nTICK);
-				nTICK += 2;
-				if (nTICK > 12)
-				{
-					nTICK = 2;
-				}	
-			} 
-
-			lData = DoReadInc();
-
-			nLo = (lData & 0x000000FF);		// X
-			lData >>= 8;
-			nMLo = (lData & 0x000000FF);	// Y
-			lData >>= 8;
-			nMHi = (lData & 0x000000FF);	// Z
-
-			sprintf(szUSART_Out, (const rom far char *)" %3d\t%3d\t%3d\t%d\r\n\r\n", (signed char)nLo, (signed char)nMLo, (signed char)nMHi, (char)FlagBits.bToggle);
-			SkrivBuffert(szUSART_Out, 1);
-
-			FlagBits.bToggle = !FlagBits.bToggle;
-		}	
-		
-		Nop();
-		Nop();
-	}
-
-	Delay(1000);
-    LATDbits.LATD4 = 1;
-                                        // ÄNTRAT Kommenterat bort allt som har med NMEA att göra
-    /*
-	FlagBits.AllMyFlags	= 0L;
-	FlagBits.bPassThrough = 0;
-	FlagBits.bNMEA = 0;
-	FlagBits.bNMEA_OFF_Once = 0;
-	FlagBits.bNMEA_ON_Once = 0;
-	nCountToFive = 0;
-
-	while (1)
-	{
-		if (FlagBits.bReadInc == 1)
-		{
-			FlagBits.bReadInc = 0;
-			lData = DoReadInc();
-
-			nLo = (lData & 0x000000FF);		// X
-			lData >>= 8;
-			nMLo = (lData & 0x000000FF);	// Y
-			lData >>= 8;
-			nMHi = (lData & 0x000000FF);	// Z
-
-			sprintf(szUSART_Out, (const rom far char *)"%3d\t%3d\t%3d\t%d\t", (signed char)nLo, (signed char)nMLo, (signed char)nMHi, (char)FlagBits.bToggle);
-			SkrivBuffert(szUSART_Out, 1);
-			
-			FlagBits.bToggle = !FlagBits.bToggle;
-		}	
-		
-		if (FlagBits.bReceived_1 == 1)
-		{
-			FlagBits.bReceived_1 = 0;
-			nByte_1 = 0;
-
-			if (FlagBits.bNMEA == 1) 
-			{
-				RCSTA2bits.SPEN = 1;		// USART2
-				TRISGbits.TRISG1 = 0;		// RX
-
-				SkrivBuffert(szUSART_1, 2);
-			}
-			else
-			{
-				RCSTA2bits.SPEN = 0;		// USART2
-				TRISGbits.TRISG1 = 1;		// RX
-			}					
-		}
-
-		if (FlagBits.bReceived_2 == 1)
-		{
-			FlagBits.bReceived_2 = 0;
-			nByte_2 = 0;
-		}	
-
-		if ( (FlagBits.bNMEA == 1) && (FlagBits.bNMEA_ON_Once == 0) )
-		{
-			FlagBits.bNMEA_ON_Once = 1;
-			FlagBits.bNMEA_OFF_Once = 0;
-
-			RCSTA2bits.SPEN = 1;		// USART2
-			TRISGbits.TRISG1 = 0;		// RX
-
-			strcpypgm2ram(szUSART_Out, (const rom far char *)" RUN\r\n\r\n");
-			SkrivBuffert(szUSART_Out, 1);
-			Delay(500);		
-		}
-		
-		if ( (FlagBits.bNMEA == 0) && (FlagBits.bNMEA_OFF_Once == 0) )
-		{
-			FlagBits.bNMEA_OFF_Once = 1;
-			FlagBits.bNMEA_ON_Once = 0;
-
-			RCSTA2bits.SPEN = 0;		// USART2
-			TRISGbits.TRISG1 = 1;		// RX
-
-			strcpypgm2ram(szUSART_Out, (const rom far char *)" WAIT\r\n\r\n");
-			SkrivBuffert(szUSART_Out, 1);
-			Delay(500);
-		}					
-
-		Nop();
-		Nop();
-     */
+//    
 }	

@@ -28,7 +28,7 @@ long int DoReadInc(void)
 
 	OpenSPI(SPI_FOSC_16, MODE_11, SMPMID);	// Farten minskad för att försäkra sig om att skrivinstruktionen ska gå fram (0x03)
 	
-	ACC_ENABLE = 0;
+	//ACC_ENABLE = 0;
 
 	Nop(); Nop(); Nop();
 
@@ -38,7 +38,7 @@ long int DoReadInc(void)
 	nY = MyReadSPI();
 	nZ = MyReadSPI();
 
-	ACC_ENABLE = 1;
+	//ACC_ENABLE = 1;
 
 	CloseSPI();
 	
@@ -68,7 +68,7 @@ char DoStartST_ACC(void)
 	ACC_ENABLE = 0; // CS dras låg
     
     //Delay(1);
-	
+	Blink2;
 	MyWriteSPI(0x22);		// Skriv till 0x22 REG8
 	MyWriteSPI(0x81);		// Software Reset och Reboot
     Delay(1);
@@ -93,6 +93,7 @@ char DoStartST_ACC(void)
     //FlagBits.bSPIbusy = 0;
 
 	return lReturn;
+   
 }
 // AccWrite = 0x0A, AccRead = 0x0B, Fifo = 0x0D;
 
@@ -156,3 +157,64 @@ char DoStartST_ACC(void)
 // CKP = 1 = Idle state for clock is a high level
 // CKE = 1 = Transmit occurs on transition from active to Idle clock state
 // -----------------------------------------------------------------------------
+
+
+
+
+//      Y_L = MyReadSPI();		// Data skickas sedan till TempL
+//      Y_H = MyReadSPI();
+//
+//      Z_L = MyReadSPI();		// Data skickas toll Z_L och Z_H
+//      Z_H = MyReadSPI();
+
+//        ACC_ENABLE = 1;
+//        CloseSPI1();
+        
+        // Räkna ut accelerometerdatan, klumpa ihop de lägre bitarna med de högre
+//        xVal = AccDataCalc(X_L, X_H);
+//        yVal = AccDataCalc(Y_L, Y_H);
+//        zVal = AccDataCalc(Z_L, Z_H);
+
+        // Skriver ut antalet x,y,z för hur stort utslag de har.
+//        PrintAccData(xVal, "x");
+//        PrintAccData(yVal, "x");
+//        PrintAccData(zVal, "x");
+        
+        // Delar alla värden med 100 för att kunna visa data på skärmen lite enklare
+//        xVal_100 = xVal / 100;
+//        yVal_100 = yVal / 100;
+//        zVal_100 = zVal / 100;
+
+        // Skriv ut ett antal "X" på skärmen som motsvarar absolutbeloppett av värdet på X-axeln delat på 100
+//        for (nHi = 0; xVal_100 > nHi; nHi++)
+//        {
+//            printf(szUSART_Out, (const rom far char *)"X"); // Utskrift på skärmen
+//            SkrivBuffert(szUSART_Out, 1);
+//        }
+//        
+//         for (nHi = 0; yVal_100 > nHi; nHi++)
+//        {
+//            printf(szUSART_Out, (const rom far char *)"Y"); // Utskrift på skärmen
+//            SkrivBuffert(szUSART_Out, 1);
+//        }
+//        
+//         for (nHi = 0; zVal_100 > nHi; nHi++)
+//        {
+//            printf(szUSART_Out, (const rom far char *)"Z"); // Utskrift på skärmen
+//            SkrivBuffert(szUSART_Out, 1);
+//        }
+        
+        //Skriver ut X, Y och Z med deras värden
+        //sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n X \t %04d \r\n Y \t %04d \n\r Z \t %04d \r\n\r\n", 
+        //        xVal, yVal, zVal); // Utskrift på skärmen
+        //SkrivBuffert(szUSART_Out, 1);
+//            for (i=0; i<xVal; i++){
+//                GREEN_LED = 0; Delay(20);
+//                GREEN_LED = 1; Delay(20);
+//                GREEN_LED = 0; Delay(20);
+//                GREEN_LED = 1; Delay(20);
+//            }
+//Blink2();
+  //sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LSM9DS1 Initiering:\r\n\r\n WHO AM I? \t0x%02X (0x68)\r\n\r\n", lData);
+        //SkrivBuffert(szUSART_Out, 1);
+

@@ -2,12 +2,8 @@
 \rule{\textwidth}{0.3pt}
 \vspace{10ex}
  % after-code
+What is the step after the \gls{PCB} is produced? Yes it is time to program the system. This chapter will guide the reader through this process of setting up the processor to run program code. How all the components are programmed and tested will be explained in this chapter. 
 
-\section{Software implementation} %% Ändra denna
-%% Radio
-
-Radio Chip Waking Up First,  the  radio  is  in  the  off  state. After  the  SDN  pin  is  pulled  low,  the  radio  wakes  up  and  performs  a  Power  on.
-Reset  which  takes  a  maximum  of  6 ms  (900 $\mu$ s  typical  at  room  temperature)  until  the  chip  is  ready  to  receive commands on the SPI bus. The GPIO1 pin goes high when the radio is ready for receiving SPI commands. During the reset period, the radio cannot accept any SPI commands. 
 
 %% MCU
 %\subsubsubsection{Programming}
@@ -18,3 +14,10 @@ In start of every embedded system the processor have to be programmed. Here the 
 \subsection{Software implementation}
 The processor do not start up on it own, much consideration needs in making right initzilation and configure it right. A source voltage is supplied to the processor to get it to operate. There are some initial registers that needs to be set in order to inintialize and start the processor. This varies between different processors and models and is different for applications and systems. These registers contain information about the speed of the processor.    
 
+
+\section{Radio implementation} %% Radio
+
+
+
+Radio Chip Waking Up First,  the  radio  is  in  the  off  state. After  the  SDN  pin  is  pulled  low,  the  radio  wakes  up  and  performs  a  Power  on.
+Reset  which  takes  a  maximum  of  6 ms  (900 $\mu$ s  typical  at  room  temperature)  until  the  chip  is  ready  to  receive commands on the SPI bus. The GPIO1 pin goes high when the radio is ready for receiving SPI commands. During the reset period, the radio cannot accept any SPI commands. 

@@ -3,19 +3,28 @@
 \rule{\textwidth}{0.3pt}
 \vspace{10ex}
  % after-code
- 
+A deeper look into each component with some information of their functionality and implementation will be presented in this chapter. Why some specific components are chosen is also aswered here. 
 
-\section{Layout}
-To get a 4 layer board some inintial rules needs to be setup. These parameters are set by the board manufactuer. The minimum measurements are presented in \autoref{PCB_param}
 
-One is the width of the traces. minimum of 6 mils, which equals of 0,1524mm. 
-Via diameter: 10
+\section{Layout parameters}
+
+When starting the layour some inintial rules needs to be setup. These parameters are set by the board manufactuer.
+The design can be produced at different places but when ordering from this manufacturer the constrains that is used is the same parameters that the supplier uses as their standard.
+These rules and constrains may differ from one supplier to another but as the company already this supplier the same will be used for this project.
+Naturally for this project the minimum spaces and distances that does not make for a supplement charge are chosen as the design rules. A list of these parameters can be seen in  autoref{PCB_param}
+
+\begin{itemize}
+\item Trace width: minimum of 6 mils (0,1524mm) 
+\item Via diameter: 10 mils
+\item Via diameter: 10 mils
+
+\end{itemize}
  
 \subsection{Landgrid}
 The industry standard is always good to aim for, in this case the basic designs are taken from \gls{ipcg}'s design guidline\cite{ipcg}. Whilest these are made for optimal manufacturability the footprints used on the testboard are modified to enable for easier solderability, production and rework if needed. The land grids are made slightly bigger and longer to acheive this. The downside of making the pads larger is that the final board size increases and therefore the size of the land grids requires to be reduced.
 
 \subsection{Easy prototyping}
-The components that going to be used in high frequency often comes in tiny packages. This gives the protypability problems with easy ability to solder and use, but the problem is that the best components used in this area of work will be small to fit in small advanced systems. To make a
+The components that are going to be used in high frequency often comes in tiny packages. This gives the protypability problems with easy ability to solder and use, but the problem is that the best components used in this area of work will be small to fit in small advanced systems. To make a
 
 \section{Structure}
 The product is constructed with a number of components, which all have a central role of the final product. They can all be seen in \autoref{fig:sys_dia}. A list of the major components and their function can be seen below:

@@ -14,118 +14,50 @@
 // -----------------------------------------------------------------------------
 void InitCPU(void)
 {
-	// Endast digitala ingångar nu
-	//ANCON0 = 0xFF;                                    ÄNDRAT
-	//ANCON1 = 0xFF;
-
+	
     //18F46k22
     //Digitala ingångar
     
     // TRIS sätter riktning på datan
-    // 1 Output
-    // 0 Input
+    // 0 Output
+    // 1 Input
     
     //LAT sätter pullup eller pulldown
     // 1 Pullup till Vdd
     // 0 Pulldown till Jord
     
-    ANSELA = 0x00;  // Sätter om alla pinnar till digitala istället för det initialt analoga
+    // Endast digitala ingångar nu, Sätter om alla pinnar till digitala istället för det initialt analoga
+    ANSELA = 0x00;
     ANSELB = 0x00;
     ANSELC = 0x00;
     ANSELD = 0x00;
+    ANSELE = 0x00;
     
     // Sätter voltage supply på utgångar på processorn
-    LATCbits.LATC0 =  0;     // Sätter upp C0 som latch
-    LATCbits.LATC1 =  0;     // Sätter upp C1 som latch 
-    TRISCbits.RC0 = 0;      // Sätter RC0 som utgång
-    TRISCbits.RC1 = 0;      // Sätter RC1 som utgång
+    //LATCbits.LATC0 =  0;     // Sätter upp C0 som latch
+    //LATCbits.LATC1 =  0;     // Sätter upp C1 som latch 
+    //TRISCbits.RC0 = 0;      // Sätter RC0 som utgång
+    //TRISCbits.RC1 = 0;      // Sätter RC1 som utgång
     
     
-	PORTA = 0b00000000;
-	TRISA = 0b11100011;
-	LATA  = 0b00011000;
+	//PORTA = 0b00000000;
+	TRISA = 0b00000000; // 0b11100011;
+	LATA  = 0b11100000; //0b00011000
 	
 	PORTB = 0b00000000;
 	TRISB = 0b00011011;
     
-    LATE  = 0b00000111; // Sätter CS kontakterna först, drar de normalt höga
+    TRISC = 0b00000001; // RC3,RC4 & RC5 SPI // RC6 & RC7 TX/RX //RC2 SDN_RADIO
+	LATC  = 0b00000000; // 
+    
+    //PORTE = 0b00000000; // 
+    LATE  = 0b10000000; // Alla dras låga av pulldown
 	TRISE = 0b00000000; // Alla är utgångar
 
 	LATD  = 0b00000000;	
 	TRISD = 0b00000000; 	// LEDar, alla ut
 
-//	LATF  = 0b00010000;		// RF4=MEMORY_ENABLE_0      ÄNDRAT
-//	TRISF = 0b10000000;
-//	LATF  = 0b00000100;	
-//	TRISF = 0b00000010;
 
-//	TRISG = 0b00000101; 
-//	LATG  = 0b00000010;
-
-//	TRISH = 0b00000100; 
-//	LATH  = 0b00000010;
-
-//	PORTJ = 0b00000000;
-//	TRISJ = 0b11110000;
-//	LATJ  = 0x00;
-
-	// -------------------------------
-	
-//	MEMCONbits.EBDIS = 1;
-
-	// PIC18F87J11
-	// ********************************************************************************
-	// ADCON1bits.PCFGn styr AD-kanalerna (bl.a. PORTH.7.6.5.4 är ANALOGA ingångar default)
-	// Endast digitala ingångar nu
-	/*ANCON0 = 0xFF;
-	ANCON1 = 0xFF;
-
-	// Voltage Reference Configuration Bits
-	ADCON0bits.VCFG1 = 0;	// VDD och VSS
-	ADCON0bits.VCFG0 = 0;
-	ADCON0bits.ADON  = 0;
-	
-	// Högerjusterat
-	ADCON1bits.ADFM  = 1;	
-	ADCON1bits.ADCAL = 0;	
-
-	// AD Acquisition Time Select Bits
-	ADCON1bits.ACQT2 = 1;	// 8 Tad
-	ADCON1bits.ACQT1 = 0;
-	ADCON1bits.ACQT0 = 0;
-
-	// AD Conversion Clock Select Bits
-	ADCON1bits.ADCS2 = 1;	// Fosc/16
-	ADCON1bits.ADCS1 = 0;
-	ADCON1bits.ADCS0 = 1;
-*/
-	// PIC18F8722
-	// ********************************************************************************
-	// ADCON1bits.PCFGn styr AD-kanalerna (bl.a. PORTH.7.6.5.4 är ANALOGA ingångar default)
-	// Mätning på AN_MUX_OUT_0 (AN0) och AN_MUX_OUT_1 (AN1)
-	// Endast digitala ingångar nu
-/*	ADCON1bits.PCFG3 = 1;	// 
-	ADCON1bits.PCFG2 = 1; 	// 0;
-	ADCON1bits.PCFG1 = 1;	// 0;
-	ADCON1bits.PCFG0 = 1;
-
-	// Voltage Reference Configuration Bits
-	ADCON1bits.VCFG1 = 0;	// VDD och VSS
-	ADCON1bits.VCFG0 = 0;
-	
-	// AD Conversion Clock Select Bits
-	ADCON2bits.ADCS2 = 1;	// Fosc/16
-	ADCON2bits.ADCS1 = 0;
-	ADCON2bits.ADCS0 = 1;
-
-	// AD Acquisition Time Select Bits
-	ADCON2bits.ACQT2 = 1;	// 8 Tad
-	ADCON2bits.ACQT1 = 0;
-	ADCON2bits.ACQT0 = 0;
-
-	// Högerjusterat
-	ADCON2bits.ADFM  = 1;	
-*/
     /*
 	// IRQ ---------------------------
 	RCONbits.IPEN = 0;		// Ingen prioritering av IRQ
@@ -160,11 +92,12 @@ void InitCPU(void)
 	// Timer4: Test						6.5ms intervall
 */
     
+    
 	OpenTimer2(TIMER_INT_ON & T2_PS_1_16 & T2_POST_1_16);	// 6.5ms
 	WriteTimer2(0);
 	PR2 = 0xFF;
 	PIR1bits.TMR2IF = 0;
-
+/*
 //	OpenTimer3(TIMER_INT_ON & T3_16BIT_RW & T3_SOURCE_INT & T3_PS_1_8);
 //	WriteTimer3(0x7FFF);	// 1 sekund
 //	WriteTimer3(0xBFFF);	// 500ms
@@ -194,8 +127,18 @@ void InitCPU(void)
 	nTimeOutUSART_2 = 0;
 	nByte_2 = 0;
 	szUSART_2[0] = '\0';
+     */
 }
 
+void OSCILLATOR_Initialize(void)    // ?
+{
+    // SCS FOSC; IRCF 1MHz_HFINTOSC/16; IDLEN disabled; 
+    OSCCON = 0x30;
+    // PRISD enabled; SOSCGO disabled; MFIOSEL disabled; 
+    OSCCON2 = 0x04;
+    // INTSRC disabled; PLLEN disabled; TUN 0; 
+    OSCTUNE = 0x00;
+}
 // ------------------------------------------------------------------------------------------------------------------
 // Returnerar veckodag, 0=söndag, 1=måndag, 2=tisdag osv.
 int dow(int y, int m, int d)  /* 1 <= m <= 12, y > 1752 */
@@ -284,8 +227,8 @@ void Delay(unsigned int nDelay)
 	
 	for (nLoop0 = 0; nLoop0 < nDelay; nLoop0++)
 	{
-		for (nLoop1 = 0; nLoop1 < 250; nLoop1++);	// HS
-//		for (nLoop1 = 0; nLoop1 < 99; nLoop1++);	// INTOSC
+	//	for (nLoop1 = 0; nLoop1 < 250; nLoop1++);	// HS
+		for (nLoop1 = 0; nLoop1 < 99; nLoop1++);	// INTOSC
 	}	
 }
 
@@ -313,7 +256,7 @@ signed int AccDataCalc(unsigned char val_L, unsigned char val_H)
 //}
 
 // -----------------------------------------------------------------------------
-void Blink(void)
+void Blink1(void)
 {
     LATDbits.LATD0 = 1;
     Delay(100);
@@ -346,6 +289,26 @@ void Blink(void)
     LATDbits.LATD6 = 0;
     Delay(100);
     LATDbits.LATD7 = 0;
+}
+
+// ----------------------------------------------------------------------------
+void Blink2(void) {
+    GREEN_LED = 1; Delay(12);
+        
+    RED_LED = 1;    Delay(12); 
+         
+    GREEN_LED = 0;  Delay(12);
+        
+    RED_LED = 0;    Delay(32);
+        
+    RED_LED = 1;    Delay(12);
+        
+    GREEN_LED = 1;  Delay(12);
+      
+    RED_LED = 0;    Delay(12);
+       
+    GREEN_LED = 0;  Delay(72); 
+        
 }
 
 // -----------------------------------------------------------------------------
@@ -398,3 +361,384 @@ void Blink(void)
 60	01 10 00 00
 50	01 01 00 00
 */
+
+
+
+// -----------------------------------------------------------------------------
+//char DoResetRTC_INT(void);
+
+/*// -----------------------------------------------------------------------------
+#pragma code HighVector=0x0008
+
+void atHighVector (void)
+{
+	_asm goto HandleIRQ _endasm
+}
+
+#pragma code
+
+#pragma interrupt HandleIRQ
+
+/*
+void HandleIRQ(void)
+{
+	unsigned char nLoop, nPortTmp, nIn;
+	
+	// ***********************************************************************************************************
+	if (RCSTA1bits.OERR == 1)	// OverRunError
+	{	
+		RCSTA1bits.CREN = 0;
+		RCSTA1bits.CREN = 1;
+	}
+
+	if (RCSTA1bits.FERR == 1)	// FramingError
+	{
+		nPortTmp = getc1USART();
+	}
+
+	if ( (PIE1bits.RC1IE == 1) && (PIR1bits.RC1IF == 1)	)	// Serie Interrupt från USART 1
+	{
+		nIn = getc1USART();
+
+		if (FlagBits.bPassThrough == 1)
+		{
+			if (!Busy2USART())
+			{
+				putc2USART(nIn);
+			}
+		}	
+
+		szUSART_1[nByte_1] = nIn;
+		if (nByte_1 < 510)			// Max 512 tecken
+		{
+			nByte_1++;
+		}
+
+		// Underlättar läsning av text-strängar			
+		szUSART_1[nByte_1] = '\0';
+		
+		nTimeOutUSART_1 = 0;
+	}
+
+	// ***********************************************************************************************************		
+	if (RCSTA2bits.OERR == 1)	// OverRunError
+	{
+		RCSTA2bits.CREN = 0;		
+		RCSTA2bits.CREN = 1;
+	}
+
+	if (RCSTA2bits.FERR == 1)	// OverRunError
+	{
+		nPortTmp = getc2USART();
+	}
+
+	if ( (PIE3bits.RC2IE == 1) && (PIR3bits.RC2IF == 1) )		// Serie Interrupt från USART 2
+	{
+		nIn = getc2USART();
+
+		if (FlagBits.bPassThrough == 1)
+		{
+			if (!Busy1USART())
+			{
+				putc1USART(nIn);
+			}
+		}	
+		
+		szUSART_2[nByte_2] = nIn;
+		if (nByte_2 < 254)			// Max 256 tecken
+		{
+			nByte_2++;
+		}		
+
+		// Underlättar läsning av text-strängar			
+		szUSART_2[nByte_2] = '\0';
+		
+		nTimeOutUSART_2 = 0;
+	}
+	
+
+	// ***********************************************************************************************************		
+	if ( (INTCON3bits.INT3IF == 1) && (INTCON3bits.INT3IE == 1) )
+	{
+		LED_6 = !LED_6;
+
+//		DoResetRTC_INT();
+
+		FlagBits.bTimerIRQ = 1;
+		// FlagBits.bReadInc = 1;
+		
+		INTCON3bits.INT3IF = 0;
+	}
+
+	// ***********************************************************************************************************		
+	if ( (INTCONbits.INT0IF == 1) && (INTCONbits.INT0IE == 1) )
+	{
+		while (RB0_SWITCH == 0);
+		
+		FlagBits.bReadInc = 1;
+		INTCONbits.INT0IF = 0;
+		LED_0 = !LED_0;
+	}
+
+	// ***********************************************************************************************************		
+	if ( (INTCONbits.TMR0IF == 1) && (INTCONbits.TMR0IE == 1) )		// Avstudsare för PIN-pad
+	{
+		INTCONbits.TMR0IF = 0;
+ 		CloseTimer0();
+		LED_0 = !LED_0;
+	}
+
+	// ***********************************************************************************************************		
+	// IRQ var 6.56ms
+	if ( (PIR1bits.TMR2IF == 1) && (PIE1bits.TMR2IE == 1) )
+	{
+		LED_7 = ACC_IRQ;
+
+		LED_1 = !LED_1;
+		PIR1bits.TMR2IF = 0;
+
+		nTimeOutUSART_1++;
+		nTimeOutUSART_2++;
+
+		if ((nTimeOutUSART_1 >= 3) && (nByte_1 != 0) )
+		{
+			FlagBits.bReceived_1 = 1;
+			nByte_1 = 0;
+		}
+
+		if ( (nTimeOutUSART_2 >= 3) && (nByte_2 != 0) )
+		{
+			FlagBits.bReceived_2 = 1;
+			nByte_2 = 0;
+		}
+	}
+
+	// ***********************************************************************************************************		
+	if ( (PIR2bits.TMR3IF == 1) && (PIE2bits.TMR3IE == 1) )			// TICK
+	{
+		PIR2bits.TMR3IF = 0;
+		WriteTimer3(0x0C00);	// 200ms
+		nCountToFive++;
+		if (nCountToFive > 4)
+		{
+			LED_3 = !LED_3;		// 200 x 5 = 1000ms
+			nCountToFive = 0;
+		}	
+
+		if (SEND_NMEA_0 == 1)
+		{
+			FlagBits.bNMEA = 1;
+			LED_4 = 1;
+			LED_5 = 0;
+		}
+		else
+		{
+			FlagBits.bNMEA = 0;
+			LED_4 = 0;
+			LED_5 = 1;
+		}
+	}
+
+	// ***********************************************************************************************************		
+	if ( (PIR3bits.TMR4IF == 1) && (PIE3bits.TMR4IE == 1) )			// 6.5ms max, till vad?
+	{
+		CloseTimer4();
+		PIR3bits.TMR4IF = 0;
+
+		// LED_4 = !LED_4;
+	}
+		
+	// ***********************************************************************************************************		
+	// IRQ On Change
+	if 	( (INTCONbits.RBIE == 1) && (INTCONbits.RBIF == 1) )
+	{
+		nPortTmp = PORTB;
+		INTCONbits.RBIF = 0;
+		LED_7 = !LED_7;
+		FlagBits.bReadInc = 1;
+	}  
+}
+*/ 
+
+
+	// 57600bps
+	/*
+    Open1USART( USART_TX_INT_OFF &
+		USART_RX_INT_ON &
+		USART_ASYNCH_MODE &
+		USART_EIGHT_BIT &
+		USART_CONT_RX &
+		USART_BRGH_HIGH,
+		42 );				// HS      10MHz 
+//		16 );				// INTOSC  4MHz
+
+	BAUDCON1bits.BRG16 = 1;
+*/
+	/*// 9600bps
+	Open2USART( USART_TX_INT_OFF &
+		USART_RX_INT_ON &
+		USART_ASYNCH_MODE &
+		USART_EIGHT_BIT &
+		USART_CONT_RX &
+		USART_BRGH_HIGH,
+		259);				// INTOSC  4MHz
+//		103);				// HS     10MHz
+
+	BAUDCON2bits.BRG16 = 1;
+*/
+    //Blink1();
+    
+	//lData = DoStartST_ACC();        // Kör itiieringen
+	
+	//Nop();
+	//sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LSM9DS1 Initiering:\r\n\r\n WHO AM I? \t0x%02X (0x68)\r\n\r\n", lData);
+	//SkrivBuffert(szUSART_Out, 1);
+   
+    
+//    OpenSPI(SPI_FOSC_4, MODE_11, SMPMID);
+//    Delay(1);
+//    ACC_ENABLE = 0;
+//    Delay(1);
+//    SPI1_Exchange8bit(0x8F);
+//    lData = SPI1_Exchange8bit(0x00);
+//    sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LSM9DS1 läst med annan SPI funktion \r\n\r\n WHO AM I? \t0x%02X (0x68)\r\n\r\n", lData);
+//    SkrivBuffert(szUSART_Out, 1);
+//    Delay(1);
+//    ACC_ENABLE = 1;
+//    Delay(1);
+//    CloseSPI();
+    
+    
+    
+	//FlagBits.bReadInc = 0;
+    /*
+	strcpypgm2ram(szUSART_Out, (const rom far char *)" NMEA Generator \r\n\r\n\r\n\r\n");
+	SkrivBuffert(szUSART_Out, 1);
+	
+	INTCONbits.GIE = 1;		// Global
+
+	strcpypgm2ram(szUSART_Out, (const rom far char *)"\r\n RV3049:\r\n\r\n");
+	SkrivBuffert(szUSART_Out, 1);
+
+
+	// Ställ in tid och datum enlig nedan, värdet är sparat sedan tidigare
+	lDefaultTid = 0x143000;
+	lDefaultDatum = 0x180302;
+
+	// Kontrollera om RTC:n behöver initieras om
+	nTmp = DoCheckRV3049Start();
+	
+	Nop();
+	Nop();
+	
+	//if ( (nTmp & 0x20) != 0)	// PON = bit 5 = 0x20
+	{
+		DoInitRV3049();
+	
+		lGPSTid = lDefaultTid;
+		lGPSDatum = lDefaultDatum;
+		DoSetTimeRV3049();
+	}
+
+	// En läsning måste göras för att få igång klockan
+	DoReadRTC();
+	DoResetRTC_INT();
+
+	FlagBits.bTimerIRQ = 0;
+    
+//  lData = DoStartADXL362();
+//  nLo = (lData & 0x000000FF);		// REVID
+//	lData >>= 8;
+//	nMLo = (lData & 0x000000FF);	// PARTID
+//	lData >>= 8;
+//	nMHi = (lData & 0x000000FF);	// DEVID_MST
+//	lData >>= 8;
+//	nHi = (lData & 0x000000FF);		// DEVID_AD
+	*/
+	//Nop();
+    
+//DoStartST_ACC();        // Kör initieringen    
+
+                                      // ÄNTRAT Kommenterat bort allt som har med NMEA att göra
+    /*
+	FlagBits.AllMyFlags	= 0L;
+	FlagBits.bPassThrough = 0;
+	FlagBits.bNMEA = 0;
+	FlagBits.bNMEA_OFF_Once = 0;
+	FlagBits.bNMEA_ON_Once = 0;
+	nCountToFive = 0;
+
+	while (1)
+	{
+		if (FlagBits.bReadInc == 1)
+		{
+			FlagBits.bReadInc = 0;
+			lData = DoReadInc();
+
+			nLo = (lData & 0x000000FF);		// X
+			lData >>= 8;
+			nMLo = (lData & 0x000000FF);	// Y
+			lData >>= 8;
+			nMHi = (lData & 0x000000FF);	// Z
+
+			sprintf(szUSART_Out, (const rom far char *)"%3d\t%3d\t%3d\t%d\t", (signed char)nLo, (signed char)nMLo, (signed char)nMHi, (char)FlagBits.bToggle);
+			SkrivBuffert(szUSART_Out, 1);
+			
+			FlagBits.bToggle = !FlagBits.bToggle;
+		}	
+		
+		if (FlagBits.bReceived_1 == 1)
+		{
+			FlagBits.bReceived_1 = 0;
+			nByte_1 = 0;
+
+			if (FlagBits.bNMEA == 1) 
+			{
+				RCSTA2bits.SPEN = 1;		// USART2
+				TRISGbits.TRISG1 = 0;		// RX
+
+				SkrivBuffert(szUSART_1, 2);
+			}
+			else
+			{
+				RCSTA2bits.SPEN = 0;		// USART2
+				TRISGbits.TRISG1 = 1;		// RX
+			}					
+		}
+
+		if (FlagBits.bReceived_2 == 1)
+		{
+			FlagBits.bReceived_2 = 0;
+			nByte_2 = 0;
+		}	
+
+		if ( (FlagBits.bNMEA == 1) && (FlagBits.bNMEA_ON_Once == 0) )
+		{
+			FlagBits.bNMEA_ON_Once = 1;
+			FlagBits.bNMEA_OFF_Once = 0;
+
+			RCSTA2bits.SPEN = 1;		// USART2
+			TRISGbits.TRISG1 = 0;		// RX
+
+			strcpypgm2ram(szUSART_Out, (const rom far char *)" RUN\r\n\r\n");
+			SkrivBuffert(szUSART_Out, 1);
+			Delay(500);		
+		}
+		
+		if ( (FlagBits.bNMEA == 0) && (FlagBits.bNMEA_OFF_Once == 0) )
+		{
+			FlagBits.bNMEA_OFF_Once = 1;
+			FlagBits.bNMEA_ON_Once = 0;
+
+			RCSTA2bits.SPEN = 0;		// USART2
+			TRISGbits.TRISG1 = 1;		// RX
+
+			strcpypgm2ram(szUSART_Out, (const rom far char *)" WAIT\r\n\r\n");
+			SkrivBuffert(szUSART_Out, 1);
+			Delay(500);
+		}					
+
+		Nop();
+		Nop();
+     */
+

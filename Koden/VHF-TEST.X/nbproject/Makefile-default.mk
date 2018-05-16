@@ -89,8 +89,8 @@ ifneq ($(INFORMATION_MESSAGE), )
 endif
 	${MAKE}  -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/VHF-TEST.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 
-MP_PROCESSOR_OPTION=18LF45K22
-MP_PROCESSOR_OPTION_LD=18lf45k22
+MP_PROCESSOR_OPTION=18LF46K22
+MP_PROCESSOR_OPTION_LD=18lf46k22
 MP_LINKER_DEBUG_OPTION=  -u_DEBUGSTACK
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: assemble
