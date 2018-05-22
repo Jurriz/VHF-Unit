@@ -14,7 +14,7 @@
 void ToggleACC(void)
 {
 	ACC_ENABLE = 1;
-	Nop(); Nop(); Nop();
+	Nop(); Nop(); Nop(); Nop();
 	ACC_ENABLE = 0;
 }
 

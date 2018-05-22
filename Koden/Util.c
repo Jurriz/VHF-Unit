@@ -42,19 +42,20 @@ void InitCPU(void)
     
 	//PORTA = 0b00000000;
 	TRISA = 0b00000000; // 0b11100011;
-	LATA  = 0b11100000; //0b00011000
+	LATA  = 0b10101000; //0b00011000; VSEL1 & VSEL2 & VSEL3
 	
 	PORTB = 0b00000000;
-	TRISB = 0b00011011;
+	TRISB = 0b11111111;
+    //LATB  = 0b11111111;
     
-    TRISC = 0b00000001; // RC3,RC4 & RC5 SPI // RC6 & RC7 TX/RX //RC2 SDN_RADIO
-	LATC  = 0b00000000; // 
+    TRISC = 0b00000000; // RC3,RC4 & RC5 SPI // RC6 & RC7 TX/RX //RC2 SDN_RADIO
+	LATC  = 0b00100001; // SND_radio hög & TCXO EN hög
     
     //PORTE = 0b00000000; // 
     LATE  = 0b10000000; // Alla dras låga av pulldown
 	TRISE = 0b00000000; // Alla är utgångar
 
-	LATD  = 0b00000000;	
+	LATD  = 0b11001000;     // Sätt Radio CS till hög vid uppstart
 	TRISD = 0b00000000; 	// LEDar, alla ut
 
 
@@ -228,7 +229,8 @@ void Delay(unsigned int nDelay)
 	for (nLoop0 = 0; nLoop0 < nDelay; nLoop0++)
 	{
 	//	for (nLoop1 = 0; nLoop1 < 250; nLoop1++);	// HS
-		for (nLoop1 = 0; nLoop1 < 99; nLoop1++);	// INTOSC
+	//	for (nLoop1 = 0; nLoop1 < 99; nLoop1++);	// INTOSC
+        for (nLoop1 = 0; nLoop1 < 24; nLoop1++);	// INTIO67
 	}	
 }
 
@@ -310,6 +312,77 @@ void Blink2(void) {
     GREEN_LED = 0;  Delay(72); 
         
 }
+
+void TestaVSEL(void){
+    
+        // Sätter 3.3 V
+        LATAbits.LATA0 = 1; 
+        LATAbits.LATA1 = 0; // Inverterad
+        LATAbits.LATA2 = 1;   
+        GREEN_LED = 1;
+        Delay(2000);
+        GREEN_LED = 0;
+        
+        // Sätter 3.0 V
+        LATAbits.LATA0 = 0; 
+        LATAbits.LATA1 = 0;  // Inverterad
+        LATAbits.LATA2 = 1; 
+        RED_LED = 1;
+        Delay(2000);
+        RED_LED = 0; Delay(50);
+        RED_LED = 1; Delay(50);
+        RED_LED = 0;
+        
+        // Sätter 2.8 V
+        LATAbits.LATA0 = 1; 
+        LATAbits.LATA1 = 1;  // Inverterad
+        LATAbits.LATA2 = 1; 
+        GREEN_LED = 1;
+        Delay(2000);
+        GREEN_LED = 0; Delay(50);
+        GREEN_LED = 1; Delay(50);
+        GREEN_LED = 0; Delay(50);
+        GREEN_LED = 1; Delay(50);
+        GREEN_LED = 0;
+        
+        // Sätter 2.5 V
+        LATAbits.LATA0 = 0; 
+        LATAbits.LATA1 = 1;  // Inverterad
+        LATAbits.LATA2 = 1; 
+        RED_LED = 1;
+        Delay(2000);
+        RED_LED = 0;Delay(50);
+        RED_LED = 1;Delay(50);
+        RED_LED = 0;Delay(50);
+        RED_LED = 1;Delay(50);
+        RED_LED = 0;Delay(50);
+        RED_LED = 1;Delay(50);
+        RED_LED = 0;
+        
+        // Sätter 2.1 V
+        LATAbits.LATA0 = 1; 
+        LATAbits.LATA1 = 0;  // Inverterad
+        LATAbits.LATA2 = 0; 
+        GREEN_LED = 1;
+        Delay(2000);
+        GREEN_LED = 0; Delay(50);
+        GREEN_LED = 1; Delay(50);
+        GREEN_LED = 0; Delay(50);
+        GREEN_LED = 1; Delay(50);
+        GREEN_LED = 0; Delay(50);
+        GREEN_LED = 1; Delay(50);
+        GREEN_LED = 0; Delay(50);
+        GREEN_LED = 1; Delay(50);
+        GREEN_LED = 0;
+        
+        // Sätter 1.8 V
+        LATAbits.LATA0 = 0; 
+        LATAbits.LATA1 = 0;  // Inverterad
+        LATAbits.LATA2 = 0;       
+        RED_LED = 1;
+        Delay(2000);
+        RED_LED = 0;
+    }
 
 // -----------------------------------------------------------------------------
 

@@ -10,7 +10,7 @@
 #include <adc.h>
 
 #include "Header_h.h"
-
+/*
 
 // -----------------------------------------------------------------------------
 void ToggleRTC(void)
@@ -99,7 +99,7 @@ char DoInitRV3049(void)
 	MyWriteSPI(RTCWrite | RTCControl | 0x00);	// Skriv till Control_1
 	MyWriteSPI(0b10100110);						// TE = 1
 */
-	ToggleRTC();
+/*	ToggleRTC();
 
 	MyWriteSPI(RTCWrite | RTCControl | 0x02);	// Skriv till Control_1
 	MyWriteSPI(0b00000000);						// TF = 0
@@ -137,6 +137,7 @@ char DoInitRV3049(void)
 */
 
 //---------------------------------------------------------------------------------------------
+/*
 void DoSetTimeRV3049(void)
 {
 	unsigned char nTmp, nLoop, szInitData[7];
@@ -379,6 +380,7 @@ char DoInitRV3049(void)
 	FlagBits.bSPIbusy = 0;
 }	
 */
+/*
 // -----------------------------------------------------------------------------
 void DoReadAllRTC_Regs(void)
 {
@@ -573,7 +575,7 @@ char DoReadRTC_DEBUG(void)
 		break;
 	}
 */
-
+/*
 	sprintf(szUSART_Out, (const rom far char *)"\t%02X-%02X-%02X %02X:%02X:%02X 0x%02X  %+d'C\t%d\t", 
 		nYear, nMon, nDay, nHour, nMin, nSec, nWeekDay, nTemp, (char)(nVarv & 0x01) );
 	
@@ -776,7 +778,7 @@ char DoResetRTC_INT(void)
 }
 
 
-
+*/
 //	nTmp = DoReadRTC();
 //	if (nTmp != 0)
 //	{

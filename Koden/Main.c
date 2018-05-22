@@ -178,22 +178,79 @@ void SkrivBuffert(char *szUt, char nVal)
 // -----------------------------------------------------------------------------
 void main(void)
 {
-    unsigned char nLoop, nLoop1, nPek, nTmp, nSlask, nPoll, nTemp, WAI, nTest;
-	unsigned char nHi, nMHi, nMLo, nLo;	
-	unsigned char nTICK, TempL, TempH, test, CTS_OK, szData[];
+    
+    unsigned char nLoop, nTmp, nTemp, nTest;
+	unsigned char  CTS_OK, szData[];
     unsigned char X_L, X_H, Y_L, Y_H, Z_L, Z_H;
 
-	signed char nOldX, nOldY, nOldZ;
+	//signed char nOldX, nOldY, nOldZ;
     signed int xVal, yVal, zVal, xVal_100, yVal_100, zVal_100, i=0;
-	char lData;
+	//char lData;
 
-	FlagBits.bTimerIRQ = 0;
-        
+	//FlagBits.bTimerIRQ = 0;  
 	InitCPU();
-    OSCILLATOR_Initialize();  // VET EJ
+    OSCILLATOR_Initialize();  // VET EJ OM DEN BEHÖVS
 	
 	//RTC_ENABLE = 0;
     
+//	OpenTimer3(TIMER_INT_ON & T3_16BIT_RW & T3_SOURCE_INT & T3_PS_1_8);
+//	WriteTimer3(0x7FFF);	// 1 sekund
+//	WriteTimer3(0xBFFF);	// 500ms
+	WriteTimer3(0);	
+	
+//	OpenTimer4(TIMER_INT_ON & T4_PS_1_16 & T4_POST_1_16);	// 6.5ms
+//	WriteTimer4(0x00);
+	
+	nByte_1 = 0;
+	nByte_2 = 0;
+	nTimeOutUSART_1 = 0;
+	nTimeOutUSART_2 = 0;
+
+	// Ta bort eventuellt falskt IRQ 
+	getc1USART();	
+	getc2USART();	
+
+	// Weak pull-up
+	INTCON2bits.RBPU = 0;
+
+	FlagBits.bReceived_1 = 0;
+	nTimeOutUSART_1 = 0;
+	nByte_1 = 0;
+	szUSART_1[0] = '\0';
+
+	FlagBits.bReceived_2 = 0;
+	nTimeOutUSART_2 = 0;
+	nByte_2 = 0;
+	szUSART_2[0] = '\0';
+    
+    TRISCbits.TRISC7 = 1;		// RX
+	TRISCbits.TRISC6 = 0;		// TX
+    
+// 19200bps
+	
+    Open1USART( USART_TX_INT_OFF &
+		USART_RX_INT_ON &
+		USART_ASYNCH_MODE &
+		USART_EIGHT_BIT &
+		USART_CONT_RX &
+		USART_BRGH_HIGH,
+//		42 );				// HS      10MHz 
+//		16 );				// INTOSC  4MHz
+      12  );                 // INTIO67 1MHz    
+
+	BAUDCON1bits.BRG16 = 1;
+
+//	// 9600bps
+//	Open2USART( USART_TX_INT_OFF &
+//		USART_RX_INT_ON &
+//		USART_ASYNCH_MODE &
+//		USART_EIGHT_BIT &
+//		USART_CONT_RX &
+//		USART_BRGH_HIGH,
+//		259);				// INTOSC  4MHz
+////		103);				// HS     10MHz
+
+	BAUDCON2bits.BRG16 = 1;
 
     //LATAbits.LATA0 = 1; // 2.1 V 
     LATAbits.LATA2 = 1; // 3.3 V   
@@ -202,199 +259,221 @@ void main(void)
 	
 	//INTCONbits.GIE = 0;		// Global
 
-	// **********************************************************************
- 	TRISCbits.TRISC7 = 1;		// RX
-	TRISCbits.TRISC6 = 0;		// TX
-	
-//---------------------------------------------------------------------------------------    
-    OpenSPI1(SPI_FOSC_16, MODE_11, SMPMID);     
+	// ***************************************************************************************
+ 
+    
+
+    //----------------------------------------------------------------------------------------------
+    // Starta upp accelerometern med denna kod
+    
+     
+        
+        GREEN_LED = 1; Delay(1); // Tänd grön lampa
+        GREEN_LED = 0;
+       //TestaVSEL();
+        
+       OpenSPI1(SPI_FOSC_4, MODE_11, SMPMID);     
 
         ACC_ENABLE = 0; // CS dras låg
-
+        Nop();
         WriteSPI1(0x24);           // Skriv till 0x22 REG8 // CTRL_REG5 (0x24) 
         WriteSPI1(0x80);           // Software Reset och Reboot (0x81) // BOOT (1000 0000) (0x80)
-        
-        Delay(100); // Viktigt att ha denna tillräckligt stor så att kretsen hinner starta om helt
+        Delay(10);                  // Viktigt att ha denna tillräckligt stor så att kretsen hinner starta om helt
         
         ToggleACC();
-
+        
         WriteSPI1(0x20);            // Skriv till CTRL_REG6_XL.. (0x20) // (CTRL_REG1) 
-        WriteSPI1(0x97);            // 0111 1000 vilket ger accelerometern hastigheten 238 Hz (0x98) // 1001 0111 (0x97)
-        Delay(100);
+        WriteSPI1(0x77);            // 0111 1000 vilket ger accelerometern hastigheten 238 Hz (0x98) // 0111 0111 (0x97) 400/200 Hz
+        Delay(10);
         
         ToggleACC();
 
         WriteSPI1(0x8F);            // Läs från WHO_AM_I 
         nTmp = MyReadSPI();         // Spara värdet i nTmp
+        
         ACC_ENABLE = 1;
         CloseSPI1();
     
-        RED_LED = 1;
-        Delay(300);                 // Tänd  
+        RED_LED = 1; Delay(10); // Tänd röd lampa 
         RED_LED = 0;
         
-    
-    // Testkod för att se så att kretsen gör som den ska och fungerar 
-    while (0)
-    {
+        sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LIS2DH12 Initiering:\r\n\r\n WHO AM I? \t0x%02X (0x44)\r\n\r\n", nTmp);
+        SkrivBuffert(szUSART_Out, 1);
+        Delay(10);
         
+        while (1)
+        { 
         // ---------- Läs från Accelerometern ----------------------------------
+        OpenSPI1(SPI_FOSC_4, MODE_11, SMPMID);   // 11, SMPMID 
         ACC_ENABLE = 0;
-        OpenSPI1(SPI_FOSC_16, MODE_11, SMPMID);   
-        Delay(1);
-        WriteSPI1(0xA8);       //(0xA8) Läs från adress 0x28 "OUT_X_L", data läses automatiskt ut i en linjär rörelse, bit 0 & 1 måste vara satta
-        X_L = MyReadSPI();		// Data skickas sedan till TempL
+        Nop();
+        WriteSPI1(0xA8);        //(0xA8) Läs från adress 0x28 "OUT_X_L", data läses automatiskt ut i en linjär rörelse, bit 0 & 1 måste vara satta
+        X_L = MyReadSPI();		// Data läses från den övre delen av X registrer
+        X_H = MyReadSPI();      // Data läses från den nedre delen av X registrer
+        Y_L = MyReadSPI();
+        Y_H = MyReadSPI();
+        Z_L = MyReadSPI();
+        Z_H = MyReadSPI();
         
-        RED_LED = 1; Delay(5);
-        RED_LED = 0;
         
-        WriteSPI1(0xA9);
-        X_H = MyReadSPI();
-
         ACC_ENABLE = 1;
         CloseSPI1();
         
         // Räkna ut accelerometerdatan, klumpa ihop de lägre bitarna med de högre
         xVal = AccDataCalc(X_L, X_H);
-
+        yVal = AccDataCalc(Y_L, Y_H);
+        zVal = AccDataCalc(Z_L, Z_H);
+            
+        // Dela värdet på 100 för att lättare analysera data
         xVal_100 = xVal / 100;
-
-        GREEN_LED = 1; Delay(5); 
-        GREEN_LED = 0;
-    } 
-       
-       while(1) { 
-        // --------- Läs från radion: ------------------------------------------
+        yVal_100 = yVal / 100;
+        zVal_100 = zVal / 100;
         
-        // Startar TCXO
-        //TCXO_EN = 1;
-        //LATCbits.LATC7 = 1;
-        GPIO_RC1 = 1;
-        Delay(3);
-        OpenSPI1(SPI_FOSC_4, MODE_00, SMPEND);
-        
-        DoResetRadio();
-        
-        DoCheckCTSManyTimes();
-        
-        DoStartRadio();
-        
-        DoCheckCTSManyTimes();
-         
-        // ----- Kör en läsning av info ----
-        ToggleRadio();
-        
-        WriteSPI1(0x01);       
-        
-        RADIO_EN = 1;
+        sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n X VAL: \t %d \r\n Y VAL: \t %d \r\n Z VAL: \t %d \r\n", xVal_100, yVal_100, zVal_100);
+        SkrivBuffert(szUSART_Out, 1);
         Delay(1);
+        // Skriv ut ett antal "X" på skärmen som motsvarar absolutbeloppett av värdet på X-axeln delat på 100
         
-        nTmp = DoCheckCTSManyTimes();
-        
-        if (nTmp == 0xFF)   // Om CTS är hög är allting rätt
-        {
-            CTS_OK = 1;     // Kollar så att CTS är ok
-            nLoop = 0;
-            while (nLoop < 8)
-            {
-                szData[nLoop] = MyReadSPI();
-                nLoop++;
-            }	
-        }		
-        
-        RADIO_EN = 1;
-        
-        CloseSPI1();
-        RED_LED = 1; Delay(10); 
-        RED_LED = 0;
-        
-    }  
-        // --------- Läs från radion: ------------------------------------------
-        OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);
-        
-        DoResetRadio();
-        
-        DoCheckCTSManyTimes();
-        
-        DoStartRadio();
-        
-        DoCheckCTSManyTimes();
-         
-        // ----- Kör en läsning av info ----
-        ToggleRadio();
-        
-        WriteSPI1(0x01);       
-        
-        RADIO_EN = 1;
-        Delay(1);
-        
-        nTmp = DoCheckCTSManyTimes();
-        
-        if (nTmp == 0xFF)   // Om CTS är hög är allting rätt
-        {
-            CTS_OK = 1;     // Kollar så att CTS är ok
-            nLoop = 0;
-            while (nLoop < 8)
-            {
-                szData[nLoop] = MyReadSPI();
-                nLoop++;
-            }	
-        }		
-        
-        RADIO_EN = 1;
-        CloseSPI1();
-        
-        // ---------------------------------------------------------------------
-        
-        for (i=0; i<nLoop; i++)     // Skriv ut utläst data från PART_INFO
-        {
-        //    sprintf(szUSART_Out, (const rom far char *)"Index %d - %02X \r\n ", i, szData[i]); // Visar part_info
-        //    SkrivBuffert(szUSART_Out, 1);
-        }
-        //sprintf(szUSART_Out, (const rom far char *)"\r\n");     //Lägger in lite radbrytningar
+        //sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n X value: \t %d \r\n\r\n", xVal);
         //SkrivBuffert(szUSART_Out, 1);
+                
+        Delay(100);
+      
+        //}
         
-        //Blink1();
-    
-    
+        // --------- Läs från radion: ------------------------------------------
 
-    i=0;
+        //Startar TCXO
+           TCXO_EN = 1;        //Startar TCXO
+//                
+//        OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);
+//        
+//        DoResetRadio();
+//        
+//        DoCheckCTSManyTimes();
+//        
+//        DoStartRadio();
+//        
+//        DoCheckCTSManyTimes();
+//         
+//        // ----- Kör en läsning av info ----
+//        ToggleRadio();
+//        
+//        WriteSPI1(0x01);       
+//        //ReadFromRadio(1,8);
+//        
+//        RADIO_EN = 1;
+//        Delay(1);
+//        
+//        nTmp = DoCheckCTSManyTimes();
+//        
+//        if (nTmp == 0xFF)   // Om CTS är hög är allting rätt
+//        {
+//            CTS_OK = 1;     // Kollar så att CTS är ok
+//            nLoop = 0;
+//            while (nLoop < 8)
+//            {
+//                szData[nLoop] = MyReadSPI();
+//                nLoop++;
+//            }	
+//        }		
+//        
+//        RADIO_EN = 1;
+//        
+//        CloseSPI1();
+//        RED_LED = 1; Delay(1); 
+//        RED_LED = 0;
+//        
+//        sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n SI4460:\r\n\r\n nTmp \t0x%02X \r\n\r\n", nTmp);
+//        SkrivBuffert(szUSART_Out, 1);
+//       
+        
+        // ---------------------------------------------------- Testar Hall Brytaren
+        i = PORTBbits.RB5;
+        if (i==0)
+        {
+            sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n Hallswitchen är aktiv: \t %d \r\n\r\n", i);
+            SkrivBuffert(szUSART_Out, 1);    
+        }
+
+        //}  
+        // ----------------------------------------------------  Läs från radion
+       
+        OpenSPI1(SPI_FOSC_16, MODE_00, SMPMID);
+        
+        DoResetRadio();
+        
+        DoCheckCTSManyTimes();
+        
+        DoStartRadio();
+        
+        DoCheckCTSManyTimes();
+         
+        // ----- Kör en läsning av info ----
+        ToggleRadio();
+        
+        WriteSPI1(0x01);       
+        RADIO_EN = 1;
+        Delay(1);
+        
+        nTmp = DoCheckCTSManyTimes();
+        
+        // Hämtar PART_INFO
+        if (nTmp == 0xFF)               // Om CTS är hög är allting rätt
+        {
+            nLoop = 0;                  
+            while (nLoop < 4)
+            {
+                szData[nLoop] = MyReadSPI();
+                nLoop++;
+            }
+            
+            sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n PART_ID_RADIO: -%02X%02X- \r\n\r\n", szData[2], szData[3]);
+            SkrivBuffert(szUSART_Out, 1);
+            
+        }		
+        
+        RADIO_EN = 1;
+        CloseSPI1();
+   
+    Delay(1000);
     
+    }
     
     while(1)
     {
         
     // Kod till I2C accelerometern:
-    SSP1ADD = 0x18;
+    SSP2ADD = 0x18; // Setting BoadRate
     
     //RTC_ENABLE = 1;     // För att se på skåpet
     
-    OpenI2C(MASTER, SLEW_ON); 
+    OpenI2C2(MASTER, SLEW_ON); 
     
-    StartI2C();        // Start  kommando
+    StartI2C2();        // Start  kommando
 
-    WriteI2C(0xD4); //SAD + W (D6)
+    WriteI2C2(0x64); //SAD + W (D6) // 0110 010 (R/W) 
     
-    AckI2C();   // Get acknowledgement
+    AckI2C2();   // Get acknowledgement
+    Blink2();
+    WriteI2C2(0x22); // Adress 0x0f (Who_AM_I), CTRL_REG_1 
     
-    WriteI2C(0x22); // Adress 0x0f (Who_AM_I), CTRL_REG_1 
+    AckI2C2();   // Get Akcnowledgement
     
-    AckI2C();   // Get Akcnowledgement
+    RestartI2C2(); // Repeted Start
     
-    RestartI2C(); // Repeted Start
+    WriteI2C2(0xD4); //SAD + R (D7)
     
-    WriteI2C(0xD4); //SAD + R (D7)
+    AckI2C2();   // Get acknowledgement
     
-    AckI2C();   // Get acknowledgement
+    WriteI2C2(0x81); // SW_RESET och BOOT
     
-    WriteI2C(0x81); // SW_RESET och BOOT
+    AckI2C2();
     
-    AckI2C();
+    StopI2C2();
     
-    StopI2C();
-    
-    CloseI2C();
-    
+    CloseI2C2();
+
     // ---- KÖR IGEN -----------------------------------------------------------
     
     OpenI2C(MASTER, SLEW_ON); 
@@ -443,8 +522,7 @@ void main(void)
     
     //RTC_ENABLE = 0;
     
-	Blink1();
-    i++;
+	Blink2();
    
     }
 //    

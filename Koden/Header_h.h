@@ -102,6 +102,7 @@ signed int AccDataCalc(unsigned char val_L, unsigned char val_H);
 void Blink1(void);
 void Blink2(void);
 void OSCILLATOR_Initialize(void);
+void TestaVSEL(void);
 
 // AmCe_NReader.c --------------------------------------------------------------
 void DoEraseAllNotes(void);
