@@ -127,6 +127,7 @@
 \clearpage
 %\begin{abstract}
 \chapter*{Abstract}
+
 \input{abstract.tex}
 %\end{abstract}
 
@@ -141,8 +142,10 @@
 \vspace{0.5em}
 
 \clearpage
-\noindent
+
+%\setlength{\parindent}{0pt}
 \printglossary[type=\acronymtype]
+\noindent
 \printglossary[type=main]
 
 \clearpage
@@ -153,18 +156,18 @@
 %%             	Theory
 \clearpage
 \chapter{Theory}\label{sec:Theory}
-\addcontentsline{toc}{chapter}{Theory}
+%\addcontentsline{toc}{chapter}{Theory}
 \input{theory.tex}
 
 %%   		-----Method ------
 %%			Hardware
 \clearpage
-\chapter{PCB}\label{sec:pcb}
+\chapter{Hardware}\label{sec:pcb}
 \input{pcb.tex}
 
 %% 			Software
 \clearpage
-\chapter{software}\label{sec:software}
+\chapter{Software}\label{sec:software}
 \input{software.tex}
 
 %% 			Results

@@ -1,9 +1,14 @@
 
 \vspace{-10ex}%
 \rule{\textwidth}{0.3pt}
-\vspace{10ex}
+\vspace{5ex}
  % after-code
+
+\textit{
 A deeper look into each component with some information of their functionality and implementation will be presented in this chapter. Why some specific components are chosen is also aswered here. 
+}
+\vspace{5ex}
+
 
 
 \section{Layout parameters}
@@ -11,12 +16,12 @@ A deeper look into each component with some information of their functionality a
 When starting the layour some inintial rules needs to be setup. These parameters are set by the board manufactuer.
 The design can be produced at different places but when ordering from this manufacturer the constrains that is used is the same parameters that the supplier uses as their standard.
 These rules and constrains may differ from one supplier to another but as the company already this supplier the same will be used for this project.
-Naturally for this project the minimum spaces and distances that does not make for a supplement charge are chosen as the design rules. A list of these parameters can be seen in  autoref{PCB_param}
+Naturally for this project the minimum spaces and distances that does not make for a supplement charge are chosen as the design rules. A list of these parameters can be seen below.
 
 \begin{itemize}
 \item Trace width: minimum of 6 mils (0,1524mm) 
 \item Via diameter: 10 mils
-\item Via diameter: 10 mils
+\item Maximium thickness of board
 
 \end{itemize}
  
@@ -40,10 +45,10 @@ The product is constructed with a number of components, which all have a central
 
 
 \begin{figure}[H] 
-\centering 
-\includegraphics[width=.8\linewidth]{Figures/System_diagram} 
-\captionsource{The prototype connection}{Aurthor}
-\label{fig:sys_dia} 
+	\centering 
+	\includegraphics[width=.8\linewidth]{Figures/System_diagram} 
+	\captionsource{The prototype connection}{Aurthor}
+	\label{fig:sys_dia} 
 \end{figure} 
 
 Each of the components in this project is carfully chosen to get the functionallity and effect that the company is after. To ensure the system works as intended the company have aquired development boards to each of the components. Every components needs to be tested to ensure their induvidial functionallity. Each development board is connected to the micro controllers board. First off the \gls{mcu} have to be set up in a correct way with all it parameters and then the other components could be connected and initilized one after another. The whole connection can be seen. %\autoref{rattbo}.
@@ -70,11 +75,12 @@ The \gls{mcu} used for this project is a processor type that is used by this com
 
 \subsection{Connenctions}
 
- \subsubsection{Power}
+ \subsection{Power}
 Powering it is done by connnecting the VDD pins to the power net. Connected to ground is the Vss pins on the processor. To ensure the current fed is as smooth as possible capacitors are connected between these two pins. The value of these capacitors are choosen to 100nF.  
 
-\subsubsection{Oscillator}
+\subsection{Oscillator}
 To operate the \gls{mcu} a clock signal is mandatory, this can be implemented in different ways. Either with the internal High, Medium and Low frequency oscillator or a external one. Where the external rely on a specific circuitry to provide the clock source. Examples of external oscillators are: clock modules, quarts crystal resonators or ceramic resonators and resistor-capacitor circuits. When a circuit is specified to be power efficient the speed of the clock plays a central role. As this product is specified to run on a small battery the speed of the system is kept low to increase the lifetime of the battery. The clock signal is generated from a external temperature compensated Crystal Oscillator (TCXO).
+
 
 
 \newpage
@@ -101,6 +107,11 @@ Two voltage connections is apperent on this device, one which is called VDD and 
 \subsection{Connenctions}
  In the registers 
 
+
+\subsection{Solidworks PCB}
+Followit uses the PCB board design software Solidworks PCB from DASSAULT SYSTÈMES. It utilizes the industry-proven Altium design engine for layout and routing of printed circuit boards and combined with a close connection with the mechanical CAD of classical Solidworks. With this program the PCB layout and design can be transfered seamlessly over to the mechanical enviroment to create a exact case or enclosure for the circuit board. The version used in this theisis is (Update 2.0).
+
+
 \section{Power consumption}
  The total power consumption is calculated by adding the current draw from each induvudual component together.  Different test is conducted to try different modes of the system. One describing the power cunsumption of only the processor. This is done by running it in a infinite loop with all the other components at the circuit powered down or in power down mode. Since the system is not supposed to be active just a small time with a longer power down mode in between the power consumption on the system has to account for a longer time span. The tests is made with a standard scheme used already by the company. The scheme consist of a small radio pulse every second and the system beeing inactive in between these radio pulses. 
-
+All the systems 

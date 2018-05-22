@@ -1,9 +1,10 @@
 \vspace{-10ex}%
 \rule{\textwidth}{0.3pt}
 \vspace{10ex}
- % after-code
 
+\emph{
 This chapter will guid the reader through the whole process of developing a system prototype. Designing the PCB, soldering the components, troubleshooting the board and writing the neccesary code are some of the steps involved and they will all be described in detail here.
+}
 
 \section{Schematics}
 The schematics over the circuit is created by placing all the components discussed earlier, every IC have a small amont of components that is placed in a way so that it is easy to understand which components is belongs to which. A title is added to every part in the design for a good overwiev over the system. Since the section which included the radio is large it is placed on a separate page. When additional components are added in additional pages can be inserded. These schematics can be found in "aoutoref appendix schematics".
@@ -18,8 +19,37 @@ The schematics over the circuit is created by placing all the components discuss
 	\label{fig:pcbr1}
 \end{figure}
 
+\section{Communication}
+
+\subsection{UART}
+The \gls{uart} connection interfered with another connection which lead to one function not working as intended. The function that is the enabeling line to the \gls{ldo} which powers the oscillator for the radio. It is fixed by connection one of the extra pins that was layed out beforehand directly to the \gls{ldo}. The transmitting half of the \gls{uart} connection is working as intended on this version, some of the resulting data which is sent to the computer can be seen in \autoref{fig:uart_first_rev}.
+
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[width=.8\linewidth]{Figures/uart_first_rev} 
+	\captionsource{Simple \gls{uart} transmission to a \gls{pc}}{Aurthor}
+	\label{fig:uart_first_rev} 
+\end{figure} 
+
+\subsection{SPI}
+Testing started with both the\gls{mcu}, radio and accelerometer soldered to the board. No communications was acheived when both of these slave devices was connected at the same time. After some troubleshooting the failing factor of this is the accelerometer having it's \gls{spi} conncetion the other way around. The data out (SDO) line was connected to the data output, and the SDI was connected to the data input line of the accelerometer.  
+
+
+\section{improvements}
+From the first version some valuable point can be determined, both for the layout, schematics and wiring.
+
+
+
+
+
+
+
+
+
 
 % Kanske inte
+\begin{comment}
 \section{Power consumption}
 When running the processor at operation speed and voltage the 
 The power consumption is first mesured with only the processor connected. 
+\end{comment}

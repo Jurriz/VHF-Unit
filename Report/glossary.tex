@@ -115,6 +115,85 @@ first={Printed Circuit Board (PCB)\glsadd{pcbg}}, see=[Glossary:]{pcbg}}
 description={Printed Wire Board}, 
 first={Printed Wire Board (PWB)\glsadd{pwbg}}, see=[Glossary:]{pwbg}}
 
+%%% LED
+\newglossaryentry{ledg}{name={LED},
+    description={A Light-emitting diode (LED), is a two-lead semiconductor light source.}}
+\newglossaryentry{led}{type=\acronymtype, name={LED}, 
+description={Light-emitting diode}, 
+first={Light-emitting diode (LED)\glsadd{ledg}}, see=[Glossary:]{ledg}}
+
+%%% GPIO
+\newglossaryentry{gpiog}{name={GPIO},
+    description={General Purpose Input Output (GPIO), is a general use port of an \gls{mcu}.}}
+\newglossaryentry{gpio}{type=\acronymtype, name={GPIO}, 
+description={General Purpose Input Output}, 
+first={General Purpose Input Output (GPIO)\glsadd{gpiog}}, see=[Glossary:]{gpiog}}
+
+%%% SPI
+\newglossaryentry{spig}{name={SPI},
+    description={Serial Peripheral Interface Bus (SPI), is a synchronous 
+    serial communication interface specification used for short distance 
+    communication, primarily in embedded systems.}}
+\newglossaryentry{spi}{type=\acronymtype, name={SPI}, 
+description={Serial Peripheral Interface}, 
+first={Serial Peripheral Interface (SPI)\glsadd{spig}}, see=[Glossary:]{spig}}
+
+%%% I2C
+\newglossaryentry{i2cg}{name={I$^2$C},
+    description={Inter-Integrated Circuit (I$^2$C), is a serial computer bus.}}
+\newglossaryentry{i2c}{type=\acronymtype, name={I$^2$C}, 
+description={Inter-Integrated Circuit}, 
+first={Inter-Integrated Circuit (I$^2$C)\glsadd{i2cg}}, see=[Glossary:]{i2cg}}
+
+%%% I2C
+\newglossaryentry{uartg}{name={UART},
+    description={Universal asynchronous receiver-transmitter (UART) is a computer hardware device for asynchronous serial communication.}}
+\newglossaryentry{uart}{type=\acronymtype, name={UART}, 
+description={Universal asynchronous receiver-transmitter}, 
+first={Universal asynchronous receiver-transmitter (UART)\glsadd{uartg}}, see=[Glossary:]{uartg}}
+
+
+
+%%% ST
+\newglossaryentry{stg}{name={ST},
+    description={STMicroelectronics (ST) is a French-Italian multinational 
+    electronics and semiconductor manufacturer.}}
+\newglossaryentry{st}{type=\acronymtype, name={ST}, 
+description={STMicroelectronics}, 
+first={STMicroelectronics (ST)\glsadd{stg}}, see=[Glossary:]{stg}}
+
+%%% VIA
+\newglossaryentry{viag}{name={VIA},
+    description={A vertical interconnect access (via) is an electrical connection between
+	layers in a physical electronic circuit.}}
+\newglossaryentry{via}{type=\acronymtype, name={via}, 
+description={vertical interconnect access}, 
+first={via\glsadd{viag}}, see=[Glossary:]{viag}}
+
+%%% LGA
+\newglossaryentry{lgag}{name={LGA},
+    description={Land Grid Array (LGA) is a type of \gls{smd} device with pins on the socket.}}
+\newglossaryentry{lga}{type=\acronymtype, name={LGA}, 
+description={Land Grid Array}, 
+first={Land Grid Array (LGA)\glsadd{lgag}}, see=[Glossary:]{lgag}}
+
+%%% SMD
+\newglossaryentry{smdg}{name={SMD},
+    description={Surface Mount Devices (SMD) are electric components soldered directly on a \gls{pcb} instead of using through-holes.}}
+\newglossaryentry{smd}{type=\acronymtype, name={SMD}, 
+description={Surface Mount Device}, 
+first={Surface Mount Device (SMD)\glsadd{smdg}}, see=[Glossary:]{smdg}}
+
+%%% IPC
+\newglossaryentry{ipcg}{name={IPC},
+    description={Institute for Printed Circuits (IPC), Institute for Interconnecting and Packaging Electronic Circuits}}
+\newglossaryentry{ipc}{type=\acronymtype, name={IPC}, 
+description={Institute for Printed Circuits}, 
+first={Institute for Printed Circuits (IPC)\glsadd{ipcg}}, see=[Glossary:]{ipcg}}
+
+
+
+
 %\begin{comment}
 %%% SEK
 \newglossaryentry{sekg}{name={SEK},
@@ -146,14 +225,6 @@ first={Lithium-ion Batteries (LIB)\glsadd{liong}}, see=[Glossary:]{liong}}
 description={Positive Temperature Coefficient},
 first={Positive Temperature Coefficient (PTC)\glsadd{ptcg}}, see=[Glossary:]{ptcg}}
 
-%%% ST
-\newglossaryentry{stg}{name={ST},
-    description={STMicroelectronics (ST) is a French-Italian multinational 
-    electronics and semiconductor manufacturer.}}
-\newglossaryentry{st}{type=\acronymtype, name={ST}, 
-description={STMicroelectronics}, 
-first={STMicroelectronics (ST)\glsadd{stg}}, see=[Glossary:]{stg}}
-
 %%% DRC
 \newglossaryentry{drcg}{name={DRC},
     description={Design Rule Check (DRC) is an automated check of your designed \gls{pcb}
@@ -179,36 +250,6 @@ first={Electronic Rule Check (ERC)\glsadd{ercg}}, see=[Glossary:]{ercg}}
 description={Universal Serial Bus}, 
 first={Universal Serial Bus (USB)\glsadd{usbg}}, see=[Glossary:]{usbg}}
 
-%%% LED
-\newglossaryentry{ledg}{name={LED},
-    description={A Light-emitting diode (LED), is a two-lead semiconductor light source.}}
-\newglossaryentry{led}{type=\acronymtype, name={LED}, 
-description={Light-emitting diode}, 
-first={Light-emitting diode (LED)\glsadd{ledg}}, see=[Glossary:]{ledg}}
-
-%%% GPIO
-\newglossaryentry{gpiog}{name={GPIO},
-    description={General Purpose Input Output (GPIO), is a general use port of an \gls{mcu}.}}
-\newglossaryentry{gpio}{type=\acronymtype, name={GPIO}, 
-description={General Purpose Input Output}, 
-first={General Purpose Input Output (GPIO)\glsadd{gpiog}}, see=[Glossary:]{gpiog}}
-
-%%% SPI
-\newglossaryentry{spig}{name={SPI},
-    description={Serial Peripheral Interface Bus (SPI), is a synchronous 
-    serial communication interface specification used for short distance 
-    communication, primarily in embedded systems.}}
-\newglossaryentry{spi}{type=\acronymtype, name={SPI}, 
-description={Serial Peripheral Interface}, 
-first={Serial Peripheral Interface (SPI)\glsadd{spig}}, see=[Glossary:]{spig}}
-
-%%% I2C
-\newglossaryentry{i2cg}{name={I$^2$C},
-    description={Inter-Integrated Circuit (I$^2$C), is a serial computer bus.}}
-\newglossaryentry{i2c}{type=\acronymtype, name={I$^2$C}, 
-description={Inter-Integrated Circuit}, 
-first={Inter-Integrated Circuit (I$^2$C)\glsadd{i2cg}}, see=[Glossary:]{i2cg}}
-
 %%% ADC
 \newglossaryentry{adcg}{name={ADC},
     description={An Analog-to-digital converter (ADC) is a system that converts 
@@ -225,44 +266,13 @@ first={Analog-to-digital converter (ADC)\glsadd{adcg}}, see=[Glossary:]{adcg}}
 description={National Marine Electronics Association standard}, 
 first={National Marine Electronics Association standard (NMEA)\glsadd{nmeag}}, see=[Glossary:]{nmeag}}
 
-%%% VIA
-\newglossaryentry{viag}{name={VIA},
-    description={A vertical interconnect access (via) is an electrical connection between
-	layers in a physical electronic circuit.}}
-\newglossaryentry{via}{type=\acronymtype, name={via}, 
-description={vertical interconnect access}, 
-first={via\glsadd{viag}}, see=[Glossary:]{viag}}
-
 %%% PNG
 \newglossaryentry{pngg}{name={PNG},
     description={Portable Network Graphics (PNG) is a raster graphics file format.}}
 \newglossaryentry{png}{type=\acronymtype, name={PNG}, 
 description={Portable Network Graphics}, 
 first={Portable Network Graphics (PNG)\glsadd{pngg}}, see=[Glossary:]{pngg}}
-
-
-%%% LGA
-\newglossaryentry{lgag}{name={LGA},
-    description={Land Grid Array (LGA) is a type of \gls{smd} device with pins on the socket.}}
-\newglossaryentry{lga}{type=\acronymtype, name={LGA}, 
-description={Land Grid Array}, 
-first={Land Grid Array (LGA)\glsadd{lgag}}, see=[Glossary:]{lgag}}
-
-%%% SMD
-\newglossaryentry{smdg}{name={SMD},
-    description={Surface Mount Devices (SMD) are electric components soldered directly on a \gls{pcb} instead of using through-holes.}}
-\newglossaryentry{smd}{type=\acronymtype, name={SMD}, 
-description={Surface Mount Device}, 
-first={Surface Mount Device (SMD)\glsadd{smdg}}, see=[Glossary:]{smdg}}
-
-%%% IPC
-\newglossaryentry{ipcg}{name={IPC},
-    description={Institute for Printed Circuits (IPC), Institute for Interconnecting and Packaging Electronic Circuits}}
-\newglossaryentry{ipc}{type=\acronymtype, name={IPC}, 
-description={Institute for Printed Circuits}, 
-first={Institute for Printed Circuits (IPC)\glsadd{ipcg}}, see=[Glossary:]{ipcg}}
-
-
 %\end{comment}
+
 \thispagestyle{empty}
 
