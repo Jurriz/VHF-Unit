@@ -31,14 +31,7 @@ void InitCPU(void)
     ANSELB = 0x00;
     ANSELC = 0x00;
     ANSELD = 0x00;
-    ANSELE = 0x00;
-    
-    // Sätter voltage supply på utgångar på processorn
-    //LATCbits.LATC0 =  0;     // Sätter upp C0 som latch
-    //LATCbits.LATC1 =  0;     // Sätter upp C1 som latch 
-    //TRISCbits.RC0 = 0;      // Sätter RC0 som utgång
-    //TRISCbits.RC1 = 0;      // Sätter RC1 som utgång
-    
+    ANSELE = 0x00;    
     
 	//PORTA = 0b00000000;
 	TRISA = 0b00000000; // 0b11100011;
@@ -48,15 +41,19 @@ void InitCPU(void)
 	TRISB = 0b11111111;
     //LATB  = 0b11111111;
     
+    //PORTC = 0b00000000;
     TRISC = 0b00000000; // RC3,RC4 & RC5 SPI // RC6 & RC7 TX/RX //RC2 SDN_RADIO
 	LATC  = 0b00100001; // SND_radio hög & TCXO EN hög
+    
+    //PORTE = 0b00000000;
+	LATD  = 0b11001000;     // Sätt Radio CS till hög vid uppstart
+	TRISD = 0b00000000; 	// 
     
     //PORTE = 0b00000000; // 
     LATE  = 0b10000000; // Alla dras låga av pulldown
 	TRISE = 0b00000000; // Alla är utgångar
 
-	LATD  = 0b11001000;     // Sätt Radio CS till hög vid uppstart
-	TRISD = 0b00000000; 	// LEDar, alla ut
+    
 
 
     /*
@@ -295,21 +292,37 @@ void Blink1(void)
 
 // ----------------------------------------------------------------------------
 void Blink2(void) {
-    GREEN_LED = 1; Delay(12);
+    GREEN_LED = 1; Delay(42);
         
-    RED_LED = 1;    Delay(12); 
+    RED_LED = 1;    Delay(42); 
          
-    GREEN_LED = 0;  Delay(12);
+    GREEN_LED = 0;  Delay(42);
         
-    RED_LED = 0;    Delay(32);
+    RED_LED = 0;    Delay(82);
         
-    RED_LED = 1;    Delay(12);
+    RED_LED = 1;    Delay(42);
         
-    GREEN_LED = 1;  Delay(12);
+    GREEN_LED = 1;  Delay(42);
       
-    RED_LED = 0;    Delay(12);
+    RED_LED = 0;    Delay(42);
        
-    GREEN_LED = 0;  Delay(72); 
+    GREEN_LED = 0;  Delay(130); 
+    
+    GREEN_LED = 1; Delay(42);
+        
+    RED_LED = 1;    Delay(42); 
+         
+    GREEN_LED = 0;  Delay(42);
+        
+    RED_LED = 0;    Delay(82);
+        
+    RED_LED = 1;    Delay(42);
+        
+    GREEN_LED = 1;  Delay(42);
+      
+    RED_LED = 0;    Delay(42);
+       
+    GREEN_LED = 0;  Delay(72);
         
 }
 

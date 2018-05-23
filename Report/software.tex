@@ -5,37 +5,36 @@
 
 %Method Software
 \textit{
-What is the step after the \gls{pcb} is produced? Yes it is time to test the system, and this is done with the help of a test program. This chapter will guide the reader through this process of setting up the processor to run program code. How all the components are programmed and tested will be explained in this chapter. 
+What is the step after the \gls{pcb} is produced? It is time to test the system, and this is done with the help of a test program. This chapter will guide the reader through this process of setting up the processor to run program code. How all the components are programmed and tested will be explained in this chapter. 
 }
 
 %% MCU
 \section{Programming} 
-In start of every embedded system the processor have to be programmed. Here the most common implementation is the \gls{jtag}, where the all the programming and debugging is done through a standardized interface. The approach is different on this \gls{mcu}, here three pins are used to program the device. The first one is the "PGC", which is the clock signal for the In-Circuit Debugger and "PGD", In-Circuit Serial Programming. The third pin needed from the processor is the MCLR. These pins on the processor have to be accessible to program the microcontroller. %(Designing_Embedded_Systems_with_PIC_Microcontrollers 7.4.2)
+In the start of every embedded system, the processor have to be programmed. Here the most common implementation is the \gls{jtag}, where the all the programming and debugging is done through a standardized interface. The approach is different on this \gls{mcu}, here three pins are used to program the device. The first one is the "PGC", which is the clock signal for the In-Circuit Debugger and "PGD", In-Circuit Serial Programming. The third pin needed from the processor is the MCLR. These pins on the processor have to be accessible to program the microcontroller. %(Designing_Embedded_Systems_with_PIC_Microcontrollers 7.4.2)
 
 
 \section{Software implementation}
-The processor do not start up on it own, much consideration needs in making right initzilation and configure it right. A source voltage is supplied to the processor to get it to operate. There are some initial registers that needs to be set in order to inintialize and start the processor. This varies between different processors and models and is different for applications and systems. These registers contain information about the speed of the processor.    
+The processor does not start up on it own, much consideration needs in making right initialization and configure it right. A source voltage is supplied to the processor to get it to operate. There are some initial registers that need to be set in order to initialize and start the processor. This varies between different processors and models and is different for applications and systems. These registers contain information about the speed of the processor.    
 
 
 \section{Radio implementation} %% Radio
-Radio Chip Waking Up First,  the  radio  is  in  the  off  state. After  the  SDN  pin  is  pulled  low,  the  radio  wakes  up  and  performs  a  Power  on.
-Reset  which  takes  a  maximum  of  6 ms  (900 $\mu$ s  typical  at  room  temperature)  until  the  chip  is  ready  to  receive commands on the SPI bus. The GPIO1 pin goes high when the radio is ready for receiving SPI commands. During the reset period, the radio cannot accept any SPI commands. 
+Radio Chip Waking Up First, the radio is in the off state. After the SDN pulled low, wakes up and performs a Power on.
+maximum of 6 ms  (900 $\mu$ s room temperature) ready to receive commands on the SPI bus. The GPIO1 pin goes high when the radio is ready for receiving SPI commands. During the reset period, the radio cannot accept any SPI commands. 
 
 \section{Software}
-The fundation for every developmet is a good development enviroment, both as the circuit boards are createt and the software inplementations needed later in the process.
+The foundation for every development is a good development environment, both as the circuit boards are created and the software implementations needed later in the process.
 
 (In the early days of computing, programming in Assembler was used to program almost any type of
 computer. These days, however, it is pretty much the preserve of embedded designers, particularly when
-using smaller 8-bit devices) (PICDESIGN)
+using smaller 8-bit devices) (PIC DESIGN)
 
 \subsection{MPLAB}
-Microship which is the producer of the MCU used in this project have their own development enviroement with holds a lot of handy features when making a program for their products. 
-
+Microchip which is the producer of the MCU used in this project has their own development environment which holds a lot of handy features when making a program for their products. 
 
 
 
 \subsection{Assembly}
-The acctual code that runs on this processor is assembly, the most common hardware code which is used in almost all types of MicroController units. Assembly is a harware type language which means that is describes the acctual process for the 
+The actual code that runs on this processor is assembly, the most common hardware code which is used in almost all types of MicroController units. Assembly is a hardware type language which means that describes the actual process for the 
 
 \subsection{C18}
-The C program is compiled with the compiler C18. This is the compiler which have been the official compiler for this particular processor. This compiler is used for all the processors in the family PIC18. This complier is some years old and lacks some modern features. The vesion used in this project is (3.47)?
+The C program is compiled with the compiler C18. This is the compiler which has been the official compiler for this particular processor. This compiler is used for all the processors in the family PIC18. This compiler is some years old and lacks some modern features. The version used in this project is (3.47)?

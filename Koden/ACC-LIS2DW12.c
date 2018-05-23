@@ -19,21 +19,21 @@ void ToggleACC(void)
 }
 
 // -----------------------------------------------------------------------------
-long int DoReadInc(void)
+long int DoReadInc(void)                    // Säkert fel alltihopa
 {
 	unsigned char nX, nY, nZ;
 	long lReturn;
 
-	FlagBits.bSPIbusy = 1;
+	FlagBits.bSPIbusy = 1;                  // SPI är upptagen
 
-	OpenSPI(SPI_FOSC_16, MODE_11, SMPMID);	// Farten minskad för att försäkra sig om att skrivinstruktionen ska gå fram (0x03)
+	OpenSPI(SPI_FOSC_4, MODE_11, SMPMID);	// Hastigheten blir 250Khz
 	
 	//ACC_ENABLE = 0;
 
 	Nop(); Nop(); Nop();
 
-	MyWriteSPI(0x8F);		// Läs från... 
-	//MyWriteSPI(0x08);			// ...adress 0x08 (X-axeln) 
+	MyWriteSPI(0x8F);                       // Läs från... 
+	//MyWriteSPI(0x08);                     // ...adress 0x08 (X-axeln) 
 	nX = MyReadSPI();
 	nY = MyReadSPI();
 	nZ = MyReadSPI();
@@ -57,47 +57,26 @@ long int DoReadInc(void)
 char DoStartST_ACC(void)
 {
 	unsigned char lReturn;
-	//long lReturn;
-
-	//FlagBits.bSPIbusy = 1;
-	
-    //ACC_POW_VDD_IO = 1;   Delay(1);     //  Output POWER TO VDD_IO
-    //ACC_POW_VDD = 1;                    //  Output POWER TO VDD
-    //Delay(1000);            // Viktigt att accelerometern hinner stara upp ordentligt
-	//OpenSPI(SPI_FOSC_4, MODE_11, SMPMID);	// Farten minskad för att försäkra sig om att skrivinstruktionen ska gå fram (0x03)
-	ACC_ENABLE = 0; // CS dras låg
+	ACC_ENABLE = 0;                 // CS dras låg
     
-    //Delay(1);
-	Blink2;
-	MyWriteSPI(0x22);		// Skriv till 0x22 REG8
-	MyWriteSPI(0x81);		// Software Reset och Reboot
-    Delay(1);
-    ACC_ENABLE = 1;
-	Delay(300); // Viktigt att ha denna tillräckligt stor så att kretsen hinner starta om helt
-	ACC_ENABLE = 0; 
+	MyWriteSPI(0x24);               // Skriv till 0x22 REG8 (0x22))
+	MyWriteSPI(0x80);               // Software Reset och Reboot (0x81)
     
-    WriteSPI1(0x20);         // Skriv till CTRL_REG6_XL..  
-    WriteSPI1(0x98);         // 1001 1000 vilket ger accelerometern hastigheten 238 Hz
+    ToggleACC(); 
+    
+    WriteSPI1(0x20);                // Skriv till CTRL_REG1..  (0x20)
+    WriteSPI1(0x77);                // 0111 0111 vilket ger accelerometern hastigheten 400/200 Hz (0x98)
     
     ToggleACC();
     
-	WriteSPI1(0x8F);               // Läs från WHO_AM_I 
-	lReturn = MyReadSPI();			// Data skickas till lReturn
+	WriteSPI1(0x8F);                // Läs från WHO_AM_I 
+	lReturn = MyReadSPI();          // Data skickas till lReturn
     
 	ACC_ENABLE = 1;
-
-	//CloseSPI();
-
-	Nop();
 	
-    //FlagBits.bSPIbusy = 0;
-
 	return lReturn;
-   
 }
-// AccWrite = 0x0A, AccRead = 0x0B, Fifo = 0x0D;
 
-// ADXL362
 // CKP = 0
 // CKE = 0
 

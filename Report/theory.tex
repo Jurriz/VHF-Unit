@@ -20,34 +20,14 @@ To get good characteristics of the circuit the system will be produced on a four
 
 
 \section{Radio Frequency}
-Radio frequenzy are a set frequencies that is used for trancieving and receiving data wirelessly. Radio frequencies begins with at one end of the spectrum where the frequencies is about 100Hz. It contains all the frequencies up to 300Ghz. Here the acctual wavelength is 1mm long.
+Radio frequenzy are a set frequencies that is used for trancieving and receiving data wirelessly. Radio frequencies begins with at one end of the spectrum where the frequencies is about 100Hz. It contains all the frequencies up to 300Ghz. At 300Ghz the wavelength is 1mm long. Radio frequencies are divided into different bands, all with different caracteristics and areas of implementation. 
 
 \begin{figure}[H] 
 	\centering 
 	\includegraphics[width=.8\linewidth]{Figures/Full_frequency_band} 
-	\captionsource{Electromagnitical frequencies}{Aurthor}
+	\captionsource{Electromagnitical frequencies}{RF Circuit Design \cite{rf_circut_design}}
 	\label{fig:full_freq_band} 
 \end{figure} 
-
-Frequency Band Range Wavelengths
-VLF 3 to 30kHz 100 to 10 km
-LF 30 to 300 kHz 10 to 1 km
-MF 0.3 to 3 MHz 1 to 0.1 km
-HF 3 to 30MHz 100 to 10m
-VHF 30 to 300 MHz 10 to 1m
-UHF 300 to 3000 MHz 100 to 10 cm
-SHF 3 to 30GHz 10 to 1 cm
-EHF 30 to 300 GHz 10 to 1mm
-
-(RF Circuit design) Appendix
-
-The very low frequency (VLF) region extends from just above the ELF region,
-although most authorities peg it to frequencies of 10 to 100 kilohertz (kHz). The lowfrequency
-(LF) region runs from 100 to 1000 kHz—or 1 megahertz (MHz). The
-medium-wave (MW) or medium-frequency (MF) region runs from 1 to 3 MHz. The
-amplitude-modulated (AM) broadcast band (540 to 1630 kHz) spans portions of the
-LF and MF bands.
-The high-frequency
 
 Designing a circuit for radio transmission is a advanced and complex procediur. The high frequencies introduces a lot of intresting phenomenons that need to be considered when construction a circuit in these frequincies. When designing a circuit for RF the components and traces on the PCB behaives in a different way and takes on different characteristics than a equal system at lower frequencies. Some of the challenges that arises are described in "Secrets of RF Circuit Design". Stray capacitance is one of the phenomenon that arises when handlig RF. Between conductors, conductors to ground and between components a small capacitance occures when dealing with RF. To ensure a good radio signal  some criterias need to be fulfilled. 
 The output signal from the radio tranciever is matched at 50 ohms and this has to be matched with the output stage components. These components commonly is a network of inductors and capacitors .This matching network is described later in this section. 
@@ -87,9 +67,6 @@ The power consumption is higly dependent on the speed of which the processor is 
 To get the right speed of a crystal we need to get the right product for this particular case. As a crystal 
 Many different types of oscillators exists, both internal and external types. 
 
-\section{IMU}
-The motions of the system is measured with an IMU system. This system can be used in a lot of different cases, both to detect if the unit is stationary or moving or if there is very hard and fast movements in the product. One of the simplest IMU's is the 3-axis accelerometer, it
-
 \section{SPI}
 \gls{spi} communication is used to communicate between the \gls{mcu} and other \gls{ic}'s on a circuit board. The \gls{spi} is 
 It uses four wires to communicate and additional one wire for each extra \gls{ic} that is connected. The transmisson works in a synchronous serial maner where each bit is sent one at the time syncronous to a supplied clock signal. Different types of \gls{spi} exists but with the most common beeing the four-wire serial bus. SCL, SDO, SDI and SS is used 
@@ -100,6 +77,17 @@ It uses four wires to communicate and additional one wire for each extra \gls{ic
 	\item SDI - Serial Data In, Data is transmitted in to this port.
 	\item SS - Slave Select, Selects a device for communication.
 \end{itemize}
+Eight bits are sent together to form a package of one byte. Four different modes is available when communicating through \gls{spi}. These modes determines which type of clock signal provided and how the data is sampled in the devices. Two different types of clock signal, one where the clock is pulled high when idle and the other one pulled low when idle. 
+The other mode selects the timing of data bits relative to the clock signal.  
+
+
+\begin{figure}[H]
+	\centering
+    \includegraphics[width=.8\linewidth]{Figures/spi_timing}
+	\captionsource{Timing and modes for a transmission over \gls{spi}}{\url{https://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus#/media/File:SPI_timing_diagram2.svg}}
+	\label{fig:SPI_timing}
+\end{figure}
+
 
 The interface uses one master device and multiple slaves. The master device handles the communication and supplies the selection of slaves. To enable a connection and choose which slave is used an induvidual slave select must be present. When set, only the choosen slave device is able to communicate.
 
@@ -108,13 +96,12 @@ From the \gls{mcu}'s datasheet the following diagram show in \autoref{fig:PIC_SP
 \begin{figure}[H]
 	\centering
     \includegraphics[width=.8\linewidth]{Figures/PIC_SPI}
-	\captionsource{SPI master and multiple slave connections}{http://ww1.microchip.com/downloads/en/DeviceDoc/40001412G.pdf}
+	\captionsource{SPI master and multiple slave connections}{\url{http://ww1.microchip.com/downloads/en/DeviceDoc/40001412G.pdf}}
 	\label{fig:PIC_SPI}
 \end{figure}
+Data is sent out from the \gls{mcu} at the SDO wire and at the other end connected to the SDI pin of a receiving device. 
+
 
 \section{I$^2$C}
-
-
-
 
 
