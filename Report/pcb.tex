@@ -82,6 +82,8 @@ Powering it is done by connecting the VDD pins to the power net. Connected to th
 To operate the \gls{mcu} a clock signal is mandatory, this can be implemented in different ways. Either with the internal High, Medium and Low-frequency oscillator or an external one. Where the external rely on a specific circuitry to provide the clock source. Examples of external oscillators are clock modules, quartz crystal resonators or ceramic resonators and resistor-capacitor circuits. When a circuit is specified to be power efficient the speed of the clock plays a central role. As this product is specified to run on a small battery the speed of the system is kept low to increase the lifetime of the battery. The clock signal is generated from an external temperature compensated Crystal Oscillator (TCXO).
 
 
+\section{IMU}
+The motions of the system is measured with an IMU system. This system can be used in a lot of different cases, both to detect if the unit is stationary or moving or if there is very hard and fast movements in the product. One of the simplest IMU's is the 3-axis accelerometer, it
 
 \newpage
 \section{Accelerometer} %% Accelerometers

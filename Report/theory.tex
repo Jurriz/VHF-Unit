@@ -68,7 +68,7 @@ To get the right speed of a crystal we need to get the right product for this pa
 Many different types of oscillators exists, both internal and external types. 
 
 \section{SPI}
-\gls{spi} communication is used to communicate between the \gls{mcu} and other \gls{ic}'s on a circuit board. The \gls{spi} is 
+\gls{spi} communication is used to communicate between the \gls{mcu} and other \gls{ic}'s on a circuit board. \cite{pic_spi} The \gls{spi} is 
 It uses four wires to communicate and additional one wire for each extra \gls{ic} that is connected. The transmisson works in a synchronous serial maner where each bit is sent one at the time syncronous to a supplied clock signal. Different types of \gls{spi} exists but with the most common beeing the four-wire serial bus. SCL, SDO, SDI and SS is used 
 
 \begin{itemize}[noitemsep]
@@ -77,14 +77,15 @@ It uses four wires to communicate and additional one wire for each extra \gls{ic
 	\item SDI - Serial Data In, Data is transmitted in to this port.
 	\item SS - Slave Select, Selects a device for communication.
 \end{itemize}
-Eight bits are sent together to form a package of one byte. Four different modes is available when communicating through \gls{spi}. These modes determines which type of clock signal provided and how the data is sampled in the devices. Two different types of clock signal, one where the clock is pulled high when idle and the other one pulled low when idle. 
-The other mode selects the timing of data bits relative to the clock signal.  
+ 
+Eight bits are sent together to form a package of one byte. Four different modes are available when communicating through \gls{spi}. These modes determine which type of clock signal provided and how the data is sampled in the devices. Two different types of clock signal, one where the clock is pulled high when idle and the other one pulled low when idle. 
+The other mode selects the timing of data bits relative to the clock signal. Data is sampled either wh
 
 
 \begin{figure}[H]
 	\centering
-    \includegraphics[width=.8\linewidth]{Figures/spi_timing}
-	\captionsource{Timing and modes for a transmission over \gls{spi}}{\url{https://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus#/media/File:SPI_timing_diagram2.svg}}
+    \includegraphics[width=.8\linewidth]{Figures/SPI_timing}
+	\captionsource{Timing and modes for a transmission over \gls{spi}}{\url{https://commons.wikimedia.org/wiki/File:SPI_timing_diagram.svg}}
 	\label{fig:SPI_timing}
 \end{figure}
 
