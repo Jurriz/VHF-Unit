@@ -20,6 +20,8 @@
 \usepackage{titlesec}
 \usepackage{verbatim}
 \usepackage[document]{ragged2e} % Right and left aligned text
+
+%\usepackage[nonumberlist]{glossaries}
 %\usepackage[sc]{titlesec}
 %\usepackage{titletoc}
 
@@ -38,9 +40,10 @@
 % header layout
 \usepackage{suffix}
 
-% Abbreviations and glossary
-\usepackage[automake,entrycounter,acronym,toc,section=section,numberedsection=autolabel]{glossaries-extra}
-\makeglossaries\setabbreviationstyle[acronym]{long-postshort-user}
+% Abbreviations and glossary - ,toc,section=section -section=chapter
+\usepackage[automake,acronym,toc,section=chapter,numberedsection=autolabel]{glossaries-extra}
+\makeglossaries
+\setabbreviationstyle[acronym]{long-postshort-user}
 \glssetcategoryattribute{acronym}{nohyperfirst}{true}
 \renewcommand*{\glsxtruserparen}[2]{
   \glsxtrfullsep{#2}
@@ -54,7 +57,7 @@
 \newcommand\chapterauthor[1]{\authortoc{#1}\printchapterauthor{#1}}
 \WithSuffix\newcommand\chapterauthor*[1]{\printchapterauthor{#1}}
 
-\makeatletter
+%\makeatletter
 \newcommand{\printchapterauthor}[1]{%
   {\parindent0pt\vspace*{-10pt}%
   \linespread{1.1}\large\scshape#1%
@@ -116,6 +119,8 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
+%\input{glossary.tex}
+
 \input{glossary.tex}
 
 \begin{document}
@@ -124,10 +129,10 @@
 \input{titlepage.tex}
 \end{titlepage}
 
+\pagenumbering{roman}
 \clearpage
 %\begin{abstract}
 \chapter*{Abstract}
-
 \input{abstract.tex}
 %\end{abstract}
 
@@ -139,27 +144,29 @@
 \clearpage
 \setlength{\columnseprule}{0.2pt}
 \tableofcontents % TABLE OF CONTENTS
+\thispagestyle{plain}
 \vspace{0.5em}
 
-\clearpage
-
-%\setlength{\parindent}{0pt}
-\printglossary[type=\acronymtype]
-\noindent
-\printglossary[type=main]
+\setlength{\parindent}{0pt}
 
 \clearpage
-\setcounter{page}{2}
+\printglossary[type=\acronymtype,title=Abbrevations]
+\thispagestyle{plain}
+%\printglossary[type= main]
+
+
+%%             	Introduction
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
 \chapter{Introduction}
 \input{introduction.tex}
 
 %%             	Theory
 \clearpage
 \chapter{Theory}\label{sec:Theory}
-%\addcontentsline{toc}{chapter}{Theory}
 \input{theory.tex}
 
-%%   		-----Method ------
 %%			Hardware
 \clearpage
 \chapter{Hardware}\label{sec:pcb}
