@@ -116,8 +116,6 @@ unsigned char DoCheckCTSManyTimes(void)
     return nTmp;
 }
 
-
-
         // --------- Läs från radion: ------------------------------------------
 
         //Startar TCXO

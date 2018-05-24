@@ -1,5 +1,5 @@
 MPLINK 5.00, LINKER
-Linker Map File - Created Wed May 23 12:03:16 2018
+Linker Map File - Created Thu May 24 09:00:31 2018
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
@@ -8,94 +8,94 @@ Linker Map File - Created Wed May 23 12:03:16 2018
                    .cinit    romdata   0x000006    program   0x000002
          .code_vfprintf.o       code   0x000008    program   0x000816
              .code_Util.o       code   0x00081e    program   0x0005f8
-             .code_Main.o       code   0x000e16    program   0x000568
-                     PROG       code   0x00137e    program   0x0002b6
-           .code_SI4463.o       code   0x001634    program   0x00019e
-     .code_ACC-LIS2DW12.o       code   0x0017d2    program   0x00016a
-             .stringtable    romdata   0x00193c    program   0x0000bd
-       .idata_t3write.o_i    romdata   0x0019f9    program   0x000000
-      .romdata_spi1writ.o    romdata   0x0019f9    program   0x000000
-        .idata_u1open.o_i    romdata   0x0019f9    program   0x000000
-      .idata_i2c1open.o_i    romdata   0x0019f9    program   0x000000
-      .idata_i2c2writ.o_i    romdata   0x0019f9    program   0x000000
-      .idata_i2c1writ.o_i    romdata   0x0019f9    program   0x000000
-      .romdata_i2c2open.o    romdata   0x0019f9    program   0x000000
-       .romdata_u2write.o    romdata   0x0019f9    program   0x000000
-      .idata_spi1open.o_i    romdata   0x0019f9    program   0x000000
-       .idata_u1write.o_i    romdata   0x0019f9    program   0x000000
-      .romdata_i2c1read.o    romdata   0x0019f9    program   0x000000
-        .romdata_u2defs.o    romdata   0x0019f9    program   0x000000
-        .romdata_t2open.o    romdata   0x0019f9    program   0x000000
-        .romdata_u1defs.o    romdata   0x0019f9    program   0x000000
-        .romdata_u1read.o    romdata   0x0019f9    program   0x000000
-        .idata_u2read.o_i    romdata   0x0019f9    program   0x000000
-          .romdata_Main.o    romdata   0x0019f9    program   0x000000
-          .romdata_putc.o    romdata   0x0019f9    program   0x000000
-    .idata__user_putc.o_i    romdata   0x0019f9    program   0x000000
-      .idata_vfprintf.o_i    romdata   0x0019f9    program   0x000000
-          .idata_Util.o_i    romdata   0x0019f9    program   0x000000
-       .idata_sprintf.o_i    romdata   0x0019f9    program   0x000000
-        .romdata_SI4463.o    romdata   0x0019f9    program   0x000000
-  .idata_RTC-RV8803C7.o_i    romdata   0x0019f9    program   0x000000
-        .romdata___init.o    romdata   0x0019f9    program   0x000000
-  .idata_ACC-LIS2DW12.o_i    romdata   0x0019f9    program   0x000000
-       .romdata_c018i_e.o    romdata   0x0019f9    program   0x000000
-     .code_RTC-RV8803C7.o       code   0x0019fa    program   0x000000
-               _cinit_scn       code   0x0019fa    program   0x00009e
-           .code_u1defs.o       code   0x0019fa    program   0x000000
-         .code_i2c1writ.o       code   0x001a98    program   0x000082
-         .code_i2c2writ.o       code   0x001b1a    program   0x00007c
-          .code_sprintf.o       code   0x001b96    program   0x000072
-           .code_u1open.o       code   0x001c08    program   0x00006c
-                   STRING       code   0x001c74    program   0x000066
-             .code_putc.o       code   0x001cda    program   0x000066
-         .code_spi1open.o       code   0x001d40    program   0x00005e
-           .code_u2read.o       code   0x001d9e    program   0x00003e
-           .code_u1read.o       code   0x001ddc    program   0x00003e
-         .code_spi1writ.o       code   0x001e1a    program   0x00003a
-           .code_t2open.o       code   0x001e54    program   0x000034
-          .code_t3write.o       code   0x001e88    program   0x000030
-         .code_i2c2open.o       code   0x001eb8    program   0x000030
-         .code_i2c1open.o       code   0x001ee8    program   0x000030
-          .code_u2write.o       code   0x001f18    program   0x00002e
-          .code_u1write.o       code   0x001f46    program   0x00002e
-                    CTYPE       code   0x001f74    program   0x000024
-             D100TCYXCODE       code   0x001f98    program   0x000020
-                    .code       code   0x001fb8    program   0x000020
-                    STDIO       code   0x001fd8    program   0x00001c
-             _startup_scn       code   0x001ff4    program   0x00001a
-         .code_i2c1read.o       code   0x00200e    program   0x00001a
-      .romdata_vfprintf.o    romdata   0x002028    program   0x000011
-       .romdata_t3write.o    romdata   0x002039    program   0x000000
-  .romdata_ACC-LIS2DW12.o    romdata   0x002039    program   0x000000
-        .idata___init.o_i    romdata   0x002039    program   0x000000
-  .romdata_RTC-RV8803C7.o    romdata   0x002039    program   0x000000
-        .idata_SI4463.o_i    romdata   0x002039    program   0x000000
-       .romdata_sprintf.o    romdata   0x002039    program   0x000000
-          .romdata_Util.o    romdata   0x002039    program   0x000000
-          .idata_putc.o_i    romdata   0x002039    program   0x000000
-          .idata_Main.o_i    romdata   0x002039    program   0x000000
-    .romdata__user_putc.o    romdata   0x002039    program   0x000000
-       .idata_c018i_e.o_i    romdata   0x002039    program   0x000000
-        .romdata_u2read.o    romdata   0x002039    program   0x000000
-      .idata_i2c1read.o_i    romdata   0x002039    program   0x000000
-        .idata_u1defs.o_i    romdata   0x002039    program   0x000000
-        .idata_u1read.o_i    romdata   0x002039    program   0x000000
-        .idata_u2defs.o_i    romdata   0x002039    program   0x000000
-        .idata_t2open.o_i    romdata   0x002039    program   0x000000
-      .romdata_spi1open.o    romdata   0x002039    program   0x000000
-       .romdata_u1write.o    romdata   0x002039    program   0x000000
-       .idata_u2write.o_i    romdata   0x002039    program   0x000000
-      .idata_i2c2open.o_i    romdata   0x002039    program   0x000000
-      .romdata_i2c1writ.o    romdata   0x002039    program   0x000000
-      .romdata_i2c1open.o    romdata   0x002039    program   0x000000
-      .romdata_i2c2writ.o    romdata   0x002039    program   0x000000
-        .romdata_u1open.o    romdata   0x002039    program   0x000000
-      .idata_spi1writ.o_i    romdata   0x002039    program   0x000000
-           .code_u2defs.o       code   0x00203a    program   0x000000
-       .code__user_putc.o       code   0x00203a    program   0x000002
-          .code_c018i_e.o       code   0x00203a    program   0x000000
-           .code___init.o       code   0x00203c    program   0x000002
+             .code_Main.o       code   0x000e16    program   0x00059e
+                     PROG       code   0x0013b4    program   0x0002b6
+           .code_SI4463.o       code   0x00166a    program   0x00019e
+     .code_ACC-LIS2DW12.o       code   0x001808    program   0x00016a
+             .stringtable    romdata   0x001972    program   0x0000bd
+       .idata_t3write.o_i    romdata   0x001a2f    program   0x000000
+      .romdata_spi1writ.o    romdata   0x001a2f    program   0x000000
+        .idata_u1open.o_i    romdata   0x001a2f    program   0x000000
+      .idata_i2c1open.o_i    romdata   0x001a2f    program   0x000000
+      .idata_i2c2writ.o_i    romdata   0x001a2f    program   0x000000
+      .idata_i2c1writ.o_i    romdata   0x001a2f    program   0x000000
+      .romdata_i2c2open.o    romdata   0x001a2f    program   0x000000
+       .romdata_u2write.o    romdata   0x001a2f    program   0x000000
+      .idata_spi1open.o_i    romdata   0x001a2f    program   0x000000
+       .idata_u1write.o_i    romdata   0x001a2f    program   0x000000
+      .romdata_i2c1read.o    romdata   0x001a2f    program   0x000000
+        .romdata_u2defs.o    romdata   0x001a2f    program   0x000000
+        .romdata_t2open.o    romdata   0x001a2f    program   0x000000
+        .romdata_u1defs.o    romdata   0x001a2f    program   0x000000
+        .romdata_u1read.o    romdata   0x001a2f    program   0x000000
+        .idata_u2read.o_i    romdata   0x001a2f    program   0x000000
+          .romdata_Main.o    romdata   0x001a2f    program   0x000000
+          .romdata_putc.o    romdata   0x001a2f    program   0x000000
+    .idata__user_putc.o_i    romdata   0x001a2f    program   0x000000
+      .idata_vfprintf.o_i    romdata   0x001a2f    program   0x000000
+          .idata_Util.o_i    romdata   0x001a2f    program   0x000000
+       .idata_sprintf.o_i    romdata   0x001a2f    program   0x000000
+        .romdata_SI4463.o    romdata   0x001a2f    program   0x000000
+  .idata_RTC-RV8803C7.o_i    romdata   0x001a2f    program   0x000000
+        .romdata___init.o    romdata   0x001a2f    program   0x000000
+  .idata_ACC-LIS2DW12.o_i    romdata   0x001a2f    program   0x000000
+       .romdata_c018i_e.o    romdata   0x001a2f    program   0x000000
+     .code_RTC-RV8803C7.o       code   0x001a30    program   0x000000
+               _cinit_scn       code   0x001a30    program   0x00009e
+           .code_u1defs.o       code   0x001a30    program   0x000000
+         .code_i2c1writ.o       code   0x001ace    program   0x000082
+         .code_i2c2writ.o       code   0x001b50    program   0x00007c
+          .code_sprintf.o       code   0x001bcc    program   0x000072
+           .code_u1open.o       code   0x001c3e    program   0x00006c
+                   STRING       code   0x001caa    program   0x000066
+             .code_putc.o       code   0x001d10    program   0x000066
+         .code_spi1open.o       code   0x001d76    program   0x00005e
+           .code_u2read.o       code   0x001dd4    program   0x00003e
+           .code_u1read.o       code   0x001e12    program   0x00003e
+         .code_spi1writ.o       code   0x001e50    program   0x00003a
+           .code_t2open.o       code   0x001e8a    program   0x000034
+          .code_t3write.o       code   0x001ebe    program   0x000030
+         .code_i2c2open.o       code   0x001eee    program   0x000030
+         .code_i2c1open.o       code   0x001f1e    program   0x000030
+          .code_u2write.o       code   0x001f4e    program   0x00002e
+          .code_u1write.o       code   0x001f7c    program   0x00002e
+                    CTYPE       code   0x001faa    program   0x000024
+             D100TCYXCODE       code   0x001fce    program   0x000020
+                    .code       code   0x001fee    program   0x000020
+                    STDIO       code   0x00200e    program   0x00001c
+             _startup_scn       code   0x00202a    program   0x00001a
+         .code_i2c1read.o       code   0x002044    program   0x00001a
+      .romdata_vfprintf.o    romdata   0x00205e    program   0x000011
+       .romdata_t3write.o    romdata   0x00206f    program   0x000000
+  .romdata_ACC-LIS2DW12.o    romdata   0x00206f    program   0x000000
+        .idata___init.o_i    romdata   0x00206f    program   0x000000
+  .romdata_RTC-RV8803C7.o    romdata   0x00206f    program   0x000000
+        .idata_SI4463.o_i    romdata   0x00206f    program   0x000000
+       .romdata_sprintf.o    romdata   0x00206f    program   0x000000
+          .romdata_Util.o    romdata   0x00206f    program   0x000000
+          .idata_putc.o_i    romdata   0x00206f    program   0x000000
+          .idata_Main.o_i    romdata   0x00206f    program   0x000000
+    .romdata__user_putc.o    romdata   0x00206f    program   0x000000
+       .idata_c018i_e.o_i    romdata   0x00206f    program   0x000000
+        .romdata_u2read.o    romdata   0x00206f    program   0x000000
+      .idata_i2c1read.o_i    romdata   0x00206f    program   0x000000
+        .idata_u1defs.o_i    romdata   0x00206f    program   0x000000
+        .idata_u1read.o_i    romdata   0x00206f    program   0x000000
+        .idata_u2defs.o_i    romdata   0x00206f    program   0x000000
+        .idata_t2open.o_i    romdata   0x00206f    program   0x000000
+      .romdata_spi1open.o    romdata   0x00206f    program   0x000000
+       .romdata_u1write.o    romdata   0x00206f    program   0x000000
+       .idata_u2write.o_i    romdata   0x00206f    program   0x000000
+      .idata_i2c2open.o_i    romdata   0x00206f    program   0x000000
+      .romdata_i2c1writ.o    romdata   0x00206f    program   0x000000
+      .romdata_i2c1open.o    romdata   0x00206f    program   0x000000
+      .romdata_i2c2writ.o    romdata   0x00206f    program   0x000000
+        .romdata_u1open.o    romdata   0x00206f    program   0x000000
+      .idata_spi1writ.o_i    romdata   0x00206f    program   0x000000
+           .code_u2defs.o       code   0x002070    program   0x000000
+       .code__user_putc.o       code   0x002070    program   0x000002
+          .code_c018i_e.o       code   0x002070    program   0x000000
+           .code___init.o       code   0x002072    program   0x000002
     .config_300001_Main.o    romdata   0x300001    program   0x000001
     .config_300005_Main.o    romdata   0x300005    program   0x000001
     .config_300006_Main.o    romdata   0x300006    program   0x000001
@@ -165,12 +165,12 @@ Linker Map File - Created Wed May 23 12:03:16 2018
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x0019f8      
-                            0x0019fa    0x002038      
-                            0x00203a    0x00203d      
+                            0x000000    0x001a2e      
+                            0x001a30    0x00206e      
+                            0x002070    0x002073      
                             0x300001    0x300001      
                             0x300005    0x300006      
-            8255 out of 66584 program addresses used, program memory utilization is 12%
+            8309 out of 66584 program addresses used, program memory utilization is 12%
 
 
 
@@ -181,81 +181,81 @@ Linker Map File - Created Wed May 23 12:03:16 2018
                  BCD2Byte   0x0009f6    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Util.c
                    Blink1   0x000b26    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Util.c
                    Blink2   0x000bde    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Util.c
-                   D100_1   0x001faa    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
-                    D100x   0x001fa8    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
-                   D1616S   0x0013c0    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                D1616SNEG   0x0013ce    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                 D1616SOK   0x0013ca    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                D1616SPOS   0x0013de    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                  D1616SX   0x001404    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                  DA1616S   0x0013b0    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                   D100_1   0x001fe0    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
+                    D100x   0x001fde    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
+                   D1616S   0x0013f6    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                D1616SNEG   0x001404    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                 D1616SOK   0x001400    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                D1616SPOS   0x001414    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                  D1616SX   0x00143a    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                  DA1616S   0x0013e6    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
                     Delay   0x000a9a    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Util.c
-             Delay100TCYx   0x001f98    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
-      DoCheckCTSManyTimes   0x001776    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
-                DoReadInc   0x0017e0    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\ACC-LIS2DW12.c
-             DoResetRadio   0x001646    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
-             DoStartRadio   0x001664    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
-            DoStartST_ACC   0x0018e4    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\ACC-LIS2DW12.c
+             Delay100TCYx   0x001fce    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
+      DoCheckCTSManyTimes   0x0017ac    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
+                DoReadInc   0x001816    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\ACC-LIS2DW12.c
+             DoResetRadio   0x00167c    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
+             DoStartRadio   0x00169a    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
+            DoStartST_ACC   0x00191a    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\ACC-LIS2DW12.c
                   InitCPU   0x00081e    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Util.c
                 MyReadSPI   0x000a28    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Util.c
                MyWriteSPI   0x000a60    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Util.c
     OSCILLATOR_Initialize   0x000858    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Util.c
-               Open1USART   0x001c08    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u1open.c
-                 OpenI2C1   0x001ee8    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c1open.c
-                 OpenI2C2   0x001eb8    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c2open.c
-                 OpenSPI1   0x001d40    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\SPI\spi1open.c
-               OpenTimer2   0x001e54    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t2open.c
-                  RESTORE   0x0013f6    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                  RESTORE   0x001584    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-                  RESTORE   0x001478    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-              RETQUOTIENT   0x001470    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-              RETQUOTIENT   0x001574    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-              RETQUOTIENT   0x0013ee    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-               Read1USART   0x001ddc    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u1read.c
-               Read2USART   0x001d9e    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u2read.c
-            ReadFromRadio   0x0016bc    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
-                 ReadI2C1   0x00200e    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c1read.c
-                  SETSIGN   0x00139e    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                 SETUPSTK   0x00140e    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-                 SETUPSTK   0x00137e    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                 SETUPSTK   0x0014ee    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+               Open1USART   0x001c3e    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u1open.c
+                 OpenI2C1   0x001f1e    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c1open.c
+                 OpenI2C2   0x001eee    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c2open.c
+                 OpenSPI1   0x001d76    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\SPI\spi1open.c
+               OpenTimer2   0x001e8a    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t2open.c
+                  RESTORE   0x00142c    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                  RESTORE   0x0015ba    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+                  RESTORE   0x0014ae    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+              RETQUOTIENT   0x0014a6    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+              RETQUOTIENT   0x0015aa    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+              RETQUOTIENT   0x001424    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+               Read1USART   0x001e12    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u1read.c
+               Read2USART   0x001dd4    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u2read.c
+            ReadFromRadio   0x0016f2    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
+                 ReadI2C1   0x002044    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c1read.c
+                  SETSIGN   0x0013d4    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                 SETUPSTK   0x001444    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+                 SETUPSTK   0x0013b4    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                 SETUPSTK   0x001524    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
         SPI1_Exchange8bit   0x000a40    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Util.c
              SkrivBuffert   0x000e16    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
                 TestaVSEL   0x000ca0    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Util.c
-                ToggleACC   0x0017d2    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\ACC-LIS2DW12.c
-              ToggleRadio   0x001634    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
-              Write1USART   0x001f46    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u1write.c
-              Write2USART   0x001f18    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u2write.c
-                WriteI2C1   0x001a98    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c1writ.c
-                WriteI2C2   0x001b1a    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c2writ.c
-                WriteSPI1   0x001e1a    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\SPI\spi1writ.c
-              WriteTimer3   0x001e88    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t3write.c
-                   _2jEnd   0x001cc4    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
-       _D100TCYXCODE_000A   0x001fa2    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
-       _D100TCYXCODE_000C   0x001fa4    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
-       _D100TCYXCODE_0016   0x001fae    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
-       _D100TCYXCODE_001C   0x001fb4    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
-       ___return_lbl00000   0x0017de    program     static                          
+                ToggleACC   0x001808    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\ACC-LIS2DW12.c
+              ToggleRadio   0x00166a    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
+              Write1USART   0x001f7c    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u1write.c
+              Write2USART   0x001f4e    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u2write.c
+                WriteI2C1   0x001ace    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c1writ.c
+                WriteI2C2   0x001b50    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c2writ.c
+                WriteSPI1   0x001e50    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\SPI\spi1writ.c
+              WriteTimer3   0x001ebe    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t3write.c
+                   _2jEnd   0x001cfa    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
+       _D100TCYXCODE_000A   0x001fd8    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
+       _D100TCYXCODE_000C   0x001fda    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
+       _D100TCYXCODE_0016   0x001fe4    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
+       _D100TCYXCODE_001C   0x001fea    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
+       ___return_lbl00000   0x001814    program     static                          
        ___return_lbl00000   0x000004    program     static                          
-       ___return_lbl00001   0x0018dc    program     static                          
-       ___return_lbl00001   0x00200c    program     static                          
-       ___return_lbl00002   0x001a96    program     static                          
+       ___return_lbl00001   0x001912    program     static                          
+       ___return_lbl00001   0x002042    program     static                          
+       ___return_lbl00002   0x001acc    program     static                          
        ___return_lbl00002   0x0009ee    program     static                          
-       ___return_lbl00010   0x0017ca    program     static                          
-        ___while_lbl00011   0x0017a0    program     static                          
-        ___while_lbl00012   0x0017c6    program     static                          
+       ___return_lbl00010   0x001800    program     static                          
+        ___while_lbl00011   0x0017d6    program     static                          
+        ___while_lbl00012   0x0017fc    program     static                          
                __config_0   0x300001    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
                __config_1   0x300005    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
                __config_2   0x300006    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
-                 __div16s   0x001396    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                 __div16u   0x001426    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-                 __div32u   0x001506    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-                   __init   0x00203c    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\__init.c
-                 __mod16s   0x00139c    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                 __mod16u   0x00142c    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-                 __mod32u   0x00150c    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-                  __mul16   0x001486    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\mul16.asm
-                  __mul32   0x001592    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\mul32.asm
+                 __div16s   0x0013cc    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                 __div16u   0x00145c    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+                 __div32u   0x00153c    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+                   __init   0x002072    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\__init.c
+                 __mod16s   0x0013d2    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                 __mod16u   0x001462    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+                 __mod32u   0x001542    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+                  __mul16   0x0014bc    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\mul16.asm
+                  __mul32   0x0015c8    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\mul32.asm
                    __pa_0   0x0006ca    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
                    __pa_1   0x0006d8    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
                   __pa_10   0x000766    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
@@ -280,56 +280,56 @@ Linker Map File - Created Wed May 23 12:03:16 2018
                    __pa_7   0x00073c    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
                    __pa_8   0x000748    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
                    __pa_9   0x00075a    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-               __string_0   0x0019cc    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
-               __string_0   0x001992    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
-               __string_1   0x001961    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
-               __string_2   0x00193c    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
+               __string_0   0x001a02    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
+               __string_0   0x0019c8    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
+               __string_1   0x001997    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
+               __string_2   0x001972    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
                __tmplbl_0   0x0008c8    program     static                          
                __tmplbl_1   0x0008c4    program     static                          
-               __tmplbl_2   0x0017ac    program     static                          
-               __tmplbl_3   0x0017a6    program     static                          
+               __tmplbl_2   0x0017e2    program     static                          
+               __tmplbl_3   0x0017dc    program     static                          
                __tmplbl_6   0x0008c2    program     static                          
-            __zero_memory   0x001fb8    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
-                _do_cinit   0x0019fa    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
-            _early16uexit   0x001430    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-            _early32uexit   0x001510    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+            __zero_memory   0x001fee    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
+                _do_cinit   0x001a30    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
+            _early16uexit   0x001466    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+            _early32uexit   0x001546    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
                    _entry   0x000000    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
-                   _false   0x001554    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-                 _startup   0x001ff4    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
-              _usart_putc   0x001fd8    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\_usartpc.asm
-               _user_putc   0x00203a    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\_user_putc.c
-                compare_l   0x001fce    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
-                copy_loop   0x001a6c    program     static                          
-            copy_one_byte   0x001a72    program     static                          
-                divmod16u   0x001432    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-                divmod32u   0x001512    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-                     done   0x001a96    program     static                          
-             done_copying   0x001a80    program     static                          
+                   _false   0x00158a    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+                 _startup   0x00202a    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
+              _usart_putc   0x00200e    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\_usartpc.asm
+               _user_putc   0x002070    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\_user_putc.c
+                compare_l   0x002004    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
+                copy_loop   0x001aa2    program     static                          
+            copy_one_byte   0x001aa8    program     static                          
+                divmod16u   0x001468    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+                divmod32u   0x001548    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+                     done   0x001acc    program     static                          
+             done_copying   0x001ab6    program     static                          
                       dow   0x000864    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Util.c
-                  endloop   0x001458    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-                  isdigit   0x001f74    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
-                     jEnd   0x001c8e    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
-                     jEnd   0x001cc6    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
-                    jLoop   0x001c84    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
-                    jLoop   0x001cae    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
-                   jMatch   0x001f94    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
-                 jNoMatch   0x001f96    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
-                     loop   0x001fe8    program     static E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\_usartpc.asm
-                     loop   0x002002    program     static                          
-                     loop   0x001520    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-                     loop   0x00143c    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-                   loop_h   0x001fc6    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
-                   loop_l   0x001fd0    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
+                  endloop   0x00148e    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+                  isdigit   0x001faa    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
+                     jEnd   0x001cc4    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
+                     jEnd   0x001cfc    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
+                    jLoop   0x001cba    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
+                    jLoop   0x001ce4    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
+                   jMatch   0x001fca    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
+                 jNoMatch   0x001fcc    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
+                     loop   0x00201e    program     static E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\_usartpc.asm
+                     loop   0x002038    program     static                          
+                     loop   0x001556    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+                     loop   0x001472    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+                   loop_h   0x001ffc    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
+                   loop_l   0x002006    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
                      main   0x000eac    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
-                     putc   0x001cda    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\putc.c
-                 s_digits   0x002028    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+                     putc   0x001d10    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\putc.c
+                 s_digits   0x00205e    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
             s_put_n_chars   0x000008    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-                  sprintf   0x001b96    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\sprintf.c
-                   strlen   0x001c74    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
-                strlenpgm   0x001c90    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
-                     test   0x001a14    program     static                          
+                  sprintf   0x001bcc    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\sprintf.c
+                   strlen   0x001caa    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
+                strlenpgm   0x001cc6    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
+                     test   0x001a4a    program     static                          
                  vfprintf   0x00003a    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-               zero_block   0x001fc6    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
+               zero_block   0x001ffc    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
                    ADCON0   0x000fc2       data     extern E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
                ADCON0bits   0x000fc2       data     extern E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
                    ADCON1   0x000fc1       data     extern E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
@@ -821,110 +821,110 @@ Linker Map File - Created Wed May 23 12:03:16 2018
                 TestaVSEL   0x000ca0    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Util.c
              SkrivBuffert   0x000e16    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
                      main   0x000eac    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
-                 SETUPSTK   0x00137e    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                 __div16s   0x001396    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                 __mod16s   0x00139c    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                  SETSIGN   0x00139e    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                  DA1616S   0x0013b0    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                   D1616S   0x0013c0    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                 D1616SOK   0x0013ca    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                D1616SNEG   0x0013ce    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                D1616SPOS   0x0013de    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-              RETQUOTIENT   0x0013ee    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                  RESTORE   0x0013f6    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                  D1616SX   0x001404    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
-                 SETUPSTK   0x00140e    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-                 __div16u   0x001426    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-                 __mod16u   0x00142c    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-            _early16uexit   0x001430    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-                divmod16u   0x001432    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-                     loop   0x00143c    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-                  endloop   0x001458    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-              RETQUOTIENT   0x001470    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-                  RESTORE   0x001478    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
-                  __mul16   0x001486    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\mul16.asm
-                 SETUPSTK   0x0014ee    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-                 __div32u   0x001506    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-                 __mod32u   0x00150c    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-            _early32uexit   0x001510    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-                divmod32u   0x001512    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-                     loop   0x001520    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-                   _false   0x001554    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-              RETQUOTIENT   0x001574    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-                  RESTORE   0x001584    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
-                  __mul32   0x001592    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\mul32.asm
-              ToggleRadio   0x001634    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
-             DoResetRadio   0x001646    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
-             DoStartRadio   0x001664    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
-            ReadFromRadio   0x0016bc    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
-      DoCheckCTSManyTimes   0x001776    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
-        ___while_lbl00011   0x0017a0    program     static                          
-               __tmplbl_3   0x0017a6    program     static                          
-               __tmplbl_2   0x0017ac    program     static                          
-        ___while_lbl00012   0x0017c6    program     static                          
-       ___return_lbl00010   0x0017ca    program     static                          
-                ToggleACC   0x0017d2    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\ACC-LIS2DW12.c
-       ___return_lbl00000   0x0017de    program     static                          
-                DoReadInc   0x0017e0    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\ACC-LIS2DW12.c
-       ___return_lbl00001   0x0018dc    program     static                          
-            DoStartST_ACC   0x0018e4    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\ACC-LIS2DW12.c
-               __string_2   0x00193c    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
-               __string_1   0x001961    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
-               __string_0   0x001992    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
-               __string_0   0x0019cc    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
-                _do_cinit   0x0019fa    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
-                     test   0x001a14    program     static                          
-                copy_loop   0x001a6c    program     static                          
-            copy_one_byte   0x001a72    program     static                          
-             done_copying   0x001a80    program     static                          
-       ___return_lbl00002   0x001a96    program     static                          
-                     done   0x001a96    program     static                          
-                WriteI2C1   0x001a98    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c1writ.c
-                WriteI2C2   0x001b1a    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c2writ.c
-                  sprintf   0x001b96    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\sprintf.c
-               Open1USART   0x001c08    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u1open.c
-                   strlen   0x001c74    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
-                    jLoop   0x001c84    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
-                     jEnd   0x001c8e    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
-                strlenpgm   0x001c90    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
-                    jLoop   0x001cae    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
-                   _2jEnd   0x001cc4    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
-                     jEnd   0x001cc6    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
-                     putc   0x001cda    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\putc.c
-                 OpenSPI1   0x001d40    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\SPI\spi1open.c
-               Read2USART   0x001d9e    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u2read.c
-               Read1USART   0x001ddc    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u1read.c
-                WriteSPI1   0x001e1a    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\SPI\spi1writ.c
-               OpenTimer2   0x001e54    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t2open.c
-              WriteTimer3   0x001e88    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t3write.c
-                 OpenI2C2   0x001eb8    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c2open.c
-                 OpenI2C1   0x001ee8    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c1open.c
-              Write2USART   0x001f18    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u2write.c
-              Write1USART   0x001f46    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u1write.c
-                  isdigit   0x001f74    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
-                   jMatch   0x001f94    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
-                 jNoMatch   0x001f96    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
-             Delay100TCYx   0x001f98    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
-       _D100TCYXCODE_000A   0x001fa2    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
-       _D100TCYXCODE_000C   0x001fa4    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
-                    D100x   0x001fa8    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
-                   D100_1   0x001faa    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
-       _D100TCYXCODE_0016   0x001fae    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
-       _D100TCYXCODE_001C   0x001fb4    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
-            __zero_memory   0x001fb8    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
-                   loop_h   0x001fc6    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
-               zero_block   0x001fc6    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
-                compare_l   0x001fce    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
-                   loop_l   0x001fd0    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
-              _usart_putc   0x001fd8    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\_usartpc.asm
-                     loop   0x001fe8    program     static E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\_usartpc.asm
-                 _startup   0x001ff4    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
-                     loop   0x002002    program     static                          
-       ___return_lbl00001   0x00200c    program     static                          
-                 ReadI2C1   0x00200e    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c1read.c
-                 s_digits   0x002028    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
-               _user_putc   0x00203a    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\_user_putc.c
-                   __init   0x00203c    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\__init.c
+                 SETUPSTK   0x0013b4    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                 __div16s   0x0013cc    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                 __mod16s   0x0013d2    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                  SETSIGN   0x0013d4    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                  DA1616S   0x0013e6    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                   D1616S   0x0013f6    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                 D1616SOK   0x001400    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                D1616SNEG   0x001404    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                D1616SPOS   0x001414    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+              RETQUOTIENT   0x001424    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                  RESTORE   0x00142c    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                  D1616SX   0x00143a    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16s.asm
+                 SETUPSTK   0x001444    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+                 __div16u   0x00145c    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+                 __mod16u   0x001462    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+            _early16uexit   0x001466    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+                divmod16u   0x001468    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+                     loop   0x001472    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+                  endloop   0x00148e    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+              RETQUOTIENT   0x0014a6    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+                  RESTORE   0x0014ae    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div16u.asm
+                  __mul16   0x0014bc    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\mul16.asm
+                 SETUPSTK   0x001524    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+                 __div32u   0x00153c    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+                 __mod32u   0x001542    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+            _early32uexit   0x001546    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+                divmod32u   0x001548    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+                     loop   0x001556    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+                   _false   0x00158a    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+              RETQUOTIENT   0x0015aa    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+                  RESTORE   0x0015ba    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\math\div32u.asm
+                  __mul32   0x0015c8    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\math\mul32.asm
+              ToggleRadio   0x00166a    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
+             DoResetRadio   0x00167c    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
+             DoStartRadio   0x00169a    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
+            ReadFromRadio   0x0016f2    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
+      DoCheckCTSManyTimes   0x0017ac    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
+        ___while_lbl00011   0x0017d6    program     static                          
+               __tmplbl_3   0x0017dc    program     static                          
+               __tmplbl_2   0x0017e2    program     static                          
+        ___while_lbl00012   0x0017fc    program     static                          
+       ___return_lbl00010   0x001800    program     static                          
+                ToggleACC   0x001808    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\ACC-LIS2DW12.c
+       ___return_lbl00000   0x001814    program     static                          
+                DoReadInc   0x001816    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\ACC-LIS2DW12.c
+       ___return_lbl00001   0x001912    program     static                          
+            DoStartST_ACC   0x00191a    program     extern C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\ACC-LIS2DW12.c
+               __string_2   0x001972    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
+               __string_1   0x001997    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
+               __string_0   0x0019c8    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
+               __string_0   0x001a02    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\SI4463.c
+                _do_cinit   0x001a30    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
+                     test   0x001a4a    program     static                          
+                copy_loop   0x001aa2    program     static                          
+            copy_one_byte   0x001aa8    program     static                          
+             done_copying   0x001ab6    program     static                          
+       ___return_lbl00002   0x001acc    program     static                          
+                     done   0x001acc    program     static                          
+                WriteI2C1   0x001ace    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c1writ.c
+                WriteI2C2   0x001b50    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c2writ.c
+                  sprintf   0x001bcc    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\sprintf.c
+               Open1USART   0x001c3e    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u1open.c
+                   strlen   0x001caa    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
+                    jLoop   0x001cba    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
+                     jEnd   0x001cc4    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\strlen.asm
+                strlenpgm   0x001cc6    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
+                    jLoop   0x001ce4    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
+                   _2jEnd   0x001cfa    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
+                     jEnd   0x001cfc    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\slenpgm.asm
+                     putc   0x001d10    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\putc.c
+                 OpenSPI1   0x001d76    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\SPI\spi1open.c
+               Read2USART   0x001dd4    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u2read.c
+               Read1USART   0x001e12    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u1read.c
+                WriteSPI1   0x001e50    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\SPI\spi1writ.c
+               OpenTimer2   0x001e8a    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t2open.c
+              WriteTimer3   0x001ebe    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t3write.c
+                 OpenI2C2   0x001eee    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c2open.c
+                 OpenI2C1   0x001f1e    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c1open.c
+              Write2USART   0x001f4e    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u2write.c
+              Write1USART   0x001f7c    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\u1write.c
+                  isdigit   0x001faa    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
+                   jMatch   0x001fca    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
+                 jNoMatch   0x001fcc    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\isdigit.asm
+             Delay100TCYx   0x001fce    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
+       _D100TCYXCODE_000A   0x001fd8    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
+       _D100TCYXCODE_000C   0x001fda    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
+                    D100x   0x001fde    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
+                   D100_1   0x001fe0    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
+       _D100TCYXCODE_0016   0x001fe4    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
+       _D100TCYXCODE_001C   0x001fea    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\delays\d100tcyx.asm
+            __zero_memory   0x001fee    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
+                   loop_h   0x001ffc    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
+               zero_block   0x001ffc    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
+                compare_l   0x002004    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
+                   loop_l   0x002006    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\proc\p18lf46k22.asm
+              _usart_putc   0x00200e    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\_usartpc.asm
+                     loop   0x00201e    program     static E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\_usartpc.asm
+                 _startup   0x00202a    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\startup\c018i_e.c
+                     loop   0x002038    program     static                          
+       ___return_lbl00001   0x002042    program     static                          
+                 ReadI2C1   0x002044    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\i2c\i2c1read.c
+                 s_digits   0x00205e    program     static E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\vfprintf.c
+               _user_putc   0x002070    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\_user_putc.c
+                   __init   0x002072    program     extern E:\3.46\pic18-lt\cxx-framework\src\extended\stdclib\__init.c
                __config_0   0x300001    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
                __config_1   0x300005    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c
                __config_2   0x300006    program     static C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Koden\Main.c

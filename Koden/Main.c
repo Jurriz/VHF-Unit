@@ -393,7 +393,22 @@ void main(void)
 //        Blink2();
 //    
         ReadFromRadio(0x01, 5);
+        
+        DoCheckCTSManyTimes();
+        
+        // ----------------------------------------------------  Startar TX
+        
+        MyWriteSPI(0x31);           // Skcikar till START_TX registeret
+        
+        MyWriteSPI(0x77);           // Channel to transmit package on
+        MyWriteSPI(0x31);           // Condition  (0111 0000)
+        MyWriteSPI(0x00);           // TX_LEN
+        MyWriteSPI(0x00);           // TX_LEN
+        
+        DoCheckCTSManyTimes();
+        
         CloseSPI1();
+        
     }
     
     while(1)

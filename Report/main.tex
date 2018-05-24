@@ -40,8 +40,8 @@
 % header layout
 \usepackage{suffix}
 
-% Abbreviations and glossary - ,toc,section=section -section=chapter
-\usepackage[automake,acronym,toc,section=chapter,numberedsection=autolabel]{glossaries-extra}
+% Abbreviations and glossary - ,toc,section=section -section=chapter - ,acronym
+\usepackage[automake,toc,section=chapter,numberedsection=autolabel]{glossaries-extra}
 \makeglossaries
 \setabbreviationstyle[acronym]{long-postshort-user}
 \glssetcategoryattribute{acronym}{nohyperfirst}{true}
@@ -119,9 +119,9 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
-%\input{glossary.tex}
-
 \input{glossary.tex}
+
+%\input{glossary.tex}
 
 \begin{document}
 
@@ -151,6 +151,7 @@
 
 \clearpage
 \printglossary[type=\acronymtype,title=Abbrevations]
+%\printglossary
 \thispagestyle{plain}
 %\printglossary[type= main]
 
