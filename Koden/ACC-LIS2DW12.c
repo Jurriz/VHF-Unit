@@ -59,13 +59,23 @@ char DoStartST_ACC(void)
 	unsigned char lReturn;
 	ACC_ENABLE = 0;                 // CS dras låg
     
-	MyWriteSPI(0x24);               // Skriv till 0x22 REG8 (0x22))
-	MyWriteSPI(0x80);               // Software Reset och Reboot (0x81)
+	//MyWriteSPI(0x21);               // LIS2DW12 CTRL2 (0x22)
+	//MyWriteSPI(0xC0);               // LIS2DW12 Software Reset och Reboot (0x81)
+    
+    MyWriteSPI(0x24);               // LIS2DH12 CTRL_REG5
+    MyWriteSPI(0x80);               // LIS2DH12 Boot
+    
+    Delay(100);
     
     ToggleACC(); 
     
-    WriteSPI1(0x20);                // Skriv till CTRL_REG1..  (0x20)
-    WriteSPI1(0x77);                // 0111 0111 vilket ger accelerometern hastigheten 400/200 Hz (0x98)
+    //WriteSPI1(0x20);                // LIS2DW12 CTRL1  (0x20)
+    //WriteSPI1(0x70);                // LIS2DW12 0111 0000 vilket ger accelerometern hastigheten 400/200 Hz (0x98)
+    
+    WriteSPI1(0x20);                // LIS2DH12 CTRL_REG1  (0x20)
+    WriteSPI1(0x77);                // LIS2DH12 0111 0111 vilket ger accelerometern hastigheten 400/200 Hz (0x98)
+    
+    Delay(100);
     
     ToggleACC();
     

@@ -4,7 +4,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage[numbers]{natbib}
 %\bibliographystyle{unsrtnat}
-\usepackage{lipsum}
 \usepackage[toc,page]{appendix}
 \usepackage{amssymb,amsmath}
 \usepackage{gensymb}
@@ -40,15 +39,15 @@
 % header layout
 \usepackage{suffix}
 
-% Abbreviations and glossary - ,toc,section=section -section=chapter - ,acronym
-\usepackage[automake,toc,section=chapter,numberedsection=autolabel]{glossaries-extra}
+% Abbreviations and glossary - ,toc,section=section -section=chapter - ,acronym -, numberedsection=autolabel,,acronym ,toc {}
+\usepackage[automake,acronym,section=chapter]{glossaries-extra}
 \makeglossaries
-\setabbreviationstyle[acronym]{long-postshort-user}
-\glssetcategoryattribute{acronym}{nohyperfirst}{true}
-\renewcommand*{\glsxtruserparen}[2]{
-  \glsxtrfullsep{#2}
-  (\glshyperlink[#1]{#2})
-}
+%\setabbreviationstyle[acronym]{long-postshort-user}
+%\glssetcategoryattribute{acronym}{nohyperfirst}{true}
+%\renewcommand*{\glsxtruserparen}[2]{
+ % \glsxtrfullsep{#2}
+  %(\glshyperlink[#1]{#2})
+%}
 
 %% Name of the project, can always be called by: \project
 \newcommand{\project}{\emph{VHF-Unit}}	
@@ -119,10 +118,8 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
+%% Putting in the glossaries before the dokument
 \input{glossary.tex}
-
-%\input{glossary.tex}
-
 \begin{document}
 
 \begin{titlepage}
@@ -147,7 +144,11 @@
 \thispagestyle{plain}
 \vspace{0.5em}
 
+%% Vet inte vad den gör
 \setlength{\parindent}{0pt}
+
+
+%% 		Glossaries
 
 \clearpage
 \printglossary[type=\acronymtype,title=Abbrevations]

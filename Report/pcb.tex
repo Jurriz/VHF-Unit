@@ -9,29 +9,29 @@ A deeper look into each component with some information of their functionality a
 }
 \vspace{5ex}
 
-%\gls{usb}\gls{ti}\gls{via} \gls{adc}\gls{cad}\gls{drc}\gls{erc} 
-%\gls{ptc}\gls{png}\gls{lga}\gls{gpio} \gls{led}\gls{jtag}\gls{pwb}\gls{erc}
+%\gls{usb}\gls{adc}\gls{cad}\gls{drc}\gls{erc} 
+%\gls{ptc}\gls{lga}\gls{gpio} \gls{led}\gls{jtag}\gls{pwb}\gls{erc}
 %\cite{si4460}
 
 \section{Layout parameters}
 
 When starting the layout some initial rules need to be set up. These parameters are set by the board manufacturer.
 The design can be produced at different places but when ordering from this manufacturer the constraints that are used is the same parameters that the supplier uses as their standard.
-These rules and constraints may differ from one supplier to another but as the company already this supplier the same will be used for this project.
+These rules and constraints may differ from one supplier to another but as the company already uses this supplier the same will be used for this project.
 Naturally, for this project, the minimum spaces and distances that does not make for a supplement charge are chosen as the design rules. A list of these parameters can be seen below.
 
 \begin{itemize}
 \item Trace width: minimum of 6 mils (0,1524mm) 
-\item Via diameter: 10 mils
+\item \gls{via} diameter: 10 mils
 \item Maximium thickness of board
 
 \end{itemize}
  
 \subsection{Landgrid}
-The industry standard is always good to aim for, in this case, the basic designs are taken from \gls{ipcg}'s design guidline\cite{ipcg}. While these are made for optimal manufacturability the footprints used on the test board are modified to enable for easier solderability, production and rework if needed. The land grids are made slightly bigger and longer to achieve this. The downside of making the pads larger is that the final board size increases and therefore the size of the land grids require to be reduced.
+The industry standard is always good to aim for, in this case, the basic designs are taken from \gls{ipcg}'s design guidline\cite{ipcg}. While these are made for optimal manufacturability the footprints used on the test board are modified to enable for easier solderability, production and rework if needed. The landgrids are made slightly bigger and longer to achieve this. The downside of making the pads larger is that each component takes up more real estate and the final board size increases.
 
 \subsection{Easy prototyping}
-The components that are going to be used in high frequency often come in tiny packages. This gives the protypability problems with easy ability to solder and use, but the problem is that the best components used in this area of work will be small to fit in small advanced systems. To make a
+The components that are going to be used in high frequency often come in tiny packages. The best components used in this area of work will be small to fit in small modern advanced systems like mobilephones and.  This gives the protypability problems with easy ability to solder and use, To make a
 
 \section{Structure}
 The product is constructed with a number of components, which all have a central role in the final product. They can all be seen in \autoref{fig:sys_dia}. A list of the major components and their function can be seen below:
@@ -65,7 +65,12 @@ Each of the components of this project is carefully chosen to get the functional
 %The \gls{mcu} can dtad
 
 
-\section{MicroController Unit}
+\section{Micro Controller Unit}
+Every advanced system needs a central processing unit to make all the calculations needed. Why a lot of systems needs some powerful processor this system wich is a bit easier with 
+The power consumption is higly dependent on the speed of which the processor is runnig, the faster the more power it consumes and also the slower the less current it will draw. And by the \gls{mcu} beeing the component with the single higest power consumption the speed is set to a speed as low as possible. This low speed is not a concern in this particular system when the operations required is not time or speed sensitive. The voltage supplied to the \gls{mcu} is another parameter that will alter the power consumption. The comonent is a low power model which can handle a lower source voltage. A voltage between 1.7 to 3.6 is required, anything lower will not start the device and anything higer will damage the the part. 
+To get the right speed of a crystal we need to get the right product for this particular case. 
+%As a crystal 
+Many different types of oscillators exists, both internal and external types. 
 The \gls{mcu} used for this project is a processor type that is used by this company many times before and has been chosen to this project for its small size, low power draw, sufficient connections, and features. The particular processor used is the PIC18LF46K22\cite{pic18}. The version used is one with 40 pins. All the connections available are shown in \autoref{Pic18_Pinout}.
 
 \begin{figure}[H] 
@@ -75,34 +80,34 @@ The \gls{mcu} used for this project is a processor type that is used by this com
 \label{Pic18_Pinout} 
 \end{figure} 
 
-\subsection{Connenctions}
 
- \subsection{Power}
+%\subsection{Connenctions}
+
+\subsection{Power}
 Powering it is done by connecting the VDD pins to the power net. Connected to the ground is the Vss pins on the processor. To ensure the current fed is as smooth as possible capacitors are connected between these two pins. The value of these capacitors is chosen to 100nF.  
 
 \subsection{Oscillator}
-To operate the \gls{mcu} a clock signal is mandatory, this can be implemented in different ways. Either with the internal High, Medium and Low-frequency oscillator or an external one. Where the external rely on a specific circuitry to provide the clock source. Examples of external oscillators are clock modules, quartz crystal resonators or ceramic resonators and resistor-capacitor circuits. When a circuit is specified to be power efficient the speed of the clock plays a central role. As this product is specified to run on a small battery the speed of the system is kept low to increase the lifetime of the battery. The clock signal is generated from an external temperature compensated Crystal Oscillator (TCXO).
+To operate the \gls{mcu} a clock signal is mandatory, this can be implemented in different ways. Either with the internal High, Medium and Low-frequency oscillator or an external one. Where the external rely on a specific circuitry to provide the clock source. Examples of external oscillators are clock modules, quartz crystal resonators or ceramic resonators and resistor-capacitor circuits. When a circuit is specified to be power efficient the speed of the clock plays a central role. As this product is specified to run on a small battery the speed of the system is kept low to increase the lifetime of the battery. The clock signal is generated from an external \gls{tcxo}.
 
 
 \section{IMU}
-The motions of the system is measured with an IMU system. This system can be used in a lot of different cases, both to detect if the unit is stationary or moving or if there is very hard and fast movements in the product. One of the simplest IMU's is the 3-axis accelerometer, it
+The motions of the system are measured with an \gls{imu} system. This system can be used in a lot of different cases, both to detect if the unit is stationary or moving or if there are very hard and fast movements in the product. One of the simplest \gls{imu}'s is the 3-axis accelerometer, it detects accelerations in three axes, x, y, and z.
 
-\newpage
-\section{Accelerometer} %% Accelerometers
-The component used is a 3-axis, ultra-low-power and high-performance accelerometer from ST \cite{ST_acc}. The component is the simplest of IMU's that this manufacturer has and this simplicity makes for a product that is only incorporate one single function. 3-axis accelerometer means that it can measure 
 
-\section{Power}
+\newpage %% Accelerometers
+\section{Accelerometer} 
+The component used is a 3-axis, ultra-low-power and high-performance accelerometer from \gls{st} \cite{ST_acc}. The component is the simplest of \gls{imu}'s that this manufacturer has and this simplicity makes for a product that is only incorporate one single function. 3-axis accelerometer means that it can measure 
+
+\subsection{Power}
 Two voltage connections are apparent on this device, one which is called VDD and the other is called VDD-IO. The VDD is the supply voltage and VDD-IO determines the logic voltage level. 
 
 \subsection{Connenctions}
 
 
-\subsection{Software implementation}
-
-
-
 \newpage
-\section{Radio}
+\section{Radio component}
+ The radio module used in this project is from the company Silabs. The chosen radio \gls{ic} have the characteristics that are wanted in this type of product. The radio transmission used is the earlier explained class E. With this pice the class E is already implemented in the radio as this is widely used today and a very effective radio signal. 
+The type of filter used for sending radio signals at \gls{vhf} frequencies is defined in the defined 
 
 
 \subsection{Power}
@@ -112,10 +117,11 @@ Two voltage connections are apparent on this device, one which is called VDD and
  In the registers 
 
 
+\newpage
 \subsection{Solidworks PCB}
-Followit uses the PCB board design software Solidworks PCB from DASSAULT SYSTÈMES. It utilizes the industry-proven Altium design engine for layout and routing of printed circuit boards and combined with a close connection with the mechanical CAD of classical Solidworks. With this program, the PCB layout and design can be transferred seamlessly over to the mechanical environment to create an exact case or enclosure for the circuit board. The version used in this thesis is (Update 2.0).
+Followit uses the \gls{pcb} board design software Solidworks \gls{pcb} from DASSAULT SYSTÈMES. It utilizes the industry-proven Altium design engine for layout and routing of printed circuit boards and combined with a close connection with the mechanical \gls{cad} of classical Solidworks. With this program, the \gls{pcb} layout and design can be transferred seamlessly over to the mechanical environment to create an exact case or enclosure for the circuit board. The version used in this thesis is (Update 2.0).
 
 
 \section{Power consumption}
  The total power consumption is calculated by adding the current draw from each individual component together.  A different test is conducted to try different modes of the system. One describing the power consumption of only the processor. This is done by running it in an infinite loop with all the other components at the circuit powered down or in power down mode. Since the system is not supposed to be active just a small time with a longer power down mode in between the power consumption on the system has to account for a longer time span. The tests are made with a standard scheme used already by the company. The scheme consists of a small radio pulse every second and the system being inactive in between these radio pulses. 
-All the systems 
+%All the systems 

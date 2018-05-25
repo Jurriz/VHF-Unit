@@ -295,8 +295,16 @@ void main(void)
         
         while (1)
         { 
+            GREEN_LED = 1; Delay(10);
+            GREEN_LED = 0;
+                    
         // ---------- Läs från Accelerometern ----------------------------------
         OpenSPI1(SPI_FOSC_4, MODE_11, SMPMID);   // 11, SMPMID 
+        
+        nTmp = DoStartST_ACC();
+        
+        sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LIS2DW12 INITIERING:\r\n\r\n WHO_AM_I? \t0X%02X (0X44)\r\n\r\n", nTmp);
+        SkrivBuffert(szUSART_Out, 1);
         
         ACC_ENABLE = 0;
         
@@ -353,12 +361,13 @@ void main(void)
 // ---------------------------------------------------- Testar Hall Brytaren
         i = PORTBbits.RB5;
         if (i==0)
-        {
+            {
             sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n Hallswitchen är aktiv: \t %d \r\n\r\n", i);
             SkrivBuffert(szUSART_Out, 1);    
-        }
+            }
 
-        //}  
+        }  
+        while(1){
         // ----------------------------------------------------  Läs från radion
         
         OpenSPI1(SPI_FOSC_16, MODE_00, SMPEND);
@@ -392,7 +401,7 @@ void main(void)
 //        
 //        Blink2();
 //    
-        ReadFromRadio(0x01, 5);
+        ReadFromRadio(0x01, 3);
         
         DoCheckCTSManyTimes();
         

@@ -21,12 +21,16 @@ The processor does not start up on it own, much consideration needs in making ri
 Radio Chip Waking Up First, the radio is in the off state. After the SDN pulled low, wakes up and performs a Power on.
 maximum of 6 ms  (900 $\mu$ s room temperature) ready to receive commands on the SPI bus. The GPIO1 pin goes high when the radio is ready for receiving SPI commands. During the reset period, the radio cannot accept any SPI commands. 
 
-\section{Software}
+
+
+\subsection{Accelerometer implementation}
+The accelerometer communicates with \gls{spi}, this requires three wires that has to be considered in the code.
+
+
+\section{PC software}
 The foundation for every development is a good development environment, both as the circuit boards are created and the software implementations needed later in the process.
 
-(In the early days of computing, programming in Assembler was used to program almost any type of
-computer. These days, however, it is pretty much the preserve of embedded designers, particularly when
-using smaller 8-bit devices) (PIC DESIGN)
+% (PIC DESIGN)
 
 \subsection{MPLAB}
 Microchip which is the producer of the MCU used in this project has their own development environment which holds a lot of handy features when making a program for their products. 
@@ -35,6 +39,9 @@ Microchip which is the producer of the MCU used in this project has their own de
 
 \subsection{Assembly}
 The actual code that runs on this processor is assembly, the most common hardware code which is used in almost all types of MicroController units. Assembly is a hardware type language which means that describes the actual process for the 
+In the early days of computing, programming in Assembler was used to program almost any type of
+computer. These days, however, it is pretty much the preserve of embedded designers, particularly when
+using smaller 8-bit devices. \cite{designing_with_pic}
 
 \subsection{C18}
 The C program is compiled with the compiler C18. This is the compiler which has been the official compiler for this particular processor. This compiler is used for all the processors in the family PIC18. This compiler is some years old and lacks some modern features. The version used in this project is (3.47)?

@@ -18,7 +18,7 @@ Most of the \gls{ic}'s are already chosen by the company, but there are no actua
 Much consideration is taken to get the product both small and inexpensive. The cost of the \gls{pcb} depends on the size, manufacturing and the numbers of layers. The rest of the cost comes down to the components, batteries, and casing.    \\
 
 \section{Project goals}
-Followit wants to produce a \gls{vhf} radio unit which has a powerful \gls{mcu} for advanced programs and with some extra features that make it possible to use the finished product in different areas and with different types of characteristics. The project involves a first test prototype and also a final version which is presented to the company as a finalized product ready for marketing and sales. To ensure proper functionality of the prototype a test program is written to the system to test the connection and functionality of all the components and accessibilities. 
+Followit wants to produce a \gls{vhf} radio unit which has a powerful \gls{mcu} for advanced programs and with some extra features that make it possible to use the finished product in different areas and with different types of characteristics. The project involves a first test prototype and a final version which is presented to the company as a finalized product ready for marketing and sales. To ensure proper functionality of the prototype a test program is written to the system to test the connection and functionality of all the components and accessibilities. 
 
 Both the cost of the bare board and the components need to be kept down.  This requires some special attention to the board design, the manufacturing and component selection.
 There will be a study of the ways of making the product both small and cheap at the same time. The problem formulation will be considering making a prototype which is tiny but has a high manufacturing cost and an inexpensive that have a bigger physical size. The procedure of finding a good balance between the two is explained later in further detail.
@@ -31,22 +31,20 @@ In case of time, a casing for the product as well as battery considerations will
 
 \newpage
 \section{Approach}
-The idea that was presented to me was a half-finished principle that I needed to understand and also expand with all the necessary components that are not mentioned in this design. The initial work prior to this project can be seen in \autoref{fig:anders_koppling}
-
-
-To get an understanding of all the parts and what there function are a list is constructed for a simple overview of the system.
+The idea that was presented to me was a half-finished principle that I needed to understand and also expand with all the necessary components that are not mentioned in this design. The initial work prior to this project can be seen in \autoref{fig:anders_koppling}.
+To get an understanding of all the parts and what there function are, a list is constructed for a simple overview of the system.
 
 \begin{itemize}[noitemsep]
 	\item MCU - For processing data and connecting all the periferals together to a complete system.
 	\item Accelerometer - Used for measuring movements. Important for knowing how much the device is moving or if lying still.
-	\item Radio - All the communication to the outside world is done using radio transmissions. 
+	\item Radio - All the communication to and from the outside world is done using radio transmissions. 
 	\item RF switch - To switch between two low pass filter antennas from a single output.
 	\item Real time Clock - The best way to keep an exact time, used for the system to keep track of the time even after one year of constant operation. 
 	\item Hall switch - To turn on and off the device, a solution that is already used by the company.
 	\item Programmable buck converter - To alternate the supply voltage for the system. 
 	\item Logical inverter - To invert the signal for the programmable buck converter.
 	\item LDO - Supply the radio oscillator.
-	\item Other components - Two LED's, two oscillators, one for the processor and one for the radio module.
+	\item Miscellaneous components - Two \gls{led}'s, two oscillators, one for the processor and one for the radio module.
 \end{itemize}
 
 

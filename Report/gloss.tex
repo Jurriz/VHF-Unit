@@ -12,11 +12,6 @@ description={An Analog-to-digital converter (ADC) is a system that converts
 first={Analog-to-digital converter (ADC)\glsadd{adcg}}}
 
 
-%%% Extra nödlösning för glossaries
-\newglossaryentry{null}{name={},
-    description={Nothing here to see}}
-
-
 %%% CAD
 \newglossaryentry{cadg}{name={CAD},
     description={Computer-aided design (CAD) is a computer system which aids
@@ -25,16 +20,7 @@ first={Analog-to-digital converter (ADC)\glsadd{adcg}}}
 \newglossaryentry{cad}{type=\acronymtype, name={CAD}, 
 description={Computer-aided design (CAD) is a computer system which aids
     the creation and modification of some kind of design.}, 
-first={Computer-aided design (CAD)\glsadd{cadg}}, see=[]{null}}
-%-extra
-
-%%% CLE
-\newglossaryentry{cleg}{name={CLE},
-    description={}}
-
-\newglossaryentry{cle}{type=\acronymtype, name={CLE}, 
-description={CLass E (CLE, is a highly efficient switching amplifier type.}, 
-first={CLass E (CLE)\glsadd{cleg}}}
+first={Computer-aided design (CAD)\glsadd{cadg}}}
 
 
 %%% DRC
@@ -215,31 +201,12 @@ first={Printed Wire Board (PWB)\glsadd{pwbg}}}
 
 
 %%% RTC
-\newglossaryentry{rfg}{name={RF},
-    description={}}
-
-\newglossaryentry{rf}{type=\acronymtype, name={RF}, 
-description={Radio Frequencies (RF)}, 
-first={Radio Frequencies (RF)\glsadd{rfg}}}
-
-
-%%% RTC
 \newglossaryentry{rtcg}{name={RTC},
     description={A Real time clock is an IC that is used to mesure time even when the main device is off.}}
 
 \newglossaryentry{rtc}{type=\acronymtype, name={RTC}, 
 description={A Real time clock is an IC that is used to mesure time even when the main device is off.}, 
-first={Real time clock (RTC)\glsadd{rtcg}}}
-
-%Glossary:  rtcg
-
-%%% TCXO
-\newglossaryentry{tcxog}{name={TCXO},
-    description={TCXO}}
-
-\newglossaryentry{tcxo}{type=\acronymtype, name={TCXO}, 
-description={Temperature Controlled Crystal Oscillator is an precise type of clock source which compensates for temperature differances.}, 
-first={Temperature Controlled Crystal Oscillator (TCXO)\glsadd{tcxog}}}
+first={Real time clock (RTC)\glsadd{rtcg}}, see=[Glossary:]{rtcg}}
 
 
 %%% TI
@@ -294,7 +261,6 @@ first={STMicroelectronics (ST)\glsadd{stg}}}
 \newglossaryentry{swdg}{name={SWD},
     description={Serial Wire Debug (SWD) is an alternative 2-pin electrical interface,
 	standard debugging protocol used in ARM processors.}}
-
 \newglossaryentry{swd}{type=\acronymtype, name={SWD},
 description={Serial Wire Debug}, 
 first={Serial Wire Debug (SWD)\glsadd{swdg}}}
@@ -314,7 +280,6 @@ first={Universal asynchronous receiver-transmitter (UART)\glsadd{uartg}}}
     description={Universal Serial Bus (USB), is an industry standard for
     cables, connectors and communications protocols for connection, 
     communication, and power supply between computers and devices.}}
-
 \newglossaryentry{usb}{type=\acronymtype, name={USB}, 
 description={Universal Serial Bus}, 
 first={Universal Serial Bus (USB)\glsadd{usbg}}}
@@ -324,8 +289,8 @@ first={Universal Serial Bus (USB)\glsadd{usbg}}}
 \newglossaryentry{vhfg}{name={VHF},
     description={VHF}}
 \newglossaryentry{vhf}{type=\acronymtype, name={VHF}, 
-description={Very High Frequency (VHF) is the frequency band spanning all the frequencies from 30 to 300Mhz. }, 
-first={Very High Frequency(VHF)\glsadd{vhfg}}}
+description={Portable Network Graphics}, 
+first={Portable Network Graphics (PNG)\glsadd{vhfg}}}
 
 
 %%% VIA

@@ -1,0 +1,57 @@
+\contentsline {chapter}{\numberline {1}Glossary}{v}{chapter.1}
+\contentsline {chapter}{\numberline {2}Introduction}{1}{chapter.2}
+\contentsline {section}{\numberline {2.1}Background}{1}{section.2.1}
+\contentsline {section}{\numberline {2.2}Project goals}{2}{section.2.2}
+\contentsline {section}{\numberline {2.3}Scope}{2}{section.2.3}
+\contentsline {section}{\numberline {2.4}Approach}{3}{section.2.4}
+\contentsline {chapter}{\numberline {3}Theory}{4}{chapter.3}
+\contentsline {section}{\numberline {3.1}Prototyping}{4}{section.3.1}
+\contentsline {section}{\numberline {3.2}PCB}{4}{section.3.2}
+\contentsline {section}{\numberline {3.3}Radio Frequency}{4}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Chebychev Filter}{5}{subsection.3.3.1}
+\contentsline {section}{\numberline {3.4}Radio component}{6}{section.3.4}
+\contentsline {section}{\numberline {3.5}MicroControllerUnit}{6}{section.3.5}
+\contentsline {section}{\numberline {3.6}SPI}{6}{section.3.6}
+\contentsline {section}{\numberline {3.7}I$^2$C}{7}{section.3.7}
+\contentsline {chapter}{\numberline {4}Hardware}{8}{chapter.4}
+\contentsline {section}{\numberline {4.1}Layout parameters}{8}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Landgrid}{8}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Easy prototyping}{9}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Structure}{9}{section.4.2}
+\contentsline {section}{\numberline {4.3}MicroController Unit}{10}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Connenctions}{10}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Power}{10}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Oscillator}{11}{subsection.4.3.3}
+\contentsline {section}{\numberline {4.4}IMU}{11}{section.4.4}
+\contentsline {section}{\numberline {4.5}Accelerometer}{12}{section.4.5}
+\contentsline {section}{\numberline {4.6}Power}{12}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}Connenctions}{12}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}Software implementation}{12}{subsection.4.6.2}
+\contentsline {section}{\numberline {4.7}Radio}{13}{section.4.7}
+\contentsline {subsection}{\numberline {4.7.1}Power}{13}{subsection.4.7.1}
+\contentsline {subsection}{\numberline {4.7.2}Connenctions}{13}{subsection.4.7.2}
+\contentsline {subsection}{\numberline {4.7.3}Solidworks PCB}{13}{subsection.4.7.3}
+\contentsline {section}{\numberline {4.8}Power consumption}{13}{section.4.8}
+\contentsline {chapter}{\numberline {5}Software}{14}{chapter.5}
+\contentsline {section}{\numberline {5.1}Programming}{14}{section.5.1}
+\contentsline {section}{\numberline {5.2}Software implementation}{14}{section.5.2}
+\contentsline {section}{\numberline {5.3}Radio implementation}{14}{section.5.3}
+\contentsline {section}{\numberline {5.4}Software}{15}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}MPLAB}{15}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.2}Assembly}{15}{subsection.5.4.2}
+\contentsline {subsection}{\numberline {5.4.3}C18}{15}{subsection.5.4.3}
+\contentsline {chapter}{\numberline {6}Results}{16}{chapter.6}
+\contentsline {section}{\numberline {6.1}Schematics}{16}{section.6.1}
+\contentsline {section}{\numberline {6.2}Layout}{16}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}First design}{16}{subsection.6.2.1}
+\contentsline {section}{\numberline {6.3}Communication}{17}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}UART}{17}{subsection.6.3.1}
+\contentsline {subsection}{\numberline {6.3.2}SPI}{18}{subsection.6.3.2}
+\contentsline {section}{\numberline {6.4}improvements}{18}{section.6.4}
+\contentsline {chapter}{\numberline {7}Schematics}{19}{chapter.7}
+\contentsline {chapter}{\numberline {8}Discussion}{20}{chapter.8}
+\contentsline {section}{\nameref {sec:ref}}{21}{chapter*.12}
+\contentsline {chapter}{Appendices}{22}{section*.13}
+\contentsline {section}{\numberline {.1}Large Figures}{23}{section.a..1}
+\contentsline {section}{\numberline {.2}Lists}{24}{section.a..2}
+\contentsline {subsection}{\numberline {.2.1}Bill of Materials: Main \gls {pcb}}{24}{subsection.a..2.1}
