@@ -5,7 +5,7 @@
  % after-code
 
 \textit{
-A deeper look into each component with some information of their functionality and implementation will be presented in this chapter. Why some specific components are chosen is also answered here. 
+From the objects described briefly in earlier chapters a complete system is constructed. A deeper look into each component with some information of their functionality and implementation will be presented in this chapter. Why some specific components are chosen is also answered here. 
 }
 \vspace{5ex}
 
@@ -28,6 +28,16 @@ Naturally, for this project, the minimum spaces and distances that does not make
 \end{itemize}
  
 \subsection{Landgrid}
+Each component on a \gls{pcb} have their own landgrid design, which corresponds to the components contact pads. These pads are copper pads on the \gls{pcb} which is left open and separated from the solder resist material covering the rest of the \gls{pcb} to hold the component and the solder. Often are the pads a bit larger then the acctual contact point of the component to accomendate some additional solder and making the soldering process as easy and troublefree as possible. One simple landgrid design used in this report is the 0402 package size for passive components, the design can be seen in \autoref{fig:landgridd_0402}.
+
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[width=.8\linewidth]{Figures/0402_landgrid} 
+	\captionsource{The prototype connection}{Aurthor}
+	\label{fig:sys_dia} 
+\end{figure} 
+
+Some of the design aspects used are described earlier and here they will be described in more detail.  
 The industry standard is always good to aim for, in this case, the basic designs are taken from \gls{ipcg}'s design guidline\cite{ipcg}. While these are made for optimal manufacturability the footprints used on the test board are modified to enable for easier solderability, production and rework if needed. The landgrids are made slightly bigger and longer to achieve this. The downside of making the pads larger is that each component takes up more real estate and the final board size increases.
 
 \subsection{Easy prototyping}
@@ -91,15 +101,16 @@ To operate the \gls{mcu} a clock signal is mandatory, this can be implemented in
 
 
 \section{IMU}
-The motions of the system are measured with an \gls{imu} system. This system can be used in a lot of different cases, both to detect if the unit is stationary or moving or if there are very hard and fast movements in the product. One of the simplest \gls{imu}'s is the 3-axis accelerometer, it detects accelerations in three axes, x, y, and z.
+
 
 
 \newpage %% Accelerometers
 \section{Accelerometer} 
-The component used is a 3-axis, ultra-low-power and high-performance accelerometer from \gls{st} \cite{ST_acc}. The component is the simplest of \gls{imu}'s that this manufacturer has and this simplicity makes for a product that is only incorporate one single function. 3-axis accelerometer means that it can measure 
+The motions of the system are measured with an \gls{imu} system. This system can be used in a lot of different cases, both to detect if the unit is stationary or moving or if there are very hard and fast movements in the product. One of the simplest \gls{imu}'s is the 3-axis accelerometer, it detects accelerations in three axes, x, y, and z. The component used is a 3-axis, ultra-low-power and high-performance accelerometer from \gls{st} \cite{ST_acc}. The component is the simplest of \gls{imu}'s that this manufacturer has and this simplicity makes for a product that is only incorporate one single function. 3-axis accelerometer means that it can measure  
 
 \subsection{Power}
 Two voltage connections are apparent on this device, one which is called VDD and the other is called VDD-IO. The VDD is the supply voltage and VDD-IO determines the logic voltage level. 
+
 
 \subsection{Connenctions}
 
