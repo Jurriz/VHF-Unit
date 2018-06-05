@@ -1,7 +1,7 @@
 
-**** 05/04/18 08:13:42 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+**** 06/04/18 14:38:12 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
 
- ** Profile: "SCHEMATIC1-bias"  [ c:\users\josef.tvp1\documents\github\vhf-unit\kretskortet\simuleringen\simulering-pspicefiles\schem
+ ** Profile: "SCHEMATIC1-bias"  [ C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Kretskortet\Simuleringen\simulering-pspicefiles\schem
 
 
  ****     CIRCUIT DESCRIPTION
@@ -32,33 +32,40 @@
 **** INCLUDING SCHEMATIC1.net ****
 * source SIMULERING
 R_R19         0 N48604  1000000meg TC=0,0 
-C_CM5         0 N48594  5.2p  TC=0,0 
-L_LM6         N48604 N48662  65n  
+C_CM5         0 N48594  10.54p  TC=0,0 
+C_CM4         0 N48614  20.3p  TC=0,0 
+L_LM6         N48604 N48614  52n  
 R_R18         0 N48662  50 TC=0,0 
 V_V6         N48570 0 DC 0Vdc AC 1Vac 
-C_CM6         N48594 N75394  100p  TC=0,0 
-C_C33         0 N64206  18p  TC=0,0 
-C_C32         N64192 0  18p  TC=0,0 
-L_L15         N64222 N64238  27n  
+C_CM6         N48594 N75730  200p  TC=0,0 
+L_LM10         N48614 N62639  24n  
+C_C33         0 N64032  18p  TC=0,0 
+C_C32         N64022 0  18p  TC=0,0 
+L_L15         N64046 N64238  27n  
 V_V5         N64168 0 DC 0Vdc AC 1Vac 
-C_C34         0 N64222  11p  TC=0,0 
+C_C28         N64032 N64046  1.8p  TC=0,0 
+C_C34         0 N64046  11p  TC=0,0 
 C_C31         N64242 N64238  470p  TC=0,0 
 R_R15         0 N64242  50 TC=0,0 
 R_R14         0 N64178  100000meg TC=0,0 
-L_L12         N64178 N64192  47n  
-R_R16         0 N64206  100000meg TC=0,0 
+L_L12         N64178 N64022  47n  
+C_C27         N64022 N64032  2.7p  TC=0,0 
+R_R16         0 N64032  100000meg TC=0,0 
 C_C29         N72799 N64178  470p  TC=0,0 
-L_L13         N64192 N64206  68n  
-L_L14         N64206 N64222  47n  
-L_LM11         N66548 N76524  58n  
-R_R21         0 N66612  50 TC=0,0 
+L_L13         N64022 N64032  68n  
+L_L14         N64032 N64046  47n  
+L_LM11         N66538 N66572  64.3n  
+L_LM14         0 N66538  42n  
+R_R21         0 N66576  50 TC=0,0 
 V_V7         N66528 0 DC 0Vdc AC 1Vac 
-C_CM8         0 N66548  18.5p  TC=0,0 
-C_CM7         N77933 N74719  220p  TC=0,0 
-R_R20         0 N66548  1000000meg TC=0,0 
-C_CM9         0 N66582  18.5p  TC=0,0 
-L_L0         N675620 N67702  22nH  
-C_C23         N67546 N67764  470p  TC=0,0 
+C_C39         N66572 N66576  10.9p  TC=0,0 
+C_CM8         0 N66538  17p  TC=0,0 
+C_CM7         N66538 N75636  100u  TC=0,0 
+R_R20         0 N66538  1000000meg TC=0,0 
+L_LM13         N66576 0  42n  
+C_CM9         0 N66576  17p  TC=0,0 
+L_L0         N67696 N67702  22nH  
+C_C23         N67546 N67778  470p  TC=0,0 
 L_LM         N67702 N67716  56nH  
 C_CP2         N67532 N67546  5p  TC=0,0 
 V_V4         N67686 0 DC 0Vdc AC 1Vac 
@@ -69,32 +76,24 @@ L_LM3         N67522 N67532  68nH
 C_CM         0 N67702  18p  TC=0,0 
 C_CP1         N67522 N67532  4p  TC=0,0 
 L_LM2         N67716 N67522  47nH  
-R_R12         0 N67764  50 TC=0,0 
+R_R12         0 N67778  50 TC=0,0 
 C_CM3         0 N67532  18p  TC=0,0 
-C_C0         N75100 N675620  100p  TC=0,0 
-C_C13         0 N67764  11p  TC=0,0 
-L_LM9         N48594 N48604  36.8n  
-C_CM10         0 N48604  22p  TC=0,0 
+C_C0         N75384 N67696  100p  TC=0,0 
+C_C13         0 N67546  11p  TC=0,0 
+L_LM9         N48594 N48604  46n  
+C_CM10         0 N48604  22.8p  TC=0,0 
 R_R22         N72799 N64168  50 TC=0,0 
-C_C28         N64206 N64222  2p  TC=0,0 
-R_R23         N74719 N66528  50 TC=0,0 
-R_R24         N75100 N67686  50 TC=0,0 
-R_R25         N75394 N48570  50 TC=0,0 
-L_LM16         0 N48594  200n  
-C_CM12         0 N76524  21.7p  TC=0,0 
-L_LM13         N76524 N66582  58n  
-L_LM17         N66582 N77223  26.4n  
-L_LM18         N77933 N66548  26.4n  
-C_CM13         N66612 N77223  220p  TC=0,0 
-C_C35         N64192 N64206  3p  TC=0,0 
-C_CM14         N66582 N76524  500f  TC=0,0 
+R_R23         N75384 N67686  50 TC=0,0 
+R_R24         N75636 N66528  50 TC=0,0 
+R_R25         N75730 N48570  50 TC=0,0 
+C_CM11         N48662 N62639  200p  TC=0,0 
 
 **** RESUMING bias.cir ****
 .END
 
-**** 05/04/18 08:13:42 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+**** 06/04/18 14:38:12 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
 
- ** Profile: "SCHEMATIC1-bias"  [ c:\users\josef.tvp1\documents\github\vhf-unit\kretskortet\simuleringen\simulering-pspicefiles\schem
+ ** Profile: "SCHEMATIC1-bias"  [ C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Kretskortet\Simuleringen\simulering-pspicefiles\schem
 
 
  ****     SMALL SIGNAL BIAS SOLUTION       TEMPERATURE =   27.000 DEG C
@@ -107,21 +106,21 @@ C_CM14         N66582 N76524  500f  TC=0,0
  NODE   VOLTAGE     NODE   VOLTAGE     NODE   VOLTAGE     NODE   VOLTAGE
 
 
-(N48570)    0.0000 (N48594)    0.0000 (N48604)    0.0000 (N48662)    0.0000     
+(N48570)    0.0000 (N48594)    0.0000 (N48604)    0.0000 (N48614)    0.0000     
 
-(N64168)    0.0000 (N64178)    0.0000 (N64192)    0.0000 (N64206)    0.0000     
+(N48662)    0.0000 (N62639)    0.0000 (N64022)    0.0000 (N64032)    0.0000     
 
-(N64222)    0.0000 (N64238)    0.0000 (N64242)    0.0000 (N66528)    0.0000     
+(N64046)    0.0000 (N64168)    0.0000 (N64178)    0.0000 (N64238)    0.0000     
 
-(N66548)    0.0000 (N66582)    0.0000 (N66612)    0.0000 (N67522)    0.0000     
+(N64242)    0.0000 (N66528)    0.0000 (N66538)    0.0000 (N66572)    0.0000     
 
-(N67532)    0.0000 (N67546)    0.0000 (N67686)    0.0000 (N67702)    0.0000     
+(N66576)    0.0000 (N67522)    0.0000 (N67532)    0.0000 (N67546)    0.0000     
 
-(N67716)    0.0000 (N67764)    0.0000 (N72799)    0.0000 (N74719)    0.0000     
+(N67686)    0.0000 (N67696)    0.0000 (N67702)    0.0000 (N67716)    0.0000     
 
-(N75100)    0.0000 (N75394)    0.0000 (N76524)    0.0000 (N77223)    0.0000     
+(N67778)    0.0000 (N72799)    0.0000 (N75384)    0.0000 (N75636)    0.0000     
 
-(N77933)    0.0000 (N675620)    0.0000                   
+(N75730)    0.0000 
 
 
 
@@ -140,9 +139,9 @@ C_CM14         N66582 N76524  500f  TC=0,0
 
           JOB CONCLUDED
 
-**** 05/04/18 08:13:42 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+**** 06/04/18 14:38:12 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
 
- ** Profile: "SCHEMATIC1-bias"  [ c:\users\josef.tvp1\documents\github\vhf-unit\kretskortet\simuleringen\simulering-pspicefiles\schem
+ ** Profile: "SCHEMATIC1-bias"  [ C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Kretskortet\Simuleringen\simulering-pspicefiles\schem
 
 
  ****     JOB STATISTICS SUMMARY
@@ -152,5 +151,5 @@ C_CM14         N66582 N76524  500f  TC=0,0
 
 
 
-  Total job time (using Solver 1)   =         .36
+  Total job time (using Solver 1)   =         .41
 

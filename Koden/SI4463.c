@@ -15,9 +15,9 @@
 // -----------------------------------------------------------------------------
 void ToggleRadio(void)
 {
-	RADIO_EN = 1;
+	TRX_EN = 1;
 	Delay(1);
-	RADIO_EN = 0;
+	TRX_EN = 0;
 }
 
 // -----------------------------------------------------------------------------
@@ -32,10 +32,10 @@ void DoResetRadio(void)
 // -----------------------------------------------------------------------------
 void DoStartRadio(void)
 {
-    RADIO_EN = 0;
+    TRX_EN = 0;
 
     MyWriteSPI(0x02);       // Skriv på funktionen POWER_UP  
-
+    
     MyWriteSPI(0x01);       // Skriv in funktionen BOOT_OPTIONS 0x81
     MyWriteSPI(0x01);       // Skriv in funktionen XTAL_OPTIONS 0x01
 
@@ -46,7 +46,7 @@ void DoStartRadio(void)
 
     Delay(20);  // 14ms     // Viktigt att den hinner starta ordentlig
 
-   RADIO_EN = 1;
+   TRX_EN = 1;
 }
 
 // -----------------------------------------------------------------------------
@@ -55,7 +55,7 @@ unsigned char ReadFromRadio (unsigned char nProp, unsigned char nLen) // Vilket 
 	unsigned char nTmp, nLoop;
     long nReturn; // Fungerar den som det ska?
     
-    RADIO_EN=0;
+    TRX_EN=0;
     MyWriteSPI(nProp);      // Skickar in valt register
     
     ToggleRadio();
@@ -66,19 +66,19 @@ unsigned char ReadFromRadio (unsigned char nProp, unsigned char nLen) // Vilket 
     nLoop = 0;
     while ( (nTmp != 0xFF) && (nLoop < 10) )    // Så länge inte radion svarar CTS skickas frågan igen
     {   
-        RADIO_EN = 0;	
+        TRX_EN = 0;	
         MyWriteSPI(0x44);
         nTmp = MyReadSPI();
-        RADIO_EN = 1;
+        TRX_EN = 1;
         nLoop++;
     }	
     
     // Efter 10 försök kollas det om radion har svarat CTS
-    RADIO_EN = 0;
+    TRX_EN = 0;
     if (nTmp == 0xFF)
 	{
 		nReturn = 1;
-        RADIO_EN = 0;
+        TRX_EN = 0;
 		nLoop = 0;
 		while (nLoop < nLen)
 		{
@@ -90,7 +90,7 @@ unsigned char ReadFromRadio (unsigned char nProp, unsigned char nLen) // Vilket 
 		}	
 	}
 
-    RADIO_EN = 1;
+    TRX_EN = 1;
 	return nReturn;
 }
 
@@ -107,9 +107,9 @@ unsigned char DoCheckCTSManyTimes(void)
     while ( (nTmp != 0xFF) && (nLoop < 10) )
     {
         nLoop++;
-        RADIO_EN = 1;
+       TRX_EN = 1;
         Nop();
-        RADIO_EN = 0;
+        TRX_EN = 0;
         MyWriteSPI(0x44);
         nTmp = MyReadSPI();
     }	
@@ -117,6 +117,20 @@ unsigned char DoCheckCTSManyTimes(void)
 }
 
         // --------- Läs från radion: ------------------------------------------
+
+//        // ----------------------------------------------------  Startar TX
+//        
+//        MyWriteSPI(0x31);           // Skcikar till START_TX registeret
+//        
+//        MyWriteSPI(0x77);           // Channel to transmit package on
+//        MyWriteSPI(0x31);           // Condition  (0111 0000)
+//        MyWriteSPI(0x00);           // TX_LEN
+//        MyWriteSPI(0x00);           // TX_LEN
+//        
+//        DoCheckCTSManyTimes();
+//        
+//        // ------------------------------------------------------ Skickar data på TX
+        
 
         //Startar TCXO
        

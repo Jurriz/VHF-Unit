@@ -9,6 +9,9 @@
 #include <delays.h>
 #include <adc.h>
 #include "Header_h.h"
+#include "trx-4460_h.h"
+
+
 
 // -----------------------------------------------------------------------------
 // PIC18LF46k22 
@@ -366,55 +369,60 @@ void main(void)
             SkrivBuffert(szUSART_Out, 1);    
             }
 
-        }  
-        while(1){
+        //}  
+        //while(1){
         // ----------------------------------------------------  Läs från radion
         
         OpenSPI1(SPI_FOSC_16, MODE_00, SMPEND);
         
-        //DoCheckCTSManyTimes();
+        DoCheckCTSManyTimes();
         
-//        ToggleRadio();
-//        
-//        WriteSPI1(0x01);
-//        
-//        ToggleRadio();
-//        
-//        nTmp = DoCheckCTSManyTimes();
-//        
-//        // Hämtar PART_INFO
-//        if (nTmp == 0xFF)               // Om CTS är hög är allting rätt
-//        {
-//            nLoop = 0;                  
-//            while (nLoop < 4)
-//            {
-//                szData[nLoop] = MyReadSPI();
-//                nLoop++;
-//            }
-//            
-//            sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n PART_ID_RADIO: -%02X%02X- \r\n\r\n", szData[2], szData[3]);
-//            SkrivBuffert(szUSART_Out, 1);
-//            
-//        }		
-//        
-//        RADIO_EN = 1;
-//        
-//        Blink2();
-//    
+        ToggleRadio();
+        
+        WriteSPI1(0x01);
+        
+        ToggleRadio();
+        
+        nTmp = DoCheckCTSManyTimes();
+        
+        // Hämtar PART_INFO
+        if (nTmp == 0xFF)               // Om CTS är hög är allting rätt
+        {
+            nLoop = 0;                  
+            while (nLoop < 4)
+            {
+                szData[nLoop] = MyReadSPI();
+                nLoop++;
+            }
+            
+            sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n PART_ID_RADIO: -%02X%02X- \r\n\r\n", szData[2], szData[3]);
+            SkrivBuffert(szUSART_Out, 1);
+            
+        }		
+        
+        TRX_EN = 1;
+        
+        //Blink2();
+    
         ReadFromRadio(0x01, 3);
         
         DoCheckCTSManyTimes();
         
-        // ----------------------------------------------------  Startar TX
+    
         
-        MyWriteSPI(0x31);           // Skcikar till START_TX registeret
+        // Initiera radion
+        //Init151AndGotoSleep();
+        GREEN_LED = 1;
+        DoTurn151BeaconPulseOn();
+        Delay(10);
+        GREEN_LED = 0;
+        Delay(10);
+        DoTurn151BeaconPulseOff();
+        //GreenLedPulse();
+        //För att sända en beacon-puls sker ett anrop till
+        //Beacon(0, nReadSchEEPROM);
         
-        MyWriteSPI(0x77);           // Channel to transmit package on
-        MyWriteSPI(0x31);           // Condition  (0111 0000)
-        MyWriteSPI(0x00);           // TX_LEN
-        MyWriteSPI(0x00);           // TX_LEN
-        
-        DoCheckCTSManyTimes();
+
         
         CloseSPI1();
         

@@ -2,6 +2,9 @@
 #define __AMCE_H
 //#define _XTAL_FREQ  32000   //Frequency
 
+
+
+
 // -----------------------------------------------------------------------------
 // **********************************************************************
 // TRISA = 0b.xx11.1111; PORTA = 0b.xx00.0000;
@@ -46,7 +49,7 @@
 //#define FREE			LATDbits.LATD7	// D,O
 #define GPIO2_Radio		LATDbits.LATD6	// D,O
 #define GPIO1_Radio		LATDbits.LATD5	// D,O
-#define RADIO_EN		LATDbits.LATD4	// D,O Radio Chip Select
+#define TRX_EN		LATDbits.LATD4	// D,O Radio Chip Select
 //#define FREE			LATDbits.LATD3	// D,O
 //#define FREE			LATDbits.LATD2	// D,O
 //          		 	@ PORTD.1       // SDA_RTC
@@ -90,6 +93,41 @@ void ToggleRadio(void);
 void DoStartRadio(void);
 unsigned char ReadFromRadio(unsigned char nProp, unsigned char nLen);
 char DoCheckCTSManyTimes (void);
+
+// Beacon_21
+void GreenLedPulse(void);
+
+
+// TRX-SI4460
+void Init151AndGotoSleep(void);
+unsigned char DoInit151Beacon(void);
+unsigned char  DoTurn151BeaconPulseOn(void);
+unsigned char DoTurn151BeaconPulseOff(void);
+void DoInit433Beacon(void);
+void DoTurn433BeaconPulseOn(void);
+void DoTurn433BeaconPulseOff(void);
+void DoResetSi4460(void);
+char DoSendVHFSetupToSi4460(unsigned char nIndex);
+char DoSendBB_TX_SetupToSi4460(unsigned char nIndex);
+char DoSendUHFSetupToSi4460(unsigned char nIndex);
+char DoSendTRXSetupToSi4460(unsigned char nIndex);
+char DoSendUtilSetupToSi4460(unsigned char nIndex);
+unsigned char DoSendCommandToSi4460(char *szPek, char nLen);
+unsigned char DoCheckCTS(void);
+unsigned char DoCheckCTSManyTimes(void);
+unsigned char DoSpecialCheckCTS(void);
+void DoReadFromSi4460(unsigned char nLen);
+void DoReadFromRX_FIFOSi4460(unsigned char nLen);
+void DoClearIRQSi4460(void);
+char DoReadFIFOnumsSi4460(unsigned char nVal);
+unsigned char DoReadIRQSi4460(unsigned char nCom, unsigned char nLen);
+void DoPutRadioToSleep(void);
+unsigned char ReadFrom4460(unsigned char nProp, unsigned char nLen, unsigned char *szData);
+unsigned char ReadFRR4460(unsigned char nFRR);
+unsigned char CalcRSSI(unsigned char nLastValue);
+void DoInitTRX(void);
+void DoInitBB_TX(unsigned char nMode);
+void DoCloseBB_TX_Session(void);
 
 // -----------------------------------------------------------------------------
 // Util.c
@@ -269,5 +307,21 @@ extern const rom unsigned char RTCTemp, RTCEE, RTCEECtrl, RTCRAM;
 extern short long lTid, lDatum;
 extern unsigned char nWeekDay;
 extern short long lGPSTid, lGPSDatum;
+
+
+extern typedef const rom struct MyNewRad
+{
+	char szRad[17];
+};
+
+extern const rom struct MyNewRad Beacon433Rad[];
+extern const rom struct MyNewRad Beacon151Rad[];
+extern const rom struct MyNewRad RXTXRad[];
+extern const rom struct MyNewRad BitBangRad[];
+extern const rom struct MyNewRad UtilRad[];
+extern const rom struct MyNewRad BBTXRad[];
+extern const rom struct MyNewRad BBRXRad[];
+extern const rom struct MyNewRad BB_RXTX_Rad[];
+
 
 #endif
