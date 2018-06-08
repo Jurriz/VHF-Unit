@@ -6,41 +6,41 @@
 #include <spi.h>
 #include <delays.h>
 #include <adc.h>
-#include "trx-4460_h.h"
+
 #include "Header_h.h"
 
 void GreenLedPulse(void);
 void RedLedPulse(void);
-void NoLedPulse(void);
+void NoLedPulse(int nDelay);
 
 // ------------------------------------------------------------------------------------
 void GreenLedPulse(void)
 {
 	GREEN_LED = 1;
-	DoTurn151BeaconPulseOn();
-	Delay(10);
+	DoTurnBeaconPulseOn();
+	Delay(100);
 	GREEN_LED = 0;
-	Delay(10);
-	DoTurn151BeaconPulseOff();
+	Delay(100);
+	DoTurnBeaconPulseOff();
 }
 
 // ------------------------------------------------------------------------------------
 void RedLedPulse(void)
 {
 	RED_LED = 1;
-	DoTurn151BeaconPulseOn();
-	Delay(10);
+	DoTurnBeaconPulseOn();
+	Delay(20);
 	RED_LED = 0;
-	Delay(10);
-	DoTurn151BeaconPulseOff();
+	Delay(20);
+	DoTurnBeaconPulseOff();
 }
 
 // ------------------------------------------------------------------------------------
-void NoLedPulse(void)
+void NoLedPulse(int nDelay)
 {
-	DoTurn151BeaconPulseOn();
-	Delay(18);
-	DoTurn151BeaconPulseOff();
+	DoTurnBeaconPulseOn();
+	Delay(nDelay);
+	DoTurnBeaconPulseOff();
 }
 
 #ifdef SKROT

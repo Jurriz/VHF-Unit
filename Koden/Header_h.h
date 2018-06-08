@@ -1,9 +1,5 @@
 #ifndef __AMCE_H
 #define __AMCE_H
-//#define _XTAL_FREQ  32000   //Frequency
-
-
-
 
 // -----------------------------------------------------------------------------
 // **********************************************************************
@@ -92,25 +88,30 @@ void DoResetRadio(void);
 void ToggleRadio(void);
 void DoStartRadio(void);
 unsigned char ReadFromRadio(unsigned char nProp, unsigned char nLen);
-char DoCheckCTSManyTimes (void);
+char DoCheckCTSManyTimes1 (void);
 
 // Beacon_21
 void GreenLedPulse(void);
-
+void RedLedPulse(void);
+void NoLedPulse(int);
 
 // TRX-SI4460
-void Init151AndGotoSleep(void);
-unsigned char DoInit151Beacon(void);
-unsigned char  DoTurn151BeaconPulseOn(void);
-unsigned char DoTurn151BeaconPulseOff(void);
-void DoInit433Beacon(void);
-void DoTurn433BeaconPulseOn(void);
-void DoTurn433BeaconPulseOff(void);
+void InitTRXAndGotoSleep(void);
+unsigned char DoInitBeacon(void);
+unsigned char  DoTurnBeaconPulseOn(void);
+unsigned char DoTurnBeaconPulseOff(void);
+//void DoInit433Beacon(void);
+//void DoTurn433BeaconPulseOn(void);
+//void DoTurn433BeaconPulseOff(void);
 void DoResetSi4460(void);
-char DoSendVHFSetupToSi4460(unsigned char nIndex);
 char DoSendBB_TX_SetupToSi4460(unsigned char nIndex);
-char DoSendUHFSetupToSi4460(unsigned char nIndex);
+
+char DoSendSetupToSi4460(unsigned char nIndex);
+
+//Behövs ej, använder den övre till alla funktioner
+//char DoSendUHFSetupToSi4460(unsigned char nIndex);
 char DoSendTRXSetupToSi4460(unsigned char nIndex);
+
 char DoSendUtilSetupToSi4460(unsigned char nIndex);
 unsigned char DoSendCommandToSi4460(char *szPek, char nLen);
 unsigned char DoCheckCTS(void);
@@ -137,10 +138,13 @@ unsigned char MyWriteSPI(unsigned char data_out);
 int dow(int y, int m, int d);
 unsigned char BCD2Byte(unsigned char nIn);
 signed int AccDataCalc(unsigned char val_L, unsigned char val_H);
+unsigned char ReadEEByte(int nEEAdr);
+void Write2EE(const unsigned char nData, const int nAdress);
 void Blink1(void);
 void Blink2(void);
 void OSCILLATOR_Initialize(void);
 void TestaVSEL(void);
+
 
 // AmCe_NReader.c --------------------------------------------------------------
 void DoEraseAllNotes(void);
@@ -314,14 +318,14 @@ extern typedef const rom struct MyNewRad
 	char szRad[17];
 };
 
-extern const rom struct MyNewRad Beacon433Rad[];
-extern const rom struct MyNewRad Beacon151Rad[];
-extern const rom struct MyNewRad RXTXRad[];
-extern const rom struct MyNewRad BitBangRad[];
-extern const rom struct MyNewRad UtilRad[];
-extern const rom struct MyNewRad BBTXRad[];
-extern const rom struct MyNewRad BBRXRad[];
-extern const rom struct MyNewRad BB_RXTX_Rad[];
+//extern const rom struct MyNewRad Beacon433Rad[];
+//extern const rom struct MyNewRad Beacon151Rad[];
+//extern const rom struct MyNewRad RXTXRad[];
+//extern const rom struct MyNewRad BitBangRad[];
+//extern const rom struct MyNewRad UtilRad[];
+//extern const rom struct MyNewRad BBTXRad[];
+//extern const rom struct MyNewRad BBRXRad[];
+//extern const rom struct MyNewRad BB_RXTX_Rad[];
 
 
 #endif

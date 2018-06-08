@@ -87,6 +87,29 @@ char DoStartST_ACC(void)
 	return lReturn;
 }
 
+// -----------------------------------------------------------------------------
+signed int AccDataCalc(unsigned char val_L, unsigned char val_H)
+{
+    signed int nTmp;
+    nTmp = val_H;
+    nTmp = nTmp << 8;
+    nTmp = nTmp | val_L;
+    
+    if(nTmp < 0)
+           nTmp =- nTmp;
+    return nTmp;
+}
+
+// -----------------------------------------------------------------------------
+//void PrintAccData(signed int Acc_val, char text)
+//{
+//    for (int i = 0; Acc_val > i; i++)
+//    {
+//        sprintf(szUSART_Out, (const rom far char *), text); // Utskrift på skärmen
+//        SkrivBuffert(szUSART_Out, 1);
+//    }
+//}
+
 // CKP = 0
 // CKE = 0
 

@@ -8,10 +8,8 @@
 #include <i2c.h>
 #include <delays.h>
 #include <adc.h>
+
 #include "Header_h.h"
-#include "trx-4460_h.h"
-
-
 
 // -----------------------------------------------------------------------------
 // PIC18LF46k22 
@@ -181,14 +179,17 @@ void SkrivBuffert(char *szUt, char nVal)
 // -----------------------------------------------------------------------------
 void main(void)
 {
-    unsigned char nLoop, nTmp, nTemp, nTest;
+    
+    unsigned char nLoop, nTmp, nTemp, nTest, nLength;
+    unsigned char FREQ_CTRL_INTE, FREQ_CTRL_FRAC_H, FREQ_CTRL_FRAC_M, FREQ_CTRL_FRAC_L;
+    unsigned char FREQ_CTRL_INTE_433, FREQ_CTRL_FRAC_H_433, FREQ_CTRL_FRAC_M_433, FREQ_CTRL_FRAC_L_433;
 	unsigned char  CTS_OK, szData[];
     unsigned char X_L, X_H, Y_L, Y_H, Z_L, Z_H;
 
 	//signed char nOldX, nOldY, nOldZ;
     signed int xVal, yVal, zVal, xVal_100, yVal_100, zVal_100, i=0, nHi;
 	//char lData;
-
+    
 	//FlagBits.bTimerIRQ = 0;  
 	InitCPU();
     OSCILLATOR_Initialize();  // VET EJ OM DEN BEHÖVS
@@ -254,8 +255,9 @@ void main(void)
 
 	BAUDCON2bits.BRG16 = 1;
 
-    LATAbits.LATA0 = 1; // 2.1 V 
-    LATAbits.LATA2 = 1; // 3.3 V   
+           
+    LATAbits.LATA0 = 0; // 2.1 V 
+    LATAbits.LATA2 = 1; // 3.3 V
     
 	//Delay(100);
 	
@@ -263,27 +265,27 @@ void main(void)
 
 // ************************************************************************************************** Startar programmet här
  
-        GREEN_LED = 1; Delay(100); // Tänd grön lampa
+        GREEN_LED = 1; Delay(1000); // Tänd grön lampa
         GREEN_LED = 0;
-        RED_LED = 1; Delay(100); // Tänd röd lampa
+        RED_LED = 1; Delay(1000); // Tänd röd lampa
         RED_LED = 0;
        //TestaVSEL();
         
 // ----------------------------------------------------------------- Startar upp radion med denna kod
 
-        TCXO_EN = 1;        //Startar TCXO
-        
-        OpenSPI1(SPI_FOSC_16, MODE_00, SMPEND);     // Mode_00, SMPMID/END? 
-        
-        DoResetRadio();
-        
-        DoCheckCTSManyTimes();
-        
-        DoStartRadio();
-        
-        DoCheckCTSManyTimes(); 
-        
-        CloseSPI1();
+//        TCXO_EN = 1;        //Startar TCXO
+//        
+//        OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);     // Mode_00, SMPMID/END? 
+//        
+//        DoResetRadio();
+//        
+//        DoCheckCTSManyTimes1();
+//        
+//        DoStartRadio();
+//        
+//        DoCheckCTSManyTimes1(); 
+//        
+//        CloseSPI1();
         
 //------------------------------------------------------------------ Starta upp accelerometern med denna kod
        OpenSPI1(SPI_FOSC_4, MODE_11, SMPMID);     
@@ -296,15 +298,15 @@ void main(void)
         SkrivBuffert(szUSART_Out, 1);
         Delay(10);
         
-        while (1)
-        { 
+        //while (1){ 
+            
             GREEN_LED = 1; Delay(10);
             GREEN_LED = 0;
                     
         // ---------- Läs från Accelerometern ----------------------------------
         OpenSPI1(SPI_FOSC_4, MODE_11, SMPMID);   // 11, SMPMID 
         
-        nTmp = DoStartST_ACC();
+        //nTmp = DoStartST_ACC();
         
         sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LIS2DW12 INITIERING:\r\n\r\n WHO_AM_I? \t0X%02X (0X44)\r\n\r\n", nTmp);
         SkrivBuffert(szUSART_Out, 1);
@@ -370,12 +372,72 @@ void main(void)
             }
 
         //}  
-        //while(1){
+        
+// ------------------------------------------------------ Initierar radion        
+        TCXO_EN = 1;        //Startar TCXO
+        LATCbits.LATC1 = 1; // Start TCXO på första kortet
+        
+        
+        // ------- Detta behövs ej, all initiering sker senare. --------- //
+        
+        //OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);
+        //DoResetRadio();
+        //DoCheckCTSManyTimes1();  
+        //DoStartRadio();
+        //DoCheckCTSManyTimes1(); 
+        //CloseSPI1();
+        
+        //const unsigned char FREQ_CTRL_INTE = 0x04;
+        
+        // Ansätt variablerna redan i koden, dessa skall senare sättas via datorn direkt
+//        FREQ_CTRL_INTE = 0x41;
+//        FREQ_CTRL_FRAC_H = 0x0C;    // hastigheten skall vara 433.0515 
+//        FREQ_CTRL_FRAC_M = 0xFC;
+//        FREQ_CTRL_FRAC_L = 0x88;
+        
+        
+        //-----------------------------------------------
+        FREQ_CTRL_INTE = 0x44;          // hastigheten skall vara 151.123
+        FREQ_CTRL_FRAC_H = 0x0D;    
+        FREQ_CTRL_FRAC_M = 0xFE;
+        FREQ_CTRL_FRAC_L = 0x1C;
+        // ------------------------------------------------
+        FREQ_CTRL_INTE_433 = 0x41;          // hastigheten skall vara 433.0515
+        FREQ_CTRL_FRAC_H_433 = 0x0C;    
+        FREQ_CTRL_FRAC_M_433 = 0xFC;
+        FREQ_CTRL_FRAC_L_433 = 0x88;
+        // ------------------------------------------------
+        
+        // Skriver in värdena för hastigheten 151.123 till EEProm
+        Write2EE(FREQ_CTRL_INTE, 0x0000);       // 0
+        Write2EE(FREQ_CTRL_FRAC_H, 0x0001);     // 1
+        Write2EE(FREQ_CTRL_FRAC_M, 0x0002);     // 2
+        Write2EE(FREQ_CTRL_FRAC_L, 0x0003);     // 3
+        
+        // Skriver in värdena för hastigheten 433.0515 till EEProm
+        Write2EE(FREQ_CTRL_INTE_433, 0x0004);   // 4
+        Write2EE(FREQ_CTRL_FRAC_H_433, 0x0005); // 5
+        Write2EE(FREQ_CTRL_FRAC_M_433, 0x0006); // 6
+        Write2EE(FREQ_CTRL_FRAC_L_433, 0x0007); // 7 
+        
+        // Init VHF
+        InitTRXAndGotoSleep();
+        
+        
+        // Init UHF
+        DoInitBeacon();
+        DoTurnBeaconPulseOn();
+        DoTurnBeaconPulseOff();
+        
+        while(1){
         // ----------------------------------------------------  Läs från radion
         
-        OpenSPI1(SPI_FOSC_16, MODE_00, SMPEND);
+        OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);
         
-        DoCheckCTSManyTimes();
+        TRX_EN = 0;
+        
+        
+        DoCheckCTSManyTimes1();
         
         ToggleRadio();
         
@@ -383,7 +445,7 @@ void main(void)
         
         ToggleRadio();
         
-        nTmp = DoCheckCTSManyTimes();
+        nTmp = DoCheckCTSManyTimes1();
         
         // Hämtar PART_INFO
         if (nTmp == 0xFF)               // Om CTS är hög är allting rätt
@@ -395,40 +457,51 @@ void main(void)
                 nLoop++;
             }
             
-            sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n PART_ID_RADIO: -%02X%02X- \r\n\r\n", szData[2], szData[3]);
+            sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n PART_ID_RADIO: - %02X%02X - \r\n\r\n", szData[1], szData[2]);
             SkrivBuffert(szUSART_Out, 1);
             
-        }		
-        
+        }
+            
         TRX_EN = 1;
         
-        //Blink2();
-    
-        ReadFromRadio(0x01, 3);
+        Delay(1);
+        CloseSPI1(); 
+         
         
-        DoCheckCTSManyTimes();
+        //GreenLedPulse();            // VHF
         
-    
+        //while(1){
+        //DoSendVHFSetupToSi4460(1);
+        //DoCheckCTSManyTimes();
         
-        // Initiera radion
-        //Init151AndGotoSleep();
         GREEN_LED = 1;
-        DoTurn151BeaconPulseOn();
-        Delay(10);
+        DoTurnBeaconPulseOn();
+        Delay(20);
+        DoTurnBeaconPulseOff();
         GREEN_LED = 0;
-        Delay(10);
-        DoTurn151BeaconPulseOff();
-        //GreenLedPulse();
+        
+        //NoLedPulse(100);
+//        Delay(300);
+//        NoLedPulse(200);
+//        Delay(200);
+//        NoLedPulse(300);
+//        Delay(300);
+//        NoLedPulse(300);
+        
+        
+        
+        Delay(1000);
+        
+        
+        //RedLedPulse();      
+        
         //För att sända en beacon-puls sker ett anrop till
         //Beacon(0, nReadSchEEPROM);
         
-
-        
-        CloseSPI1();
-        
+        //}  
     }
     
-    while(1)
+    while(0)
     {
         
     // Kod till I2C accelerometern:

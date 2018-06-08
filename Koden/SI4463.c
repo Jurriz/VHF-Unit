@@ -95,19 +95,20 @@ unsigned char ReadFromRadio (unsigned char nProp, unsigned char nLen) // Vilket 
 }
 
 // ------------------------------------------------------------------------------------
-unsigned char DoCheckCTSManyTimes(void)
+unsigned char DoCheckCTSManyTimes1(void)
 {
     unsigned char nTmp, nLoop;
     
+    TRX_EN = 0; // Chip select radio dras låg
     Delay(1);
-    MyWriteSPI(0x44);		
-    nTmp = MyReadSPI();
+    MyWriteSPI(0x44);		// Frågar efter CTS
+    nTmp = MyReadSPI();     // Läser svaret från radion
 
     nLoop = 0;
-    while ( (nTmp != 0xFF) && (nLoop < 10) )
+    while ( (nTmp != 0xFF) && (nLoop < 10) )    // Kollar så att CTS svarar OK
     {
         nLoop++;
-       TRX_EN = 1;
+        TRX_EN = 1;
         Nop();
         TRX_EN = 0;
         MyWriteSPI(0x44);

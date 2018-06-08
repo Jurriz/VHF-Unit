@@ -34,24 +34,29 @@
 // ------------------------------------------------------------------------------------
 
 // ------------------------------------------------------------------------------------
-void Init151AndGotoSleep(void)
+
+// Ansätter VHF eller UHF filter 
+const char filter = 1;      // 0 = UHF, 1 = VHF
+
+void InitTRXAndGotoSleep(void)
 {
 	// Se till att DoInit151Beacon() gått bra!
-	if (DoInit151Beacon() != 0xFF)
+	if (DoInitBeacon() != 0xFF)     // 151
 	{
 		Delay(10);
-		DoInit151Beacon();
+		DoInitBeacon();         // 151
 	}
-	DoTurn151BeaconPulseOn();
-	DoTurn151BeaconPulseOff();
+	DoTurnBeaconPulseOn();      
+	DoTurnBeaconPulseOff();     
 }
 
 // ------------------------------------------------------------------------------------
 // DoInitVHFBeacon() ska direkt följas av DoTurnVHFBeaconPulseOn()
-unsigned char DoInit151Beacon(void)
+unsigned char DoInitBeacon(void)         // 151
 {
 	unsigned char nCts, nTmp, nReg, nReturn;
-
+    //int filter = 0; // UHF = 0, VHF = 1;
+    //unsigned char FREQ_CTRL_INTE, FREQ_CTRL_FRAC_H, FREQ_CTRL_FRAC_M, FREQ_CTRL_FRAC_L;
 	nReturn = 0xFF;
 
 	DoResetSi4460();
@@ -66,7 +71,8 @@ unsigned char DoInit151Beacon(void)
 
 	nReturn &= nTmp;
 	
-	DoSendVHFSetupToSi4460(0);		// POWER_UP [0]	startar radion och ställer in den för TCXO
+    // Samma till både VHF och UHF
+	DoSendSetupToSi4460(0);		// POWER_UP [0]	startar radion och ställer in den för TCXO
 
 	Delay(15);		// 14ms
 
@@ -83,44 +89,100 @@ unsigned char DoInit151Beacon(void)
 	// 30 = Slår på switchen för VHF
 	// 31 = Stänger antennswitchen för att minska strömmen
 
-	for (nReg = 1; nReg < 25; nReg++)
+    
+    // Kör de första 15st kommandonen, dessa är samma för både VHF och UHF!
+	for (nReg = 1; nReg < 16; nReg++)
 	{
-		DoSendVHFSetupToSi4460(nReg);
+		DoSendSetupToSi4460(nReg);
 		nTmp = DoCheckCTSManyTimes();
 		nReturn &= nTmp;
 	}
-	
-	// Rad 25 innehålle info som till viss del ligger i EEPROM
-	// {0x0C, 0x11, 0x40, 0x08, 0x00, 0x44, 0x0D, 0x89, 0xD8, 0x17, 0xA1, 0x20, 0xFA},		// 25	FREQ_CONTROL_INTE (1) och FREQ_CONTROL_FRAC (3)
-	//                                ¯¯¯¯  ¯¯¯¯  ¯¯¯¯  ¯¯¯¯
-	// ----------------------------------------
-	TRX_EN = 0;
-
-	MyWriteSPI(0x11);
-	MyWriteSPI(0x40);
-	MyWriteSPI(0x08);
-	MyWriteSPI(0x00);
-
-	// 151.000
-//	MyWriteSPI(0x44);
-
-	//MyWriteSPI(ReadEEByte(FREQ_CTRL_INTE));
-    MyWriteSPI(0x44);
     
-	MyWriteSPI(0x0D);   //151.123 Mhz
-    MyWriteSPI(0xFE);
-    MyWriteSPI(0x1C);
+    // Rad 16, Select PLL Synthesizer output divider ratio as a function of frequency band.
+    //Vad som egentligen körs: DoSendSetupToSi4460(16);
     
+    TRX_EN = 0;
+	MyWriteSPI(0x11);   
+	MyWriteSPI(0x20);   
+	MyWriteSPI(0x02);   
+    MyWriteSPI(0x50);
+    MyWriteSPI(0x84);
     
-    //MyWriteSPI(ReadEEByte(FREQ_CTRL_FRAC_H));
-	//MyWriteSPI(ReadEEByte(FREQ_CTRL_FRAC_M));
-	//MyWriteSPI(ReadEEByte(FREQ_CTRL_FRAC_L));
+    if (filter == 1) //  Beaconbits.UHF_filter = ?, Vhf = 1, UHF = 0;
+    {
+        MyWriteSPI(0x0D);   // 0x0D för VHF
+    } else {
+        MyWriteSPI(0x0A);   // 0x0A för UHF
+    }
+   
+    nTmp = DoCheckCTSManyTimes();
+    nReturn &= nTmp;
+    
+//  MyWriteSPI(0x1C);
+//  MyWriteSPI(ReadEEByte(FREQ_CTRL_FRAC_H));
+//	MyWriteSPI(ReadEEByte(FREQ_CTRL_FRAC_M));
+//	MyWriteSPI(ReadEEByte(FREQ_CTRL_FRAC_L));
 
 	// 151.000
 //	MyWriteSPI(0x0D);
 //	MyWriteSPI(0x89);
 //	MyWriteSPI(0xD8);
 
+	//MyWriteSPI(0x17);
+	//MyWriteSPI(0xA1);
+	//MyWriteSPI(0x20);
+	//MyWriteSPI(0xFA);
+    
+    // Kör de sista, 17:e till 24:e kommandonen, dessa är samma för både VHF och UHF!
+    for (nReg = 17; nReg < 25; nReg++)
+	{
+		DoSendSetupToSi4460(nReg);
+		nTmp = DoCheckCTSManyTimes();
+		nReturn &= nTmp;
+	}
+    
+    
+	// Rad 25 innehåller info som till viss del ligger i EEPROM
+	// {0x0C, 0x11, 0x40, 0x08, 0x00, 0x44, 0x0D, 0x89, 0xD8, 0x17, 0xA1, 0x20, 0xFA},		// 25	FREQ_CONTROL_INTE (1) och FREQ_CONTROL_FRAC (3)
+	//                                ¯¯¯¯  ¯¯¯¯  ¯¯¯¯  ¯¯¯¯
+	// ----------------------------------------
+    
+	TRX_EN = 0;
+
+    // SET_PROPERTY
+	MyWriteSPI(0x11);
+	MyWriteSPI(0x40);   //GROUP
+	MyWriteSPI(0x08);   // NUM_PROPS
+	MyWriteSPI(0x00);   // START_PROP
+
+    // Beaconbits.UHF_filter = ?, Kollar vilken hastighet som skall sättas
+    if (filter == 1)
+    {
+//151.123 Mhz
+//   MyWriteSPI(0x44);     
+//	 MyWriteSPI(0x0D);   
+//   MyWriteSPI(0xFE);
+//   MyWriteSPI(0x1C);
+    
+	MyWriteSPI(ReadEEByte(0));
+    MyWriteSPI(ReadEEByte(1));
+	MyWriteSPI(ReadEEByte(2));
+	MyWriteSPI(ReadEEByte(3));  
+    
+	// 151.000 Mhz
+//  MyWriteSPI(0x44);    
+//	MyWriteSPI(0x0D);
+//	MyWriteSPI(0x89);
+//	MyWriteSPI(0xD8);
+
+    } else {
+    MyWriteSPI(ReadEEByte(4));
+    MyWriteSPI(ReadEEByte(5));
+	MyWriteSPI(ReadEEByte(6));
+	MyWriteSPI(ReadEEByte(7)); 
+    }
+    
+    // Resten av värdena är samma för både VHF och UHF
 	MyWriteSPI(0x17);
 	MyWriteSPI(0xA1);
 	MyWriteSPI(0x20);
@@ -139,10 +201,11 @@ unsigned char DoInit151Beacon(void)
 }	
 
 // ------------------------------------------------------------------------------------
-// Startar beacon en VHF-puls
-unsigned char  DoTurn151BeaconPulseOn(void)
+// Startar beacon, en VHF/UHF-puls
+unsigned char  DoTurnBeaconPulseOn(void)
 {
 	unsigned char nTmp, nReturn;
+    //int filter = 0;
 
 	nReturn = 0xFF;
 
@@ -152,20 +215,20 @@ unsigned char  DoTurn151BeaconPulseOn(void)
 	
 	OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);
 
-	// Starta beacon
-	//if (BeaconBits.UHF_FILTER == 0)		// Beacon mellan 142 och 175 MHz. Filtret ska inte ställas in för UHF (420-525 MHz)
-	//{
-		DoSendVHFSetupToSi4460(30);		// Slår på switchen för VHF
-	//}
-	//else								// Beacon mellan 420 och 525 MHz. Filtret ska inte ställas in för VHF (142-175 MHz)
-	//{
-	//	DoSendVHFSetupToSi4460(31);		// Slår på switchen för UHF
-	//}
-
-	nTmp = DoCheckCTSManyTimes();
-	nReturn &= nTmp;
-
-	DoSendVHFSetupToSi4460(28);		// CHANGE_STATE to TX state	
+	//Starta beacon, if(BeaconBits.UHF_FILTER = ?)
+	if (filter == 1)		// Beacon mellan 142 och 175 MHz. Filtret ska inte ställas in för UHF (420-525 MHz)
+	{
+        DoSendSetupToSi4460(30);		// Slår på switchen för VHF
+	}
+	else								// Beacon mellan 420 och 525 MHz. Filtret ska inte ställas in för VHF (142-175 MHz)
+	{
+		DoSendSetupToSi4460(31);		// Slår på switchen för UHF
+	}
+    
+    nTmp = DoCheckCTSManyTimes();
+    nReturn &= nTmp;
+    
+	DoSendSetupToSi4460(28);		// CHANGE_STATE to TX state	
 
 	nTmp = DoCheckCTSManyTimes();
 	nReturn &= nTmp;
@@ -177,7 +240,7 @@ unsigned char  DoTurn151BeaconPulseOn(void)
 
 // ------------------------------------------------------------------------------------
 // Stänger av
-unsigned char DoTurn151BeaconPulseOff(void)
+unsigned char DoTurnBeaconPulseOff(void)
 {
 	unsigned char nTmp, nReturn;
 
@@ -185,12 +248,12 @@ unsigned char DoTurn151BeaconPulseOff(void)
 
 	OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);
 
-	DoSendVHFSetupToSi4460(33);		// READY, stänger av TX
+	DoSendSetupToSi4460(33);		// READY, stänger av TX
 
 	nTmp = DoCheckCTSManyTimes();
 	nReturn &= nTmp;
 
-	DoSendVHFSetupToSi4460(32);		// Stänger antennswitchen för att minska strömmen
+	DoSendSetupToSi4460(32);		// Stänger antennswitchen för att minska strömmen
 
 	nTmp = DoCheckCTSManyTimes();
 	nReturn &= nTmp;
@@ -200,7 +263,7 @@ unsigned char DoTurn151BeaconPulseOff(void)
 	nTmp = DoCheckCTSManyTimes();
 	nReturn &= nTmp;
 
-	DoSendVHFSetupToSi4460(27);		// CHANGE_STATE to SLEEP/STANDBY
+	DoSendSetupToSi4460(27);		// CHANGE_STATE to SLEEP/STANDBY
 
 	CloseSPI1();
 
@@ -214,97 +277,100 @@ unsigned char DoTurn151BeaconPulseOff(void)
 
 // ------------------------------------------------------------------------------------
 // DoInit433Beacon() ska direkt följas av DoTurn433BeaconPulseOn()
-void DoInit433Beacon(void)
-{
-	unsigned char nTmp, nReg;
+// Slängas ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+//void DoInit433Beacon(void)
+//{
+//	unsigned char nTmp, nReg;
+//
+//	TCXO_EN = 1;		// OBS - Först
+//
+//	Delay(5);			// Räcker med 2ms 
+//
+//	// Reset mha SDN, alla register clearas
+//	DoResetSi4460();
+//
+//	OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);
+//
+//	nTmp = DoCheckCTSManyTimes();
+//
+//	DoSendUHFSetupToSi4460(0);	// POWER_UP [0]	startar radion och ställer in den för TCXO
+//
+//	Delay(15);		// 14ms
+//
+//	nTmp = DoCheckCTSManyTimes();
+//
+//	// 0-30 totalt
+//	//  0 = POWER_UP
+//	// 26 = Start TX immediately on channel 0
+//	// 27 = CHANGE_STATE to SLEEP or STANDBY  (puls off?) 	(se GLOBAL_CLK_CFG:CLK_32K_SEL)
+//	// 28 = CHANGE_STATE to TX state (puls on?)
+//	// 29 = Slår på switchen för VHF
+//	// 30 = Slår av matningsspänningen till antnn-switchen
+//
+//	for (nReg = 1; nReg < 26; nReg++)
+//	{
+//		DoSendUHFSetupToSi4460(nReg);
+//		nTmp = DoCheckCTSManyTimes();
+//	}
+//
+//	CloseSPI1();
+//}
+//
+//// ------------------------------------------------------------------------------------
+//// Startar beacon en UHF-puls
+//void DoTurn433BeaconPulseOn(void)
+//{
+//	unsigned char nTmp, nReg;
+//
+//	TCXO_EN = 1;		// OBS - Först
+//
+//	Delay100TCYx(2);	// Ska vara 100us enligt databladet
+//
+//	OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);
+//
+//	nTmp = DoCheckCTSManyTimes();	// Väcker upp kretsen mha SPI-kommunikation
+//
+//	DoSendUHFSetupToSi4460(29);		// Öppnar antennswitchen
+//
+//	nTmp = DoCheckCTSManyTimes();
+//	
+//	DoSendUHFSetupToSi4460(28);		// CHANGE_STATE to TX state	
+//
+//	nTmp = DoCheckCTSManyTimes();
+//
+//	CloseSPI1();
+//}
+//
+//// ------------------------------------------------------------------------------------
+//// Stänger av
+//void DoTurn433BeaconPulseOff(void)
+//{
+//	unsigned char nTmp;
+//
+////	while (Flaggs.bSPIbusy == 1);
+//
+//	OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);
+//
+//	DoSendUHFSetupToSi4460(31);		// READY, stänger TX
+//
+//	nTmp = DoCheckCTSManyTimes();
+//
+//	DoSendUHFSetupToSi4460(30);		// Stänger antennswitchen
+//
+//	nTmp = DoCheckCTSManyTimes();
+//
+//	DoClearIRQSi4460();				// Fordras för att gå till sleep/standby
+//	
+//	nTmp = DoCheckCTSManyTimes();
+//
+//	DoSendUHFSetupToSi4460(27);		// CHANGE_STATE to SLEEP or STANDBY
+//
+//	CloseSPI1();
+//		
+//	TCXO_EN = 0;		// OBS - Sist
+//}
+// ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
 
-	TCXO_EN = 1;		// OBS - Först
-
-	Delay(5);			// Räcker med 2ms 
-
-	// Reset mha SDN, alla register clearas
-	DoResetSi4460();
-
-	OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);
-
-	nTmp = DoCheckCTSManyTimes();
-
-	DoSendUHFSetupToSi4460(0);	// POWER_UP [0]	startar radion och ställer in den för TCXO
-
-	Delay(15);		// 14ms
-
-	nTmp = DoCheckCTSManyTimes();
-
-	// 0-30 totalt
-	//  0 = POWER_UP
-	// 26 = Start TX immediately on channel 0
-	// 27 = CHANGE_STATE to SLEEP or STANDBY  (puls off?) 	(se GLOBAL_CLK_CFG:CLK_32K_SEL)
-	// 28 = CHANGE_STATE to TX state (puls on?)
-	// 29 = Slår på switchen för VHF
-	// 30 = Slår av matningsspänningen till antnn-switchen
-
-	for (nReg = 1; nReg < 26; nReg++)
-	{
-		DoSendUHFSetupToSi4460(nReg);
-		nTmp = DoCheckCTSManyTimes();
-	}
-
-	CloseSPI1();
-}
-
-// ------------------------------------------------------------------------------------
-// Startar beacon en VHF-puls
-void DoTurn433BeaconPulseOn(void)
-{
-	unsigned char nTmp, nReg;
-
-	TCXO_EN = 1;		// OBS - Först
-
-	Delay100TCYx(2);	// Ska vara 100us enligt databladet
-
-	OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);
-
-	nTmp = DoCheckCTSManyTimes();	// Väcker upp kretsen mha SPI-kommunikation
-
-	DoSendUHFSetupToSi4460(29);		// Öppnar antennswitchen
-
-	nTmp = DoCheckCTSManyTimes();
-	
-	DoSendUHFSetupToSi4460(28);		// CHANGE_STATE to TX state	
-
-	nTmp = DoCheckCTSManyTimes();
-
-	CloseSPI1();
-}
-
-// ------------------------------------------------------------------------------------
-// Stänger av
-void DoTurn433BeaconPulseOff(void)
-{
-	unsigned char nTmp;
-
-//	while (Flaggs.bSPIbusy == 1);
-
-	OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);
-
-	DoSendUHFSetupToSi4460(31);		// READY, stänger TX
-
-	nTmp = DoCheckCTSManyTimes();
-
-	DoSendUHFSetupToSi4460(30);		// Stänger antennswitchen
-
-	nTmp = DoCheckCTSManyTimes();
-
-	DoClearIRQSi4460();				// Fordras för att gå till sleep/standby
-	
-	nTmp = DoCheckCTSManyTimes();
-
-	DoSendUHFSetupToSi4460(27);		// CHANGE_STATE to SLEEP or STANDBY
-
-	CloseSPI1();
-		
-	TCXO_EN = 0;		// OBS - Sist
-}
 
 // ------------------------------------------------------------------------------------
 void DoResetSi4460(void)
@@ -312,12 +378,12 @@ void DoResetSi4460(void)
 	// Reset mha SDN, alla register clearas
 	RADIO_SDN = 1;
 
-	Delay10TCYx(35);	// 35x10us=350us, ska vara 300us
-//	Delay(1);			// 300us
+	//Delay10TCYx(35);	// 35x10us=350us, ska vara 300us
+	Delay(1);			// 300us
 
 	RADIO_SDN = 0;
 
-	Delay(6);		// 5ms
+	Delay(10);		// 5ms
 }	
 
 // ------------------------------------------------------------------------------------
@@ -380,12 +446,12 @@ void DoResetSi4460(void)
 // ------------------------------------------------------------------------------------
 // nIndex anger vilken rad som ska skickas 
 // Komplett initiering: 20.7ms
-char DoSendVHFSetupToSi4460(unsigned char nIndex)
+char DoSendSetupToSi4460(unsigned char nIndex)
 {
-	char nLoop, nTmp, nLen;
+	char nLoop, nLen;
 	far rom char *szRadPek;
 
-	szRadPek = (far rom char *)Beacon151Rad[nIndex].szRad;
+	szRadPek = (far rom char *)BeaconRad[nIndex].szRad;
 
 	nLen = *szRadPek++;
 
@@ -588,10 +654,10 @@ unsigned char DoCheckCTSManyTimes(void)
 	if (nReturn != 0xFF)
 	{
 		RED_LED = 1;
-		Delay(5);
+		Delay(20);
 		RED_LED = 0;
 	}	
-
+    TRX_EN = 0;
 	return nReturn;
 }
 
@@ -932,7 +998,7 @@ void DoReadFromRX_FIFOSi4460(unsigned char nLen)		// 0x2A = 42byte
 // ------------------------------------------------------------------------------------
 void DoClearIRQSi4460(void)
 {
-	char nLoop, nTmp;
+	//char nLoop, nTmp;
 
 	TRX_EN = 0;
 

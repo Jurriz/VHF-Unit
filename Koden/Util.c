@@ -35,7 +35,7 @@ void InitCPU(void)
     
 	//PORTA = 0b00000000;
 	TRISA = 0b00000000; // 0b11100011;
-	LATA  = 0b10101000; //0b00011000; VSEL1 & VSEL2 & VSEL3
+	LATA  = 0b00000000; //0b00011000; VSEL1 & VSEL2 & VSEL3 0b10101000
 	
 	PORTB = 0b00000000;
 	TRISB = 0b11111111;
@@ -231,28 +231,72 @@ void Delay(unsigned int nDelay)
 	}	
 }
 
-// -----------------------------------------------------------------------------
-signed int AccDataCalc(unsigned char val_L, unsigned char val_H)
+//---------------------------------------------------------------------------------------------
+unsigned char ReadEEByte(int nEEAdr)
 {
-    signed int nTmp;
-    nTmp = val_H;
-    nTmp = nTmp << 8;
-    nTmp = nTmp | val_L;
-    
-    if(nTmp < 0)
-           nTmp =- nTmp;
-    return nTmp;
+    EEADRH = ((nEEAdr & 0xff00) >> 8);    // Det måste finnas minst en instruktion mellan EEADR = .. och .RD = 1
+    EEADR = (nEEAdr & 0x00ff);            // Det måste finnas minst en instruktion mellan EEADR = .. och .RD = 1
+
+    EECON1bits.EEPGD = 0;        // EEPROM
+    EECON1bits.CFGS = 0;        // EEPROM
+
+    EECON1bits.RD = 1;
+
+    return EEDATA;                // OBS: Läsning måste ske direkt efter .RD = 1
 }
 
-// -----------------------------------------------------------------------------
-//void PrintAccData(signed int Acc_val, char text)
-//{
-//    for (int i = 0; Acc_val > i; i++)
-//    {
-//        sprintf(szUSART_Out, (const rom far char *), text); // Utskrift på skärmen
-//        SkrivBuffert(szUSART_Out, 1);
-//    }
-//}
+//---------------------------------------------------------------------------------------------
+void Write2EE(const unsigned char nData, const int nAdress)
+{
+    int WDI; //
+    static char nWriteLoop;
+    unsigned char bOldINTCON;
+
+    WDI = 1;
+    Nop();
+    Nop();
+    WDI = 0;
+
+    // Spara nuvarande status för GIE (INTCON = 7=GIE/GIEH 6=PEIE/GIEL 5=TMR0IE 4=INT0IE 3=RBIE 2=TMR0IF 1=INT0IF 0=RBIF
+    bOldINTCON = INTCON;
+
+    // Tidigare styrde följande
+    // "if ( ( (DCDC_ENABLE == 1) && (BatFlag.bLowBat == 0) ) || ( (DCDC_ENABLE == 0) && (MAIN_LOW_BAT == 1) ) )"
+
+    // GIE avstängd under hela operationen
+    INTCONbits.GIE = 0;
+
+    nWriteLoop = 0;
+    do {
+        EEADRH = ((nAdress & 0xff00) >> 8);
+        EEADR = (nAdress & 0x00ff);
+
+        EEDATA = nData;
+
+        EECON1bits.EEPGD = 0;        // EEPROM
+        EECON1bits.CFGS = 0;        // EEPROM
+        EECON1bits.WREN = 1;
+
+        // INTCONbits.GIE = 0;        // OBS VIKTIGT ******************
+
+        EECON2 = 0x55;
+        EECON2 = 0xAA;
+
+        EECON1bits.WR = 1;            // Inled skrivning
+
+        // INTCONbits.GIE = 1;        // OBS VIKTIGT ******************
+
+        while(EECON1bits.WR == 1);  // Vänta tills skrivningen är klar, om inte EECON1bits.WR går låg tar watchDogTimern hand om det!
+
+        EECON1bits.WREN = 0;
+        nWriteLoop++;
+    } while ( (ReadEEByte(nAdress) != nData) && (nWriteLoop < 4) );
+
+    // Maska in det ursprunliga inehållet i INTCON, är GIE == 0 fortsätter den inställningen
+    INTCON |= bOldINTCON;
+    // INTCONbits.GIE = 1;
+} 
+
 
 // -----------------------------------------------------------------------------
 void Blink1(void)
