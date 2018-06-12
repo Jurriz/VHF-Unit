@@ -26,9 +26,7 @@ const rom struct MyNewRad BeaconRad[] = {
 // GPIO0 eller GPIO1 kan, om man vill, agera CTS (0x08) Går hög när ett nytt kommando kan tas emot annars låg
 // GPIOn     [0]   [1]   [2]   [3]  NIRQ   SDO  GEN_GONFIG
 {0x08, 0x13, 0x01, 0x00, 0x03, 0x03, 0x00, 0x00, 0x00},		// 1 Slår på switchen för VHF
-
 {0x06, 0x11, 0x00, 0x02, 0x00, 0x00, 0x00},					// 2 grupp 00, antal parametrar 02, start adress 00, data är 00 och 00
-
 {0x05, 0x11, 0x00, 0x01, 0x03, 0x20},						// 3
 {0x05, 0x11, 0x01, 0x01, 0x00, 0x00},						// 4
 {0x08, 0x11, 0x02, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00},		// 5
@@ -69,17 +67,16 @@ const rom struct MyNewRad BeaconRad[] = {
 // -------------------------------------------------------------------------------------------------------------------------
 {0x02, 0x34, 0x01},		//0x01	// 27		// CHANGE_STATE to SLEEP or STANDBY  (puls off?) 	(se GLOBAL_CLK_CFG:CLK_32K_SEL)
 {0x02, 0x34, 0x07},			// 28		// CHANGE_STATE to TX state (puls on?)
-
 {0x01, 0x20},	 			// 29 Reset av alla IRQ
 
 // GPIO2 agerar huvudbrytare och ska vara '1' när den ska vara aktiv (på) (0x03) annars låg (0x02)
 // GPIO3 styr UHF ('0'/0x02)) eller VHF ('1'/0x03)
 // GPIO0 eller GPIO1 kan agera CTS (0x08) Går hög när ett nytt kommando kan tas emot annars låg
 
-// (31) [2] 0x01 [3] 0x00 Gjort om denna till den första versionen
+// (31) [2] 0x03 [3] 0x02 Gjort om denna till den första versionen
 // GPIOn      [0]   [1]   [2]   [3]  NIRQ   SDO  GEN_GONFIG
 {0x08, 0x13, 0x01, 0x00, 0x03, 0x03, 0x00, 0x00, 0x00},		// 30 Slår på switchen för VHF
-{0x08, 0x13, 0x01, 0x00, 0x03, 0x02, 0x00, 0x00, 0x00},		// 31 Slår på switchen för UHF
+{0x08, 0x13, 0x01, 0x00, 0x02, 0x03, 0x00, 0x00, 0x00},		// 31 Slår på switchen för UHF
 {0x08, 0x13, 0x01, 0x00, 0x02, 0x02, 0x00, 0x00, 0x00},		// 32 Slår av matningsspänningen till antenn-switchen
 {0x02, 0x34, 0x03}											// 33 CHANGE_STATE to READY
 
@@ -92,7 +89,7 @@ const rom struct MyNewRad BeaconRad[] = {
 //  0 = POWER_UP
 // 25 = Frekvensinställningarna
 // 30 = Slår på switchen för VHF
-// 31 Slår på switchen för UHF
+// 31 = Slår på switchen för UHF
 // 32 = Slår av matningsspänningen till antenn-switchen
 // 33 = Byte state till READY
 

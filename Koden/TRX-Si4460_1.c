@@ -36,7 +36,7 @@
 // ------------------------------------------------------------------------------------
 
 // Ansätter VHF eller UHF filter 
-const char filter = 1;      // 0 = UHF, 1 = VHF
+//const char filter = 0;      // 0 = UHF, 1 = VHF
 
 void InitTRXAndGotoSleep(void)
 {
@@ -101,7 +101,7 @@ unsigned char DoInitBeacon(void)         // 151
     // Rad 16, Select PLL Synthesizer output divider ratio as a function of frequency band.
     //Vad som egentligen körs: DoSendSetupToSi4460(16);
     
-    TRX_EN = 0;
+//    TRX_EN = 0;
 	MyWriteSPI(0x11);   
 	MyWriteSPI(0x20);   
 	MyWriteSPI(0x02);   
@@ -228,7 +228,7 @@ unsigned char  DoTurnBeaconPulseOn(void)
     nTmp = DoCheckCTSManyTimes();
     nReturn &= nTmp;
     
-	DoSendSetupToSi4460(28);		// CHANGE_STATE to TX state	
+	DoSendSetupToSi4460(28);            // CHANGE_STATE to TX state	
 
 	nTmp = DoCheckCTSManyTimes();
 	nReturn &= nTmp;

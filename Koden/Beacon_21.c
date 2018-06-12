@@ -29,9 +29,9 @@ void RedLedPulse(void)
 {
 	RED_LED = 1;
 	DoTurnBeaconPulseOn();
-	Delay(20);
+	Delay(100);
 	RED_LED = 0;
-	Delay(20);
+	Delay(100);
 	DoTurnBeaconPulseOff();
 }
 

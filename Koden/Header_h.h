@@ -45,7 +45,7 @@
 //#define FREE			LATDbits.LATD7	// D,O
 #define GPIO2_Radio		LATDbits.LATD6	// D,O
 #define GPIO1_Radio		LATDbits.LATD5	// D,O
-#define TRX_EN		LATDbits.LATD4	// D,O Radio Chip Select
+#define TRX_EN          LATDbits.LATD4	// D,O Radio Chip Select
 //#define FREE			LATDbits.LATD3	// D,O
 //#define FREE			LATDbits.LATD2	// D,O
 //          		 	@ PORTD.1       // SDA_RTC
@@ -63,6 +63,7 @@
 // -----------------------------------------------------------------------------
 // Main.c
 void SkrivBuffert(char *szUt, char nVal);
+void HandleIRQ(void);
 
 // -----------------------------------------------------------------------------
 // RTC-RV8803C7
@@ -100,12 +101,11 @@ void InitTRXAndGotoSleep(void);
 unsigned char DoInitBeacon(void);
 unsigned char  DoTurnBeaconPulseOn(void);
 unsigned char DoTurnBeaconPulseOff(void);
+void DoResetSi4460(void);
+char DoSendBB_TX_SetupToSi4460(unsigned char nIndex);
 //void DoInit433Beacon(void);
 //void DoTurn433BeaconPulseOn(void);
 //void DoTurn433BeaconPulseOff(void);
-void DoResetSi4460(void);
-char DoSendBB_TX_SetupToSi4460(unsigned char nIndex);
-
 char DoSendSetupToSi4460(unsigned char nIndex);
 
 //Behövs ej, använder den övre till alla funktioner
@@ -140,8 +140,7 @@ unsigned char BCD2Byte(unsigned char nIn);
 signed int AccDataCalc(unsigned char val_L, unsigned char val_H);
 unsigned char ReadEEByte(int nEEAdr);
 void Write2EE(const unsigned char nData, const int nAdress);
-void Blink1(void);
-void Blink2(void);
+void Blink(void);
 void OSCILLATOR_Initialize(void);
 void TestaVSEL(void);
 
@@ -286,6 +285,7 @@ extern volatile union
 // -----------------------------------------------------------------------------
 extern char nByte_1, nByte_2;
 extern char nTimeOutUSART_1, nTimeOutUSART_2;
+extern char filter;
 
 // -----------------------------------------------------------------------------
 //#pragma udata USART_Buffer0

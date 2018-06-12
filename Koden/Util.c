@@ -299,43 +299,9 @@ void Write2EE(const unsigned char nData, const int nAdress)
 
 
 // -----------------------------------------------------------------------------
-void Blink1(void)
-{
-    LATDbits.LATD0 = 1;
-    Delay(100);
-    LATDbits.LATD1 = 1;
-    Delay(100);
-    LATDbits.LATD2 = 1;
-    Delay(100);
-    LATDbits.LATD3 = 1;
-    Delay(100);
-    LATDbits.LATD4 = 1;
-    Delay(100);
-    LATDbits.LATD5 = 1;
-    Delay(100);
-    LATDbits.LATD6 = 1;
-    Delay(100);
-    LATDbits.LATD7 = 1;
-    Delay(100);
-    LATDbits.LATD0 = 0;
-    Delay(100);
-    LATDbits.LATD1 = 0;
-    Delay(100);
-    LATDbits.LATD2 = 0;
-    Delay(100);
-    LATDbits.LATD3 = 0;
-    Delay(100);
-    LATDbits.LATD4 = 0;
-    Delay(100);
-    LATDbits.LATD5 = 0;
-    Delay(100);
-    LATDbits.LATD6 = 0;
-    Delay(100);
-    LATDbits.LATD7 = 0;
-}
 
 // ----------------------------------------------------------------------------
-void Blink2(void) {
+void Blink(void) {
     GREEN_LED = 1; Delay(42);
         
     RED_LED = 1;    Delay(42); 
