@@ -1,0 +1,5 @@
+DRC Rules Export File for PCB: C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Kretskortet\VHF-Unit rev1\Test Radio Design Rev.1.SWPcbDoc
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=4.00
+RuleKind=Width|RuleName=Width|Scope=Board|Minimum=6.00
+RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=6.00
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0

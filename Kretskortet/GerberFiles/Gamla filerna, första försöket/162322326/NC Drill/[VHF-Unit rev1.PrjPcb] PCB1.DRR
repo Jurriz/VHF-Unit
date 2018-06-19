@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+NCDrill File Report For: PCB1.SWPcbDoc   2018-04-26  10:11:19
+---------------------------------------------------------------------------
+
+Layer Pair : Component Side to Solder Side
+ASCII RoundHoles File : [VHF-Unit rev1.PrjPcb] PCB1.TXT
+EIA File   : [VHF-Unit rev1.PrjPcb] PCB1.DRL
+
+Tool         Hole Size           Hole Type     Hole Count Plated       Tool Travel
+---------------------------------------------------------------------------
+T1        0.2mm (7.874mil)         Round          13               33.22 mm (1.31 Inch)
+T2        0.711mm (27.992mil)      Round          3                7.21 mm (0.28 Inch)
+T3        0.9mm (35.433mil)        Round          3                35.45 mm (1.40 Inch)
+---------------------------------------------------------------------------
+Totals                                            19               75.88 mm (2.99 Inch)
+
+Total Processing Time (hh:mm:ss) : 00:00:00

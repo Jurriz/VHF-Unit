@@ -102,11 +102,14 @@
     (FileView
       (Path "Design Resources")
       (Path "Design Resources"
-         "c:\users\josef.tvp1\documents\github\vhf-unit\kretskortet\simuleringen\simulering.dsn")
+         "C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Kretskortet\Simuleringen\simulering.dsn")
       (Path "Design Resources"
-         "c:\users\josef.tvp1\documents\github\vhf-unit\kretskortet\simuleringen\simulering.dsn"
+         "C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Kretskortet\Simuleringen\simulering.dsn"
          "SCHEMATIC1")
-      (Path "Outputs"))
+      (Path "Outputs")
+      (Select "Design Resources"
+         "C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Kretskortet\Simuleringen\simulering.dsn"
+         "SCHEMATIC1" "Anders Lösning"))
     (HierarchyView)
     (Doc
       (Type "COrCapturePMDoc")
@@ -116,8 +119,8 @@
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 2 3 -1 -1 -8 -30 175 1525 175 643")
-        (Scroll "705 250")
+        (Placement "44 0 1 -1 -1 -8 -30 175 1525 175 643")
+        (Scroll "0 441")
         (Zoom "148")
         (Occurrence "/"))
       (Path
@@ -127,8 +130,8 @@
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -30 150 1794 150 618")
-        (Scroll "0 20")
+        (Placement "44 2 3 -1 -1 -8 -30 150 1794 150 618")
+        (Scroll "0 0")
         (Zoom "100")
         (Occurrence "/"))
       (Path

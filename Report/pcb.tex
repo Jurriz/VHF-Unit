@@ -100,28 +100,28 @@ Powering it is done by connecting the VDD pins to the power net. Connected to th
 To operate the \gls{mcu} a clock signal is mandatory, this can be implemented in different ways. Either with the internal High, Medium and Low-frequency oscillator or an external one. Where the external rely on a specific circuitry to provide the clock source. Examples of external oscillators are clock modules, quartz crystal resonators or ceramic resonators and resistor-capacitor circuits. When a circuit is specified to be power efficient the speed of the clock plays a central role. As this product is specified to run on a small battery the speed of the system is kept low to increase the lifetime of the battery. The clock signal is generated from an external \gls{tcxo}.
 
 
-\section{IMU}
-
-
-
 \newpage %% Accelerometers
 \section{Accelerometer} 
 The motions of the system are measured with an \gls{imu} system. This system can be used in a lot of different cases, both to detect if the unit is stationary or moving or if there are very hard and fast movements in the product. One of the simplest \gls{imu}'s is the 3-axis accelerometer, it detects accelerations in three axes, x, y, and z. The component used is a 3-axis, ultra-low-power and high-performance accelerometer from \gls{st} \cite{ST_acc}. The component is the simplest of \gls{imu}'s that this manufacturer has and this simplicity makes for a product that is only incorporate one single function. 3-axis accelerometer means that it can measure  
 
-\subsection{Power}
+\subsection{Connenctions}
 Two voltage connections are apparent on this device, one which is called VDD and the other is called VDD-IO. The VDD is the supply voltage and VDD-IO determines the logic voltage level. 
+No special attention is needed towards these contacts, both of them are connected to supply voltage. 
 
+The component is connected to the MCU through the SPI interface, four wires are needed here. 
+
+\newpage %% RTC
+\section{Real Time Clock} 
+Sending schemes with timed The \gls{rtc} is used to 
 
 \subsection{Connenctions}
+The component used in this project communicates with the \gls{i2c} interface, this requires two connections to the \gls{mcu}.
 
 
 \newpage
 \section{Radio component}
  The radio module used in this project is from the company Silabs. The chosen radio \gls{ic} have the characteristics that are wanted in this type of product. The radio transmission used is the earlier explained class E. With this pice the class E is already implemented in the radio as this is widely used today and a very effective radio signal. 
 The type of filter used for sending radio signals at \gls{vhf} frequencies is defined in the defined 
-
-
-\subsection{Power}
 
 
 \subsection{Connenctions}

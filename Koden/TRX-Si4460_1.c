@@ -91,7 +91,7 @@ unsigned char DoInitBeacon(void)         // 151
 
     
     // Kör de första 15st kommandonen, dessa är samma för både VHF och UHF!
-	for (nReg = 1; nReg < 16; nReg++)
+	for (nReg = 1; nReg < 17; nReg++)
 	{
 		DoSendSetupToSi4460(nReg);
 		nTmp = DoCheckCTSManyTimes();
@@ -134,7 +134,7 @@ unsigned char DoInitBeacon(void)         // 151
 	//MyWriteSPI(0xFA);
     
     // Kör de sista, 17:e till 24:e kommandonen, dessa är samma för både VHF och UHF!
-    for (nReg = 17; nReg < 25; nReg++)
+    for (nReg = 18; nReg < 25; nReg++)
 	{
 		DoSendSetupToSi4460(nReg);
 		nTmp = DoCheckCTSManyTimes();
@@ -1162,7 +1162,7 @@ void DoPutRadioToSleep(void)
 // GPIO1
 // Any of the GPIOs can be configured for monitoring the CTS. GPIOs can be configured to go high or low if the chip
 // completes the command. The function of the GPIOs can be changed by the GPIO_PIN_CFG command. By
-// default, GPIO1 is set as “High when command completed, low otherwise” after Power On Reset. Therefore, this pin
+// default, GPIO1 is set as ?High when command completed, low otherwise? after Power On Reset. Therefore, this pin
 // can be used for monitoring the CTS right after Power On Reset to know when the chip is ready to boot up.
 
 // ------------------------------------------------------------------------------------
@@ -1580,7 +1580,7 @@ void DoInitTRX(void)
 /*
 3.2.1. Sending Commands
 The behavior of the radio can be changed by sending commands to the radio (e.g. changing the power states, start
-packet transmission, etc.). The radio can be configured through several so called “properties”. The properties hold
+packet transmission, etc.). The radio can be configured through several so called ?properties?. The properties hold
 radio configuration settings, such as interrupt settings, modem parameters, packet handler settings, etc. The
 properties can be set and read via API commands.
 Most of the commands are sent from the host MCU to the radio, and the host MCU does not expect any response
@@ -2025,7 +2025,7 @@ void DoCloseBB_TX_Session(void)
 
 
 // -----------------------------------------------------------------------------------------------------------------------------------------
-// The Manchester code is based on transitions; a “0” is encoded as a low-to-high transition, a “1” is encoded as a high-to-low transition
+// The Manchester code is based on transitions; a ?0? is encoded as a low-to-high transition, a ?1? is encoded as a high-to-low transition
 // Klockan går dubbelt så snabbt som data-hastigheten
 // -----------------------------------------------------------------------------------------------------------------------------------------
 /* void DoSendOne(void)
@@ -2044,7 +2044,7 @@ void DoCloseBB_TX_Session(void)
 }
 */
 // -----------------------------------------------------------------------------------------------------------------------------------------
-// The Manchester code is based on transitions; a “0” is encoded as a low-to-high transition, a “1” is encoded as a high-to-low transition
+// The Manchester code is based on transitions; a ?0? is encoded as a low-to-high transition, a ?1? is encoded as a high-to-low transition
 // -----------------------------------------------------------------------------------------------------------------------------------------
 /* void DoSendZero(void)
 {

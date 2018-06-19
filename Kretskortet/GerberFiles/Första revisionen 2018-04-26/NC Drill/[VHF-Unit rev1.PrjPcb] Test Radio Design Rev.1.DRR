@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+NCDrill File Report For: Test Radio Design Rev.1.SWPcbDoc   2018-04-27  10:32:50
+---------------------------------------------------------------------------
+
+Layer Pair : Component Side to Solder Side
+ASCII RoundHoles File : [VHF-Unit rev1.PrjPcb] Test Radio Design Rev.1.TXT
+EIA File   : [VHF-Unit rev1.PrjPcb] Test Radio Design Rev.1.DRL
+
+Tool         Hole Size           Hole Type     Hole Count Plated       Tool Travel
+---------------------------------------------------------------------------
+T1        0.3mm (11.811mil)        Round          182              521.52 mm (20.53 Inch)
+T2        0.7mm (27.559mil)        Round          2                2.00 mm (0.08 Inch)
+T3        0.711mm (27.992mil)      Round          3         NPTH   7.21 mm (0.28 Inch)
+---------------------------------------------------------------------------
+Totals                                            187              530.73 mm (20.89 Inch)
+
+Total Processing Time (hh:mm:ss) : 00:00:01

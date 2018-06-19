@@ -1,0 +1,213 @@
+\documentclass[a4paper]{report}
+
+% text
+\usepackage[utf8]{inputenc}
+\usepackage[numbers]{natbib}
+%\bibliographystyle{unsrtnat}
+\usepackage[toc,page]{appendix}
+\usepackage{amssymb,amsmath}
+\usepackage{gensymb}
+\usepackage{amsfonts}
+\usepackage{todonotes}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{scrextend}
+\usepackage{graphicx, xcolor}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage{subcaption, float}
+\usepackage{titlesec}
+\usepackage{verbatim}
+\usepackage[document]{ragged2e} % Right and left aligned text
+
+%\usepackage[nonumberlist]{glossaries}
+%\usepackage[sc]{titlesec}
+%\usepackage{titletoc}
+
+% links
+\usepackage{color}
+%\usepackage[linktocpage=true, colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[pdfpagemode={UseOutlines},bookmarks=true,bookmarksopenlevel=0,bookmarksnumbered=true,plainpages=false,colorlinks,linkcolor={black},citecolor={blue},urlcolor={blue},pdfstartview={FitV},unicode,breaklinks=true,pdfpagelabels]{hyperref}
+\usepackage[all]{hypcap}
+\usepackage[hypcap]{caption}
+
+% layout
+%\usepackage{multicol}
+\usepackage{fancyhdr,lastpage}
+\setcounter{tocdepth}{2}
+
+% header layout
+\usepackage{suffix}
+
+% Abbreviations and glossary - ,toc,section=section -section=chapter - ,acronym
+\usepackage[automake,entrycounter,acronym,toc,section=section,numberedsection=autolabel]{glossaries-extra}
+\makeglossaries
+\setabbreviationstyle[acronym]{long-postshort-user}
+\glssetcategoryattribute{acronym}{nohyperfirst}{true}
+\renewcommand*{\glsxtruserparen}[2]{
+  \glsxtrfullsep{#2}
+  (\glshyperlink[#1]{#2})
+}
+
+%% Name of the project, can always be called by: \project
+\newcommand{\project}{\emph{VHF-Unit}}	
+
+%% Pictures with aurthor and source
+\newcommand\chapterauthor[1]{\authortoc{#1}\printchapterauthor{#1}}
+\WithSuffix\newcommand\chapterauthor*[1]{\printchapterauthor{#1}}
+
+%\makeatletter
+\newcommand{\printchapterauthor}[1]{%
+  {\parindent0pt\vspace*{-10pt}%
+  \linespread{1.1}\large\scshape#1%
+  \par\nobreak\vspace*{10pt}}
+  \@afterheading%
+}
+\newcommand{\authortoc}[1]{%
+  \addtocontents{toc}{\vskip-1pt}%
+  \addtocontents{toc}{%
+    \protect\contentsline{chapter}%
+    {\hskip0em\mdseries\scshape\protect\scriptsize#1}{}{}}
+  \addtocontents{toc}{\vskip5pt}%
+}
+\makeatother
+
+
+%% Fixed 4th deepth
+%\setcounter{secnumdepth}{4}
+%\titleformat{\paragraph}
+%{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+%\titlespacing*{\paragraph}
+%{0pt}{1.25ex plus 1ex minus .2ex}{0.5ex plus .2ex}
+
+% Chapter and section style
+\titleformat
+{\chapter} % command
+[display] % shape
+{\bfseries\huge} % format
+{ \ \thechapter} % label
+{0.5ex} % sep
+{
+    \rule{\textwidth}{1pt}
+    \vspace{0ex}
+    \centering
+} % before-code
+
+
+%\titleformat{\section}[wrap]
+%{\Large\bfseries}
+%{\thesection}{0.5em}{}
+%\titlespacing{\section}{10pc}{1.5ex plus .1ex minus .2ex}{1pc}
+ 
+\input{glossary.tex}
+
+% Figure caption source
+\newcommand*{\captionsource}[2]{%
+  \caption[{#1}]{#1}\par
+  \textbf{Source:} #2\par}
+
+% header style
+\pagestyle{fancy}
+\lhead{Project \project}
+\chead{}
+
+\rhead{\today}
+\lfoot{}
+\cfoot{\thepage~of~\pageref{LastPage}}
+\rfoot{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+
+\begin{document}
+
+\begin{titlepage}
+\input{titlepage.tex}
+\end{titlepage}
+
+\pagenumbering{roman}
+\clearpage
+%\begin{abstract}
+\chapter*{Abstract}
+\input{abstract.tex}
+%\end{abstract}
+
+% Preface
+\clearpage
+\chapter*{Preface}
+\input{preface.tex}
+
+\clearpage
+\setlength{\columnseprule}{0.2pt}
+\tableofcontents % TABLE OF CONTENTS
+\thispagestyle{plain}
+\vspace{0.5em}
+
+%% Vet inte vad den gör
+\setlength{\parindent}{0pt}
+
+
+%% 		Glossaries
+\clearpage
+\printglossary[type=\acronymtype,title=Abbrevations]
+%\printglossary
+%\thispagestyle{plain}
+%\printglossary[type= main]
+
+
+%%             	Introduction
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\chapter{Introduction}
+\input{introduction.tex}
+
+%%             	Theory
+\clearpage
+\chapter{Theory}\label{sec:Theory}
+\input{theory.tex}
+
+%%			Hardware
+\clearpage
+\chapter{Hardware}\label{sec:pcb}
+\input{pcb.tex}
+
+%% 			Software
+\clearpage
+\chapter{Software}\label{sec:software}
+\input{software.tex}
+
+%% 			Results
+\clearpage
+\chapter{Results}\label{sec:results}
+\input{result.tex}
+
+%%			Schematics
+\clearpage
+\chapter{Schematics}\label{sec:schematic}
+\input{Schematic.tex}
+
+%% 			Discussion
+\clearpage
+\chapter{Discussion}\label{sec:discussion}
+\input{discussion.tex}
+
+%% 			References
+\clearpage
+\input{references.tex}
+
+%%			Appendix
+\clearpage
+\begin{appendices}
+\input{APPENDIX.tex}
+\end{appendices}
+
+\newpage
+\vspace*{9cm}
+\begin{center}
+The project; complete with all software code, the application, hardware files and more, can be found online in the github-repo:\\
+\url{https://github.com/Jurriz/VHF-Unit}
+\end{center}
+
+\end{document}
