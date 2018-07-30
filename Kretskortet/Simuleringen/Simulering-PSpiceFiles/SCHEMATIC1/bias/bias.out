@@ -1,7 +1,7 @@
 
-**** 07/03/18 15:43:17 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+**** 07/30/18 14:29:17 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
 
- ** Profile: "SCHEMATIC1-bias"  [ c:\users\josef.tvp1\documents\github\vhf-unit\kretskortet\simuleringen\simulering-pspicefiles\schem
+ ** Profile: "SCHEMATIC1-bias"  [ C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Kretskortet\Simuleringen\Simulering-PSpiceFiles\SCHEM
 
 
  ****     CIRCUIT DESCRIPTION
@@ -93,9 +93,9 @@ L_LM15         N61793 N48594  10n
 **** RESUMING bias.cir ****
 .END
 
-**** 07/03/18 15:43:17 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+**** 07/30/18 14:29:17 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
 
- ** Profile: "SCHEMATIC1-bias"  [ c:\users\josef.tvp1\documents\github\vhf-unit\kretskortet\simuleringen\simulering-pspicefiles\schem
+ ** Profile: "SCHEMATIC1-bias"  [ C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Kretskortet\Simuleringen\Simulering-PSpiceFiles\SCHEM
 
 
  ****     SMALL SIGNAL BIAS SOLUTION       TEMPERATURE =   27.000 DEG C
@@ -141,9 +141,9 @@ L_LM15         N61793 N48594  10n
 
           JOB CONCLUDED
 
-**** 07/03/18 15:43:17 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+**** 07/30/18 14:29:17 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
 
- ** Profile: "SCHEMATIC1-bias"  [ c:\users\josef.tvp1\documents\github\vhf-unit\kretskortet\simuleringen\simulering-pspicefiles\schem
+ ** Profile: "SCHEMATIC1-bias"  [ C:\Users\josef.TVP1\Documents\GitHub\VHF-Unit\Kretskortet\Simuleringen\Simulering-PSpiceFiles\SCHEM
 
 
  ****     JOB STATISTICS SUMMARY
@@ -153,5 +153,5 @@ L_LM15         N61793 N48594  10n
 
 
 
-  Total job time (using Solver 1)   =         .41
+  Total job time (using Solver 1)   =         .42
 
