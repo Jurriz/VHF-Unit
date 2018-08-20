@@ -1,0 +1,153 @@
+<div class="wikidoc">
+<p><strong>Introduction<br>
+</strong>This example shows how you can use the PeekyPokey to control a lamp wirelessly from your Windows PC.</p>
+<p>For this, I&rsquo;ll be using a radio controlled wall outlet containing a relay-driven power switch. Simply connecting a&nbsp;radio&nbsp;transmitter will turn the PeekyPokey into a wireless remote making the wall outlet respond to your&nbsp;slightest bidding.</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=786598" alt="Example of receivers" width="617" height="451">&nbsp;</p>
+<p><strong>Parts needed<br>
+</strong>Only very few external parts are needed, see further down for more information on each of these items:</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=786599" alt="Parts needed" width="610" height="436">&nbsp;</p>
+<p><strong>Tech background<br>
+</strong>There are a number of different vendors of wireless power switches, each using their own protocol standard. One of the more common ones in Europe is the Nexa system using various other names (Proove, CoCo, KlikAanKlikUit and others) in different countries.</p>
+<p>Being sold mostly in Europe, the Nexa system operates at 433.92Mhz radio frequency while as in some countries (like the U.S.) 315Mhz is used.</p>
+<p>Here's a more in-depth analysis of how these receivers work internally:<br>
+<a href="http://articles.logicapplied.com/#post0" target="_blank">http://articles.logicapplied.com/#post0</a></p>
+<p>A few typical radio controlled wall outlets are depicted in the introductory photo (see top of this page). These all contain a radio receiver and a relay. The receiver listens for ON/OFF&nbsp;messages and&nbsp;when an ON message is received, the relay is
+ pulled thus effectively powering the jack. When the the receiver detects an OFF message, the relay is relaxed and the jack becomes powerless. Very simple, very effective.</p>
+<p>Normally, you'd use a remote control like this one to control the outlet:</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=786615" alt="Nexa remote" width="490" height="614"></p>
+<p>However, instead of having to operate the&nbsp;remote&nbsp;manually, a small radio transmitter module will make&nbsp;the PeekyPokey able to take its place&nbsp;in&nbsp;becoming a wireless remote. This allows you to operate the power switch from the comfort
+ of&nbsp;your&nbsp;Windows PC.</p>
+<p>Currently, the PeekyPokey API supports the Nexa, Waveman and Rising Sun type of receivers. The API also supports the Nexa self learning system including absolute dimming functionality.&nbsp;</p>
+<p>The key component is a small&nbsp;433.92Mhz radio transmitter module like this one:</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=786597" alt="Typical 433 transmitter" width="639" height="581"></p>
+<p>These transmitters are available from various on-line market places for electronics. They are&nbsp;very cheap&nbsp;and pretty small, only about 10 x 20 mm in size. Despite their modest looks, they are quite&nbsp;versatile when it comes to the wireless control
+ of things. Depending on power feed (3 - 12V), you can expect a range from 10 to&nbsp;30 meters indoors.</p>
+<p><strong>Wiring<br>
+</strong>Firstly, disconnect PeekyPokey from your Windows host PC. Connect jumper wires between the&nbsp;PeekyPokey and radio transmitter module according to the table below:&nbsp;</p>
+<table>
+<tbody>
+<tr>
+<td>
+<p><strong>PeekyPokey</strong></p>
+</td>
+<td>
+<p><strong>Transmitter</strong></p>
+</td>
+<td>
+<p><strong>Remarks</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Vdd</p>
+</td>
+<td>
+<p>Vcc</p>
+</td>
+<td>
+<p>Select the &#43;5V position on&nbsp;the slider switch of&nbsp;the PeekyPokey</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>GND</p>
+</td>
+<td>
+<p>GND</p>
+</td>
+<td rowspan="2">
+<p>Put a small capacitor between the GND and Data pins to smoothen the signal a bit. A small ceramic capacitor in the range of 47nF to 1uF should do.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>TX</p>
+</td>
+<td>
+<p>Data</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>&nbsp;</p>
+</td>
+<td>
+<p>Ant</p>
+</td>
+<td>
+<p>For the antenna, you can use about 170 mm of single-core wire (the long red wire shown in our images)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>When done wiring, here&rsquo;s what your setup should look like:</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=786600" alt="PeekyPokey  based 433Mhz transmitter" width="646" height="641">&nbsp;</p>
+<p><strong>Adding a pinch of software<br>
+</strong>Before starting to code, you need to find out what message&nbsp;your receiver requires for turning the&nbsp;power switch on or off.</p>
+<p>There are a couple of different methods for this &ndash; some receivers have two rotating switch knobs to&nbsp;select a certain house code (A&hellip;P) and button (1&hellip;16) that your receiver will listen to. Others use a so called &ldquo;self learning&rdquo;
+ system that allow you to pair it with a remote button of your own choosing.</p>
+<p>In my case, I'm&nbsp;using a Nexa self learning receiver. Refer to the manual of your particular receiver for details on pairing it.</p>
+<p>When you've found out what command to send, launch Visual Studio and follow&nbsp;these steps:&nbsp;</p>
+<ol>
+<li>Create a &ldquo;New project&rdquo; of type C# Windows Forms application named &quot;Nexa&quot;
+</li><li>Add a reference to the PeekyPokey.DLL file </li><li>Double click the file &ldquo;Form1.frm&rdquo; </li><li>Add two Buttons named &ldquo;btnON&rdquo; and &ldquo;btnOff&rdquo; respectively
+</li><li>Double click on each button to create default event handlers for them </li><li>Add a Trackbar slider control and name it &ldquo;tbDimmer&rdquo; </li><li>Double click on the slider to create a default handler for it </li><li>Configure the slider&nbsp;so that it ranges from 0 (zero) to 16. </li><li>Replace the code in Form1.cs with the contents of the snippet below </li></ol>
+<table border="1" width="464" style="height:586px; width:464px">
+<tbody>
+<tr>
+<td>
+<p>using System;<br>
+using System.Collections.Generic;<br>
+using System.ComponentModel;<br>
+using System.Drawing;<br>
+using System.Text;<br>
+using System.Windows.Forms;</p>
+<p>namespace NexaTest<br>
+{<br>
+&nbsp; &nbsp;&nbsp;public partial class frmMain : Form<br>
+&nbsp; &nbsp;&nbsp;{<br>
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;private PeekyPokey.Toolkit.Rf.NexaSelfLearning _nexa;</p>
+<p>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;public frmMain()<br>
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{<br>
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;InitializeComponent();</p>
+<p>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;// create the PeekyPokey Nexa driver, choose any number<br>
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;_nexa = new PeekyPokey.Toolkit.Rf.NexaSelfLearning(2341234);<br>
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;}</p>
+<p>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;private void btnON_Click(object sender, EventArgs e)<br>
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{<br>
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; _nexa.Send(&quot;11d&quot;, true);<br>
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;}</p>
+<p>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;private void btnOff_Click(object sender, EventArgs e)<br>
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{<br>
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; _nexa.Send(&quot;11&quot;, false);<br>
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;}</p>
+<p>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;protected override void OnClosed(EventArgs e)<br>
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{<br>
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; base.OnClosed(e);</p>
+<p>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;_nexa.Dispose();<br>
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;}</p>
+<p>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;private void tbDimmer_Scroll(object sender, EventArgs e)<br>
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{<br>
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; _nexa.Send(&quot;11&quot;, tbDimmer.Value);<br>
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;}<br>
+&nbsp; &nbsp;&nbsp;}<br>
+}&nbsp;</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>I've chosen to mimic button #1 of unit #1 of a Nexa self learning receiver with dimmer and hence, there&rsquo;s a string literal &ldquo;11&rdquo; in my&nbsp;code above.</p>
+<p>If your receiver&nbsp;supports dimming like mine does, the slider can be used to fade the light. If your receiver is not capable of dimming, then the slider will have no effect. The ON/OFF buttons should work in either case though.&nbsp;</p>
+<p>Connect the PeekyPokey to your Windows&nbsp;PC and then launch the PeekyPokey Dashboard tool. Configure the board for TX LED on Gpio7 and choose to&nbsp;<strong>invert the UART.</strong>&nbsp;Don't&nbsp;forget to
+<strong>save the profile&nbsp;</strong>before closing the Dashboard tool.</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=786609" alt="" width="564" height="324"></p>
+<p>&nbsp;</p>
+<p><strong>Take it for a spin<br>
+</strong>Now, plug a lamp into the power jack&nbsp;of your receiver and fire up the new&nbsp;Windows application you created earlier and you should see something like this.</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=786601" alt="PeekyPokey Windows Forms application" width="327" height="228"></p>
+<p>Have fun playing with the buttons and slider to control your&nbsp;lamp!</p>
+<p>&nbsp;</p>
+<p><strong>TIP #1:</strong> By adding a web server from the PeekyPokey API, you&rsquo;ll be able to control your lamp from a networked device such as a smartphone (such as iPhone or Android) using your Windows PC as a home automation server.&nbsp;</p>
+<p><strong>TIP #2:</strong> Remember the PeekyPokey also has a set of eight general inputs and outputs? Have a look at some of the other
+<a href="https://peekypokey.codeplex.com/wikipage?title=Projects">example projects</a>&nbsp;for inspiration on things you might want to add to your smart home server.</p>
+</div><div class="ClearBoth"></div>

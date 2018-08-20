@@ -1,0 +1,135 @@
+<div class="wikidoc">
+<p><strong>Description</strong><br>
+This example project will show how to read key presses from a 16 (4 by 4)&nbsp;button keypad. This will introduce you to the concept of &quot;strobe and scan&quot;&nbsp;which a technique very commonly used for button input.</p>
+<p><br>
+<strong>Introduction</strong><br>
+We will be using a 4 by 4 button keypad like the one shown below. You will&nbsp;also need 8 header pins or jumper wires to use for connecting the&nbsp;keypad to your PeekyPokey.</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=722146" alt="" width="653" height="490"></p>
+<p>As you will see, this type of keypad is quite easy to use. It's only&nbsp;about 2 mm thick and has a self-adhesive backside so that you can stick&nbsp;it onto whatever you like.&nbsp;These keypads are very common will only cost you a few US dollars on&nbsp;popular
+ on-line market places.</p>
+<p>A 4 by 4 keypad contains 16 switches (one under each button) but you'll&nbsp;be able to detect all the 16 buttons using only the 8 GPIO pins of &nbsp;the&nbsp;PeekyPokey. To achieve this, we'll be using &quot;strobe and scan&quot;.</p>
+<p><span style="font-size:10pt">In a real world design, you would probably use a dedicated slave chip to&nbsp;</span>control the keyboard but this example serves to demonstrate the strobe&nbsp;and scan technique in itself.<br>
+<br>
+As can be seen, the ribbon cable of the keypad has 8 wires - one for each&nbsp;of the 4 rows and one for each of the 4 columns. The 16 switches of the keypad&nbsp;are&nbsp;arranged in a 4 by 4 matrix pattern as depicted below where circles symbolizes the switches:</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=722147" alt="" width="585" height="445"><br>
+When a button is pressed, the switch of the corresponding row and column is closed. Let's say you press the button &quot;6&quot; which sits in the intersection of row 2&nbsp;and column 1. Since this closes the corresponding button switch, a voltage applied to row 2 would
+ also be seen at column 1.</p>
+<p><br>
+<strong>Working principle - strobe and scan</strong><br>
+To read the keypad, you &quot;strobe&quot; each row by applying a voltage to each&nbsp;row in turn. While strobing a row, you &quot;scan&quot; the columns looking for one with a voltage on it. In pseudo code:</p>
+<ol>
+<li><span style="font-size:10pt">Initialize a variable Y to zero</span> </li><li><span style="font-size:10pt">Apply voltage to row Y</span> </li><li><span style="font-size:10pt">Initialize a varible X to zero</span> </li><li><span style="font-size:10pt">Check column X for the presence of voltage</span>
+</li><li><span style="font-size:10pt">If voltage present, button at position (X,Y) is being pressed</span>
+</li><li><span style="font-size:10pt">If X is less than 4, increment X and goto (4)</span>
+</li><li><span style="font-size:10pt">If Y is less than 4, increment Y and goto (2)</span>
+</li><li><span style="font-size:10pt">Goto (1)</span> </li></ol>
+<p><span style="font-size:10pt">You must repeat the process rather quickly not to miss out on a button&nbsp;</span>being pressed in between scans.</p>
+<p><br>
+<strong>Wiring</strong><br>
+Wire up your keypad to the PeekyPokey by connecting the 8 wires to gp0&nbsp;through gp7 like this:</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=722148" alt="" width="653" height="490"></p>
+<p><strong>Software</strong><br>
+You'll be using C# code to implement the &quot;strobe and scan&quot; working&nbsp;principle described earlier. Here's what you do:</p>
+<ol>
+<li><span style="font-size:10pt">Start Visual Studio</span> </li><li><span style="font-size:10pt">Choose to create a new Console Application</span>
+</li><li><span style="font-size:10pt">Replace the code &quot;Program.cs&quot; with this code block:</span>
+</li></ol>
+<p>&nbsp;</p>
+<div style="color:black; background-color:white">
+<pre><span style="color:blue">using</span> System;
+<span style="color:blue">using</span> System.Runtime.InteropServices;
+<span style="color:blue">using</span> PeekyPokey;
+
+<span style="color:blue">namespace</span> Keypad
+{
+    <span style="color:blue">class</span> Program
+    {
+        [DllImport(<span style="color:#a31515">&quot;User32.dll&quot;</span>)]
+        <span style="color:blue">private</span> <span style="color:blue">static</span> <span style="color:blue">extern</span> <span style="color:blue">void</span> keybd_event(Byte virtualKeyCode, Byte scanCode, UInt32 dwFlags, UIntPtr dwExtraInfo);
+
+        <span style="color:blue">static</span> <span style="color:blue">void</span> Main(<span style="color:blue">string</span>[] args)
+        {
+            <span style="color:green">// 4 bit output bus for rows to strobe</span>
+            <span style="color:blue">var</span> rowbus = <span style="color:blue">new</span> Port.Bus(Device.Pin.Gpio4, Device.Pin.Gpio5, Device.Pin.Gpio6, Device.Pin.Gpio7);
+
+            <span style="color:green">// 4 bit input bus for columns to scan</span>
+            <span style="color:blue">var</span> colbus = <span style="color:blue">new</span> Port.Bus(Device.Pin.Gpio0, Device.Pin.Gpio1, Device.Pin.Gpio2, Device.Pin.Gpio3);
+
+            <span style="color:green">//  main loop</span>
+            <span style="color:blue">for</span> (<span style="color:blue">int</span> row = 0, lastkey = -1; <span style="color:blue">true</span>; )
+            {
+                <span style="color:blue">int</span> key = -1;
+
+                <span style="color:green">// strobe rows...</span>
+                <span style="color:blue">for</span> (<span style="color:blue">int</span> i = 0; i &lt; 4; i&#43;&#43;, row = (row &#43; 1) &amp; 3)
+                {
+                    <span style="color:green">// set row bit</span>
+                    rowbus.Value = (<span style="color:blue">byte</span>)(1 &lt;&lt; row);
+
+                    <span style="color:green">// scan column inputs...</span>
+                    <span style="color:blue">int</span> col = ScanColumns(colbus.Value);
+                    
+                    <span style="color:blue">if</span>(col != -1)
+                    {
+                        <span style="color:green">// key detected!</span>
+                        key = 4 * row &#43; col;
+                        <span style="color:blue">break</span>;
+                    }
+                }
+
+                <span style="color:blue">if</span> (key != lastkey)
+                {
+                    <span style="color:blue">if</span> (key != -1)
+                    {
+                        SendKey(key);
+                        Console.WriteLine(<span style="color:#a31515">&quot;Keycode Down: {0}&quot;</span>, key);
+                    }
+                    <span style="color:blue">else</span>
+                        Console.WriteLine(<span style="color:#a31515">&quot;Keycode Up: {0}&quot;</span>, lastkey);
+
+                    lastkey = key;
+                }
+            }
+        }
+
+        <span style="color:blue">static</span> <span style="color:blue">int</span> ScanColumns(<span style="color:blue">byte</span> mask)
+        {
+            <span style="color:blue">for</span> (<span style="color:blue">int</span> col = 0; col &lt; 4; col&#43;&#43;)
+                <span style="color:blue">if</span> ((mask &amp; (1 &lt;&lt; col)) != 0)
+                    <span style="color:blue">return</span> col;
+            <span style="color:blue">return</span> -1;
+        }
+
+        <span style="color:green">// key symbols as printed on the keypad, item with 0x100 added to them</span>
+        <span style="color:green">// will use the shift key modifier</span>
+        <span style="color:blue">static</span> <span style="color:blue">int</span>[] _vkeys = { <span style="color:#a31515">'D'</span> &#43; 0x100, <span style="color:#a31515">'3'</span> &#43; 0x100, <span style="color:#a31515">'0'</span>, <span style="color:#a31515">'X'</span>, <span style="color:#a31515">'C'</span> &#43; 0x100, <span style="color:#a31515">'9'</span>, <span style="color:#a31515">'8'</span>, <span style="color:#a31515">'7'</span>, <span style="color:#a31515">'B'</span> &#43; 0x100, <span style="color:#a31515">'6'</span>, <span style="color:#a31515">'5'</span>, <span style="color:#a31515">'4'</span>, <span style="color:#a31515">'A'</span> &#43; 0x100, <span style="color:#a31515">'3'</span>, <span style="color:#a31515">'2'</span>, <span style="color:#a31515">'1'</span> };
+
+        <span style="color:blue">static</span> <span style="color:blue">void</span> SendKey(<span style="color:blue">int</span> key)
+        {
+            <span style="color:blue">int</span> vkey = _vkeys[key];
+
+            <span style="color:green">// optional shift down</span>
+            <span style="color:blue">if</span> ((vkey &amp; 0x100) != 0) keybd_event(0x10, 0, 0, UIntPtr.Zero);
+
+            <span style="color:green">// send the key</span>
+            keybd_event((<span style="color:blue">byte</span>)vkey, 0, 0, UIntPtr.Zero);
+
+            <span style="color:green">// optional shift up</span>
+            <span style="color:blue">if</span> ((vkey &amp; 0x100) != 0) keybd_event(0x10, 0, 2, UIntPtr.Zero);
+        }
+    }
+}
+
+</pre>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-size:10pt">The code above is somewhat more complicated than the pseudo code and that&nbsp;is because I added some extra code to avoid key repetitions and to detect&nbsp;when keys are pressed or released respectively.</span></p>
+<p><span style="font-size:10pt">The &quot;SendKey&quot; method is used to send virtual key strokes to Windows,&nbsp;</span>effectively simulating the event actual keyboard buttons being pressed&nbsp;and released.<br>
+<br>
+Before hitting the green arrow to run your application, launch the&nbsp;PeekyPokey Dashboard and use it to configure gp0...gp3 for input and&nbsp;gp4...gp7 for output.</p>
+<p><span style="font-size:10pt">To test your keypad, simply launch Notepad and start typing. Notice which LEDs are lit as you hold down keyboard button and compare this to rows and columns.</span></p>
+<p><strong>Hint</strong>: By omitting the first row of keys A,B,C and D, you only need 4 &#43; 3 =&nbsp;7 GPIOs. The 8th pin can then be used for something else, like pulling a&nbsp;relay. You could use the keypad for entering a secret PIN code. If the&nbsp;code
+ is correct, you use the relay to pull an electronic door latch.<br>
+<br>
+Have fun!</p>
+</div><div class="ClearBoth"></div>

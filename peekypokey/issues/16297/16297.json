@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "The Toolkit should be broken out from the PeekyPokey core API. The Toolkit could then be Open Source enabling project team members to add new functionality contributing to extending the Toolkit.",
+    "LastUpdatedDate": "2013-08-15T01:02:56.7-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Medium",
+      "Severity": 100,
+      "Id": 2
+    },
+    "ProjectName": "peekypokey",
+    "ReportedDate": "2013-07-03T23:35:30.723-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Breaking out the Toolkit from the core API",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 16297
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

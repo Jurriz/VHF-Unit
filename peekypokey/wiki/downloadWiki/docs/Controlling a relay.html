@@ -1,0 +1,84 @@
+<div class="wikidoc">
+<p><strong style="font-size:10pt">Description<br>
+</strong><span style="font-size:10pt">This example project will show how you can use PeekyPokey to control an electric device such as a lamp or similar via a relay. In this project we'll create a Windows Forms application with a button and LED indicator to
+ operate and monitor the relay. As you will see, this can all be done without writing a single line of code.</span></p>
+<p><strong>Introduction</strong><br>
+<span style="font-size:10pt">One of the first and simplest things that comes to mind when starting out with digital electronics could be the ability to turn a device on and off. A lamp would serve as a good example of something that we might want to control.</span></p>
+<p>Now, the PeekyPokey can't supply enough power to drive a lamp directly and so we need some kind of switch that we can maneuver to indirectly turn the lamp on and off. For this a relay would be a good solution.</p>
+<p><strong>What is a relay?</strong><br>
+<span style="font-size:10pt">You could think of a relay as means of connecting two wires in order to close a circuit without physically touching the wires your self. Not touching wires seems like a very good idea so&nbsp;</span><span style="font-size:10pt">instead
+ of manually closing a circuit we can use a device to do that for us. A relay happens to be such a device.</span></p>
+<p>A relay is like an electrically operated switch that will close when we operate its actuator by enabling its control signal. The control signal does not need much power so we can use a PeekyPokey digital output port for that.</p>
+<p>Without dwelling into the inner workings of relays, we can just get ourselves a cheap breakout board with a single relay on it - very much like the one depicted below. A board like that will only cost you a &nbsp;couple of US dollars on popular internet
+ marketplaces (e.g. eBay and the likes).</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=716511" alt="" width="653" height="490"></p>
+<p>The above board is pretty small and only measures some 40 x 20mm. The actual relay is the blue plastic box in the middle, the rest are connectors and support circuitry.</p>
+<p><strong>Wiring it up</strong><br>
+<span style="font-size:10pt">Notice how the labels to the left says VCC, GND and IN1? Those are the connectors we need to wire up to the PeekyPokey. For now, we don't care about the blue screw terminals to the right.</span></p>
+<p>We will be using gp0 of the PeekyPokey for controlling the relay and so the boards should be interconnected like this:</p>
+<table border="0">
+<tbody>
+<tr>
+<td><strong>Relay board</strong></td>
+<td><strong>PeekyPokey</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr>
+<td>VCC</td>
+<td>&#43;5V</td>
+<td>Fixed 5V power supply for the relay mechanism</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>GND</td>
+<td>Common ground</td>
+</tr>
+<tr>
+<td>IN1</td>
+<td>gp0</td>
+<td>Control signal</td>
+</tr>
+</tbody>
+</table>
+<p>You will need three jumper wires for it to look like this:</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=716526" alt="" width="490" height="368"></p>
+<p>Above, the PeekyPokey sits in a small breadboard where the red wire is &#43;5V, black is GND and the green is used for the control signal gp0 that will pull the relay.</p>
+<p><span style="color:#ff0000"><strong>Important:</strong></span>&nbsp;A single 5V relay like the above should not draw more current than the PeekyPokey can supply but even so, check datasheets to make sure or else you could damage your board and/or the USB
+ port of your PC.</p>
+<p><strong>The software</strong><br>
+In this example we will be creating a Windows Forms application for which we won't have to write a single line of code. Here's what you do next:</p>
+<ol>
+<li><span style="font-size:10pt">Start Visual Studio</span> </li><li><span style="font-size:10pt">Create a new Windows Forms application</span> </li><li><span style="font-size:10pt">Add a reference to the PeekyPokey API by browsing to the file
+<em>PeekyPokey.dll</em></span> </li><li><span style="font-size:10pt">Make sure your form is visible in the editor, &nbsp;i.e. double-click
+<em>Form1.frm</em></span> </li><li><span style="font-size:10pt">From the toolbox, drag a Pushbutton control and drop it onto your form</span>
+</li><li><span style="font-size:10pt">Drag an Indicator control and drop it onto your form next to the button</span>
+</li></ol>
+<p>When your done, the form should look something like this:</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=716323" alt="" width="623" height="466"></p>
+<p><br>
+Now, select the Pushbutton control and scroll down the Properties window and change the Label property so that it reads
+<em>Pull relay</em>&nbsp;. Notice how the Pin is already assigned Gpio0 which is the default and in this case also quite convenient since that's the port we will use to control the relay.</p>
+<p><em><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=716325" alt="" width="378" height="513"><br>
+</em></p>
+<p><em><br>
+</em></p>
+<p>Now, select the Indicator control and change the Pin property to Gpio0.</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=716326" alt="" width="364" height="497"></p>
+<p>Finally, make sure the PeekyPokey board is connected and wired up according to the diagram shown. Also remember to set the power switch in the 5V position (like in the picture above).&nbsp;Hit the green arrow symbol in Visual Studio to run your application.
+ Click and hold the button and you should hear the relay click and see the indicator LED light up. Release the button and you should again hear the relay click while the LED now goes off.</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=716328" alt="" width="351" height="306"></p>
+<p>If you look at your physical PeekyPokey board while pushing the button, you will see the actual LED indicator for gp0 goes on and off as the relay does.</p>
+<p><strong>Nice, but what now?<br>
+</strong><span style="font-size:10pt">So now you can pull the relay with the click of a mouse button from the desktop of your PC. It's about time to add some practical use for your application. Do achieve that, you need to connect something for the relay to
+ turn on and off and here's where those blue screw terminals of the relay module comes in to play.</span></p>
+<p><span style="font-size:10pt">We leave for you to choose something to connect but typically, you will have two wire ends that closes a circuit when you connect them. As said, the purpose of the relay is to perform that connection for you.</span></p>
+<p><span style="font-size:10pt">Connect your two wire ends to the screw terminals marked NC and COM respectively then hit the push button to see what happens.</span></p>
+<p><span style="color:#ff0000"><strong>Warning</strong></span>: Make sure you know exactly what your are doing before connecting something in excess of 24V. Working with 110 / 240V from your mains is potentially lethal.</p>
+<p><strong>Where to go from here?</strong><br>
+Instead of having to push the button yourself, you could set your software up to do this automatically depending things like time of day, weekdays or whatever information you can get hold of from your PC. You could also use the PeekyPokey to react on input
+ from some other external device. Why not make a web based interface so that you could control the relay (and thus lamp or what have you) from your smartphone?</p>
+<p>Have a look at some of the other example projects for inspiration, you might want to combine bits and parts from different projects to achieve what you want, the choice is yours. Have fun!</p>
+<p><span style="font-size:10pt">More example projects are available on the </span>
+<a href="https://peekypokey.codeplex.com/wikipage?title=Projects" target="_self" style="font-size:10pt">Projects
+</a><span style="font-size:10pt">page.</span></p>
+</div><div class="ClearBoth"></div>

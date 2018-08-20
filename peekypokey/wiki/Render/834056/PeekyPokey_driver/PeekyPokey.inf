@@ -1,0 +1,102 @@
+; PeekyPokey Composite Device HID+CDC
+;
+; Copyright (C) 2000 Microsoft Corporation
+; Copyright (C) 2013 Eelate AB.
+
+[Version] 
+Signature="$Windows NT$" 
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318} 
+Provider=%MFGNAME% 
+LayoutFile=layout.inf
+CatalogFile=PeekyPokey.cat
+DriverVer=08/28/2012,5.1.2600.3
+
+[Manufacturer] 
+%MFGNAME%=DeviceList, NTamd64
+
+[DestinationDirs] 
+DefaultDestDir=12 
+
+
+;------------------------------------------------------------------------------
+;  Windows 2000/XP/2003/Vista/2008/7 - 32bit Sections
+;
+;  Note: All Windows versions prior to Windows Vista and XP (Service Pack 3)
+;        require Microsoft hotfixes to update the usbser.sys and usbccgp.sys
+;        driver files, before composite CDC devices can be used.
+;------------------------------------------------------------------------------
+
+[DriverInstall.nt] 
+include=mdmcpq.inf
+CopyFiles=DriverCopyFiles.nt
+AddReg=DriverInstall.nt.AddReg 
+
+[DriverCopyFiles.nt]
+usbser.sys,,,0x20
+
+[DriverInstall.nt.AddReg] 
+HKR,,DevLoader,,*ntkern 
+HKR,,NTMPDriver,,%DRIVERFILENAME%.sys 
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider" 
+
+[DriverInstall.nt.Services] 
+AddService=usbser, 0x00000002, DriverService.nt
+
+[DriverService.nt] 
+DisplayName=%SERVICE% 
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\%DRIVERFILENAME%.sys 
+
+;------------------------------------------------------------------------------
+;  Windows XP/2003/Vista/2008/7 - 64bit Sections
+;------------------------------------------------------------------------------
+
+[DriverInstall.NTamd64] 
+include=mdmcpq.inf
+CopyFiles=DriverCopyFiles.NTamd64
+AddReg=DriverInstall.NTamd64.AddReg 
+
+[DriverCopyFiles.NTamd64]
+%DRIVERFILENAME%.sys,,,0x20
+
+[DriverInstall.NTamd64.AddReg] 
+HKR,,DevLoader,,*ntkern 
+HKR,,NTMPDriver,,%DRIVERFILENAME%.sys 
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider" 
+
+[DriverInstall.NTamd64.Services] 
+AddService=usbser, 0x00000002, DriverService.NTamd64
+
+[DriverService.NTamd64] 
+DisplayName=%SERVICE% 
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\%DRIVERFILENAME%.sys 
+
+
+;------------------------------------------------------------------------------
+;  Vendor and Product ID Definitions
+;------------------------------------------------------------------------------
+[SourceDisksFiles]
+[SourceDisksNames]
+[DeviceList]
+%DESCRIPTION%=DriverInstall, USB\VID_04D8&PID_F7EB&MI_00
+
+[DeviceList.NTamd64] 
+%DESCRIPTION%=DriverInstall, USB\VID_04D8&PID_F7EB&MI_00
+
+
+;------------------------------------------------------------------------------
+;  String Definitions
+;------------------------------------------------------------------------------
+[Strings]
+MFGFILENAME="PeekyPokey"
+DRIVERFILENAME ="usbser"
+MFGNAME="Eelate AB"
+INSTDISK="PeekyPokey Driver Installation Disc"
+DESCRIPTION="PeakyPokey Virtual COM Port"
+SERVICE="USB RS-232 Emulation Driver"

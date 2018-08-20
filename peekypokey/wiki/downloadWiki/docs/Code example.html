@@ -1,0 +1,39 @@
+<div class="wikidoc">
+<p><strong>Description</strong><br>
+This example project show how you can blink a LED in just a few lines of code. For this a comand line application is used but PeekyPokey can also be programmed in a graphical manner using Windows Forms or any combination of the two.</p>
+<p><strong>Introduction</strong><br>
+<span style="font-size:10pt">PeekyPokey coding is very easy in either C# or VB.NET using the free Visual Studio Express 2010&#43; IDE under Windows. You can of course also use any of the corresponding commercial versions of Visual Studio.</span></p>
+<p>A simple yet informative example would be the classic &quot;Blinky&quot; application that blinks a LED. The application code below periodically turns the rightmost of the on-board LEDs on and off every 200 milliseconds.</p>
+<p>Here's what the code looks like in C#:</p>
+<div style="color:black; background-color:white">
+<pre><span style="color:blue">using</span> PeekyPokey;
+
+<span style="color:blue">namespace</span> Blinky
+{
+    <span style="color:blue">class</span> Program
+    {
+        <span style="color:blue">static</span> <span style="color:blue">void</span> Main(<span style="color:blue">string</span>[] args)
+        {
+            <span style="color:green">// create a digital output port</span>
+            <span style="color:blue">var</span> LED = <span style="color:blue">new</span> OutputPort(Device.Pin.Gpio0);
+
+            <span style="color:green">// loop</span>
+            <span style="color:blue">while</span>(<span style="color:blue">true</span>)
+            {
+                <span style="color:green">// turn LED on and wait 200ms</span>
+                LED.Value = <span style="color:blue">true</span>;
+                System.Threading.Thread.Sleep(200);
+
+                <span style="color:green">// turn the LED off and wait 200ms</span>
+                LED.Value = <span style="color:blue">false</span>;
+                System.Threading.Thread.Sleep(200);
+            }
+        }
+    }
+}
+</pre>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-size:10pt">Check out the</span><span style="font-size:10pt">&nbsp;<strong><a title="Projects" href="https://peekypokey.codeplex.com/wikipage?title=Projects" target="_self">Projects</a></strong>&nbsp;page for more examples on how to code
+ and also how to wire up your gizmos in order to do something more useful than simply blinking a LED.</span></p>
+</div><div class="ClearBoth"></div>

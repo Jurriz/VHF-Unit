@@ -1,0 +1,53 @@
+[
+  {
+    "Id": "0",
+    "Name": "PeekyPokey Datasheet",
+    "DevelopmentStatus": "Beta",
+    "Description": "Latest version of the PeekyPokey datasheet for hardware revision 2.2",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2013-07-03T08:40:53.813-07:00",
+    "Files": [
+      {
+        "Id": "3350a1bd-9427-4bc1-8648-37f9e7af9916",
+        "FileName": "Datasheet_PeekyPokey_R22.pdf",
+        "Url": "./0/3350a1bd-9427-4bc1-8648-37f9e7af9916",
+        "Type": "Documentation",
+        "UploadDate": "2013-07-03T08:40:53.797-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "1",
+    "Name": "Blinky sample application",
+    "DevelopmentStatus": "Stable",
+    "Description": "This is the source code for the Blinky sample application.\n\nThe application shows how to blink a LED in just a few lines of code.\n\nYou can also browse or download the code from the general source code section.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2014-03-06T14:50:15.823-08:00",
+    "Files": [
+      {
+        "Id": "dd9c2594-312a-4d69-b4e3-204654c68a00",
+        "FileName": "Blinky.zip",
+        "Url": "./1/dd9c2594-312a-4d69-b4e3-204654c68a00",
+        "Type": "Application",
+        "UploadDate": "2014-03-06T14:50:15.447-08:00"
+      }
+    ]
+  },
+  {
+    "Id": "2",
+    "Name": "PeekyPokey API version 1.1.0.0",
+    "DevelopmentStatus": "Beta",
+    "Description": "The latest version of the PeekyPokey API.\n\nThis version of the API is totally self contained and also includes the Dashboard application.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2014-03-06T14:39:44.553-08:00",
+    "Files": [
+      {
+        "Id": "ee8947d3-0965-43f5-a056-e95ace716208",
+        "FileName": "PeekyPokey_v1.1.0.0.zip",
+        "Url": "./2/ee8947d3-0965-43f5-a056-e95ace716208",
+        "Type": "Application",
+        "UploadDate": "2014-03-06T14:38:26.863-08:00"
+      }
+    ]
+  }
+]

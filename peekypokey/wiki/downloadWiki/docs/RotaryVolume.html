@@ -1,0 +1,125 @@
+<div class="wikidoc">
+<p><strong>Description</strong><br>
+This example project will show you how a rotary encoder works and how to make a tactile volume control for Windows.<br>
+<br>
+<strong>Introduction</strong><br>
+A binary rotary encoder with <a href="http://en.wikipedia.org/wiki/Gray_code" target="_blank">
+Gray code </a>output is a very cleverly made rotating mechanical dual switch. It is a passive component, meaning that it does not need a power supply to work.<br>
+<br>
+This is what a typical rotary encoder looks like on the outside:</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=722630" alt="" width="490" height="368"><br>
+An encoder like the one above is only a couple of US dollars and can be found at most electronics dealers or on-line market places and stores where electronics is sold.<br>
+<br>
+Inside the body of the device, two spindles are sliding along a rotating metal plate in such a way that the two switches can only change state (open or close) one at a time. There are no endpoints in either direction, i.e. the knob can be rotated continuously
+ without ever blocking.</p>
+<p><strong>Basic working principle<br>
+</strong><span style="font-size:10pt">As you can see from the above image, there are three pins coming out of the base. The middle pin is common and the other two are the output from the two internal switches.&nbsp;</span></p>
+<p><span style="font-size:10pt">When the knob is rotated in one direction, one of the two switches will close slightly before the other and when the knob is turned in the opposite direction, the other switch will close first.</span></p>
+<p><span style="font-size:10pt">As the knob is turned, the switches will open and close repeatedly creating a two differently phased pulse trains.&nbsp;Also, the speed at which the switches toggle is proportional to the speed at which the knob is being turned.</span></p>
+<p>To read the encoder, you apply voltage to the middle pin and then analyze the chronology of the output from the other two pins.&nbsp;<span style="font-size:10pt">This means that if we can detect a voltage on the left pin before the right pin, someone is
+ turning the knob clockwise. On the other hand, if the right pin shows voltage first, we know that the knob is rotating counter&nbsp;clockwise.</span></p>
+<p>To use a rotary encoder in an electronic design, we can write a piece of software to analyze the chronology in order to inform the other logic in which direction the knob is currently rotating and at which speed.<br>
+<br>
+<strong>Wiring</strong><br>
+Before doing the wiring we must configure the pins that we will be using:</p>
+<ol>
+<li><span style="font-size:10pt">Put the PeekyPokey power supply in the 5V position</span>
+</li><li><span style="font-size:10pt">Plug the USB cable into your PC.&nbsp;</span> </li><li><span style="font-size:10pt">Launch the PeekyPokey Dashboard application</span>
+</li><li><span style="font-size:10pt">In the profiles tab, make sure gp0 and gp1 are inputs (see image below)</span>
+</li><li><span style="font-size:10pt">Save the configuration but leave the Dashboard running</span>
+</li><li><span style="font-size:10pt">Unplug the USB cable</span> </li></ol>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=722619" alt="" width="623" height="409"></p>
+<p>With the USB cable unplugged, first stick the rotary encoder down your breadboard. Since these encoders are meant to be soldered on a PCB, it can be a little tricky. You also might have to use a rubber band, tape or
+<br>
+a piece of string to keep the encoder sitting steadily and keep it from breaking loose when turning the knob.</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=722629" alt="" width="490" height="368"><br>
+<br>
+This is how to wire it up:</p>
+<table border="0">
+<tbody>
+<tr>
+<td><strong>PeekyPokey&nbsp;</strong></td>
+<td><strong>Encoder</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr>
+<td>&#43;5V</td>
+<td>Middle pin</td>
+<td>Common voltage for the switches</td>
+</tr>
+<tr>
+<td>gp0</td>
+<td>Right pin</td>
+<td>Output from encoder switch #1</td>
+</tr>
+<tr>
+<td>gp1</td>
+<td>Left pin</td>
+<td>Output from encoder switch #2</td>
+</tr>
+</tbody>
+</table>
+<p><span style="font-size:10pt">When done, your setup should look a little something like this:</span><br>
+<br>
+<img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=722631" alt="" width="653" height="490"><br>
+In the above picture, I've put a plastic cap on the encoder knob to make turning it easier.</p>
+<p><span style="font-size:10pt">Now, plug the USB cable back into your PC and turn to the Dashboard application that you left running before (or launch it again as necessary). Click the analyzer tab and watch closely what happens with gp0 and gp1 as you slowly
+ turn the knob clockwise and then counter clockwise. Also look at the LEDs on the physical board.</span><br>
+<br>
+If the encoder behaves as expected, you will see something like this in the analyzer window:<br>
+<br>
+<img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=722618" alt="" width="695" height="354"><br>
+In the left rectangle, gp1 is clearly rising before gp0 and in the right rectangle, it's the other way around. The timeline runs from left (earlier) to right (later).</p>
+<p><span style="font-size:10pt">You should be able to verify the working principle as explained earlier and as outlined by the two rectangles respectively. If you can't, check your wiring and possibly swap wires until you get it right.</span><br>
+<br>
+<strong>Writing some code</strong><br>
+You will now do a little bit of coding to implement a volume control for your PC. As it turns out, the PeekyPokey API toolkit contains a ready made driver&nbsp;class for rotary encoders so we go a head and use that. Here's what to do next:</p>
+<ol>
+<li><span style="font-size:10pt">Start Visual Studio</span> </li><li><span style="font-size:10pt">Choose to create a new Windows Forms application</span>
+</li><li><span style="font-size:10pt">Add a reference to the PeekyPokey API .DLL file</span>
+</li><li><span style="font-size:10pt">Double click the Program.cs file</span> </li><li><span style="font-size:10pt">Remove all existing code</span> </li><li><span style="font-size:10pt">Copy and paste the code snippet below into the code window</span>
+</li><li><span style="font-size:10pt">Save and run the application</span> </li></ol>
+<div style="color:black; background-color:white">
+<pre><span style="color:blue">using</span> System;
+<span style="color:blue">using</span> PeekyPokey;
+<span style="color:blue">using</span> System.Threading;
+
+<span style="color:blue">namespace</span> RotaryVolume
+{
+    <span style="color:blue">class</span> Program
+    {
+        <span style="color:blue">static</span> <span style="color:blue">void</span> Main(<span style="color:blue">string</span>[] args)
+        {
+            <span style="color:green">// create a new instance of the rotary encode driver class</span>
+            <span style="color:blue">var</span> rotary = <span style="color:blue">new</span> PeekyPokey.Toolkit.Rotary(Device.Pin.Gpio0, Device.Pin.Gpio1);
+
+            <span style="color:green">// attach an event handler to sense knob rotation</span>
+            rotary.OnRotation &#43;= <span style="color:blue">new</span> PeekyPokey.Toolkit.Rotary.Rotation(rotary_OnRotation);
+
+            <span style="color:green">// main thread waits here for ever...</span>
+            Thread.Sleep(-1);
+        }
+
+        <span style="color:green">// called upon rotation of the knob</span>
+        <span style="color:blue">static</span> <span style="color:blue">void</span> rotary_OnRotation(<span style="color:blue">bool</span> upDown)
+        {
+            <span style="color:green">// use media keys to adjust Windows volume accordingly</span>
+            <span style="color:blue">if</span> (upDown)
+                PeekyPokey.Toolkit.MediaKeys.VolumeUp();
+            <span style="color:blue">else</span>
+                PeekyPokey.Toolkit.MediaKeys.VolumeDown();
+        }
+    }
+}
+
+</pre>
+</div>
+<p>As you can see, there's not much code and it should be fairly easy to follow.</p>
+<p><span style="font-size:10pt">To try out your new volume control, start your favorite music player and have it play a song while turning the rotary encoder knob in either direction to adjust the volume. You can also bring up the Windows volume mixer control
+ window and watch the slider move up and down as you turn the knob:</span></p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=724585" alt="" width="666" height="289"></p>
+<p><strong style="font-size:10pt">Tip:</strong><span style="font-size:10pt">&nbsp;On some rotary encoders, there's a third switch that you operate by pushing down the knob. You could use such an encoder with a digital input to sense the knob being pushed and
+ then use the corresponding event to mute&nbsp;and unmute the sound of your PC. Similarly, you could add some push&nbsp;buttons to use for play/pause, skip, previous etc.</span></p>
+<p><br>
+Experiment, explore and have fun!</p>
+</div><div class="ClearBoth"></div>

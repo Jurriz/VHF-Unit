@@ -1,0 +1,171 @@
+<div class="wikidoc">
+<p><strong>Description<br>
+</strong><span style="font-size:10pt">This example project is about making an RFID reader so that you can identify RFID tags as they are held (contactless) in the vicinity of (about an inch or some 3 cm away from) a reader module.</span><span style="font-size:10pt">&nbsp;</span></p>
+<p><strong>Introduction<br>
+</strong><span style="font-size:10pt">RFID is a very interesting technology that has grown increasingly popular over the last few years. Basically, an RFID system consists of two main components:</span><span style="font-size:10pt">&nbsp;</span></p>
+<ul>
+<li>An RFID reader module </li><li>One or more RFID tags </li></ul>
+<p><span style="font-size:10pt">Below is an example of a reader module that is&nbsp;quite common and a two different kinds of tags - one shaped like a credit card and one in the form of a key ring. This particular reader (that I&rsquo;ll also be using here)
+ is based on the popular MFRC522 chip from NXP (formerly known as Philips).</span></p>
+<p><span style="font-size:10pt"><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=724799" alt="" width="653" height="490"><br>
+</span></p>
+<p><span style="font-size:10pt">You can pick up a kit like the one depicted above for just below 7 USD on popular on-line market places. The module uses a variant of RFID called
+<a href="http://en.wikipedia.org/wiki/Mifare" target="_blank">Mifare</a> which operates at 13.56 MHz radio frequency. The technology has quite a few really cool properties, among which these are my personal favorites:&nbsp;<br>
+</span></p>
+<ul>
+<li>Tags and readers come really cheap! </li><li>Tags are small ICs that feed from wireless power </li><li>Tags have built in storage of about 200 bytes to 4kB (depending on type of tag)
+</li><li>Tags can be read and written securely using a password </li><li>Communication does not require physical contact
+<ul>
+<li>Tags can be sown into clothes </li><li>Self adhesive tags stick to virtually anything </li><li>Tags are usually water proof </li><li>Reader module can be covered under waterproof material </li></ul>
+</li><li>Communication is strongly enciphered and secure </li><li>Can be used for many things and tends to inspire of innovative applications </li><li>It&rsquo;s just so clever and simply really fun to play with! </li><li>Probably a dozen more things I can&rsquo;t remember&hellip; </li></ul>
+<p>You can read more about <a href="http://en.wikipedia.org/wiki/Mifare" target="_blank">
+Mifare tags on Wikipedia</a>.</p>
+<p><span style="font-size:10pt">Where I live, RFID cards with Mifare tags are used to pay for the bus fare and it turned out these cards can be read using the very same kind of reader that we&rsquo;ll play with in this project. The cards are used like a refillable
+ wallet and this is what happens when I hold up my bus card (tag) to pay for my ticket:</span><span style="font-size:10pt">&nbsp;</span></p>
+<ul>
+<li>Card tag is identified and selected for communication </li><li>The reader authenticates a data block to read using a secret key (password) </li><li>The information is read and validated for consistency </li><li>Current funds is read </li><li>Bus fare is deducted from funds (if enough funds available) </li><li>Remaining funds are written to the tag </li><li>Green light flashes to say &quot;Ticket has been paid for&quot; </li></ul>
+<p><strong style="font-size:10pt">Talking to the module<br>
+</strong><span style="font-size:10pt">Even though the MFRC522 chip supports several digital interfaces, the board at hand is configured (through hard wiring) for
+<a href="http://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus" target="_blank">
+SPI (Serial Peripheral Interface)</a>. The SPI interface is quite popular, mainly because it&rsquo;s both simple and fast.</span></p>
+<p><span style="font-size:10pt">SPI is a master/slave bus interface that uses four wires. The PeekyPokey will be acting as the SPI bus master while the reader module will be the slave. Being the master includes responsibility for driving the bus (running the
+ clock) and initiating all communication.</span></p>
+<p><span style="font-size:10pt">From the reader module&rsquo;s (slave) point of view, these are the following:</span></p>
+<ul>
+<li>Chip select (CS) which puts the module in listening mode </li><li>Clock signal (CLK) which drives the bus </li><li>Data in (MOSI meaning Master Out &ndash; <strong>Slave In</strong>) </li><li>Data out (MISO meaning Master In - <strong>Slave Out</strong>) </li></ul>
+<p><span style="font-size:10pt">As the PeekyPokey board does not support SPI in native hardware, we emulate the SPI interface using four of the regular I/O pins of the PeekyPokey. This technique is known as &ldquo;bit banging&rdquo; and makes communication
+ considerably slower than with real h/w SPI but it works for simple examples like the one at hand.</span></p>
+<p><strong style="font-size:10pt">The wiring<br>
+</strong><span style="font-size:10pt">Enough said about the SPI bus and back to the subject, namely getting the project up and running. Before doing any actual wiring, please perform this series of tasks:</span></p>
+<ul>
+<li>Connect the PeekyPokey to your PC </li><li>Lever the power switch to the 3.3V position </li><li>Run the Dashboard application </li><li>Select the profiles tab and configure the pins as shown below </li><li>Disconnect your PeekyPokey from USB </li></ul>
+<p><span style="font-size:10pt">Now you can start doing the wiring like so:</span><span style="font-size:10pt">&nbsp;</span></p>
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="115" valign="top">
+<p><strong>PeekyPokey</strong></p>
+</td>
+<td width="132" valign="top">
+<p><strong>RFID module</strong></p>
+</td>
+<td width="367" valign="top">
+<p><strong>Description</strong></p>
+</td>
+</tr>
+<tr>
+<td width="115" valign="top">
+<p>Vdd</p>
+</td>
+<td width="132" valign="top">
+<p>3.3V</p>
+</td>
+<td width="367" valign="top">
+<p>Power supply for the module</p>
+</td>
+</tr>
+<tr>
+<td width="115" valign="top">
+<p>GND</p>
+</td>
+<td width="132" valign="top">
+<p>GND</p>
+</td>
+<td width="367" valign="top">
+<p>Common ground</p>
+</td>
+</tr>
+<tr>
+<td width="115" valign="top">
+<p>gp0</p>
+</td>
+<td width="132" valign="top">
+<p>SDA</p>
+</td>
+<td width="367" valign="top">
+<p>Chip select (active low)</p>
+</td>
+</tr>
+<tr>
+<td width="115" valign="top">
+<p>gp1</p>
+</td>
+<td width="132" valign="top">
+<p>SCK</p>
+</td>
+<td width="367" valign="top">
+<p>Clock signal</p>
+</td>
+</tr>
+<tr>
+<td width="115" valign="top">
+<p>gp2</p>
+</td>
+<td width="132" valign="top">
+<p>MOSI</p>
+</td>
+<td width="367" valign="top">
+<p>Data from PeekyPokey to reader module</p>
+</td>
+</tr>
+<tr>
+<td width="115" valign="top">
+<p>gp3</p>
+</td>
+<td width="132" valign="top">
+<p>MISO</p>
+</td>
+<td width="367" valign="top">
+<p>Data from reader module to PeekyPokey</p>
+</td>
+</tr>
+<tr>
+<td width="115" valign="top">
+<p>gp4</p>
+</td>
+<td width="132" valign="top">
+<p>RST</p>
+</td>
+<td width="367" valign="top">
+<p>Reset (active low)</p>
+</td>
+</tr>
+<tr>
+<td width="115" valign="top">
+<p>&nbsp;</p>
+</td>
+<td width="132" valign="top">
+<p>IRQ</p>
+</td>
+<td width="367" valign="top">
+<p>Interrupt request &ndash; not used in this project</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><span style="font-size:10pt">As you can see from the above table, we&rsquo;ll be using five of PeekyPokey&rsquo;s eight I/O pins meaning we got another three left which can be used for other stuff like controlling relays, LEDs, motors or whatever your imagination
+ tells you.</span></p>
+<p>When done wiring you should end up with something like this:</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=724800" alt="" width="653" height="490"><br>
+I used a special header row connector for my reader module but you can just as well use regular jumper wires or stick the reader down your breadboard and use much shorter wires.</p>
+<p><span style="font-size:10pt">NOTE: Do not connect the PeekyBoard to your PC just yet...</span></p>
+<p><strong style="font-size:10pt">Adding a bit of code to the soup<br>
+</strong><span style="font-size:10pt">Talking to the reader module is actually a none-trivial task, but fortunately the Toolkit contains a ready made driver class allowing basic tasks. This makes the code quite a bit shorter. Here&rsquo;s what you do:</span></p>
+<ol>
+<li>Launch Visual Studio </li><li>Choose to create a new Windows Forms application </li><li>Double&nbsp; click the form show in the designer window </li><li>Replace all existing code with the snippet below </li></ol>
+<pre>The code is on its way, please check back later. Thanks.</pre>
+<p><strong style="font-size:10pt"><br>
+Taking it for a spin<br>
+</strong><span style="font-size:10pt">Before connecting the PeekyPokey to your PC, make sure the power switch is in the 3.3V position or you could damage your reader module.</span></p>
+<p><span style="font-size:10pt">When connected, run the application by hitting the green play button. While watching the application window, look at the PeekyPokey LEDs. See how the flicker? That is the SPI protocol in action shoving bits back and forth between
+ the PeekyPokey and the reader module.</span></p>
+<p><span style="font-size:10pt">Now, while keeping an eye on the application window, take out an RFID tag and hold it just an inch or so above the antenna plate of the reader module. In a few seconds, you should be seeing something like this:</span></p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=724801" alt="" width="671" height="431"></p>
+<p><span style="font-size:10pt">In the case depicted above, my tag has a serial number of 8d.48.49.ca (hexadecimal notation) while yours will have a different serial number. Regardless of which serial number your tag has, it has identified itself to the reader.
+ The serial can be interpreted as a 32 bit number and so there are some 4 billion possible values.</span></p>
+<p><span style="font-size:10pt">In a simple domestic scenario, you&rsquo;d typically associate the serial number of the tag with its owner (perhaps family members). Tag owners can then use the tag to identify him/her self to your computer which can then respond
+ by performing some task possibly involving some other piece of hardware or software.</span></p>
+<p><span style="font-size:10pt">Here&rsquo;s an idea: Store a certain amount of credits onto tags and hand them out to your kids or other family members. The credits could be used to &ldquo;pay&rdquo; for and effectively limit access to your home computer or
+ other stuff not really promoting an active life style :-)</span></p>
+<p>As always, have fun!</p>
+</div><div class="ClearBoth"></div>

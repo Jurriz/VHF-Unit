@@ -1,0 +1,7 @@
+C:\Users\josef.TVP1\Downloads\peekypokey\sourceCode\Samples\Blinky\bin\Debug\Blinky.exe
+C:\Users\josef.TVP1\Downloads\peekypokey\sourceCode\Samples\Blinky\bin\Debug\Blinky.pdb
+C:\Users\josef.TVP1\Downloads\peekypokey\sourceCode\Samples\Blinky\bin\Debug\PeekyPokey.dll
+C:\Users\josef.TVP1\Downloads\peekypokey\sourceCode\Samples\Blinky\bin\Debug\PeekyPokey.xml
+C:\Users\josef.TVP1\Downloads\peekypokey\sourceCode\Samples\Blinky\obj\x86\Debug\Blinky.csprojResolveAssemblyReference.cache
+C:\Users\josef.TVP1\Downloads\peekypokey\sourceCode\Samples\Blinky\obj\x86\Debug\Blinky.exe
+C:\Users\josef.TVP1\Downloads\peekypokey\sourceCode\Samples\Blinky\obj\x86\Debug\Blinky.pdb

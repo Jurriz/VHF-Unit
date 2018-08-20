@@ -1,0 +1,181 @@
+<div class="wikidoc">
+<p><strong>Description</strong><br>
+In this project, we&rsquo;ll be making an automated water filling system for an aquarium, a swimming pool or a roof top hot water reservoir. In this example we&rsquo;ll just imagine that we got a water tank that needs a refill once in a while.<br>
+<br>
+The system consists of a power valve and a water level sensor. When the sensor does not sense water, the system will open the valve to let water flow through the valve. As the water level rises to the level at which the sensor is, &nbsp;the sensor will report
+ this and the power valve will be closed effectively preventing water from flowing.<br>
+<br>
+<span style="color:#ff0000"><strong>Important:</strong></span> The working principle described here would probably be viable for other fluids than pure water but make sure the valve and sensor can withstand the kind of fluid you&rsquo;ll be using and DO NOT
+ USE WITH PETROL, ALCOHOL OR OTHER INFLAMMABLE FLUIDS!<br>
+<br>
+<strong>Introduction</strong><br>
+We&rsquo;ll be using a water level sensor with a flotation device containing a magnetic switch fitted inside a waterproof casing. The floater contains a magnetic ring that, when in a certain position, will make the switch open or close.</p>
+<p>Below is an image of the sensor we&rsquo;ll be using:<br>
+<br>
+<img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=725320" alt="" width="653" height="490"></p>
+<p><span style="font-size:10pt">The floater is the marshmallow looking cylinder and the switch is hidden inside the other half of the sensor. A sensor like the one above typically sells for about 3 US dollars.</span><br>
+<br>
+We&rsquo;ll also be using a power valve for opening and closing the water inlet. In this case, we are going to use a valve containing a solenoid that will operate the water valve.<br>
+<br>
+Below is a picture of the power valve that I used in this example:<br>
+<br>
+<img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=725321" alt="" width="490" height="368" style="font-size:10pt"></p>
+<p>A valve like the one depicted above can be purchased for approximately 6 US dollars. As this particular valve needs 12V which the PeekyPokey cannot supply directly, we&rsquo;ll be using a relay to control the valve.&nbsp;There&rsquo;s a separate example
+<a href="https://peekypokey.codeplex.com/wikipage?title=Controlling%20a%20relay" target="_blank">
+project on how to control a relay</a> where its connectors are also outlined and explained.<br>
+<br>
+<strong>The setup</strong><br>
+This is what the system looks like when everything is wired up. Since I don&rsquo;t have access to water in my lab, you&rsquo;ll have to imagine the water hose and the tank. We are using a 12V AC/DC wall adapter which is not depicted in itself.<br>
+<br>
+<img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=725316" alt="" width="621" height="472"><br>
+<br>
+Look carefully at the image above and you'll notice there&rsquo;s a diode in parallel with the &#43;12V power supply connector.</p>
+<p><span style="font-size:10pt"><strong>About the diode</strong><br>
+In this project, the diode is there to prevent back-voltage from the coil in the solenoid. If omitted you will send spikes back to your power supply which could potentially damage it or other things. The basic functionality of a diode is that it will only conduct
+ current in one direction; from the anode to the cathode.</span></p>
+<p><span style="font-size:10pt">This is what your typical&nbsp;diode looks like:</span></p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=725314" alt="" width="320" height="260"></p>
+<p>You see the gray stripe on the otherwise black body of diode? That stripe marks the cathode.</p>
+<p><span style="font-size:10pt">When fitting the diode in this project, make absolutely sure you get the polarity right since this is kind of crucial &nbsp;here. The cathode (gray stripe) must be facing the positive side (plus sign) of your 12V power supply.
+ If you get it wrong, you will short circuit your wall adapter causing damage or even fire to it.</span></p>
+<p><span style="font-size:10pt"><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=725315" alt=""><br>
+</span></p>
+<p>When getting a diode for this project, make sure you get one that can withstand at least 12V since that is what you will apply to it. Please note that 12V is not harmful to the human body so there&rsquo;s no reason for alarm; just make sure you get the diode
+ right, that&rsquo;s all.</p>
+<p><span style="font-size:10pt">Enough said about the diode, you can <a href="http://en.wikipedia.org/wiki/Diode" target="_blank">
+read more on diodes and how they work on Wikipedia.</a></span></p>
+<p><strong style="font-size:10pt">Wiring</strong><br>
+Below is how to wire the setup in terms of which pairs of connections to make.</p>
+<table border="0">
+<tbody>
+<tr>
+<td><strong>PeekyPokey</strong></td>
+<td><strong>12V adapter</strong></td>
+<td><strong>Valve</strong></td>
+<td><strong>Relay</strong></td>
+<td><strong>Sensor</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr>
+<td>gp7&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>IN1</td>
+<td>&nbsp;</td>
+<td>Relay control</td>
+</tr>
+<tr>
+<td>Vcc&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>Vcc</td>
+<td>&nbsp;</td>
+<td>Power</td>
+</tr>
+<tr>
+<td>GND&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>GND</td>
+<td>&nbsp;</td>
+<td>Common ground</td>
+</tr>
+<tr>
+<td>&#43;5V</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>1st wire</td>
+<td>(doesn't matter which)</td>
+</tr>
+<tr>
+<td>gp0</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>2nd wire</td>
+<td>(other wire)</td>
+</tr>
+<tr>
+<td><br>
+</td>
+<td>&#43;12V</td>
+<td>1st pole</td>
+<td>&nbsp;</td>
+<td><br>
+</td>
+<td><br>
+</td>
+</tr>
+<tr>
+<td><br>
+</td>
+<td>GND</td>
+<td>&nbsp;</td>
+<td>NO</td>
+<td>&nbsp;</td>
+<td>Screw terminal</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>2nd pole</td>
+<td>COM</td>
+<td>&nbsp;</td>
+<td>Screw terminal</td>
+</tr>
+</tbody>
+</table>
+<p>Above, empty positions mean there are no wires to be connected between the corresponding locations. Hopefully it should be clear enough, at least when compared to the full system image above.</p>
+<p><strong>The code</strong><br>
+We&rsquo;ll need a little application logic to control the system. In this simple example, the valve will open immediately as the sensor reports &ldquo;no water&rdquo; and it will close equally immediately when there is enough water. Here&rsquo;s what to do
+ next:</p>
+<ol>
+<li><span style="font-size:10pt">Start Visual Studio</span> </li><li><span style="font-size:10pt">Choose to create a new Console Application</span>
+</li><li><span style="font-size:10pt">Add a reference to PeekyPokey.dll</span> </li><li><span style="font-size:10pt">In &ldquo;Program.cs&rdquo;, replace existing code with the code below&nbsp;</span>
+</li></ol>
+<div style="color:black; background-color:white">
+<pre><span style="color:blue">using</span> System;
+<span style="color:blue">using</span> PeekyPokey;
+
+<span style="color:blue">namespace</span> WaterFiller
+{
+    <span style="color:blue">static</span> <span style="color:blue">class</span> Program
+    {
+        <span style="color:blue">private</span> <span style="color:blue">static</span> OutputPort _powervalve;
+
+        <span style="color:blue">static</span> <span style="color:blue">void</span> Main()
+        {
+            <span style="color:green">// create a digital output for the power valve</span>
+            _powervalve = <span style="color:blue">new</span> OutputPort(Device.Pin.Gpio7, <span style="color:blue">true</span>);
+
+            <span style="color:green">// create a digital input for the sensor</span>
+            <span style="color:blue">var</span> levelsensor = <span style="color:blue">new</span> InputPort(Device.Pin.Gpio0, Port.Trigger.Toggle);
+
+            <span style="color:green">// attach a handle to detect when sensor output changes</span>
+            levelsensor.OnValueChanged &#43;= <span style="color:blue">new</span> Port.ValueChanged(levelsensor_OnValueChanged);
+
+            <span style="color:green">// main thread lies dormant...</span>
+            System.Threading.Thread.Sleep(-1);
+        }
+
+        <span style="color:blue">static</span> <span style="color:blue">void</span> levelsensor_OnValueChanged(Port sender, Port.ValueChangedEventArgs e)
+        {
+            <span style="color:green">// open or close valve according to the sensor</span>
+            _powervalve.Value = !e.Value;
+        }
+    }
+}
+
+</pre>
+</div>
+<p>In a real world scenario, you would probably implement some kind of filter or delay logic to make sure the water level is stable before opening or closing the valve. As the application works now, the system could start to oscillate which would produce noise
+ and eventually wear out the relay and valve.</p>
+<p><span style="font-size:10pt">Before hitting the run button in Visual Studio, make sure you put the PeekyPokey power selector switch in the &#43;5V position or you may damage your board.</span></p>
+<p><strong>Note:</strong> The kind of solenoid based power valve used in this example tends to get fairly hot at times so be careful when touching the valve with you bare hands. Also, make sure your 12V wall adapter can supply enough current for the power valve
+ &ndash; the valve I&rsquo;m using requires about 500mA (0.5A) which is quite substantial.<br>
+<br>
+You probably want to do some &ldquo;dry swimming&rdquo; tests before actually connecting a live water hose to your system. You can verify correct operation by blowing into the valve pipe while using you hand to tinker with the water sensor.</p>
+<p><span style="font-size:10pt">Why not make a really geeky beverage filling system for your next party? Guests could get one unique RFID tag each to activate the filler which would open the valve for a certain fixed duration corresponding to the time it takes
+ to fill up a fixed sized cup. You could implement a &ldquo;servings per person&rdquo; limiter or use the system for logging individual consumption :-)</span></p>
+</div><div class="ClearBoth"></div>

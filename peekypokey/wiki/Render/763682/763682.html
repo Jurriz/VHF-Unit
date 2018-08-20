@@ -1,0 +1,74 @@
+<div class="wikidoc">
+<p><strong style="font-size:10pt">Description<br>
+</strong><span style="font-size:10pt">In this example we will show how you can build a gadget that detects the presence of a person. When a person enters the room, the PC will play a sound saying &quot;Hello!&quot;.</span></p>
+<p><strong>Introduction</strong><br>
+For this project you will need what is known as a PIR&nbsp;(passive infrared) sensor. The PIR sensor will react on the infrared light radiated by warm objects (such as the human body).&nbsp;<a href="http://www.instructables.com/id/PIR-Motion-Sensor-Tutorial/" target="_blank">Click
+ here to read more about PIR sensors</a>&nbsp;and how they work.</p>
+<p><span style="font-size:10pt">A simple PIR sensor like the one below is only a few US dollars and can be found on most on-line electronics stores. You will also need a small breadboard and three jumper wires.</span></p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=717204" alt="Top of PIR sensor module" width="653" height="490">Top&nbsp;view of the sensor.</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=717205" alt="Back of PIR sensor module">Bottom view.</p>
+<p><span style="font-size:10pt">The above sensor board is quite small and only measures about 20x30 mm. Notice how there are three pins coming out on the back - from the left these are &#43;5V, OUT and GND.</span></p>
+<p><strong>Wiring the sensor</strong><br>
+<span style="font-size:10pt">Connect your sensor like this:</span></p>
+<table border="0">
+<tbody>
+<tr>
+<td><strong>PIR</strong></td>
+<td><strong>PeekyPokey</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr>
+<td>&#43;5V</td>
+<td>&nbsp;&#43;5V</td>
+<td>Power supply for the sensor</td>
+</tr>
+<tr>
+<td>OUT</td>
+<td>gp0</td>
+<td>3.3V sensor output</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>GND</td>
+<td>Common ground</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;When you're done, the setup should look like this:</p>
+<p><img src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=717207" alt="" width="490" height="368" style="font-size:10pt"><span style="font-size:10pt">&nbsp;<br>
+Red is &#43;5V, green is OUT and black is GND.&nbsp;</span></p>
+<p><strong style="font-size:10pt"><br>
+The software<br>
+</strong><span style="font-size:10pt">Even though this application does not have any visual representation, we will create a Windows Forms application. Here's what you do:</span></p>
+<ol>
+<li>Download this <a href="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=717208">
+hello.wav</a> sound file and save it on your harddrive </li><li><span style="font-size:10pt">Start Visual Studio</span> </li><li><span style="font-size:10pt">Choose to create a new Windows Forms application</span>
+</li><li><span style="font-size:10pt">In the solution explorer, right click &quot;form1.frm&quot; and select &quot;View code&quot;</span>
+</li><li><span style="font-size:10pt">In the code window that appears, add this code snippet:</span>
+</li></ol>
+<div style="color:black; background-color:white">
+<pre><span style="color:blue">private</span> <span style="color:blue">void</span> Form1_Load(<span style="color:blue">object</span> sender, EventArgs e)
+{
+    <span style="color:blue">new</span> InputPort(Device.Pin.Gpio0, Port.Trigger.ToggleUp).OnValueChanged &#43;= <span style="color:blue">new</span> Port.ValueChanged(Form1_OnValueChanged);
+}
+
+<span style="color:blue">void</span> Form1_OnValueChanged(Port sender, Port.ValueChangedEventArgs e)
+{
+    <span style="color:blue">using</span>(<span style="color:blue">var</span> player = <span style="color:blue">new</span> System.Media.SoundPlayer(<span style="color:#a31515">&quot;C:\\hello.wav&quot;</span>))
+        player.Play();
+}
+
+</pre>
+</div>
+<p><span style="font-size:10pt"><strong>Note</strong>: You will have to change the path for
+<a href="http://download-codeplex.sec.s-msft.com/Download?ProjectName=peekypokey&DownloadId=717208">
+hello.wav </a>to where ever you saved the file after download.</span></p>
+<p><strong style="font-size:10pt"><br>
+Running the application<br>
+</strong><span style="font-size:10pt">Before connecting the PeekyPokey to your PC, make sure the power switch is in the 3.3V position (like in the picture above) or the PeekyPokey will not detect the sensor output.</span></p>
+<p>Now, crank up the volume on your PC and press the green play button in Visual Studio to run the application. Move your body or wave your arms in front of the PIR sensor....</p>
+<p><span style="font-size:10pt">You could use this application to set up an alarm to go off when somebody enters the room. You could also do without the sound effects and simply log any and all events of motion while you're away. Another possibility could be
+ to combine it with the relay project and turn on the lights as you enter the room.</span></p>
+<p><span style="font-size:10pt"><span>More example projects are available on the&nbsp;</span><a href="https://peekypokey.codeplex.com/wikipage?title=Projects" target="_self">Projects&nbsp;</a><span>page.</span><br>
+</span></p>
+</div><div class="ClearBoth"></div>

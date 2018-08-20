@@ -1,0 +1,2912 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PeekyPokey</name>
+    </assembly>
+    <members>
+        <member name="F:PeekyPokey.Controls.Dashboard.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Controls.Dashboard.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:PeekyPokey.Controls.Dashboard.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Controls.Analyzer.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Controls.Analyzer.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:PeekyPokey.Controls.Analyzer.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Controls.Analyzer.SampleMemory.Capacity">
+            <summary>
+            Gets total size of memory
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Controls.Analyzer.SampleMemory.Item(System.Int32)">
+            <summary>
+            Get sample with the given index accoding to T - index
+            where T is zero. Thus an index of zero always refers 
+            to the most recently added sample. Consequenyly, an 
+            index of -1 refers to the penultimately most recently 
+            added sample and so forth along a negative timeline 
+            stretching backwards in time
+            </summary>
+            <param name="i">Index of sample to get</param>
+            <returns>Null if item does not exist</returns>
+        </member>
+        <member name="M:PeekyPokey.Port.Read">
+            <summary>
+            Reads the logic value of this pin
+            </summary>
+            <returns>Logic value</returns>
+        </member>
+        <member name="P:PeekyPokey.Port.Value">
+            <summary>
+            Gets the logic value of the pin
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Port.Bus">
+            <summary>
+            Implements a bus of variable width 1 - 8
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Port.Bus.#ctor(PeekyPokey.Device.Pin[])">
+            <summary>
+            Create a new bus with the given pins
+            </summary>
+            <param name="pins">Pins with least the significant bit (LSB), 
+            e.g. left most in the parameter list</param>
+            <!--param name="output_only"></param-->
+        </member>
+        <member name="M:PeekyPokey.Port.Bus.Assemble(System.Byte)">
+            <summary>
+            Converts a full (possibly scarse) 8 bit 
+            value to a bus value
+            </summary>
+            <param name="value8">Full 8 bit value to convert</param>
+            <returns>Converted bus value</returns>
+        </member>
+        <member name="M:PeekyPokey.Port.Bus.Write(System.Byte)">
+            <summary>
+            Writes the bus value
+            </summary>
+            <param name="value">Value to write</param>
+        </member>
+        <member name="M:PeekyPokey.Port.Bus.Read">
+            <summary>
+            Read the bus value
+            </summary>
+            <returns>Bus value</returns>
+        </member>
+        <member name="M:PeekyPokey.OutputPort.Write(System.Boolean)">
+            <summary>
+            Sets a logic value
+            </summary>
+            <param name="value">Logic value to set</param>
+        </member>
+        <member name="P:PeekyPokey.OutputPort.Value">
+            <summary>
+            Gets or sets a logic Value
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Rf.Nexa.Send(System.String,System.Boolean)">
+            <summary>
+            Send an old styla Nexa command for the
+            specified house and unit
+            </summary>
+            <param name="house_unit">A1, B4, etc.</param>
+            <param name="onoff">true for ON, false for OFF</param>
+        </member>
+        <member name="F:PeekyPokey.Controls.Indicator.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Controls.Indicator.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:PeekyPokey.Controls.Indicator.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Controls.Indicator.Pin">
+            <summary>
+            Gets or sets the pin for which to indicate state
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Controls.Indicator.BulbSize">
+            <summary>
+            Bulb sizes
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Controls.Indicator.BulbColor">
+            <summary>
+            Bulb colors
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.Rf.RfTrx">
+            <summary>
+            Internal helper class to perform signal modulation and bit stuffing,
+            regardning different Rf protocols there are plenty of information out
+            there and especially here:
+            http://developer.telldus.se/browser/telldus-core/service?order=name
+            
+            Also, it would also be possible to make the a virtual Tellstick by
+            supporting the very same interface:
+            http://developer.telldus.se/doxygen/TellStick.html
+            
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Rf.RfTrx.#ctor(System.Double,System.Int32)">
+            <summary>
+            Create a new transmitter
+            </summary>
+            <param name="Trf">Period length of radio carrier frequency in seconds</param>
+            <param name="Sf">Synthesizer frequency in Hertz</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Rf.RfTrx.AddSymbol(System.Char,System.String)">
+            <summary>
+            Adds a symbol for later use
+            </summary>
+            <param name="s">Symbol</param>
+            <param name="OnOffPairs">Even number of comma separated Trf multiples</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Rf.RfTrx.Encode(System.Char)">
+            <summary>
+            Returns bit pattern for the given symbol
+            </summary>
+            <param name="s">Symbol</param>
+            <returns></returns>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Rf.RfTrx.Encode(System.String)">
+            <summary>
+            Encodes a string of symbols
+            </summary>
+            <param name="symbols">Symbol string</param>
+            <returns></returns>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.HiResStopwatch">
+            <summary>
+            Stopwatch class
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.HiResStopwatch.ElapsedMicroSeconds">
+            <summary>
+            Returns microseconds passed since the stopwatch was
+            started
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.XBoxGamePad">
+            <summary>
+            Provides an API to the original XBox (not 360) 
+            wired game pad controller
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.XBoxGamePad.#ctor">
+            <summary>
+            Createa a new instance of the XBox GamePad controller class, this
+            requires XBCD http://www.redcl0ud.com/xbcd.html
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.XBoxGamePad.SetRumble(System.Byte,System.Byte)">
+            <summary>
+            Sets the strengt of the rumble actuators
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.XBoxGamePad.OnButtonA">
+            <summary>
+            Fires when the A button is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.XBoxGamePad.OnButtonB">
+            <summary>
+            Fires when the B button is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.XBoxGamePad.OnButtonX">
+            <summary>
+            Fires when the X button is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.XBoxGamePad.OnButtonY">
+            <summary>
+            Fires when the Y button is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.XBoxGamePad.OnButtonBlack">
+            <summary>
+            Fires when the Black button is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.XBoxGamePad.OnButtonWhite">
+            <summary>
+            Fires when the White button is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.XBoxGamePad.OnLeftTrigger">
+            <summary>
+            Fires when the left trigger is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.XBoxGamePad.OnRightTrigger">
+            <summary>
+            Fires when the right trigger is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.XBoxGamePad.OnPad">
+            <summary>
+            Fires when directional pad is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.XBoxGamePad.OnDigitalButtonBack">
+            <summary>
+            Fires when the Back button is pressed or released
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.XBoxGamePad.OnDigitalButtonStart">
+            <summary>
+            Fires when the Start button is pressed or released
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.XBoxGamePad.OnDigitalButtonLeftThumb">
+            <summary>
+            Fires when the Left thumbstick button is pressed or released
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.XBoxGamePad.OnDigitalButtonRightThumb">
+            <summary>
+            Fires when the Right thumbstick button is pressed or released
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.XBoxGamePad.OnLeftThumbStick">
+            <summary>
+            Fires when the left thumbstick is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.XBoxGamePad.OnRightThumbStick">
+            <summary>
+            Fires when the right thumbstick is being used
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.XBoxGamePad.RumbleLeft">
+            <summary>
+            Sets the strengt of the left rumble actuator
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.XBoxGamePad.RumbleRight">
+            <summary>
+            Sets the strengt of the right rumble actuator
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.XBoxGamePad.State`1">
+            <summary>
+            Holds the state of game pad control
+            </summary>
+            <typeparam name="T">Type of state</typeparam>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.XBoxGamePad.State`1.Value">
+            <summary>
+            The value of the state
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.XBoxGamePad.ButtonEventArgs">
+            <summary>
+            Button event arguments
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.XBoxGamePad.ButtonEventArgs.Time">
+            <summary>
+            The time at which the event occurred
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.XBoxGamePad.ButtonEventArgs.State">
+            <summary>
+            The current state of the button
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.XBoxGamePad.Button">
+            <summary>
+            Delegate to handle button events
+            </summary>
+            <param name="sender">The game pad</param>
+            <param name="e">Button event argument</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.XBoxGamePad.DigitalButtonEventArgs">
+            <summary>
+            Event arguments for digital buttons
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.XBoxGamePad.DigitalButton">
+            <summary>
+            Handler delegate for digital button events
+            </summary>
+            <param name="sender">The game pad</param>
+            <param name="e">Event arguments</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.XBoxGamePad.PadState">
+            <summary>
+            Holds the state of the directional pad
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.XBoxGamePad.PadEventArgs">
+            <summary>
+            Event argument for the directional pad
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.XBoxGamePad.Pad">
+            <summary>
+            Delegate to handla directional pad events
+            </summary>
+            <param name="sender">The game pad</param>
+            <param name="e">Pad event arguments</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.XBoxGamePad.ThumbStickState">
+            <summary>
+            Holds the state of a thumbstick
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.XBoxGamePad.ThumbStickEventArgs">
+            <summary>
+            Argument for a joystick event
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.XBoxGamePad.ThumbStickEventArgs.Time">
+            <summary>
+            The time at which the event occurred
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.XBoxGamePad.ThumbStickEventArgs.StateX">
+            <summary>
+            State of the X axis
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.XBoxGamePad.ThumbStickEventArgs.StateY">
+            <summary>
+            State of the Y axis
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.XBoxGamePad.ThumbStick">
+            <summary>
+            Delegate for handler of a thumbstick event
+            </summary>
+            <param name="sender">The game pad</param>
+            <param name="e">Event argument</param>
+        </member>
+        <member name="M:PeekyPokey.PPHID._openDevice(System.Boolean)">
+            <summary>
+            Internal. Attempts to lock and open device 
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.PPHID.MakeDeviceId(PeekyPokey.HIDDevice.DeviceInfo)">
+            <summary>
+            Construct an identifier string that is uniqie and constant
+            over time for the supplied device. The id is burned into
+            the USB chip which is unique among all chips.
+            </summary>
+            <param name="di">Device info structure</param>
+            <returns></returns>
+        </member>
+        <member name="M:PeekyPokey.PPHID._lockDevice(PeekyPokey.HIDDevice.DeviceInfo)">
+            <summary>
+            Attempts to lock this device for exclusive use
+            by the current process
+            </summary>
+            <returns>True if device sucessfully locked</returns>
+        </member>
+        <member name="M:PeekyPokey.PPHID._closeDevice(System.Boolean)">
+            <summary>
+            Unlock and dispose of device
+            </summary>
+            <param name="surprise"></param>
+        </member>
+        <member name="M:PeekyPokey.PPHID.Disconnect">
+            <summary>
+            Disconnect from a connected device, this
+            effectively releases the device which will
+            then by availble for any other possibly
+            active but idle API instance
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.PPHID.Connect">
+            <summary>
+            Attempts connecting to a device
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.PPHID.Write(System.Byte[])">
+            <summary>
+            Write data to device
+            </summary>
+            <param name="pkt">buffer with data to be written</param>
+        </member>
+        <member name="M:PeekyPokey.PPHID.Read(System.Byte[])">
+            <summary>
+            Reads a package from the device
+            </summary>
+            <param name="pkt">buffer to hold data to be read</param>
+        </member>
+        <member name="E:PeekyPokey.PPHID.OnConnectionChanged">
+            <summary>
+            Fires when connection status changes
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.PPHID.DeviceId">
+            <summary>
+            Unique device identifier
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.PPHID.IsConnected">
+            <summary>
+            Returns true if connected to a device
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.PPHID.ConnectionChangedEventArgs">
+            <summary>
+            Connection status event information
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.PPHID.ConnectionChangedEventArgs.Date">
+            <summary>
+            Date and time when the event occurred
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.PPHID.ConnectionChangedEventArgs.IsConnected">
+            <summary>
+            Connection status
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.PPHID.ConnectionChangedEventArgs.IsSurprise">
+            <summary>
+            True if status change was unexpected, e.g.
+            when due to a surprise device removal in
+            contrast to a programmatic disconnection
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.PPHID.ConnectionChanged">
+            <summary>
+            Delegate for connection status change events
+            </summary>
+            <param name="sender"></param>
+            <param name="e">Additional information</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.PWM">
+            <summary>
+            Uses the UART to synthesize a PWM signal
+            with a variable duty cycle
+            NOTE: Frequency is fixed at ~50kHz and
+            actual duty cycle will never be less
+            than ~7% due to hardware limitations.
+            Also note that there can be only one
+            PWM generator instance at any given
+            moment.
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.PWM.#ctor">
+            <summary>
+            Creates a new PWM generator with
+            a zero duty cycle
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.PWM.#ctor(System.Int32)">
+            <summary>
+            Creates a new PWM generator with
+            the given duty cyle
+            </summary>
+            <param name="dutycycle">Initial duty cycle to use</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.PWM.#ctor(System.Int32,System.Boolean)">
+            <summary>
+            Creates a new PWM generator with
+            the given duty cyle and optionally
+            starts the generator immediately
+            </summary>
+            <param name="dutycycle">Initial duty cycle to use</param>
+            <param name="start">true to start immediately</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.PWM.Start">
+            <summary>
+            Starts the PWM generator
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.PWM.Stop">
+            <summary>
+            Stops the PWM generator, setting output low
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.PWM.IsRunning">
+            <summary>
+            Get current run state of the PWM generator
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.PWM.DutyCycle">
+            <summary>
+            Get or set duty cycle as  0 to 100%
+            NOTE: Actual duty cycle will never be 
+            less than about 6% due to hardware
+            limitations
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.PhoenixRC">
+            <summary>
+            Provides an API to the PhoenixRC USB RC model trainer 
+            as emulated by the JTL-0904A USB handset
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.PhoenixRC.#ctor">
+            <summary>
+            Createa a new instance of the PhoenixRC USB trainer driver class
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.PhoenixRC.OnCh6">
+            <summary>
+            Fires when the A button is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.PhoenixRC.OnCh5">
+            <summary>
+            Fires when the Ch5 switch goes on or off
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.PhoenixRC.OnLeftStick">
+            <summary>
+            Fires when the left stick is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.PhoenixRC.OnRightStick">
+            <summary>
+            Fires when the right stick is being used
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.PhoenixRC.State`1">
+            <summary>
+            Holds the state of a PhoenixRC control
+            </summary>
+            <typeparam name="T">Type of state</typeparam>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.PhoenixRC.State`1.Value">
+            <summary>
+            The value of the state
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.PhoenixRC.RotaryEventArgs">
+            <summary>
+            Button event arguments
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.PhoenixRC.RotaryEventArgs.Time">
+            <summary>
+            The time at which the event occurred
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.PhoenixRC.RotaryEventArgs.State">
+            <summary>
+            The current state of the button
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.PhoenixRC.Rotary">
+            <summary>
+            Delegate to handle rotary knob events
+            </summary>
+            <param name="sender">PhoenixRC</param>
+            <param name="e">Rotary event argument</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.PhoenixRC.DigitalSwitchEventArgs">
+            <summary>
+            Event arguments for a digital switch
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.PhoenixRC.DigitalSwitchEventArgs.Time">
+            <summary>
+            The  time at which the event occurred
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.PhoenixRC.DigitalSwitchEventArgs.State">
+            <summary>
+            Current state at the of the event
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.PhoenixRC.DigitalSwitch">
+            <summary>
+            Handler delegate for digital button events
+            </summary>
+            <param name="sender">PhoenixRC</param>
+            <param name="e">Event arguments</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.PhoenixRC.StickState">
+            <summary>
+            Holds the state of a stick
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.PhoenixRC.StickEventArgs">
+            <summary>
+            Argument for a joystick event
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.PhoenixRC.StickEventArgs.Time">
+            <summary>
+            The time at which the event occurred
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.PhoenixRC.StickEventArgs.StateX">
+            <summary>
+            State of the X axis
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.PhoenixRC.StickEventArgs.StateY">
+            <summary>
+            State of the Y axis
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.PhoenixRC.Stick">
+            <summary>
+            Delegate for handler of a stick event
+            </summary>
+            <param name="sender">PhoenixRC</param>
+            <param name="e">Event argument</param>
+        </member>
+        <member name="M:PeekyPokey.Win32TImer.#ctor(PeekyPokey.Win32TImer.TickHandler,System.Int32)">
+            <summary>
+            Creates a new OS timer (pretty accurate)
+            </summary>
+            <param name="tickhandler">Callback method</param>
+            <param name="period">Milliseconds between calls</param>
+        </member>
+        <member name="F:PeekyPokey.Win32TImer.TimerCaps.periodMin">
+            <summary>
+            Minimum supported period in milliseconds.
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Win32TImer.TimerCaps.periodMax">
+            <summary>
+            Maximum supported period in milliseconds.
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.WebServer.BindCommandEnum(System.Type)">
+            <summary>
+            Creates a new handler for the given command enumerator type
+            </summary>
+            <param name="enumtype">Command enumerator to create a handler for</param>
+            <returns>A command handler object</returns>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.WebServer.#ctor">
+            <summary>
+            Starts an non-serialized (async) web server @ 8080:/tinyweb/
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.WebServer.#ctor(System.Boolean,System.Int32,System.String)">
+            <summary>
+            Starts an async web server @ *:port/name
+            </summary>
+            <param name="async">Serialized or not</param>
+            <param name="port">TCP port to use</param>
+            <param name="name">Serialized or not</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.WebServer.#ctor(System.Boolean,System.String)">
+            <summary>
+            Starts a web server with the supplied prefix
+            </summary>
+            <param name="async">Serialized or not</param>
+            <param name="prefix">Name to use</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.WebServer.#ctor(System.Boolean,System.String[])">
+            <summary>
+            Starts an a web server with the supplied prefixes
+            </summary>
+            <param name="async">Serialized or not</param>
+            <param name="prefixes">Array of prefixes</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.WebServer.Start">
+            <summary>
+            Starts the webserver
+            </summary>
+            <returns>True on success</returns>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.WebServer.Stop">
+            <summary>
+            Abruptly stops the webserver
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Rf.RisingSun.#ctor">
+            <summary>
+            Creates a new instance of the RisingSun 4 group x 4 button transmitter
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Rf.RisingSun.Send(System.String,System.Boolean)">
+            <summary>
+            Send an on/off command
+            </summary>
+            <param name="group_button">Group|Button, example "42" means group 4, button 2</param>
+            <param name="onoff"></param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.AD9850">
+            <summary>
+            Implements a driver class for the AD9850 DDS signal generator IC
+            capable of generating both sinusoidal and square waves
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.AD9850.#ctor(PeekyPokey.Device.Pin,PeekyPokey.Device.Pin,PeekyPokey.Device.Pin,PeekyPokey.Device.Pin)">
+            <summary>
+            Creates a new instance of the AD9850 driver class, 
+            NOTE: This driver runs the chip (module) in serial 
+            mode so [d2,d1,d0] should be [low,high,high]
+            </summary>
+            <param name="w_clk">Word clock</param>
+            <param name="fq_ud">Frequency update</param>
+            <param name="d7_datain">d7 (data in)</param>
+            <param name="rst">Reset (optional)</param>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.AD9850.Frequency">
+            <summary>
+            Gets or sets the output frequency in Hz (~0.0291Hz - 60Mhz)
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.AD9850.Powerdown">
+            <summary>
+            Enables or disables the output, e.g.
+            the chip will be held in power down
+            mode when disabled
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.AD9850.Phase">
+            <summary>
+            Gets or sets the phase shift using the
+            lower 5 bits which are
+              MSb                LSb
+               4    3    2    1   0 
+            11.25, 22.5, 45, 90, 180 degrees
+            
+            NOTE: These bits can be combined, effectively adding 
+            together the corresponding phase shift portions
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Controls.PushButton.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Controls.PushButton.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:PeekyPokey.Controls.PushButton.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Controls.PushButton.#ctor">
+            <summary>
+            Creates a new pushbutton control
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Controls.PushButton.Pin">
+            <summary>
+            Gets or sets the pin to control
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Controls.PushButton.Port">
+            <summary>
+            Get the associated port
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Controls.PushButton.IdleState">
+            <summary>
+            Gets or sets the mode of operation
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Controls.PushButton.Type">
+            <summary>
+            Gets or sets the idle state of the switch
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Controls.PushButton.Label">
+            <summary>
+            Gets or sets the switch label
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Controls.PushButton.IdleStateType">
+            <summary>
+            Idle switch position
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Controls.PushButton.SwitchType">
+            <summary>
+            Kind of switch
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.UnipolarStepperMotor">
+            <summary>
+            Class implementing an interface for a unipolar
+            stepper motor driver module.
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.UnipolarStepperMotor.#ctor(PeekyPokey.Port.Bus)">
+            <summary>
+            Creates a new instance of the class
+            given the supplied bus
+            </summary>
+            <param name="driveBus">Bus to use for control signals. Only the lower for bits will be used</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.UnipolarStepperMotor.#ctor(PeekyPokey.Device.Pin,PeekyPokey.Device.Pin,PeekyPokey.Device.Pin,PeekyPokey.Device.Pin)">
+            <summary>
+            Creates a new instance of the class
+            given the supplied pins
+            </summary>
+            <param name="pin0">Control pin 0</param>
+            <param name="pin1">Control pin 1</param>
+            <param name="pin2">Control pin 2</param>
+            <param name="pin3">Control pin 3</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.UnipolarStepperMotor.Home">
+            <summary>
+            Go to home position
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.UnipolarStepperMotor.Reset">
+            <summary>
+            Set current position as home position
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.UnipolarStepperMotor.Halt">
+            <summary>
+            Resets the stepper driver
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.UnipolarStepperMotor.Advance(System.Int32)">
+            <summary>
+            Advances the motor
+            </summary>
+            <param name="steps">Number of steps to advance, a
+            negative value will move in reverse</param>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.UnipolarStepperMotor.OnStepDone">
+            <summary>
+            Handler to be called when the set number of steps have been completed
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.UnipolarStepperMotor.IsHalted">
+            <summary>
+            Returns true if the stepper motor is  halted
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.UnipolarStepperMotor.StepDone">
+            <summary>
+            Event handler delegate for notification of when the previously
+            set number of steps (in either direction) are completed
+            </summary>
+            <param name="time">Time for completion</param>
+            <param name="direction">The direction of the last step taken</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.UnipolarStepperMotor.SpeedType">
+            <summary>
+            Two different speeds
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.UnipolarStepperMotor.SpeedType.Normal">
+            <summary>
+            One lap is 256 steps, this is the default speed
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.UnipolarStepperMotor.SpeedType.Double">
+            <summary>
+            On lap is 128 steps, this is double speed
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.Hd44780Lcd">
+            <summary>
+            Implements a HD44780 Compatible dot matrix LCD driver
+            </summary>
+            <remarks>
+            See also http://lcd-linux.sourceforge.net/pdfdocs/hd44780.pdf
+            </remarks>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.Hd44780Lcd._PinDisposalRequired">
+            <summary>True when we use a Cpu.Pin constructor</summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.Hd44780Lcd._PinMode">
+            <summary>When true, we use pin mode</summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.Hd44780Lcd._Data">
+            <summary>Reference to the data block</summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.Hd44780Lcd._Db4Pin">
+            <summary>Reference to the 4th data pin</summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.Hd44780Lcd._Db5Pin">
+            <summary>Reference to the 5th data pin</summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.Hd44780Lcd._Db6Pin">
+            <summary>Reference to the 6th data pin</summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.Hd44780Lcd._Db7Pin">
+            <summary>Reference to the 7th data pin</summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.Hd44780Lcd._CePin">
+            <summary>Reference to the clock enable pin</summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.Hd44780Lcd._RsPin">
+            <summary>Reference to the register select pin</summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.Hd44780Lcd._RwPin">
+            <summary>Reference to the read/write pin</summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.Hd44780Lcd._FunctionSetN">
+            <summary>Display lines (false = 1, true = 2)</summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.Hd44780Lcd._FunctionSetF">
+            <summary>Character font (false = 5x8, true = 5x10)</summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Hd44780Lcd.#ctor(PeekyPokey.Port.Bus,PeekyPokey.Device.Pin,PeekyPokey.Device.Pin,PeekyPokey.Device.Pin,System.Int32,System.Int32)">
+            <summary>
+            Initializes a HD44780 compatible LCD with a parallel output port
+            </summary>
+            <param name="Data">Data port</param>
+            <param name="ClockEnablePin">Clock enable pin</param>
+            <param name="RegisterSelectPin">Register select pin</param>
+            <param name="ReadWritePin">Read/write pin (optional; this driver is always in 'write' mode)</param>
+            <param name="Columns">The amount of columns (default: 16)</param>
+            <param name="Rows">The amount of rows (default: 2)</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Hd44780Lcd.#ctor(PeekyPokey.Port.Bus,PeekyPokey.OutputPort,PeekyPokey.OutputPort,PeekyPokey.OutputPort,System.Int32,System.Int32)">
+            <summary>
+            Initializes a HD44780 compatible LCD with a parallel output port
+            </summary>
+            <param name="Data">Data port</param>
+            <param name="ClockEnablePin">Clock enable pin</param>
+            <param name="RegisterSelectPin">Register select pin</param>
+            <param name="ReadWritePin">Read/write pin (optional; this driver is always in 'write' mode)</param>
+            <param name="Columns">The amount of columns (default: 16)</param>
+            <param name="Rows">The amount of rows (default: 2)</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Hd44780Lcd.#ctor(PeekyPokey.Device.Pin,PeekyPokey.Device.Pin,PeekyPokey.Device.Pin,PeekyPokey.Device.Pin,PeekyPokey.Device.Pin,PeekyPokey.Device.Pin,PeekyPokey.Device.Pin,System.Int32,System.Int32)">
+            <summary>
+            Initializes a HD44780 compatible LCD by bitbanging
+            </summary>
+            <param name="Data4">Data pin 4</param>
+            <param name="Data5">Data pin 5</param>
+            <param name="Data6">Data pin 6</param>
+            <param name="Data7">Data pin 7</param>
+            <param name="ClockEnablePin">Clock enable pin</param>
+            <param name="RegisterSelectPin">Register select pin</param>
+            <param name="ReadWritePin">Read/write pin (optional; this driver is always in 'write' mode)</param>
+            <param name="Columns">The amount of columns (default: 16)</param>
+            <param name="Rows">The amount of rows (default: 2)</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Hd44780Lcd.#ctor(PeekyPokey.OutputPort,PeekyPokey.OutputPort,PeekyPokey.OutputPort,PeekyPokey.OutputPort,PeekyPokey.OutputPort,PeekyPokey.OutputPort,PeekyPokey.OutputPort,System.Int32,System.Int32)">
+            <summary>
+            Initializes a HD44780 compatible LCD by bitbanging
+            </summary>
+            <param name="Data4">Data pin 4</param>
+            <param name="Data5">Data pin 5</param>
+            <param name="Data6">Data pin 6</param>
+            <param name="Data7">Data pin 7</param>
+            <param name="ClockEnablePin">Clock enable pin</param>
+            <param name="RegisterSelectPin">Register select pin</param>
+            <param name="ReadWritePin">Read/write pin (optional; this driver is always in 'write' mode)</param>
+            <param name="Columns">The amount of columns (default: 16)</param>
+            <param name="Rows">The amount of rows (default: 2)</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Hd44780Lcd.Dispose">
+            <summary>
+            Disposes this object, freeing all pins
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Hd44780Lcd._Initialization">
+            <summary>
+            Initializes the display
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Hd44780Lcd.Write(System.Byte,System.Boolean)">
+            <summary>Sends data to the display</summary>
+            <param name="Data">The data to send</param>
+            <param name="CommandMode">When true, the data will be interpreted as a command</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Hd44780Lcd.Write(System.String,System.Boolean)">
+            <summary>Sends data to the display</summary>
+            <param name="Data">The data to send</param>
+            <param name="CommandMode">When true, the data will be interpreted as a command</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Hd44780Lcd.Write(System.Byte[],System.Boolean)">
+            <summary>Sends data to the display</summary>
+            <param name="Data">The data to send</param>
+            <param name="CommandMode">When true, the data will be interpreted as a command</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Hd44780Lcd._Write4Bits(System.Byte)">
+            <summary>
+            Writes four bits to the LCD interface
+            </summary>
+            <param name="Byte">The byte to send (only the last 4 bits will be used)</param>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.Hd44780Lcd._DisplayControlD">
+            <summary>Entire display on/off</summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.Hd44780Lcd._DisplayControlC">
+            <summary>Cursor on/off</summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.Hd44780Lcd._DisplayControlB">
+            <summary>Blinking of cursor position character on/off</summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Hd44780Lcd._UpdateDisplayControl">
+            <summary>
+            Updates the display control bits
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Hd44780Lcd.ClearDisplay">
+            <summary>
+            Clears the entire display
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Hd44780Lcd.ChangePosition(System.Byte,System.Byte)">
+            <summary>
+            Changes the cursor location
+            </summary>
+            <param name="Row">Row</param>
+            <param name="Column">Column</param>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.Hd44780Lcd.Columns">
+            <summary>The amount of columns on the display</summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.Hd44780Lcd.Rows">
+            <summary>The amount of rows on the display</summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.Hd44780Lcd.Characters">
+            <summary>The amount of characters on the display</summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.Hd44780Lcd.ShowCursor">
+            <summary>When true, a cursor will be shown on the display</summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.Hd44780Lcd.BlinkPosition">
+            <summary>When true, the cursor position character will blink</summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP41100.ShutDown">
+            <summary>
+            Disconnects the internal resistor rack
+            and effectively setting Rw = 0 and
+            entering low power mode. Level will
+            return the illegal value -1 if read
+            during shot down mode
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP41100.Level">
+            <summary>
+            Get or sets the level of resistance as a value
+            between 0 and 255 where 0 results in Rw = 0 Ohm
+            while 255 corresponds to Rw = 100 kOhm
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP41100.Resistance">
+            <summary>
+            Gets or sets the resistance in Ohms. The
+            actual resistance may differ slightly due
+            quantization so a callee should read back
+            the value after setting it.
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.ReflexXTR">
+            <summary>
+            Provides an API to the ReflexXTR USB RC model trainer 
+            as emulated by the JTL-0904A USB handset
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.ReflexXTR.#ctor">
+            <summary>
+            Createa a new instance of the ReflexXTR USB trainer driver class
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.ReflexXTR.OnCh6">
+            <summary>
+            Fires when the A button is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.ReflexXTR.OnCh5">
+            <summary>
+            Fires when the Ch5 switch goes on or off
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.ReflexXTR.OnLeftStick">
+            <summary>
+            Fires when the left stick is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.ReflexXTR.OnRightStick">
+            <summary>
+            Fires when the right stick is being used
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.ReflexXTR.State`1">
+            <summary>
+            Holds the state of a ReflexXTR control
+            </summary>
+            <typeparam name="T">Type of state</typeparam>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.ReflexXTR.State`1.Value">
+            <summary>
+            The value of the state
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.ReflexXTR.RotaryEventArgs">
+            <summary>
+            Button event arguments
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.ReflexXTR.RotaryEventArgs.Time">
+            <summary>
+            The time at which the event occurred
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.ReflexXTR.RotaryEventArgs.State">
+            <summary>
+            The current state of the button
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.ReflexXTR.Rotary">
+            <summary>
+            Delegate to handle rotary knob events
+            </summary>
+            <param name="sender">ReflexXTR</param>
+            <param name="e">Rotary event argument</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.ReflexXTR.DigitalSwitchEventArgs">
+            <summary>
+            Event arguments for a digital switch
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.ReflexXTR.DigitalSwitchEventArgs.Time">
+            <summary>
+            The  time at which the event occurred
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.ReflexXTR.DigitalSwitchEventArgs.State">
+            <summary>
+            Current state at the of the event
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.ReflexXTR.DigitalSwitch">
+            <summary>
+            Handler delegate for digital button events
+            </summary>
+            <param name="sender">ReflexXTR</param>
+            <param name="e">Event arguments</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.ReflexXTR.StickState">
+            <summary>
+            Holds the state of a stick
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.ReflexXTR.StickEventArgs">
+            <summary>
+            Argument for a joystick event
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.ReflexXTR.StickEventArgs.Time">
+            <summary>
+            The time at which the event occurred
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.ReflexXTR.StickEventArgs.StateX">
+            <summary>
+            State of the X axis
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.ReflexXTR.StickEventArgs.StateY">
+            <summary>
+            State of the Y axis
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.ReflexXTR.Stick">
+            <summary>
+            Delegate for handler of a stick event
+            </summary>
+            <param name="sender">ReflexXTR</param>
+            <param name="e">Event argument</param>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.MediaKeys.VK_BROWSER_BACK">
+            <summary>
+            See WinUser.h in Windows
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.ProfileManager.Import(System.Windows.Forms.IWin32Window)">
+            <summary>
+            Opens a save file dialog to choose a file in 
+            which to save all profiles
+            </summary>
+            <param name="owner">Owner form or null</param>
+            <returns>DialogResult.OK upon success</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:PeekyPokey.ProfileManager.LoadFromStream(System.IO.Stream)" -->
+        <member name="T:PeekyPokey.ProfileManager.CachedProfiles">
+            <summary>
+            This class implements a profile cache to avoid
+            having to read the full chip EEPROM every time
+            the device profile is to be read
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.ProfileManager.Profile.#ctor(PeekyPokey.ProfileManager,System.Int32,System.IO.Stream)">
+            <summary>
+            Loads a profile from the supplied stream. If a value
+            of null is used the method creates a new profile 
+            with these "factory default" values:
+                Name = "Profile #[index]"
+                gpio direction mask = 0xff (all inputs)
+                gpio alternative function mask = 0x00 (n/a)
+                gpio default value mask = 0x00 (n/a)
+                gpio alternative function mask = 0x00 (n/a)
+                gpio direction mask = 0xff (all inputs)
+                Baudrate = [DefaultBaudrate]
+            </summary>
+            <param name="mgr">Profile manager</param>
+            <param name="index">profile index (used for naming)</param>
+            <param name="s">Optional stream to load profile from</param>
+            <returns>A new profile object</returns>
+        </member>
+        <member name="M:PeekyPokey.ProfileManager.Profile.LoadFromStream(System.IO.Stream)">
+            <summary>
+            Load a profiles consisting of [dataSize] bytes
+            </summary>
+            <param name="s">A stream from which to read [dataSize] bytes</param>
+        </member>
+        <member name="F:PeekyPokey.Controls.DisplayControl.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Controls.DisplayControl.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:PeekyPokey.Controls.DisplayControl.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Rf.Waveman.Send(System.String,System.Boolean)">
+            <summary>
+            Send an Waveman command for the
+            specified house A...P and unit 1...16
+            </summary>
+            <param name="house_unit">A1, B4, etc.</param>
+            <param name="onoff">true for ON, false for OFF</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.MCP23S17">
+            <summary>
+            Driver class for the MCP23S17 16 bit I/O Expander with SPI interface
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.#ctor(PeekyPokey.Toolkit.SPI)">
+            <summary>
+            Create a new instance of the MCP23S17 driver
+            with no interrupt pin assigned
+            and hardware addressing disabled
+            </summary>
+            <param name="spi">SPI module to use</param>
+            <param name="xcsPin">Chip select pin for SPI bus</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.#ctor(PeekyPokey.Toolkit.SPI,PeekyPokey.Device.Pin)">
+            <summary>
+            Create a new instance of the MCP23S17 driver
+            with hardware addressing disabled
+            </summary>
+            <param name="spi">SPI module to use</param>
+            <param name="irqPin">Interrupt pin</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.#ctor(PeekyPokey.Toolkit.SPI,PeekyPokey.Device.Pin,System.Byte)">
+            <summary>
+            Create a new instance of the MCP23S17 driver
+            </summary>
+            <param name="spi">SPI module to use</param>
+            <param name="irqPin">Interrupt pin</param>
+            <param name="hwAddr">Chip hardware address</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.CreateBus(PeekyPokey.Toolkit.MCP23S17.Port[])">
+            <summary>
+            Creates a new parallell data bus using the supplied
+            ports which will be organized in decending
+            order of significance and must be consecutive
+            </summary>
+            <param name="ports">Ports to use</param>
+            <returns>A fresh parallell data bus</returns>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.CreateInputPort(PeekyPokey.Toolkit.MCP23S17.Pins)">
+            <summary>
+            Creates an input port
+            with internal weak (100k) pullup resistor disabled
+            and active high input
+            </summary>
+            <param name="pin">Pin to assign</param>
+            <returns>A fresh input port</returns>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.CreateInputPort(PeekyPokey.Toolkit.MCP23S17.Pins,PeekyPokey.Toolkit.MCP23S17.PullupMode)">
+            <summary>
+            Creates an input port
+            with active high input
+            </summary>
+            <param name="pin">Pin to assign</param>
+            <param name="pullupMode">Pullup resistor option</param>
+            <returns>A fresh input port</returns>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.CreateInputPort(PeekyPokey.Toolkit.MCP23S17.Pins,PeekyPokey.Toolkit.MCP23S17.PullupMode,PeekyPokey.Toolkit.MCP23S17.Polarity)">
+            <summary>
+            Creates a new input port
+            </summary>
+            <param name="pin">Pin to assign</param>
+            <param name="pullupMode">Pullup resistor option</param>
+            <param name="polarity">Active low/high option</param>
+            <returns>A fresh input port</returns>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.CreateInterruptPort(PeekyPokey.Toolkit.MCP23S17.Pins)">
+            <summary>
+            Creates a new interrupt port
+            with interrupt on  both edges
+            and internal weak (100k) pullup resistor disabled
+            and active high input
+            </summary>
+            <param name="pin">Pin to assign</param>
+            <returns>A fresh interrupt port</returns>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.CreateInterruptPort(PeekyPokey.Toolkit.MCP23S17.Pins,PeekyPokey.Toolkit.MCP23S17.PullupMode)">
+            <summary>
+            Creates a new interrupt port
+            with interrupt on both edges
+            and active high input
+            </summary>
+            <param name="pin">Pin to assign</param>
+            <param name="pullupMode">Internal weak (100k) pullup resistor option</param>
+            <returns>A fresh interrupt port</returns>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.CreateInterruptPort(PeekyPokey.Toolkit.MCP23S17.Pins,PeekyPokey.Toolkit.MCP23S17.PullupMode,PeekyPokey.Toolkit.MCP23S17.InterruptMode)">
+            <summary>
+            Creates a new interrupt port
+            with active high input
+            </summary>
+            <param name="pin">Pin to assign</param>
+            <param name="pullupMode">Internal weak (100k) pullup resistor option</param>
+            <returns>A fresh interrupt port</returns>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.CreateInterruptPort(PeekyPokey.Toolkit.MCP23S17.Pins,PeekyPokey.Toolkit.MCP23S17.PullupMode,PeekyPokey.Toolkit.MCP23S17.InterruptMode,PeekyPokey.Toolkit.MCP23S17.Polarity)">
+            <summary>
+            Creates a new interrupt port
+            </summary>
+            <param name="pin">Pin to assign</param>
+            <param name="pullupMode">Internal weak (100k) pullup resistor option</param>
+            <param name="interruptMode">Edge low/high/both option</param>
+            <param name="polarity">Active high/low option</param>
+            <returns>A fresh interrupt port</returns>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.CreateOutputPort(PeekyPokey.Toolkit.MCP23S17.Pins)">
+            <summary>
+            Creates a new output port with a
+            value initially set to a logic low
+            </summary>
+            <param name="pin">Pin to assign</param>
+            <returns>A fresh output port</returns>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.CreateOutputPort(PeekyPokey.Toolkit.MCP23S17.Pins,System.Boolean)">
+            <summary>
+            Creates a new output port
+            </summary>
+            <param name="pin">Pin to assign</param>
+            <param name="initialValue">Value to set initially</param>
+            <returns>A fresh output port</returns>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.GetDirectInterface">
+            <summary>
+            Gets a reference to the direct interface using the
+            current bus rate (~1/10 of SPI speed).
+            </summary>
+            <returns>A direct interface</returns>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.Dispose">
+            <summary>
+            Disposes of the MCP23S17 driver, automatically
+            disposing of any and all previously created pins
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.DataBuffer.Clone">
+            <summary>
+            Creates an exact copy
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.DataBuffer.Length">
+            <summary>
+            Gets number of data items in the buffer
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.DataBuffer.Item(System.Int32)">
+            <summary>
+            Gets or set the data item at the given position
+            within the buffer
+            </summary>
+            <param name="index">Index of data item to get or set</param>
+            <returns>Data item at given position</returns>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.MCP23S17._DataBuffer">
+            <summary>
+            Container of data
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.MCP23S17.Pins">
+            <summary>
+            GPIO pins
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.MCP23S17.PullupMode">
+            <summary>
+            Weak (100k) pullup
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.MCP23S17.Polarity">
+            <summary>
+            Polarity (active high/low)
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.MCP23S17.InterruptMode">
+            <summary>
+            Enable or disable interrupts
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.PinArray.Item(System.Int32)">
+            <summary>
+            Gets the pin at the given index
+            </summary>
+            <param name="index">Index of pin to get</param>
+            <returns>A pin</returns>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.PinArray.Count">
+            <summary>
+            Returns the number of pins
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.PortArray.Item(System.Int32)">
+            <summary>
+            Gets the port at the given index
+            </summary>
+            <param name="index">Index of port to get</param>
+            <returns>A port</returns>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.PortArray.Count">
+            <summary>
+            Returns the number of ports
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.Bus.BurstRead(System.UInt16[])">
+            <summary>
+            Reads data in burst mode
+            </summary>
+            <param name="data">Buffer for data to read</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.Bus.BurstRead(System.UInt16[],System.Int32,System.Int32)">
+            <summary>
+            Reads data in burst mode
+            </summary>
+            <param name="data">Buffer for data to read</param>
+            <param name="offset">Index of first item to read</param>
+            <param name="length">Number of items to read</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.Bus.BurstRead(System.Byte[])">
+            <summary>
+            Reads data in burst mode
+            </summary>
+            <param name="data">Buffer for data to read</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.Bus.BurstRead(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Reads data in burst mode
+            </summary>
+            <param name="data">Buffer for data to read</param>
+            <param name="offset">Index of first item to read</param>
+            <param name="length">Number of items to read</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.Bus.BurstWrite(System.UInt16[])">
+            <summary>
+            Writes data in burst mode
+            </summary>
+            <param name="data">Data to write</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.Bus.BurstWrite(System.UInt16[],System.Int32,System.Int32)">
+            <summary>
+            Writes data in burst mode
+            </summary>
+            <param name="data">Data to write</param>
+            <param name="offset">Index of first item to write</param>
+            <param name="length">Number of items to write</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.Bus.BurstWrite(System.Byte[])">
+            <summary>
+            Writes data in burst mode
+            </summary>
+            <param name="data">Data to write</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.Bus.BurstWrite(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes data in burst mode
+            </summary>
+            <param name="data">Data to write</param>
+            <param name="offset">Index of first item to write</param>
+            <param name="length">Number of items to write</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.Bus.Dispose(System.Boolean)">
+            <summary>
+            Disposes of the bus, optionally disposing
+            all associated pins as well
+            </summary>
+            <param name="disposePins">Dispose of all pins</param>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.Bus.Pins">
+            <summary>
+            The associated pin(s)
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.Bus.Ports">
+            <summary>
+            The associated port(s)
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.Bus.Width">
+            <summary>
+            Gets the bus width (number of bits)
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.Bus.Name">
+            <summary>
+            Friendly name
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.Bus.Value">
+            <summary>
+            Gets the current value
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17._Bus.BurstRead(System.UInt16[])">
+            <summary>
+            Reads data in burst mode
+            </summary>
+            <param name="data">Buffer for data to read</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17._Bus.BurstRead(System.UInt16[],System.Int32,System.Int32)">
+            <summary>
+            Reads data in burst mode
+            </summary>
+            <param name="data">Buffer for data to read</param>
+            <param name="offset">Index of first item to read</param>
+            <param name="length">Number of items to read</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17._Bus.BurstRead(System.Byte[])">
+            <summary>
+            Reads data in burst mode
+            </summary>
+            <param name="data">Buffer for data to read</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.MCP23S17.Port">
+            <summary>
+            Generic GPIO port
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.Port.BurstRead(System.Boolean[])">
+            <summary>
+            Reads a burst of values
+            </summary>
+            <param name="values">buffer for values to read</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.Port.BurstRead(System.Boolean[],System.Int32,System.Int32)">
+            <summary>
+            Reads a burst of values
+            </summary>
+            <param name="values">buffer for values to read</param>
+            <param name="offset">index of forst value to read</param>
+            <param name="length">number of values to read</param>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.Port.Pin">
+            <summary>
+            The associated pin
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.Port.Name">
+            <summary>
+            Friendly name
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.Port.Value">
+            <summary>
+            Gets the current value
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.Port.Bus">
+            <summary>
+            Gets the bus to which the pin belongs or null if the
+            pin does not belong to a bus
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.MCP23S17.OutputPort">
+            <summary>
+            Output port
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.OutputPort.BurstWrite(System.Boolean[])">
+            <summary>
+            Writes a burst of values
+            </summary>
+            <param name="values">buffer for values to write</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.OutputPort.BurstWrite(System.Boolean[],System.Int32,System.Int32)">
+            <summary>
+            Writes a burst of values
+            </summary>
+            <param name="values">buffer for values to write</param>
+            <param name="offset">index of forst value to write</param>
+            <param name="length">number of values to write</param>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.OutputPort.Value">
+            <summary>
+            Gets or sets the current value
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.MCP23S17.InputPort">
+            <summary>
+            Input port
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.MCP23S17.PortInterrupt">
+            <summary>
+            Interrupt event handler delegate. When interrupts
+            are enabled, the handler gets called when the
+            value of an input toggles
+            </summary>
+            <param name="pin">The pins that caused the event</param>
+            <param name="value">Current value of the pin</param>
+            <param name="time">Time stamp</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.MCP23S17.InterruptPort">
+            <summary>
+            Interrupt port
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.DirectInterface.CreateDataBuffer(System.Int32)">
+            <summary>
+            Create a buffer of the given length
+            </summary>
+            <param name="length">Size of buffer</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.DirectInterface.CreateDataBuffer(System.UInt16[])">
+            <summary>
+            Create buffer from word array
+            </summary>
+            <param name="data">Data items to copy</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.DirectInterface.CreateDataBuffer(System.Byte[])">
+            <summary>
+            Create buffer from byte array
+            </summary>
+            <param name="data">Data items to copy</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.DirectInterface.ReadData(PeekyPokey.Toolkit.MCP23S17.DataBuffer)">
+            <summary>
+            Reads data into the given buffer
+            </summary>
+            <param name="db">Buffer to read into</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.DirectInterface.ReadData(PeekyPokey.Toolkit.MCP23S17.DataBuffer,System.Int32,System.Int32)">
+            <summary>
+            Reads data into the given buffer
+            </summary>
+            <param name="db">Buffer to read into</param>
+            <param name="offset">Index of 1st data item to read</param>
+            <param name="length">Number of data items to read</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.DirectInterface.WriteData(PeekyPokey.Toolkit.MCP23S17.DataBuffer)">
+            <summary>
+            Writes data from the given buffer
+            </summary>
+            <param name="db">Buffer to write from</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.MCP23S17.DirectInterface.WriteData(PeekyPokey.Toolkit.MCP23S17.DataBuffer,System.Int32,System.Int32)">
+            <summary>
+            Writes data from the given buffer
+            </summary>
+            <param name="db">Buffer to write from</param>
+            <param name="offset">Index of 1st data item to write</param>
+            <param name="length">Number of data items to write</param>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.DirectInterface.Value">
+            <summary>
+            Get or set the value of pin(s) according 
+            to the supplied bit mask (0=low, 1=high)
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.DirectInterface.Inputs">
+            <summary>
+            Get or set the direction of each gpio
+            according to the supplied bit mask (0=out, 1=in)
+            </summary>
+            <remarks>This the inverse of the Outputs property</remarks>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.DirectInterface.Outputs">
+            <summary>
+            Get or set the direction of each gpio
+            according to the supplied bit mask (1=out, 0=in)
+            </summary>
+            <remarks>This the inverse of the Inputs property</remarks>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.DirectInterface.InputsActiveLow">
+            <summary>
+            Enable or disable reverse polarity of input pin(s)
+            according to the supplied bit mask (0=normal, 1=active low)
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.DirectInterface.InputsInterrupt">
+            <summary>
+            Enable or disable  interrupts on input(s) 
+            according to the supplied bit mask (0=disable, 1=enable)
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.MCP23S17.DirectInterface.InputsPullup">
+            <summary>
+            Enable or disable internal weak (100k) pullup 
+            resistor(s) on input(s) according to the 
+            supplied bit mask (0=disable, 1=enable)
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.VRCDongle">
+            <summary>
+            Provides an API to typical cheap VRC USB dongle 
+            clones available from eBay
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.VRCDongle.#ctor">
+            <summary>
+            Createa a new instance of the VRC USB dongle controller class
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.VRCDongle.Dispose">
+            <summary>
+            Disposes of the object
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.VRCDongle.OnSteeringChanged">
+            <summary>
+            Fires when steering wheel changes state
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.VRCDongle.OnThrottleChanged">
+            <summary>
+            Fires when the trottle changes state
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.VRCDongle.State`1">
+            <summary>
+            Generic holder of state information
+            </summary>
+            <typeparam name="T">Type of state</typeparam>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.VRCDongle.State`1.Value">
+            <summary>
+            The value of the state
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.VRCDongle.StateEventArgs">
+            <summary>
+            Argument for control state change events
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.VRCDongle.StateEventArgs.Time">
+            <summary>
+            The time at which the event occurred
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.VRCDongle.StateEventArgs.State">
+            <summary>
+            The current state of the control
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.VRCDongle.StateChanged">
+            <summary>
+            Delegate to handle control state events
+            </summary>
+            <param name="sender">The game pad</param>
+            <param name="e">Control state event argument</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.G3G4_5">
+            <summary>
+            Provides an API to the G3-G4.5 USB RC model trainer 
+            as emulated by the JTL-0904A USB handset
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.G3G4_5.#ctor">
+            <summary>
+            Createa a new instance of the G3-G4.5 USB trainer driver class
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.G3G4_5.OnCh6">
+            <summary>
+            Fires when the A button is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.G3G4_5.OnCh5">
+            <summary>
+            Fires when the Ch5 switch goes on or off
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.G3G4_5.OnLeftStick">
+            <summary>
+            Fires when the left stick is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.G3G4_5.OnRightStick">
+            <summary>
+            Fires when the right stick is being used
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.G3G4_5.State`1">
+            <summary>
+            Holds the state of a G3-G4.5 control
+            </summary>
+            <typeparam name="T">Type of state</typeparam>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.G3G4_5.State`1.Value">
+            <summary>
+            The value of the state
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.G3G4_5.RotaryEventArgs">
+            <summary>
+            Button event arguments
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.G3G4_5.RotaryEventArgs.Time">
+            <summary>
+            The time at which the event occurred
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.G3G4_5.RotaryEventArgs.State">
+            <summary>
+            The current state of the button
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.G3G4_5.Rotary">
+            <summary>
+            Delegate to handle rotary knob events
+            </summary>
+            <param name="sender">G3-G4.5</param>
+            <param name="e">Rotary event argument</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.G3G4_5.DigitalSwitchEventArgs">
+            <summary>
+            Event arguments for a digital switch
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.G3G4_5.DigitalSwitchEventArgs.Time">
+            <summary>
+            The  time at which the event occurred
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.G3G4_5.DigitalSwitchEventArgs.State">
+            <summary>
+            Current state at the of the event
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.G3G4_5.DigitalSwitch">
+            <summary>
+            Handler delegate for digital button events
+            </summary>
+            <param name="sender">G3-G4.5</param>
+            <param name="e">Event arguments</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.G3G4_5.StickState">
+            <summary>
+            Holds the state of a stick
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.G3G4_5.StickEventArgs">
+            <summary>
+            Argument for a joystick event
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.G3G4_5.StickEventArgs.Time">
+            <summary>
+            The time at which the event occurred
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.G3G4_5.StickEventArgs.StateX">
+            <summary>
+            State of the X axis
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.G3G4_5.StickEventArgs.StateY">
+            <summary>
+            State of the Y axis
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.G3G4_5.Stick">
+            <summary>
+            Delegate for handler of a stick event
+            </summary>
+            <param name="sender">G3-G4.5</param>
+            <param name="e">Event argument</param>
+        </member>
+        <member name="T:PeekyPokey.HIDDevice">
+            <summary>
+            Abstract HID device
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.HIDDevice.OPEN_EXISTING">
+            <summary>CreateFile : Resource to be "created" must exist</summary>
+        </member>
+        <member name="F:PeekyPokey.HIDDevice.OPEN_ALWAYS">
+            <summary>CreateFile : Resource will be "created" or existing will be used</summary>
+        </member>
+        <member name="F:PeekyPokey.HIDDevice.ERROR_IO_PENDING">
+            <summary>ReadFile/WriteFile : Overlapped operation is incomplete.</summary>
+        </member>
+        <member name="F:PeekyPokey.HIDDevice.INFINITE">
+            <summary>Infinite timeout</summary>
+        </member>
+        <member name="F:PeekyPokey.HIDDevice._info">
+            <summary>This is where the device path will do after initialization</summary>
+        </member>
+        <member name="F:PeekyPokey.HIDDevice._fileHandle">
+            <summary>Handle to the device</summary>
+        </member>
+        <member name="F:PeekyPokey.HIDDevice._inputReportLength">
+            <summary>Length of input report : device gives us this</summary>
+        </member>
+        <member name="F:PeekyPokey.HIDDevice._outputReportLength">
+            <summary>Length if output report : device gives us this</summary>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.Dispose">
+            <summary>
+            Dispose method
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.Dispose(System.Boolean)">
+            <summary>
+            Disposer called by both dispose and finalise
+            </summary>
+            <param name="bDisposing">True if disposing</param>
+        </member>
+        <member name="F:PeekyPokey.HIDDevice.NullHandle">
+            <summary>Simple representation of a null handle : a closed stream will get this handle. Note it is public for comparison by higher level classes.</summary>
+        </member>
+        <member name="F:PeekyPokey.HIDDevice.InvalidHandleValue">
+            <summary>Simple representation of the handle returned when CreateFile fails.</summary>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.HidD_GetHidGuid(System.Guid@)">
+            <summary>
+            Gets the GUID that Windows uses to represent HID class devices
+            </summary>
+            <param name="gHid">An out parameter to take the Guid</param>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.SetupDiGetClassDevs(System.Guid@,System.String,System.IntPtr,System.UInt32)">
+            <summary>
+            Allocates an InfoSet memory block within Windows that contains details of devices.
+            </summary>
+            <param name="gClass">Class guid (e.g. HID guid)</param>
+            <param name="strEnumerator">Not used</param>
+            <param name="hParent">Not used</param>
+            <param name="nFlags">Type of device details required (DIGCF_ constants)</param>
+            <returns>A reference to the InfoSet</returns>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.SetupDiDestroyDeviceInfoList(System.IntPtr)">
+            <summary>
+            Frees InfoSet allocated in call to above.
+            </summary>
+            <param name="lpInfoSet">Reference to InfoSet</param>
+            <returns>true if successful</returns>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.SetupDiEnumDeviceInterfaces(System.IntPtr,System.UInt32,System.Guid@,System.UInt32,PeekyPokey.HIDDevice.DeviceInterfaceData@)">
+            <summary>
+            Gets the DeviceInterfaceData for a device from an InfoSet.
+            </summary>
+            <param name="lpDeviceInfoSet">InfoSet to access</param>
+            <param name="nDeviceInfoData">Not used</param>
+            <param name="gClass">Device class guid</param>
+            <param name="nIndex">Index into InfoSet for device</param>
+            <param name="oInterfaceData">DeviceInterfaceData to fill with data</param>
+            <returns>True if successful, false if not (e.g. when index is passed end of InfoSet)</returns>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.SetupDiGetDeviceInterfaceDetail(System.IntPtr,PeekyPokey.HIDDevice.DeviceInterfaceData@,System.IntPtr,System.UInt32,System.UInt32@,System.IntPtr)">
+            <summary>
+            SetupDiGetDeviceInterfaceDetail
+            Gets the interface detail from a DeviceInterfaceData. This is pretty much the device path.
+            You call this twice, once to get the size of the struct you need to send (nDeviceInterfaceDetailDataSize=0)
+            and once again when you've allocated the required space.
+            </summary>
+            <param name="lpDeviceInfoSet">InfoSet to access</param>
+            <param name="oInterfaceData">DeviceInterfaceData to use</param>
+            <param name="lpDeviceInterfaceDetailData">DeviceInterfaceDetailData to fill with data</param>
+            <param name="nDeviceInterfaceDetailDataSize">The size of the above</param>
+            <param name="nRequiredSize">The required size of the above when above is set as zero</param>
+            <param name="lpDeviceInfoData">Not used</param>
+            <returns></returns>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.SetupDiGetDeviceInterfaceDetail(System.IntPtr,PeekyPokey.HIDDevice.DeviceInterfaceData@,PeekyPokey.HIDDevice.DeviceInterfaceDetailData@,System.UInt32,System.UInt32@,System.IntPtr)">
+            <summary>
+            SetupDiGetDeviceInterfaceDetail
+            Gets the interface detail from a DeviceInterfaceData. This is pretty much the device path.
+            You call this twice, once to get the size of the struct you need to send (nDeviceInterfaceDetailDataSize=0)
+            and once again when you've allocated the required space.
+            </summary>
+            <param name="lpDeviceInfoSet">InfoSet to access</param>
+            <param name="oInterfaceData">DeviceInterfaceData to use</param>
+            <param name="oDetailData">DeviceInterfaceDetailData to fill with data</param>
+            <param name="nDeviceInterfaceDetailDataSize">The size of the above</param>
+            <param name="nRequiredSize">The required size of the above when above is set as zero</param>
+            <param name="lpDeviceInfoData">Not used</param>
+            <returns></returns>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.RegisterDeviceNotification(System.IntPtr,PeekyPokey.HIDDevice.DeviceBroadcastInterface,System.UInt32)">
+            <summary>
+            Registers a window for device insert/remove messages
+            </summary>
+            <param name="hwnd">Handle to the window that will receive the messages</param>
+            <param name="oInterface">DeviceBroadcastInterrface structure</param>
+            <param name="nFlags">set to DEVICE_NOTIFY_WINDOW_HANDLE</param>
+            <returns>A handle used when unregistering</returns>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.UnregisterDeviceNotification(System.IntPtr)">
+            <summary>
+            Unregister from above.
+            </summary>
+            <param name="hHandle">Handle returned in call to RegisterDeviceNotification</param>
+            <returns>True if success</returns>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.HidD_GetPreparsedData(System.IntPtr,System.IntPtr@)">
+            <summary>
+            Gets details from an open device. Reserves a block of memory which must be freed.
+            </summary>
+            <param name="hFile">Device file handle</param>
+            <param name="lpData">Reference to the preparsed data block</param>
+            <returns></returns>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.HidD_FreePreparsedData(System.IntPtr@)">
+            <summary>
+            Frees the memory block reserved above.
+            </summary>
+            <param name="pData">Reference to preparsed data returned in call to GetPreparsedData</param>
+            <returns></returns>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.HidP_GetCaps(System.IntPtr,PeekyPokey.HIDDevice.HidCaps@)">
+            <summary>
+            Gets a device's capabilities from the preparsed data.
+            </summary>
+            <param name="lpData">Preparsed data reference</param>
+            <param name="oCaps">HidCaps structure to receive the capabilities</param>
+            <returns>True if successful</returns>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.CreateFile(System.String,System.UInt32,System.UInt32,System.IntPtr,System.UInt32,System.UInt32,System.IntPtr)">
+            <summary>
+            Creates/opens a file, serial port, USB device... etc
+            </summary>
+            <param name="strName">Path to object to open</param>
+            <param name="nAccess">Access mode. e.g. Read, write</param>
+            <param name="nShareMode">Sharing mode</param>
+            <param name="lpSecurity">Security details (can be null)</param>
+            <param name="nCreationFlags">Specifies if the file is created or opened</param>
+            <param name="nAttributes">Any extra attributes? e.g. open overlapped</param>
+            <param name="lpTemplate">Not used</param>
+            <returns></returns>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.CloseHandle(System.IntPtr)">
+            <summary>
+            Closes a window handle. File handles, event handles, mutex handles... etc
+            </summary>
+            <param name="hFile">Handle to close</param>
+            <returns>True if successful.</returns>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.RegisterForUsbEvents(System.IntPtr,System.Guid)">
+            <summary>
+            Registers a window to receive windows messages when a device is inserted/removed. Need to call this
+            from a form when its handle has been created, not in the form constructor. Use form's OnHandleCreated override.
+            </summary>
+            <param name="hWnd">Handle to window that will receive messages</param>
+            <param name="gClass">Class of devices to get messages for</param>
+            <returns>A handle used when unregistering</returns>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.UnregisterForUsbEvents(System.IntPtr)">
+            <summary>
+            Unregisters notifications. Can be used in form dispose
+            </summary>
+            <param name="hHandle">Handle returned from RegisterForUSBEvents</param>
+            <returns>True if successful</returns>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.Initialize(PeekyPokey.HIDDevice.DeviceInfo,PeekyPokey.HIDDevice.OpenMode)">
+            <summary>
+            Initialises the device
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.GetDevicePath(System.IntPtr,PeekyPokey.HIDDevice.DeviceInterfaceData@)">
+            <summary>
+            Helper method to return the device path given a DeviceInterfaceData structure and an InfoSet handle.
+            Used in 'FindDevice' so check that method out to see how to get an InfoSet handle and a DeviceInterfaceData.
+            </summary>
+            <param name="hInfoSet">Handle to the InfoSet</param>
+            <param name="oInterface">DeviceInterfaceData structure</param>
+            <returns>The device path or null if there was some problem</returns>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.Write(System.Byte[])">
+            <summary>
+            Write an output report to the device.
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.HIDDevice.EnumerateDevices(System.Int32,System.Int32)">
+            <summary>
+            Enumerates devices given optional VID and PID
+            </summary>
+            <param name="vid">Vendor id for device (VID) or -1 if irrelevant</param>
+            <param name="pid">Product id for device (PID) or -1 if irrelevant</param>
+            <returns>A list of DeviceInfo objects for any and all matching devices found</returns>
+        </member>
+        <member name="P:PeekyPokey.HIDDevice.HIDGuid">
+            <summary>
+            Helper to get the HID guid.
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.HIDDevice.OnReadWriteFailed">
+            <summary>
+            Event handler called when read or write operation failed, most
+            probable cause is that the device was removed
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.HIDDevice.OutputReportLength">
+            <summary>
+            Accessor for output report length
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.HIDDevice.InputReportLength">
+            <summary>
+            Accessor for input report length
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.HIDDevice.HIDDeviceException">
+            <summary>
+            Generic HID device exception
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.HIDDevice.Overlapped">
+            <summary>
+            An overlapped structure used for overlapped IO operations. The structure is
+            only used by the OS to keep state on pending operations. You don't need to fill anything in if you
+            unless you want a Windows event to fire when the operation is complete.
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.HIDDevice.DeviceInterfaceData">
+            <summary>
+            Provides details about a single USB device
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.HIDDevice.HidCaps">
+            <summary>
+            Provides the capabilities of a HID device
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.HIDDevice.DeviceInterfaceDetailData">
+            <summary>
+            Access to the path for a device
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.HIDDevice.DeviceBroadcastInterface">
+            <summary>
+            Used when registering a window to receive messages about devices added or removed from the system.
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.HIDDevice.OpenMode">
+            <summary>
+            Flags for read/write mode
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Util.CRC.Consume(System.IO.Stream,System.Int64,System.Int64)">
+            <summary>
+            Works realtive to current position
+            </summary>
+            <param name="s"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PeekyPokey.Util.CRC.Consume(System.IO.Stream)">
+            <summary>
+            Stream is assumed to be reset
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="P:PeekyPokey.Util.WinReg.Item(System.String)">
+            <summary>
+            Gets or sets a named byte array
+            </summary>
+            <param name="valuename">Array of bytes</param>
+            <returns>Array of bytes</returns>
+        </member>
+        <member name="M:PeekyPokey.Device.PushISRMask(System.Byte)">
+            <summary>
+            Stacks the current ISR mask and then sets the given
+            ISR mask effectively making that the current ISR mask
+            </summary>
+            <param name="new_isr_mask">ISR mask to set after current has been saved</param>
+        </member>
+        <member name="M:PeekyPokey.Device.PopISRMask">
+            <summary>
+            Restores the previously stacked ISR mask
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Device.RegisterPort(PeekyPokey.Port,System.Boolean)">
+            <summary>
+            Registers and configures an i/o port (i.e. a gpio)
+            </summary>
+            <param name="port">The port to register</param>
+            <param name="defaultValue">Default value when registering an output port</param>
+        </member>
+        <member name="F:PeekyPokey.Device._beep_keys">
+            <summary>
+            6 + 2 keys according to the strings of a guitar
+            E    B    G    D    A    e   X1   X2
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Device.NotifyGpioChanged(PeekyPokey.Device.GpioChangedEventArgs)">
+            <summary>
+            This function notifies any and all input ports of
+            gpio state changes. This method may also be called
+            asynchronously
+            </summary>
+            <param name="e">An instance of GpioChangedEventArgs</param>
+        </member>
+        <member name="M:PeekyPokey.Device.AlterGPIO(System.Byte,System.Byte)">
+            <summary>
+            Alters the value on the GPIO port
+            </summary>
+            <param name="setmask">Bits to set</param>
+            <param name="clearmask">Bits to clear</param>
+        </member>
+        <member name="M:PeekyPokey.Device.SetGPIO(System.Byte)">
+            <summary>
+            Sets the given mask the GPIO port
+            </summary>
+            <param name="mask">Bits to set</param>
+        </member>
+        <member name="M:PeekyPokey.Device.ReadGPIO">
+            <summary>
+            Reads the current value of the GPIO port
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PeekyPokey.Device.ApplyProfile(PeekyPokey.ProfileManager.Profile)">
+            <summary>
+            Implements the supplied profile into 
+            the device and also sets the API name
+            accordingly
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Device.ComPortName">
+            <summary>
+            Gets the name (i.e "COMx") of the serialport
+            associated to the PeekyPokey
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Device.Pin">
+            <summary>
+            PeekyPokey pins 7,6,5,...0 from left to right
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Device.Pin.Gpio0">
+            <summary>
+            General purpose input/output pin 0
+            Alternative function: SSPND (USB state)
+            This is physical pin #7
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Device.Pin.Gpio1">
+            <summary>
+            General purpose input/output pin 1
+            Alternative function: USBCFG (USB state)
+            This is physical pin #6
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Device.Pin.Gpio2">
+            <summary>
+            General purpose input/output pin 2
+            This is physical pin #5
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Device.Pin.Gpio3">
+            <summary>
+            General purpose input/output pin 3
+            This is physical pin #4
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Device.Pin.Gpio4">
+            <summary>
+            General purpose input/output pin 4
+            This is physical pin #3
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Device.Pin.Gpio5">
+            <summary>
+            General purpose input/output pin 5
+            This is physical pin #2
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Device.Pin.Gpio6">
+            <summary>
+            General purpose input/output pin 6
+            Alternative function: Rx LED (UART receiving)
+            This is physical pin #1
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Device.Pin.Gpio7">
+            <summary>
+            General purpose input/output pin 7
+            Alternative function: Tx LED (UART transmittng)
+            This is physical pin #0
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Device.Pin.nap0">
+            <summary>
+            Not an actual pin, for internal use only.
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Device.Pin.nap1">
+            <summary>
+            Not an actual pin, for internal use only.
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Device.GpioChangedEventArgs.GpioMask">
+            <summary>
+            Gpio value mask (LSB is gpio0 and MSB is gpio7)
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Device.GpioChangedEventArgs.GpioDiffMask">
+            <summary>
+            A binary number where each high bit means
+            that the corresponding Gpio has changed
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Device.GpioChangedEventArgs.GpioEventMask">
+            <summary>
+            Event filter mask
+            </summary>
+            <example>mask = 0 disables all events
+            mask = 1 enables gpio0 only
+            mask = 3 enables gpio0 and gpio1
+            mask = 255 enables all events
+            </example>
+        </member>
+        <member name="M:PeekyPokey.Device.Sampler.#ctor(PeekyPokey.Device,System.Int32,System.Boolean)">
+            <summary>
+            This class periodically polls the device
+            to see if either connection or gpio port
+            has changed.
+            </summary>
+            <param name="ppu">Owner device</param>
+            <param name="refreshRate">0 to 500 Hz (zero disables)</param>
+            <param name="enableAsyncEvents">Enables asynchonous events</param>
+        </member>
+        <member name="P:PeekyPokey.Device.Sampler.AverageSampleRate">
+            <summary>
+            Average refreshrate in Hz
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Controls.ConfigControl.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Controls.ConfigControl.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:PeekyPokey.Controls.ConfigControl.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.ServoController">
+            <summary>
+            Implements a multi channel servo 
+            controller. This class requires
+            exlusive use of the UART
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.ServoController.Channels">
+            <summary>
+            Collection of channels currently being managed by the controller
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.ServoController.#ctor">
+            <summary>
+            Creates a new Servo controller
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.ServoController.Enabled">
+            <summary>
+            Enables or disables servo control for all channels
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.ServoController.Optimize">
+            <summary>
+            Enables or disables bandwidth optimization for all channels
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.ServoController.Channel.Pin">
+            <summary>
+            Output pin used for controlling the servo of this channel
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.ServoController.Channel.Enabled">
+            <summary>
+            Gets/set a boolean value to indicate whether the servo
+            of this channel should receive control signals
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.ServoController.Channel.#ctor(PeekyPokey.Device.Pin)">
+            <summary>
+            Creates a new servo channel
+            </summary>
+            <param name="pin">Output pin for controlling the servo channel</param>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.ServoController.Channel.OnArrival">
+            <summary>
+            Fires when the servo has (assumingly) arrived at
+            a the set destination angle. Setting a new 
+            destination will cancel the previous for which
+            the event will not fire
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.ServoController.Channel.Optimize">
+            <summary>
+            Enables adaptive optimization to
+            save bandwidth. Disable to prioritize the
+            servo channel over any optimized ones 
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.ServoController.Channel.MinAngle">
+            <summary>
+            Minimum angle, default is -45 degrees, use
+            float.MinValue for revolving servos
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.ServoController.Channel.MaxAngle">
+            <summary>
+            Maximum angle, default is +45 degrees, use
+            float.MaxValue for revolving servos
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.ServoController.Channel.Inverted">
+            <summary>
+            Indicates that the servo is inverted, i.e
+            that it normally moves counter-clockwise
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.ServoController.Channel.Speed">
+            <summary>
+            Gets or sets the speed in degrees 
+            per second at which the servo is able
+            to move. This is used with the OnArrival 
+            event for way point travel time prediction
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.ServoController.Channel.Offset">
+            <summary>
+            Get or sets the offset of the angle response,
+            i.e. the displacement of the center point
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.ServoController.Channel.Angle">
+            <summary>
+            Gets/sets the current servo angle for this channel, the
+            servo has clockwise oriention but this may differ from 
+            one unit to another
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.ServoController.Channel.ChannelState">
+            <summary>
+            Internal state info used by the controller
+            for adaptive optimization and such
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.ServoController.Channel.ArrivalEventArgs">
+            <summary>
+            Details of an arrival event
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.ServoController.Channel.ArrivalEventArgs.ToAngle">
+            <summary>
+            Destination angle
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.ServoController.Channel.ArrivalEventArgs.FromAngle">
+            <summary>
+            Angle of origin
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.ServoController.Channel.ArrivalEventArgs.Time">
+            <summary>
+            Time of arrival
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.ServoController.Channel.ArrivalEventArgs.Duration">
+            <summary>
+            Duration of the journey
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.ServoController.Channel.Arrival">
+            <summary>
+            Arrival event handler signature
+            </summary>
+            <param name="sender">The servo channel</param>
+            <param name="e">Event details</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.ServoController.ChannelCollection.Contains(PeekyPokey.Device.Pin)">
+            <summary>
+            Tells whether the given pin is accociated
+            to any of the servo channels
+            </summary>
+            <param name="pin">Pin to check for</param>
+            <returns>True if a servo channel exist for the given pin</returns>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.ServoController.ChannelCollection.Add(PeekyPokey.Toolkit.ServoController.Channel)">
+            <summary>
+            Adds a new servo channel
+            </summary>
+            <param name="channel">Servo channel to add</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.ServoController.ChannelCollection.RebuildBus">
+            <summary>
+            Re-assembles a bus for all channels, this method
+            should be called within a lock
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.ServoController.ChannelCollection.Remove(PeekyPokey.Device.Pin)">
+            <summary>
+            Removes the servo channel associated with the given pin
+            </summary>
+            <param name="pin">Pin of channel to remove</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.ServoController.ChannelCollection.Remove(PeekyPokey.Toolkit.ServoController.Channel)">
+            <summary>
+            Removes the given servo channel
+            </summary>
+            <param name="channel">Servo channel to remove</param>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.ServoController.ChannelCollection.Item(PeekyPokey.Device.Pin)">
+            <summary>
+            Gets the servo channel assoociated to the given pin
+            </summary>
+            <param name="pin">Pin of servo channel to get</param>
+            <returns>A channel object</returns>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.ServoController.ChannelCollection.Item(System.Int32)">
+            <summary>
+            Gets the servo channel assoociated to the given pin
+            </summary>
+            <param name="index">index of servo channel to get</param>
+            <returns>A channel object</returns>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.ServoController.ChannelCollection.Count">
+            <summary>
+            Gets the current number of servo channels
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Controls.AboutForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Controls.AboutForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Controls.AboutForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.DerivedTimer.#ctor(System.Int32,PeekyPokey.DerivedTimer.TickHandler)">
+            <summary>
+            Creates a derived timer, there can be only
+            one instance of this class
+            </summary>
+            <param name="frequency">Max frequency is half the current samplerate</param>
+        </member>
+        <member name="M:PeekyPokey.DerivedTimer.BumpTickerAndInvokeWhenDue">
+            <summary>
+            Advances the internal ticker (divider)
+            and invokes the tickhandler if due
+            </summary>
+            <returns>true when due</returns>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Rf.NexaSelfLearning.#ctor(System.Int32)">
+            <summary>
+            Creates a new instance of the Nexa self-learning transmitter
+            </summary>
+            <param name="instanceid">Any 26 bit (unique) transmitter id</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Rf.NexaSelfLearning.Send(System.String,System.Boolean)">
+            <summary>
+            Send an on/off command
+            </summary>
+            <param name="unit_button">Unit|Button; Example: "12" means unit 1, button 2.
+            Note: Use the "d" unit_button suffix when targetting a dimmer enabled receiver for
+            it to avoid entering "jojo mode" when accidentally sending the "ON" command twice</param>
+            <param name="onoff">Specifies sending the on or off command respectively</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Rf.NexaSelfLearning.Send(System.String,System.Int32)">
+            <summary>
+            Send a dimming command 0...16
+            </summary>
+            <param name="unit_button">ub = Unit|Button, example 12 means  Unit 1, Button 2</param>
+            <param name="level">0...16</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.Rf.NexaSelfLearning.Send(System.String,System.Double)">
+            <summary>
+            Send a dimming command
+            </summary>
+            <param name="unit_button">ub = Unit|Button, example 12 means  Unit 1, Button 2</param>
+            <param name="level">0.0....1.0</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.APD">
+            <summary>
+            Provides an API to the APD USB RC model trainer 
+            as emulated by the JTL-0904A USB handset
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.APD.#ctor">
+            <summary>
+            Createa a new instance of the ADP USB trainer driver class
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.APD.OnCh6">
+            <summary>
+            Fires when the A button is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.APD.OnCh5">
+            <summary>
+            Fires when the Ch5 switch goes on or off
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.APD.OnLeftStick">
+            <summary>
+            Fires when the left stick is being used
+            </summary>
+        </member>
+        <member name="E:PeekyPokey.Toolkit.APD.OnRightStick">
+            <summary>
+            Fires when the right stick is being used
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.APD.State`1">
+            <summary>
+            Holds the state of a ADP control
+            </summary>
+            <typeparam name="T">Type of state</typeparam>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.APD.State`1.Value">
+            <summary>
+            The value of the state
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.APD.RotaryEventArgs">
+            <summary>
+            Button event arguments
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.APD.RotaryEventArgs.Time">
+            <summary>
+            The time at which the event occurred
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.APD.RotaryEventArgs.State">
+            <summary>
+            The current state of the button
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.APD.Rotary">
+            <summary>
+            Delegate to handle rotary knob events
+            </summary>
+            <param name="sender">ADP</param>
+            <param name="e">Rotary event argument</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.APD.DigitalSwitchEventArgs">
+            <summary>
+            Event arguments for a digital switch
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.APD.DigitalSwitchEventArgs.Time">
+            <summary>
+            The  time at which the event occurred
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.APD.DigitalSwitchEventArgs.State">
+            <summary>
+            Current state at the of the event
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.APD.DigitalSwitch">
+            <summary>
+            Handler delegate for digital button events
+            </summary>
+            <param name="sender">ADP</param>
+            <param name="e">Event arguments</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.APD.StickState">
+            <summary>
+            Holds the state of a stick
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.APD.StickEventArgs">
+            <summary>
+            Argument for a joystick event
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.APD.StickEventArgs.Time">
+            <summary>
+            The time at which the event occurred
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.APD.StickEventArgs.StateX">
+            <summary>
+            State of the X axis
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.APD.StickEventArgs.StateY">
+            <summary>
+            State of the Y axis
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.APD.Stick">
+            <summary>
+            Delegate for handler of a stick event
+            </summary>
+            <param name="sender">ADP</param>
+            <param name="e">Event argument</param>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.SPI">
+            <summary>
+            Class implementing a master-only SPI bus
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.SPI.#ctor(PeekyPokey.Toolkit.SPI.Configuration)">
+            <summary>
+            Creates an SPI bus using the supplied configuration
+            </summary>
+            <param name="config">SPI configuration</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.SPI.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes data to an SPI slave device
+            </summary>
+            <param name="data">Data to write</param>
+            <param name="offset">Index of first byte to write</param>
+            <param name="length">Number of bytes to write</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.SPI.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Reads data from a slave device
+            </summary>
+            <param name="data">Buffer for data to read</param>
+            <param name="offset">Index of first byte to read</param>
+            <param name="length">Number of bytes to read</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.SPI.WriteRead(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Performs a combined write read operation on
+            a slave device
+            </summary>
+            <param name="writeData">Data to write</param>
+            <param name="writeOffset">Index of first byte to write</param>
+            <param name="writeLength">Number of bytes to write</param>
+            <param name="readData">Buffer for data to read</param>
+            <param name="readOffset">Index of first byte to read</param>
+            <param name="readLength">Number of bytes to read</param>
+            <param name="readSkipOffset">Number of bytes written to skip before starting to read</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.SPI.Dispose">
+            <summary>
+            Disposes of the SPI bus
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.SPI.Config">
+            <summary>
+            Gets the current SPI bus configuration
+            </summary>
+        </member>
+        <member name="T:PeekyPokey.Toolkit.SPI.Configuration">
+            <summary>
+            SPI bus configuration object
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.SPI.Configuration.csActiveHigh">
+            <summary>
+            True if chip select pin of salve is active high
+            </summary>
+        </member>
+        <member name="F:PeekyPokey.Toolkit.SPI.Configuration.clockActiveHigh">
+            <summary>
+            True if data is clocked into slave device high edge of clock
+            </summary>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.SPI.Configuration.#ctor(PeekyPokey.Device.Pin,PeekyPokey.Device.Pin,PeekyPokey.Device.Pin,PeekyPokey.Device.Pin,System.Boolean,System.Boolean)">
+            <summary>
+            Create a new 4-pin SPI configuration
+            </summary>
+            <param name="cs">chip select pin</param>
+            <param name="clock">clock pin</param>
+            <param name="mosi">mosi pin</param>
+            <param name="miso">miso pin</param>
+            <param name="csActiveHigh">Polarity of chip select pin</param>
+            <param name="clockActiveHigh">Polarity of clock pin</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.SPI.Configuration.#ctor(PeekyPokey.Device.Pin,PeekyPokey.Device.Pin,PeekyPokey.Device.Pin,System.Boolean,System.Boolean)">
+            <summary>
+            Create a new 3-pin SPI configuration
+            </summary>
+            <param name="cs">chip select pin</param>
+            <param name="clock">clock pin</param>
+            <param name="mosi">mosi pin</param>
+            <param name="csActiveHigh">Polarity of chip select pin</param>
+            <param name="clockActiveHigh">Polarity of clock pin</param>
+        </member>
+        <member name="M:PeekyPokey.Toolkit.SPI.Configuration.Dispose">
+            <summary>
+            Disposes of the SPI bus
+            </summary>
+        </member>
+        <member name="P:PeekyPokey.Toolkit.SPI.Configuration.IsReadEnabled">
+            <summary>
+            Returns a boolean indicating whether or not this
+            configuration allow reading
+            </summary>
+        </member>
+    </members>
+</doc>
