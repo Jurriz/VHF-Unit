@@ -15,8 +15,7 @@
 void InitCPU(void)
 {
 	
-    //18F46k22
-    //Digitala ingångar
+    // --- 18F46k22 -------
     
     // TRIS sätter riktning på datan
     // 0 Output
@@ -33,25 +32,25 @@ void InitCPU(void)
     ANSELD = 0x00;
     ANSELE = 0x00;  
     
-	PORTA = 0b00000000;
-    LATA  = 0b00101000; //0b10101000; VSEL1 & VSEL2 & VSEL3 0b10101000
+	//PORTA = 0b00000000;
+    LATA  = 0b00100000; // VSEL1 & VSEL2 & VSEL3 // GREEN_LED
 	TRISA = 0b00000000; // 0b11100011;
     
 	//PORTB = 0b00000000;
 	//TRISB = 0b11011111; // Acc_int, RTC_int, TCXO_EN, FREE, NIRQ_Radio, Hall_out,PGC,PGD 
-    //LATB  = 0b11111111; //?
+    LATB  = 0b11001100; //
     
     //PORTC = 0b00000000;
     TRISC = 0b00000001; // XTAL, RC2 SDN_RADIO // RC3,RC4 & RC5 SPI // RC6 & RC7 TX/RX //
 	LATC  = 0b00100000; // SND_radio hög
     
     //PORTE = 0b00000000;
-    TRISD = 0b00000000; 	// 
-	LATD  = 0b00101000;     // CS_ACC & Radio CS sätts hög vid uppstart
+    //TRISD = 0b00000000; 	// 
+	LATD  = 0b11101000; //     // CS_ACC & Radio CS sätts hög vid uppstart
 	
     
     //PORTE = 0b00000000; // 
-    LATE  = 0b00000000; // Alla dras låga av pulldown
+    LATE  = 0b00000000; // RED_LED
 	TRISE = 0b00000000; // Alla är utgångar
 
     

@@ -13,11 +13,9 @@
 
 // -----------------------------------------------------------------------------
 // PIC18LF46k22 
-
-//#pragma config STVREN = 1       // Stack overflow reset enable
-//#pragma config WAIT = OFF             ÄNDRAT
-//#pragma config BW = 8                 ÄNDRAT
-//#pragma config MODE = MM              ÄNDRAT
+//#pragma config WAIT = OFF             
+//#pragma config BW = 8                 
+//#pragma config MODE = MM              
 // -----------------------------------------------------------------------------
 
 
@@ -29,7 +27,7 @@
 
 //// CONFIG2L
 //#pragma config PWRTEN = OFF    // Power-up Timer Enable bit->Power up timer disabled
-//#pragma config BOREN = OFF    // Brown-out Reset Enable bits->Brown-out Reset enabled in hardware only (SBOREN is disabled)
+#pragma config BOREN = OFF    // Brown-out Reset Enable bits->Brown-out Reset enabled in hardware only (SBOREN is disabled)
 //#pragma config BORV = 190    // Brown Out Reset Voltage bits->VBOR set to 1.90 V nominal
 //
 //// CONFIG2H
@@ -122,9 +120,6 @@ volatile union
 
 // unsigned char nTICK;
 
-//const rom unsigned char AccWrite = 0x0A, AccRead = 0x0B, Fifo = 0x0D;
-//const rom unsigned char RTCWrite = 0x00, RTCRead = 0x80;
-//
 //const rom unsigned char RTCControl = 0b00000000, RTCClock = 0b00001000, RTCAlarm = 0b00010000, RTCTimer = 0b00011000;
 //const rom unsigned char RTCTemp    = 0b00100000, RTCEE    = 0b00101000, RTCEECtrl = 0b00110000, RTCRAM = 0b00111000;
 
@@ -165,28 +160,28 @@ void main(void)
 {
     
     
-    unsigned char nLoop, nTmp, nTemp, nTest, nLength;
+    unsigned char nLoop, nTmp;
     unsigned char FREQ_CTRL_INTE, FREQ_CTRL_FRAC_H, FREQ_CTRL_FRAC_M, FREQ_CTRL_FRAC_L;
     unsigned char FREQ_CTRL_INTE_433, FREQ_CTRL_FRAC_H_433, FREQ_CTRL_FRAC_M_433, FREQ_CTRL_FRAC_L_433;
-	unsigned char CTS_OK, szData[];
+	unsigned char szData[];
     unsigned char X_L, X_H, Y_L, Y_H, Z_L, Z_H;
 
-	//signed char nOldX, nOldY, nOldZ;
-    signed int xVal, yVal, zVal, xVal_100, yVal_100, zVal_100, i=0, j=0, nHi;
-	//char lData;
+    signed int xVal, yVal, zVal, xVal_100, yVal_100, zVal_100, i=0, j=0;
+
     
 	
     
     //FlagBits.bTimerIRQ = 0;  
 	InitCPU();
-    OSCILLATOR_Initialize();  // VET EJ OM DEN BEHÖVS
-    VSEL1 = 1;
+    OSCILLATOR_Initialize();  
+    
+    // Sätter 3.3 V direkt
+    VSEL1 = 1; 
+    VSEL2 = 0; // Inverterad
     VSEL3 = 1;
-    GREEN_LED = 1;
-
-    // Börja med dessa, processorn ogillar skarpt den initiala 1.8 voltarna.
-    //LATAbits.LATA0 = 1; // 2.1 V 
-    //LATAbits.LATA2 = 1; // 3.3 V
+    GREEN_LED = 0;
+    Delay(5000);        // Testa strömmen
+    
     
 //	OpenTimer3(TIMER_INT_ON & T3_16BIT_RW & T3_SOURCE_INT & T3_PS_1_8);
 //	WriteTimer3(0x7FFF);	// 1 sekund
@@ -212,16 +207,8 @@ void main(void)
 	nTimeOutUSART_1 = 0;
 	nByte_1 = 0;
 	szUSART_1[0] = '\0';
-
-	FlagBits.bReceived_2 = 0;
-	nTimeOutUSART_2 = 0;
-	nByte_2 = 0;
-	szUSART_2[0] = '\0';
     
-    //TRISCbits.TRISC7 = 1;		// RX
-	//TRISCbits.TRISC6 = 0;		// TX
-    
-// 19200bps
+// 19200bps ------------------------
 	
     Open1USART( USART_TX_INT_OFF &
 		USART_RX_INT_ON &
@@ -235,7 +222,14 @@ void main(void)
 
 	BAUDCON1bits.BRG16 = 1;
 
-//	// 9600bps
+    
+    FlagBits.bReceived_2 = 0;
+	nTimeOutUSART_2 = 0;
+	nByte_2 = 0;
+	szUSART_2[0] = '\0';
+    
+//	// 9600bps -------------------------
+    
 //	Open2USART( USART_TX_INT_OFF &
 //		USART_RX_INT_ON &
 //		USART_ASYNCH_MODE &
@@ -246,36 +240,31 @@ void main(void)
 ////	103);				// HS     10MHz
 
 	//BAUDCON2bits.BRG16 = 1;
-    
-	//Delay(100);
 	
 	//INTCONbits.GIE = 0;		// Global
 
+    
 // ************************************************************************************************** Startar programmet här
     
-    //TestaVSEL();
-
-//------------------------------------------------------------------ Starta upp accelerometern med denna kod
     
-   
+    while(1)        // Ta bort all testkod för att bara köra radio
+    {
     // ---------- Läs från Accelerometern ----------------------------------
     OpenSPI1(SPI_FOSC_4, MODE_11, SMPMID);   
     nTmp = DoStartST_ACC();
     CloseSPI1();
 
-    sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LIS2DW12 INITIERING:\r\n\r\n WHO_AM_I? \t0X%02X (0X44)\r\n\r\n", nTmp);
+    sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n LIS2DW12 INITIERING:\r\n\r\n WHO_AM_I? \t0X%02X (0X44)\r\n", nTmp);
     SkrivBuffert(szUSART_Out, 1);
     Delay(10);
-
-
-
-    //nTmp = DoStartST_ACC();
-    sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n Kör aaceleromtern 10 ggr: \r\n");
-    SkrivBuffert(szUSART_Out, 1)
-            ;
-    for(i=0;i<10;i++)
+    
+    
+    sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n Kör aceleromtern 50 ggr: \r\n");
+    SkrivBuffert(szUSART_Out, 1);
+    Delay(500);
+    for(i=0;i<50;i++)
     {
-            
+        RED_LED = 1;
         OpenSPI1(SPI_FOSC_4, MODE_11, SMPMID);    
         ACC_ENABLE = 0;
 
@@ -302,11 +291,13 @@ void main(void)
 
         sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n X VAL: \t %d \r\n Y VAL: \t %d \r\n Z VAL: \t %d \r\n", xVal_100, yVal_100, zVal_100);
         SkrivBuffert(szUSART_Out, 1);
-        Delay(50);
+        RED_LED = 0;
+        Delay(25);
     }
- while(1){
+ //while(1){
     // ---------------------------------------------------- Testar Hall Brytaren
-    for(j=0; j<50; j++)
+    RED_LED =1;
+    for(j=0; j<75; j++)
     {
         i = Hall_Out; //PORTBbits.RB5
         if (i==0)
@@ -321,33 +312,18 @@ void main(void)
         }
             sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n Test #%d ", j);
             SkrivBuffert(szUSART_Out, 1); 
+        GREEN_LED = 0;    
         Delay(50);
+        GREEN_LED = 1;
     }
+
+    // TESTA Spänningsregulatorn  ---------------------------------------------
+    TestaVSEL();
     
-
-// ------------------------------------------------------ Initierar radion        
-    TCXO_EN = 1;        //Startar TCXO
-
-    filter = 1;
-    InitTRXAndGotoSleep(); 
-
-    // ------- Detta behövs ej, all initiering sker senare. --------- //
-
-    //OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);
-    //DoResetRadio();
-    //DoCheckCTSManyTimes1();  
-    //DoStartRadio();
-    //DoCheckCTSManyTimes1(); 
-    //CloseSPI1();
-
-    //const unsigned char FREQ_CTRL_INTE = 0x04;
-
+   }  
+    
+    
     // Ansätt variablerna redan i koden, dessa skall senare sättas via datorn direkt
-//        FREQ_CTRL_INTE = 0x41;
-//        FREQ_CTRL_FRAC_H = 0x0C;    // hastigheten skall vara 433.0515 
-//        FREQ_CTRL_FRAC_M = 0xFC;
-//        FREQ_CTRL_FRAC_L = 0x88;
-
     // Sätter upp variabler med information om hastighet för radion
     //-----------------------------------------------
     FREQ_CTRL_INTE = 0x44;          // hastigheten skall vara 151.123
@@ -372,53 +348,23 @@ void main(void)
     Write2EE(FREQ_CTRL_FRAC_H_433, 0x0005); // 5
     Write2EE(FREQ_CTRL_FRAC_M_433, 0x0006); // 6
     Write2EE(FREQ_CTRL_FRAC_L_433, 0x0007); // 7 
+    
+    // ----------------------------------------------------  Initierar radion
 
-    // TESTA VSEL ---------------------------------------------
-    // 1.8 V verkar inte fungera särskilt bra, processorn stannar precis när den instructionen körs -----
-    
-    
-    //---------- 2.1 V ----------
-    sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n Spänningen satt till 2.1 V\r\n", i);
-    SkrivBuffert(szUSART_Out, 1);
-    VSEL3 = 0; 
-    VSEL2 = 0;  //VSEL1 (1), VSEL2(1)
-    RED_LED = 1;
-    Delay(3000);
-    RED_LED = 0;
-    
-    //------- 2.5V ----------------
-    sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n Spänningen satt till 2.5 V\r\n", i);
-    SkrivBuffert(szUSART_Out, 1);
-    VSEL3 = 1; 
-    VSEL2 = 1;  //VSEL1 (0), VSEL2(0)
-    GREEN_LED = 1;
-    Delay(3000);
-    GREEN_LED = 0;
-    
-     //---------- 3.3 V ----------
-    sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n Spänningen satt till 3.3 V\r\n", i);
-    SkrivBuffert(szUSART_Out, 1);
-    VSEL1 = 0; 
-    VSEL2 = 0;  //VSEL1 (1), VSEL2(1)
-    RED_LED = 1;
-    Delay(3000);
-    RED_LED = 0;
-    
-    
-    
-    
-    //TestaVSEL();
-    // ----------------------------------------------------  Läs från radion
+    TCXO_EN = 1;        //Startar TCXO
 
+    filter = 1; // Sätter switchen till VHF
+    InitTRXAndGotoSleep(); 
+    
     OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);
 
-    TRX_EN = 0;     // Drar  chip select för radion låg
+    TRX_EN = 0;     // Drar chip select för radion låg
 
     DoCheckCTSManyTimes1();
 
     ToggleRadio();
 
-    WriteSPI1(0x01);
+    WriteSPI1(0x01);    // CTS
 
     ToggleRadio();
 
@@ -428,25 +374,29 @@ void main(void)
     if (nTmp == 0xFF)               // Om CTS är hög är allting rätt
     {
         nLoop = 0;                  
-        while (nLoop < 4)
+        while (nLoop < 4)           // Läser in fyra register.
         {
             szData[nLoop] = MyReadSPI();
             nLoop++;
         }
+        
+        // Skriver ut relevant data, svaret skall vara 44 60 för denna radio. 
         sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n PART_ID_RADIO: - %02X%02X - \r\n\r\n", szData[1], szData[2]);
         SkrivBuffert(szUSART_Out, 1);
     }
 
-    TRX_EN = 1;
+    TRX_EN = 1;     // CS för radion dras hög
     CloseSPI1(); 
-    
-    for(i = 0; i < 10; i++) // Hur många gånger skall radio skall sända pulser
+
+    while(1)    // Skickar pulser med radion
+    {
+    for(i = 0; i < 20; i++) // Hur många gånger skall radio skall sända pulser
         {
             
             sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n Vända %d av (10) \r\n\r\n -- UHF Signal --\r\n\r\n", i);
             SkrivBuffert(szUSART_Out, 1); Delay(10);
             
-            filter  = 1;    // UHF GRÖN
+            filter = 0;    // UHF GRÖN
             DoInitBeacon();
             GreenLedPulse(30);
             Delay(50);
@@ -456,91 +406,82 @@ void main(void)
             sprintf(szUSART_Out, (const rom far char *)"\x0C\r\n -- VHF Signal --\r\n\r\n");
             SkrivBuffert(szUSART_Out, 1); Delay(10);
             
-            filter = 0;     // VHF RÖD
+            filter = 1;     // VHF RÖD
             DoInitBeacon();
             RedLedPulse(30);
             Delay(50);
             RedLedPulse(30); 
             Delay(500);
         }
-    Delay(100);
-    OpenSPI1(SPI_FOSC_4, MODE_00, SMPMID);
-    TRX_EN=1;
-    CloseSPI1();
     }
            
     
-    // Kod till I2C accelerometern:  
+    // I2C kod till accelerometern som jag testade:  
     // ------------------------------------------------------
-    OpenI2C2(MASTER, SLEW_ON); 
     
-    StartI2C2();        // Start  kommando
-
-    WriteI2C2(0x64); //SAD + W (D6) // 0110 010 (R/W) 
-    
-    AckI2C2();   // Get acknowledgement
-    
-    WriteI2C2(0x22); // Adress 0x0f (Who_AM_I), CTRL_REG_1 
-    
-    AckI2C2();   // Get Akcnowledgement
-    
-    RestartI2C2(); // Repeted Start
-    
-    WriteI2C2(0xD4); //SAD + R (D7)
-    
-    AckI2C2();   // Get acknowledgement
-    
-    WriteI2C2(0x81); // SW_RESET och BOOT
-    
-    AckI2C2();
-    
-    StopI2C2();
-    
-    CloseI2C2();
-
-    // ---- KÖR IGEN -----------------------------------------------------------
-    
-    OpenI2C(MASTER, SLEW_ON); 
-    
-    StartI2C();        // Start  kommando
-
-    IdleI2C();
-    
-    nTmp = WriteI2C(0xD4); //SAD + W (D6)
-       
-    IdleI2C();
-    
-    AckI2C();   // Get acknowledgement
-    
-    IdleI2C();
-    
-    nTmp = WriteI2C(0x22); // Read from adress 0x0f (Who_AM_I)
-
-    IdleI2C();
-    
-    AckI2C();   // Get Akcnowledgement
-    
-    IdleI2C();
-    
-    RestartI2C(); // Repeted Start
-
-    IdleI2C();
-    
-    nTmp = WriteI2C(0xD5); //SAD + R (D7)
-
-    IdleI2C();
-    
-    AckI2C();   // Get acknowledgement
-    
-    IdleI2C();
-    
-    nTmp = ReadI2C();
-
-    IdleI2C();
-    
-    NotAckI2C();
-    
-    StopI2C();
-    
-    CloseI2C();  
+//    OpenI2C2(MASTER, SLEW_ON); 
+//    
+//    StartI2C2();        // Start  kommando
+//    WriteI2C2(0x64); //SAD + W (D6) // 0110 010 (R/W) 
+//    
+//    AckI2C2();   // Get acknowledgement
+//    
+//    WriteI2C2(0x22); // Adress 0x0f (Who_AM_I), CTRL_REG_1 
+//    
+//    AckI2C2();   // Get Akcnowledgement
+//    
+//    RestartI2C2(); // Repeted Start
+//    WriteI2C2(0xD4); //SAD + R (D7)
+//    
+//    AckI2C2();   // Get acknowledgement
+//    
+//    WriteI2C2(0x81); // SW_RESET och BOOT
+//    
+//    AckI2C2();
+//    
+//    StopI2C2();
+//    CloseI2C2();
+//
+//    // ---- KÖR IGEN -----------------------------------------------------------
+//    
+//    OpenI2C(MASTER, SLEW_ON); 
+//    StartI2C();        // Start  kommando
+//
+//    IdleI2C();
+//    nTmp = WriteI2C(0xD4); //SAD + W (D6)
+//       
+//    IdleI2C();
+//    
+//    AckI2C();   // Get acknowledgement
+//    
+//    IdleI2C();
+//    
+//    nTmp = WriteI2C(0x22); // Read from adress 0x0f (Who_AM_I)
+//
+//    IdleI2C();
+//    
+//    AckI2C();   // Get Akcnowledgement
+//    
+//    IdleI2C();
+//    
+//    RestartI2C(); // Repeted Start
+//
+//    IdleI2C();
+//    
+//    nTmp = WriteI2C(0xD5); //SAD + R (D7)
+//
+//    IdleI2C();
+//    
+//    AckI2C();   // Get acknowledgement
+//    
+//    IdleI2C();
+//    
+//    nTmp = ReadI2C();
+//
+//    IdleI2C();
+//    
+//    NotAckI2C();
+//    
+//    StopI2C();
+//    CloseI2C();  
 }	
